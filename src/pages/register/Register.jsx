@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-
-const SignUp = () => {
+import "../../styles/Form.css"
+const Register = () => {
     const [formData, setFormData] = useState({
         firstname: '',
         lastname: '',
@@ -188,16 +188,18 @@ const SignUp = () => {
                     />
                 </div>
 
-                <div className="password-container">
-                    <label htmlFor="password">סיסמא</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
-                    {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
+                <div className="form-input form-margins flex password-container">
+                    <div className={`input-wrapper ${formData.password ? 'has-content' : ''}`}>
+                        <label className={"input-placeholder"} htmlFor="password">סיסמא</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    {errors.password && <p style={{color: 'red'}}>{errors.password}</p>}
                 </div>
 
                 <div className="confirmPass-container">
@@ -220,6 +222,6 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Register;
 
 

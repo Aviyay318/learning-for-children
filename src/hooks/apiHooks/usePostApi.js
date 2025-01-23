@@ -1,5 +1,6 @@
 import {useState} from "react";
 import axios from "axios";
+import {SERVER_URL} from "../../utils/Constants.js";
 
 const usePostApi = (url) =>{
     const [data, setData] = useState(null);
@@ -12,7 +13,7 @@ const usePostApi = (url) =>{
         setError(null);
 
         try {
-            const response = await axios.post(url, body);
+            const response = await axios.post(SERVER_URL + url, body);
             setData(response.data);
         } catch (err) {
             setError(err.response?.data?.message || 'Request failed');
