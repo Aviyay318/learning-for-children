@@ -1,0 +1,33 @@
+:root{
+    --active-color: salmon;
+}
+.navbar {
+    display: flex;
+    gap: 20px;
+    padding: 15px;
+    background-color: #f4f4f4;
+    margin-inline-start: 20px;
+    margin-inline-end: 20px;
+    margin-block-start: 20px;
+    margin-block-end: 20px;
+    border-radius: 10px;
+    /*width: 40%;*/
+
+}
+
+.navbar a {
+    color: #757575;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.navbar .active svg{
+    fill: var(--active-color);
+}
+.back{
+    background-color: #e7e7e7;
+    border-color: transparent;
+    cursor: pointer;
+}

@@ -1,0 +1,27 @@
+import {useState} from "react";
+import axios from "axios";
+
+const usePostApi = (url) =>{
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+
+    const sendRequest = async (body = {}) => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await axios.post(url, body);
+            setData(response.data);
+        } catch (err) {
+            setError(err.response?.data?.message || 'Request failed');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { data, error, loading, sendRequest };
+
+}
+export default usePostApi;
