@@ -1,0 +1,83 @@
+.main-container{
+    width: 50%;
+    text-align: center;
+
+}
+form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /*border: 1px solid red;*/
+}
+.form-input {
+    position: relative; /* Added for absolute positioning */
+    flex-direction: column;
+    text-align: right;
+    gap: 10px;
+    border: 3px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px; /* Added padding for better spacing */
+    background-color: white;
+
+}
+.input-wrapper {
+    position: relative;
+    width: 100%;
+
+}
+.input-placeholder {
+    position: absolute;
+    top: 50%;
+    right: 5px; /* Adjust as needed for RTL */
+    transform: translateY(-50%);
+    color: var(--text-color);
+    font-weight: var(--font-weight-medium);
+    pointer-events: none; /* Allows clicks to pass through to the input */
+    transition: all 0.3s ease;
+    background-color: transparent; /* Adjust if you have a background */
+    padding: 0 5px; /* Optional: To improve readability */
+}
+.form-input input {
+    width: 100%;
+    direction: rtl;
+    font-weight: var(--font-weight-medium);
+    border: none;
+    /*border-bottom: 1px solid var(--border-color);*/
+    padding: 10px 5px;
+    font-size: 1rem;
+}
+
+.input-wrapper.has-content .input-placeholder,
+.input-wrapper .input-focused + .input-placeholder {
+    background-color: white;
+    transform: translateY(-150%);
+    color: var(--text-color);
+}
+
+.form-input .input-error{
+    position: absolute;
+    left: 20px;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+    color: red;
+}
+.form-margins{
+    margin-inline-start: var(--margin-start);
+    margin-inline-end: var(--margin-end);
+    margin-block-start: var(--margin-start);
+    margin-block-end: var(--margin-end);
+}
+.form-submit{
+    background-color: var(--text-color);
+    color: white;
+    transition: 0.5s all;
+    border-color:transparent;
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-semi-bold);
+}
+.form-submit:disabled{
+    background-color: darkgray;
+    color: gray;
+}
