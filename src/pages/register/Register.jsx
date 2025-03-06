@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import "../../styles/Form.css"
+import usePostApi from "../../hooks/apiHooks/usePostApi.js";
+import { REGISTER_PAGE} from "../../utils/Constants.js";
+
 const Register = () => {
     const [formData, setFormData] = useState({
         firstname: '',
@@ -11,7 +14,23 @@ const Register = () => {
         password: '',
         confirmPassword: '',
     });
+    const { data, error, loading, sendRequest } = usePostApi(REGISTER_PAGE);
 
+    const handleRegisterResponse = async () => {
+        await sendRequest(formData)
+    };
+    useEffect(() => {
+        if (data?.success) {
+          //TODO כאן רם תוכל לעשות את המעבר לOTP
+        }else if(data?.success===false) {
+            alert("ישש")
+        }
+        if (error) {
+            alert(error || "Something went wrong.");
+        }
+
+
+    }, [data]);
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
 
@@ -115,9 +134,9 @@ const Register = () => {
 
     return (
         <div className="main-container">
-            <h1 className="main-header">הירשמות</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="form-input form-margins flex firstname-container">
+            <h1 className="form-header">הירשמות</h1>
+            <form className={"grid-container"} onSubmit={handleSubmit}>
+                <div className="form-input form-margins flex" id={"item-1"}>
                     <div className={`input-wrapper ${formData.firstname ? 'has-content' : ''}`}>
                         <label className={"input-placeholder"} htmlFor="firstname">שם פרטי</label>
                         <input
@@ -128,10 +147,10 @@ const Register = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    {errors.firstname && <p style={{color: 'red'}}>{errors.firstname}</p>}
+                    {errors.firstname && <label className={"input-error"}>{errors.firstname}</label>}
                 </div>
 
-                <div className="form-input form-margins flex lastname-container">
+                <div className="form-input form-margins flex lastname-container" id={"item-2"}>
                     <div className={`input-wrapper ${formData.lastname ? 'has-content' : ''}`}>
                         <label className={"input-placeholder"} htmlFor="lastname">שם משפחה</label>
                         <input
@@ -142,10 +161,10 @@ const Register = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    {errors.lastname && <p style={{color: 'red'}}>{errors.lastname}</p>}
+                    {errors.lastname && <label className={"input-error"}>{errors.lastname}</label>}
                 </div>
 
-                <div className="form-input form-margins flex username-container">
+                <div className="form-input form-margins flex username-container" id={"item-3"}>
                     <div className={`input-wrapper ${formData.username ? 'has-content' : ''}`}>
                         <label className={"input-placeholder"} htmlFor="username">שם משתמש</label>
                         <input
@@ -156,10 +175,10 @@ const Register = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    {errors.username && <p style={{color: 'red'}}>{errors.username}</p>}
+                    {errors.username && <label className={"input-error"}>{errors.username}</label>}
                 </div>
 
-                <div className="form-input form-margins flex email-container">
+                <div className="form-input form-margins flex email-container" id={"item-4"}>
                     <div className={`input-wrapper ${formData.email ? 'has-content' : ''}`}>
                         <label className={"input-placeholder"} htmlFor="email">אימייל</label>
                         <input
@@ -170,10 +189,10 @@ const Register = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    {errors.email && <p style={{color: 'red'}}>{errors.email}</p>}
+                    {errors.email && <label className={"input-error"}>{errors.email}</label>}
                 </div>
 
-                <div className="form-input form-margins flex confirmEmail-container">
+                <div className="form-input form-margins flex confirmEmail-container" id={"item-5"}>
                     <div className={`input-wrapper ${formData.confirmEmail ? 'has-content' : ''}`}>
                         <label className={"input-placeholder"} htmlFor="confirmEmail">וידוא אימייל</label>
                         <input
@@ -184,10 +203,10 @@ const Register = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    {errors.confirmEmail && <p style={{color: 'red'}}>{errors.confirmEmail}</p>}
+                    {errors.confirmEmail && <label className={"input-error"}>{errors.confirmEmail}</label>}
                 </div>
 
-                <div className="form-input form-margins flex age-container">
+                <div className="form-input form-margins flex age-container" id={"item-6"}>
                     <div className={`input-wrapper ${formData.age ? 'has-content' : ''}`}>
                         <label className={"input-placeholder"} htmlFor="age">גיל</label>
                         <input
@@ -204,8 +223,20 @@ const Register = () => {
                         />
                     </div>
                 </div>
+                <div className="form-input form-margins flex gender-container" id={"item-6"}>
+                    <div className={`input-wrapper ${formData.age ? 'has-content' : ''}`}>
+                        <label className={"input-placeholder"} htmlFor="gender">מגדר</label>
+                        <input
+                            type="radio"
+                            id="gender"
+                            name="gender"
+                            value={formData.gender}
+                            onChange={handleChange}
+                        />
+                    </div>
+                </div>
 
-                <div className="form-input form-margins flex password-container">
+                <div className="form-input form-margins flex password-container" id={"item-7"}>
                     <div className={`input-wrapper ${formData.password ? 'has-content' : ''}`}>
                         <label className={"input-placeholder"} htmlFor="password">סיסמא</label>
                         <input
@@ -216,10 +247,10 @@ const Register = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    {errors.password && <p style={{color: 'red'}}>{errors.password}</p>}
+                    {errors.password && <label className={"input-error"}>{errors.password}</label>}
                 </div>
 
-                <div className="form-input form-margins flex confirmPass-container">
+                <div className="form-input form-margins flex confirmPass-container" id={"item-8"}>
                     <div className={`input-wrapper ${formData.confirmPassword ? 'has-content' : ''}`}>
                         <label className={"input-placeholder"} htmlFor="confirmPassword">וידוא סיסמא</label>
                         <input
@@ -230,13 +261,14 @@ const Register = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    {errors.confirmPassword && <p style={{color: 'red'}}>{errors.confirmPassword}</p>}
+                    {errors.confirmPassword && <label className={"input-error"}>{errors.confirmPassword}</label>}
                 </div>
 
-                <button type="submit" disabled={!isFormValid}>
-                    הרשם
-                </button>
+
             </form>
+            <button onClick={handleRegisterResponse} className={"form-submit form-margins"} type="submit" disabled={!isFormValid}>
+                הרשם
+            </button>
         </div>
     );
 };
