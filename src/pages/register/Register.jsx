@@ -11,6 +11,7 @@ const Register = () => {
         email: '',
         confirmEmail: '',
         age: '',
+        gender: '',
         password: '',
         confirmPassword: '',
     });

@@ -1,0 +1,6 @@
+.profile{
+    width: 95%;
+    margin-block-start: var(--margin-start);
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+}

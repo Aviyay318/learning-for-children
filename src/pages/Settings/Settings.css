@@ -1,0 +1,7 @@
+.settings{
+    width: 95%;
+    border-radius: var(--border-radius);
+
+    background-color: var(--background-color);
+    margin-block-start: var(--margin-start);
+}
