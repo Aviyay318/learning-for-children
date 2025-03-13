@@ -1,0 +1,17 @@
+.button-image{
+    border-color: transparent;
+    width: 150px;
+    height: 150px;
+
+    color: var(--text-color);
+    font-size: var(--font-size-very-large);
+    font-weight: var(--font-weight-bold);
+    text-shadow: black 0 0 3px;
+    margin-inline-start: var(--margin-start);
+    margin-inline-end: var(--margin-end);
+    margin-block-end: var(--margin-end);
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

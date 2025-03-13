@@ -1,0 +1,6 @@
+.content-container{
+    background-color: var(--background-color);
+    width: 95%;
+    border-radius: 15px;
+    height: 85%
+}

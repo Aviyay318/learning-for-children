@@ -20,12 +20,13 @@ const setLogin = () => {
           <section className={"background"}>
           </section>
           <BrowserRouter>
-              {isLogin && <Navbar/> }
+              {/*{isLogin && <Navbar/> }*/}
+              <Navbar/>
               <Routes>
+                  <Route path="/" element={<Login setIsLogin={setLogin}/>}/>
                   <Route path="/homePage" element={<Homepage/>}/>
                   <Route path="/content" element={<Content/>}/>
                   <Route path="/profile" element={<Profile/>}/>
-                  <Route path="/" element={<Login setIsLogin={setLogin}/>}/>
                   <Route path="/register" element={<Register/>}/>
               </Routes>
           </BrowserRouter>

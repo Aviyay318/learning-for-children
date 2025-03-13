@@ -1,0 +1,13 @@
+.exercise {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    border: 1px solid black;
+}
+.operand{
+    font-size: var(--font-size-huge);
+    font-weight: var(--font-weight-semi-bold);
+}

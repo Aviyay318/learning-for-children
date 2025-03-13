@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "../../styles/Form.css"
 import usePostApi from "../../hooks/apiHooks/usePostApi.js";
 import { REGISTER_PAGE} from "../../utils/Constants.js";
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -9,20 +10,18 @@ const Register = () => {
         lastname: '',
         username: '',
         email: '',
-        confirmEmail: '',
         age: '',
         gender: '',
         password: '',
         confirmPassword: '',
     });
     const { data, error, loading, sendRequest } = usePostApi(REGISTER_PAGE);
+    const navigate=useNavigate();
 
-    const handleRegisterResponse = async () => {
-        await sendRequest(formData)
-    };
+
     useEffect(() => {
         if (data?.success) {
-          //TODO כאן רם תוכל לעשות את המעבר לOTP
+            //TODO כאן רם תוכל לעשות את המעבר לOTP
         }else if(data?.success===false) {
             alert("ישש")
         }
@@ -37,6 +36,7 @@ const Register = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        console.log(value)
         setFormData({
             ...formData,
             [name]: value,
@@ -124,13 +124,15 @@ const Register = () => {
             formData.confirmPassword === formData.password &&
             formData.age;
 
-        setIsFormValid(!!isValid);
+        setIsFormValid(!isValid);
     }, [errors, formData]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) => {
         e.preventDefault();
         console.log('Form Data:', formData);
+        await sendRequest(formData)
         alert('ההרשמה הצליחה!');
+        navigate("/");
     };
 
     return (
@@ -165,49 +167,7 @@ const Register = () => {
                     {errors.lastname && <label className={"input-error"}>{errors.lastname}</label>}
                 </div>
 
-                <div className="form-input form-margins flex username-container" id={"item-3"}>
-                    <div className={`input-wrapper ${formData.username ? 'has-content' : ''}`}>
-                        <label className={"input-placeholder"} htmlFor="username">שם משתמש</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    {errors.username && <label className={"input-error"}>{errors.username}</label>}
-                </div>
-
-                <div className="form-input form-margins flex email-container" id={"item-4"}>
-                    <div className={`input-wrapper ${formData.email ? 'has-content' : ''}`}>
-                        <label className={"input-placeholder"} htmlFor="email">אימייל</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    {errors.email && <label className={"input-error"}>{errors.email}</label>}
-                </div>
-
-                <div className="form-input form-margins flex confirmEmail-container" id={"item-5"}>
-                    <div className={`input-wrapper ${formData.confirmEmail ? 'has-content' : ''}`}>
-                        <label className={"input-placeholder"} htmlFor="confirmEmail">וידוא אימייל</label>
-                        <input
-                            type="email"
-                            id="confirmEmail"
-                            name="confirmEmail"
-                            value={formData.confirmEmail}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    {errors.confirmEmail && <label className={"input-error"}>{errors.confirmEmail}</label>}
-                </div>
-
-                <div className="form-input form-margins flex age-container" id={"item-6"}>
+                <div className="form-input form-margins flex age-container" id={"item-3"}>
                     <div className={`input-wrapper ${formData.age ? 'has-content' : ''}`}>
                         <label className={"input-placeholder"} htmlFor="age">גיל</label>
                         <input
@@ -224,17 +184,59 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <div className="form-input form-margins flex gender-container" id={"item-6"}>
-                    <div className={`input-wrapper ${formData.age ? 'has-content' : ''}`}>
-                        <label className={"input-placeholder"} htmlFor="gender">מגדר</label>
+
+                <div className="form-input form-margins flex gender-container" id={"item-4"}>
+                    <label className={"input-placeholder"} htmlFor="gender">מגדר</label>
+                    <div className={"gender-chooser flex"}>
+                        <label className={"flex"}>
+                            <input
+                                type="radio"
+                                id="gender-male"
+                                name="gender"
+                                value={"boy"}
+                                onChange={handleChange}
+                            />
+                            <img src={"src/assets/profile-pictures/boy1.jpg"} style={{width: "50px", height: "50px"}}/>
+                        </label>
+                        <label className={"flex"}>
+                            <input
+                                type="radio"
+                                id="gender-female"
+                                name="gender"
+                                value={"girl"}
+                                onChange={handleChange}
+                            />
+                            <img src={"src/assets/profile-pictures/girl1.jpg"} style={{width: "50px", height: "50px"}}/>
+                        </label>
+                    </div>
+                </div>
+
+                <div className="form-input form-margins flex username-container" id={"item-5"}>
+                    <div className={`input-wrapper ${formData.username ? 'has-content' : ''}`}>
+                        <label className={"input-placeholder"} htmlFor="username">שם משתמש</label>
                         <input
-                            type="radio"
-                            id="gender"
-                            name="gender"
-                            value={formData.gender}
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={formData.username}
                             onChange={handleChange}
                         />
                     </div>
+                    {errors.username && <label className={"input-error"}>{errors.username}</label>}
+                </div>
+
+                <div className="form-input form-margins flex email-container" id={"item-6"}>
+                    <div className={`input-wrapper ${formData.email ? 'has-content' : ''}`}>
+                        <label className={"input-placeholder"} htmlFor="email">אימייל</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    {errors.email && <label className={"input-error"}>{errors.email}</label>}
                 </div>
 
                 <div className="form-input form-margins flex password-container" id={"item-7"}>
@@ -264,12 +266,10 @@ const Register = () => {
                     </div>
                     {errors.confirmPassword && <label className={"input-error"}>{errors.confirmPassword}</label>}
                 </div>
-
-
+                <button className={"form-submit form-margins"} type="submit" disabled={!isFormValid} id={"grid-item-9"}>
+                    הרשם
+                </button>
             </form>
-            <button onClick={handleRegisterResponse} className={"form-submit form-margins"} type="submit" disabled={!isFormValid}>
-                הרשם
-            </button>
         </div>
     );
 };

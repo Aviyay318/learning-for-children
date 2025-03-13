@@ -1,11 +1,10 @@
 import {useEffect, useState} from "react";
+import "../../styles/Form.css"
 
 import usePostApi from "../../hooks/apiHooks/usePostApi.js";
 import {HOME_PAGE, LOGIN_API, REGISTER_PAGE} from "../../utils/Constants.js";
 import {useNavigate} from "react-router-dom";
 import Cookies from 'universal-cookie';
-
-
 
 export default function Login({setIsLogin}){
     const [email, setEmail] = useState('');
@@ -26,7 +25,7 @@ export default function Login({setIsLogin}){
             cookies.set('token', data.token, { path: '/' });
             navigate(HOME_PAGE,{ state: { isAdmin: data.admin} });
         }else if(data?.success===false) {
-          setSuccessLoginResponse(false);
+            setSuccessLoginResponse(false);
         }
         if (error) {
             alert(error || "Something went wrong.");
@@ -38,8 +37,8 @@ export default function Login({setIsLogin}){
 
 
     return(
-        <>
-            <h1>התחברות:</h1>
+        <div className={"main-container"}>
+            <h1 className="form-header">התחברות:</h1>
 
             <label>הכנס אימייל:</label>
             <input type="text" name="email" placeholder="אימייל" onChange={(event) => {setEmail(event.target.value);setSuccessLoginResponse(true);}}/>
@@ -58,7 +57,7 @@ export default function Login({setIsLogin}){
 
             <br/>
             <button disabled={email.length === 0 || password.length === 0 || successLoginResponse === false}
-                     onClick={handleLoginResponse}
+                    onClick={handleLoginResponse}
             >Login
             </button>
             <div>
@@ -68,6 +67,6 @@ export default function Login({setIsLogin}){
                 </button>
 
             </div>
-        </>
+        </div>
     )
 }

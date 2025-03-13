@@ -1,0 +1,14 @@
+.background-settings-container{
+    border: 3px solid var(--border-color);
+    background-color: var(--background-color);
+    border-radius: 10px;
+    flex-direction: column;
+    gap: 15px;
+
+}
+#background{
+    background-size: 400px;
+    background-repeat: repeat;
+    position: absolute;
+    z-index: -100;
+}
