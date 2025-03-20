@@ -1,9 +1,48 @@
 :root{
     /*color variables*/
-    --background-color: #ffe2dd;
+    /* Default Colors */
+    --background-color: rgba(255, 54, 0, 0.1);
     --text-color: #ff8f4d;
     --border-color: salmon;
     --border-radius: 10px;
+    --inactive-color: rgba(117, 117, 117, 0.18);
+    --inactive-text-color: #213547;
+    --active-color: #ff8f4d;
+    --active-text-color: white;
+    /*--active-tab:*/
+    /* Login & Authentication Pages */
+    --login-bg: #FF9534;
+    --login-text: #2C2C2C;
+    --login-input-bg: #FFFFFF;
+    --login-border: #999999;
+
+    /* Home & Dashboard */
+    --dashboard-text: #2C2C2C;
+    --dashboard-highlight: #FF9534;
+    --dashboard-card-bg: #FFFFFF;
+    --dashboard-shadow: rgba(0, 0, 0, 0.1);
+
+    /* Learning & Content Pages */
+    --lesson-bg: #FF9534;
+    --lesson-text: #FFFFFF;
+    --video-bg: #2C2C2C;
+    --video-overlay: rgba(0, 0, 0, 0.5);
+    --exercise-card: #FFFFFF;
+    --exercise-border: #999999;
+
+    /* Progress & Rewards */
+    --progress-bar: #FF9534;
+    --achievement-badge: #FFD700; /* Gold */
+    --progress-text: #2C2C2C;
+    --progress-bg: #FFFFFF;
+
+    /* Settings & Subscription */
+    --settings-bg: #F5F5F5;
+    --settings-text: #2C2C2C;
+    --settings-highlight: #FF9534;
+    --subscription-bg: #FFFFFF;
+    --subscription-text: #2C2C2C;
+
     /*----------------*/
 
     /*margin variables*/
@@ -34,6 +73,8 @@
     --shapes-container-size: 30%;
     --shapes-default-border-color: black;
     /*----------------*/
+
+    --component-width: 80%;
 
 
 }

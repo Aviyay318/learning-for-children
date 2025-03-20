@@ -1,0 +1,24 @@
+
+.exercise-type-chooser{
+    /*border: 1px solid red;*/
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1.5rem;
+}
+.exercise-type{
+    background-color: var(--inactive-color);
+    cursor:pointer;
+    border-radius: 5px;
+    font-size: var(--font-size-medium);
+
+}
+.exercise-type:hover{
+    scale: 1.1;
+}
+.exercise-type.active{
+    background-color: var(--active-color);
+    color: var(--active-text-color);
+    font-weight: var(--font-weight-medium);
+    scale: 1.05;
+}

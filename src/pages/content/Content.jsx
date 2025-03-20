@@ -1,45 +1,48 @@
 import "./Content.css";
 import useGetApi from "../../hooks/apiHooks/useGetApi.js"; // Rename this hook to match its behavior
-import { GET_MATH } from "../../utils/Constants.js";
+import {GET_MATH, SERVER_URL} from "../../utils/Constants.js";
 import {useEffect, useState} from "react";
-import "/src/components/Math/Shapes/Shapes.css"
-import "/src/components/Math/Exercise/Exercise.css"
-import Shape from "/src/components/Math/Shapes/Shape.jsx";
 import Cookies from "js-cookie";
+import BasicMath from "../../components/Math/BasicMath/BasicMath.jsx";
+import ExerciseTabs from "../../components/Math/Exercise/ExerciseTabs.jsx";
+import axios from "axios";
 export default function Content() {
     const { data, error, loading, sendRequest } = useGetApi(GET_MATH);
     const [userAnswer, setUserAnswer] = useState("");
     const [correct, setCorrect] = useState(null);
-    const [num1, setNum1] = useState([]);
-    const [num2, setNum2] = useState([]);
-    const shapes = ["square", "circle", "triangle"]
-    const colors = ["red","yellow","green","purple"]
 
 
+    const [level, setLevel] = useState(null);
 
+    const getLevel = async () => {
+        try {
+            const token = Cookies.get("token");
+            if (!token) {
+                console.error("Token is missing!");
+                return;
+            }
 
+            const response = await axios.get(`${SERVER_URL}/get-level`, {
+                params: { token }
+            });
+
+            if (response.data !== null) {
+                console.log("User level:", response.data);
+                setLevel(response.data); // שמירת הרמה ב-state
+            }
+        } catch (error) {
+            console.error("Error fetching level:", error);
+        }
+    };
+
+    useEffect(() => {
+        getLevel();
+    }, []);
 
     const getEx = async () => {
         const token = Cookies.get("token"); // קבלת הטוקן מה-Cookie
-        await sendRequest({ token: token, level: 1 }); // שליחת אובייקט תקין
+        await sendRequest({ token: token, level: 1}); // שליחת אובייקט תקין
     };
-
-
-    useEffect(() => {
-        if (data) {
-            console.log(data.num1);
-            setNum1(Array(data.num1).fill(randomizeExerciseProps()));
-            setNum2(Array(data.num2).fill(randomizeExerciseProps()));
-        }
-    }, [data]);
-
-    function randomizeExerciseProps(){
-        const randomShape = Math.floor(Math.random() * shapes.length)
-        console.log("random shape" + randomShape);
-        const randomColor = Math.floor(Math.random() * colors.length)
-        console.log("random color" + randomColor);
-        return <Shape type={shapes[randomShape]} color={colors[randomColor]}/>
-    }
 
 
 
@@ -56,42 +59,10 @@ export default function Content() {
     };
 
     return (
-        <div className={"content-container"}>
+        <div className={"content-container flex"}>
             <h1>תרגילים</h1>
-            <button onClick={getEx}>הצג תרגיל </button>
-            {loading && <p>Loading...</p>}
-            {error && <p>Error: {error}</p>}
-            {data && (
-                <div>
-                    <div className={"exercise"}>
-                        <div className={"shapes-container"}>
-                            {num1.map((shape, index) => (
-                                <div key={index}>{shape}</div>
-                            ))}
-                        </div>
-                        <label className={"operand"}>{data.operand}</label>
-                        <div className={"shapes-container"}>
-                            {num2.map((shape, index) => (
-                                <div key={index}>{shape}</div>
-                            ))}
-                        </div>
-                        <label className={"operand"}>{data.operandEqual}</label>
-                        <input
-                            type="number"
-                            value={userAnswer}
-                            onChange={handleAnswerChange}
-                            placeholder="Enter your answer"
-                        />
-                        <button onClick={checkAnswer}>Check Answer</button>
-                    </div>
-                    <div>
-
-                    </div>
-                    {correct !== null && (
-                        <p>{correct ? "Correct!" : "Incorrect. Try again!"}</p>
-                    )}
-                </div>
-            )}
+            <h1>User Level: {level !== null ? level : "Loading..."}</h1>
+            <ExerciseTabs/>
         </div>
     );
 }

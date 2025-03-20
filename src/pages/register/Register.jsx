@@ -6,8 +6,8 @@ import {useNavigate} from "react-router-dom";
 
 const Register = () => {
     const [formData, setFormData] = useState({
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         username: '',
         email: '',
         age: '',
@@ -49,19 +49,19 @@ const Register = () => {
         const newErrors = { ...errors };
 
 
-        if (name === 'firstname') {
+        if (name === 'firstName') {
             if (value.length < 2) {
-                newErrors.firstname = 'שם פרטי צריך להכיל לפחות 2 תווים.';
+                newErrors.firstName = 'שם פרטי צריך להכיל לפחות 2 תווים.';
             } else {
-                delete newErrors.firstname;
+                delete newErrors.firstName;
             }
         }
 
-        if (name === 'lastname') {
+        if (name === 'lastName') {
             if (value.length < 2) {
-                newErrors.lastname = 'שם משפחה צריך להכיל לפחות 2 תווים.';
+                newErrors.lastName = 'שם משפחה צריך להכיל לפחות 2 תווים.';
             } else {
-                delete newErrors.lastname;
+                delete newErrors.lastName;
             }
         }
 
@@ -114,8 +114,8 @@ const Register = () => {
 
         const isValid =
             !Object.keys(errors).length &&
-            formData.firstname.length >= 2 &&
-            formData.lastname.length >= 2 &&
+            formData.firstName.length >= 2 &&
+            formData.lastName.length >= 2 &&
             formData.username.length >= 5 &&
             /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) &&
             formData.confirmEmail === formData.email &&
@@ -140,31 +140,31 @@ const Register = () => {
             <h1 className="form-header">הירשמות</h1>
             <form className={"grid-container"} onSubmit={handleSubmit}>
                 <div className="form-input form-margins flex" id={"item-1"}>
-                    <div className={`input-wrapper ${formData.firstname ? 'has-content' : ''}`}>
-                        <label className={"input-placeholder"} htmlFor="firstname">שם פרטי</label>
+                    <div className={`input-wrapper ${formData.firstName ? 'has-content' : ''}`}>
+                        <label className={"input-placeholder"} htmlFor="firstName">שם פרטי</label>
                         <input
                             type="text"
-                            id="firstname"
-                            name="firstname"
-                            value={formData.firstname}
+                            id="firstName"
+                            name="firstName"
+                            value={formData.firstName}
                             onChange={handleChange}
                         />
                     </div>
-                    {errors.firstname && <label className={"input-error"}>{errors.firstname}</label>}
+                    {errors.firstName && <label className={"input-error"}>{errors.firstName}</label>}
                 </div>
 
                 <div className="form-input form-margins flex lastname-container" id={"item-2"}>
-                    <div className={`input-wrapper ${formData.lastname ? 'has-content' : ''}`}>
-                        <label className={"input-placeholder"} htmlFor="lastname">שם משפחה</label>
+                    <div className={`input-wrapper ${formData.lastName ? 'has-content' : ''}`}>
+                        <label className={"input-placeholder"} htmlFor="lastName">שם משפחה</label>
                         <input
                             type="text"
-                            id="lastname"
-                            name="lastname"
-                            value={formData.lastname}
+                            id="lastName"
+                            name="lastName"
+                            value={formData.lastName}
                             onChange={handleChange}
                         />
                     </div>
-                    {errors.lastname && <label className={"input-error"}>{errors.lastname}</label>}
+                    {errors.lastName && <label className={"input-error"}>{errors.lastName}</label>}
                 </div>
 
                 <div className="form-input form-margins flex age-container" id={"item-3"}>

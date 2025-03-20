@@ -1,6 +1,3 @@
-:root{
-    --active-color: salmon;
-}
 .navbar {
     display: flex;
     gap: 50px;
@@ -9,12 +6,13 @@
     background-color: var(--background-color);
     margin-inline-start: var(--margin-start);
     margin-inline-end: var(--margin-end);
+    margin-block-start: var(--margin-start);
     border-radius: 10px;
-    width: 95%;
+    width: var(--component-width);
 }
 
 .navbar a {
-    color: #757575;
+    color: var(--inactive-color);
     text-decoration: none;
     padding: 8px 15px;
     border-radius: 5px;
@@ -22,6 +20,7 @@
 }
 
 .navbar .active svg{
+    scale: 1.1;
     fill: var(--active-color);
 }
 .back{

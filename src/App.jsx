@@ -16,9 +16,8 @@ const setLogin = () => {
     setIsLogin(true)
 }
   return (
-      <div className={"App"}>
-          <section className={"background"}>
-          </section>
+      <div className={"App flex"}>
+          <section className={"background"}></section>
           <BrowserRouter>
               {/*{isLogin && <Navbar/> }*/}
               <Navbar/>

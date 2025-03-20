@@ -1,6 +1,8 @@
 .content-container{
     background-color: var(--background-color);
-    width: 95%;
+    width: var(--component-width);
     border-radius: 15px;
-    height: 85%
+    height: 80vh;
+    flex-direction: column;
+    justify-content: flex-start;
 }

@@ -1,72 +1,79 @@
-import {useEffect, useState} from "react";
-import "../../styles/Form.css"
-
+import { useState, useEffect } from "react";
+import "../../styles/Form.css";
 import usePostApi from "../../hooks/apiHooks/usePostApi.js";
-import {HOME_PAGE, LOGIN_API, REGISTER_PAGE} from "../../utils/Constants.js";
-import {useNavigate} from "react-router-dom";
-import Cookies from 'universal-cookie';
+import { HOME_PAGE, LOGIN_API, REGISTER_PAGE } from "../../utils/Constants.js";
+import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
-export default function Login({setIsLogin}){
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [successLoginResponse, setSuccessLoginResponse] = useState(true);
+const Login = ({ setIsLogin }) => {
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    });
+    const [errors, setErrors] = useState({});
+    const [isFormValid, setIsFormValid] = useState(false);
+    const { data, error, sendRequest } = usePostApi(LOGIN_API);
     const navigate = useNavigate();
-    const { data, error, loading, sendRequest } = usePostApi(LOGIN_API);
-
-
-    const handleLoginResponse = async () => {
-        await sendRequest({ email, password });
-    };
 
     useEffect(() => {
         if (data?.success) {
-            setIsLogin()
+            setIsLogin();
             const cookies = new Cookies();
-            cookies.set('token', data.token, { path: '/' });
-            navigate(HOME_PAGE,{ state: { isAdmin: data.admin} });
-        }else if(data?.success===false) {
-            setSuccessLoginResponse(false);
+            cookies.set("token", data.token, { path: "/" });
+            navigate(HOME_PAGE, { state: { isAdmin: data.admin } });
+        } else if (data?.success === false) {
+            setErrors((prev) => ({ ...prev, login: "שם משתמש או סיסמה אינם נכונים" }));
         }
         if (error) {
             alert(error || "Something went wrong.");
         }
+    }, [data, error]);
 
+    useEffect(() => {
+        setIsFormValid(formData.email.length > 0 && formData.password.length > 0);
+    }, [formData]);
 
-    }, [data]);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+        setErrors((prev) => ({ ...prev, login: "" }));
+    };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await sendRequest(formData);
+    };
 
-
-    return(
-        <div className={"main-container"}>
-            <h1 className="form-header">התחברות:</h1>
-
-            <label>הכנס אימייל:</label>
-            <input type="text" name="email" placeholder="אימייל" onChange={(event) => {setEmail(event.target.value);setSuccessLoginResponse(true);}}/>
-
-            <br/>
-            <label>הכנס סיסמא:</label>
-            <input type="password" name="password" placeholder="סיסמא"
-                   onChange={(event) => {setPassword(event.target.value);setSuccessLoginResponse(true);}}/>
-
-            {
-                successLoginResponse===false
-                && <div>
-                    <label style={{color:"red"}}>שם משתמש או סיסמא אינם נכונים</label>
+    return (
+        <div className="main-container">
+            <h1 className="form-header">התחברות</h1>
+            <form className="grid-container" onSubmit={handleSubmit}>
+                <div className="form-input form-margins flex">
+                    <label htmlFor="email">אימייל</label>
+                    <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                    />
                 </div>
-            }
-
-            <br/>
-            <button disabled={email.length === 0 || password.length === 0 || successLoginResponse === false}
-                    onClick={handleLoginResponse}
-            >Login
-            </button>
-            <div>
-                <button onClick={() => {
-                    navigate(REGISTER_PAGE)
-                }}>אין לך משתמש? לחץ כאן על מנת להירשם
-                </button>
-
-            </div>
+                <div className="form-input form-margins flex">
+                    <label htmlFor="password">סיסמה</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                    />
+                </div>
+                {errors.login && <label className="input-error">{errors.login}</label>}
+                <button type="submit" disabled={!isFormValid}>התחבר</button>
+            </form>
+            <button onClick={() => navigate(REGISTER_PAGE)}>אין לך משתמש? לחץ כאן על מנת להירשם</button>
         </div>
-    )
-}
+    );
+};
+
+export default Login;

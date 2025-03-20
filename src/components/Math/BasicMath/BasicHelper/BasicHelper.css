@@ -1,0 +1,13 @@
+.basic-exercise-helper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 1px solid black;
+}
+.basic-exercise-helper-operand{
+    font-size: var(--font-size-huge);
+    font-weight: var(--font-weight-semi-bold);
+}

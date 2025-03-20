@@ -13,6 +13,7 @@ const usePostApi = (url) =>{
         setError(null);
 
         try {
+            console.log(body);
             const response = await axios.post(SERVER_URL + url, body);
             setData(response.data);
         } catch (err) {
