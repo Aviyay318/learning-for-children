@@ -1,7 +1,9 @@
 import {NavLink} from "react-router-dom";
 import "./Navbar2.css"
+import useSetResponsiveProperty from "../../hooks/responsiveHooks/useSetResponsiveProperty.js";
 export default function Navbar2() {
 
+    useSetResponsiveProperty("--navbar-svg-size")
 
     return (
         <div className={"navbar flex"}>

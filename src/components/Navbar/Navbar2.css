@@ -31,6 +31,8 @@
 .navbar svg{
     scale: 1.1;
     fill: var(--inactive-color);
+    width: var(--navbar-svg-size);
+    height: var(--navbar-svg-size);
 }
 .navbar .active svg{
     scale: 1.1;
