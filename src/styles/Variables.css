@@ -8,7 +8,7 @@
     --border-color: salmon;
     --border-radius: 10px;
 
-    --inactive-color: rgba(172, 172, 172, 0.66);
+    --inactive-color: rgba(81, 81, 81, 0.66);
     --inactive-text-color: #2C2C2C;
     --active-color: #ff7200;
     --active-text-color: white;
@@ -57,5 +57,7 @@
     --component-width: var(--component-width-desktop);
     --component-minimum-width: 50rem;
 
-
+    /*navbar variables*/
+    --navbar-svg-size: 55px;
+    --navbar-text-width: 130px;
 }

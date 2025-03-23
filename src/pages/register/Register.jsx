@@ -81,14 +81,6 @@ const Register = () => {
             }
         }
 
-        if (name === 'confirmEmail') {
-            if (value !== formData.email) {
-                newErrors.confirmEmail = 'כתובות האימייל אינן תואמות.';
-            } else {
-                delete newErrors.confirmEmail;
-            }
-        }
-
         if (name === 'password') {
             if (value.length < 6) {
                 newErrors.password = 'הסיסמא צריכה להיות באורך של לפחות 6 תווים.';
@@ -118,7 +110,7 @@ const Register = () => {
             formData.lastName.length >= 2 &&
             formData.username.length >= 5 &&
             /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) &&
-            formData.confirmEmail === formData.email &&
+            // formData.confirmEmail === formData.email &&
             formData.password.length >= 6 &&
             /\d/.test(formData.password) &&
             formData.confirmPassword === formData.password &&
@@ -239,6 +231,20 @@ const Register = () => {
                     {errors.email && <label className={"input-error"}>{errors.email}</label>}
                 </div>
 
+                <div className="form-input form-margins flex confirmPass-container" id={"item-8"}>
+                    <div className={`input-wrapper ${formData.confirmPassword ? 'has-content' : ''}`}>
+                        <label className={"input-placeholder"} htmlFor="confirmPassword">וידוא סיסמא</label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    {errors.confirmPassword && <label className={"input-error"}>{errors.confirmPassword}</label>}
+                </div>
+
                 <div className="form-input form-margins flex password-container" id={"item-7"}>
                     <div className={`input-wrapper ${formData.password ? 'has-content' : ''}`}>
                         <label className={"input-placeholder"} htmlFor="password">סיסמא</label>
@@ -253,20 +259,8 @@ const Register = () => {
                     {errors.password && <label className={"input-error"}>{errors.password}</label>}
                 </div>
 
-                <div className="form-input form-margins flex confirmPass-container" id={"item-8"}>
-                    <div className={`input-wrapper ${formData.confirmPassword ? 'has-content' : ''}`}>
-                        <label className={"input-placeholder"} htmlFor="confirmPassword">וידוא סיסמא</label>
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    {errors.confirmPassword && <label className={"input-error"}>{errors.confirmPassword}</label>}
-                </div>
-                <button className={"form-submit form-margins"} type="submit" disabled={!isFormValid} id={"grid-item-9"}>
+
+                <button className={"form-submit form-margins"} type="submit" disabled={isFormValid} id={"grid-item-9"}>
                     הרשם
                 </button>
             </form>
