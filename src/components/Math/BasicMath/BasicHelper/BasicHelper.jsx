@@ -4,7 +4,7 @@ import Shape from "../../Shapes/Shape.jsx";
 
 export default function BasicHelper({ num1, num2, operand }) {
     const shapes = ["square", "circle", "triangle"];
-    const colors = ["red", "yellow", "green", "purple"];
+    const colors = ["#ABE7FE","#FFA071", "#FEC98F", "#A7E99C", "#8A85AE", "#C9A8B1"];
 
     function randomizeShape() {
         const randomShape = shapes[Math.floor(Math.random() * shapes.length)];

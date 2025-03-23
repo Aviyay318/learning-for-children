@@ -48,3 +48,13 @@ button:focus, button:focus-visible {
     justify-content: center;
     align-items: center;
 }
+.glass{
+    backdrop-filter: blur(20px);
+    border-radius: 50px;
+    box-shadow:  5px 5px 20px #ff8f4d,
+    -5px -5px 20px #ffffff;
+}
+.header{
+    background: #ff7200;
+    color: white;
+}

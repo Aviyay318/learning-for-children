@@ -1,11 +1,10 @@
 .basic-exercise-helper {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-    border: 1px solid black;
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
 }
 .basic-exercise-helper-operand{
     font-size: var(--font-size-huge);

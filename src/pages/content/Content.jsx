@@ -60,9 +60,13 @@ export default function Content() {
 
     return (
         <div className={"content-container flex"}>
-            <h1>תרגילים</h1>
-            <h1>User Level: {level !== null ? level : "Loading..."}</h1>
-            <ExerciseTabs/>
+            <div className={"content-header header glass"}>
+                <h1>תרגילים</h1>
+            </div>
+            <div className={"content-body flex glass"}>
+                <h1>User Level: {level !== null ? level : "Loading..."}</h1>
+                <ExerciseTabs/>
+            </div>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import "./Navbar.css"
 export default function Navbar() {
 
     return (
-        <nav className={"navbar"}>
+        <nav className={"navbar glass"}>
             <NavLink to="/homepage" className={({isActive}) => isActive ? "active" : ""}>
                 <svg xmlns="http://www.w3.org/2000/svg" height="60px" viewBox="0 -960 960 960" width="60px"
                      fill="#5f6368">

@@ -21,7 +21,6 @@ export default function BasicMath(){
 
     return (
         <div className={"basic-math-container"}>
-            <div>
                 <button onClick={handleExercise}>get-exercise</button>
                 {data !== null
                     &&
@@ -45,9 +44,6 @@ export default function BasicMath(){
                             />
                         }
                     </div>}
-            </div>
-
-
         </div>
     )
 };

@@ -1,48 +1,19 @@
 :root{
     /*color variables*/
+
     /* Default Colors */
-    --background-color: rgba(255, 54, 0, 0.1);
-    --text-color: #ff8f4d;
+
+    --background-color: #FFFFFF;
+    --text-color: #ff7200;
     --border-color: salmon;
     --border-radius: 10px;
-    --inactive-color: rgba(117, 117, 117, 0.18);
-    --inactive-text-color: #213547;
-    --active-color: #ff8f4d;
+
+    --inactive-color: rgba(172, 172, 172, 0.66);
+    --inactive-text-color: #2C2C2C;
+    --active-color: #ff7200;
     --active-text-color: white;
-    /*--active-tab:*/
-    /* Login & Authentication Pages */
-    --login-bg: #FF9534;
-    --login-text: #2C2C2C;
-    --login-input-bg: #FFFFFF;
-    --login-border: #999999;
 
-    /* Home & Dashboard */
-    --dashboard-text: #2C2C2C;
-    --dashboard-highlight: #FF9534;
-    --dashboard-card-bg: #FFFFFF;
-    --dashboard-shadow: rgba(0, 0, 0, 0.1);
-
-    /* Learning & Content Pages */
-    --lesson-bg: #FF9534;
-    --lesson-text: #FFFFFF;
-    --video-bg: #2C2C2C;
-    --video-overlay: rgba(0, 0, 0, 0.5);
-    --exercise-card: #FFFFFF;
-    --exercise-border: #999999;
-
-    /* Progress & Rewards */
-    --progress-bar: #FF9534;
-    --achievement-badge: #FFD700; /* Gold */
-    --progress-text: #2C2C2C;
-    --progress-bg: #FFFFFF;
-
-    /* Settings & Subscription */
-    --settings-bg: #F5F5F5;
-    --settings-text: #2C2C2C;
-    --settings-highlight: #FF9534;
-    --subscription-bg: #FFFFFF;
-    --subscription-text: #2C2C2C;
-
+    --navbar-bg-color: #FFFFFF;
     /*----------------*/
 
     /*margin variables*/
@@ -52,11 +23,13 @@
 
     /*font variables*/
     /*sizes*/
+    --font-size-mobile-small: 1rem;
+
     --font-size-small: 1rem;
     --font-size-medium: 1.3rem;
     --font-size-large: 1.5rem;
     --font-size-very-large: 2rem;
-    --font-size-huge: 4rem;
+    --font-size-huge: 6rem;
     --font-size-h1: 3rem;
 
     /*weights*/
@@ -68,13 +41,21 @@
     /*----------------*/
 
     /*shapes variables*/
-    --shapes-default-size: 80px;
+    --shapes-size-desktop: 80px;
+    --shapes-size-tablet: 60px;
+    --shapes-size-mobile: 40px;
+    --shapes-size: var(--shapes-size-desktop);
+    --triangle-default-size: calc(var(--shapes-size) * 0.866);
     --shapes-default-color: #ff6600;
-    --shapes-container-size: 30%;
-    --shapes-default-border-color: black;
+    --shapes-container-size: 40%;
+    --shapes-default-border-color: rgba(0, 0, 0, 0.98);
     /*----------------*/
 
-    --component-width: 80%;
+    --component-width-desktop: 80%;
+    --component-width-tablet: 90%;
+    --component-width-mobile: 95%;
+    --component-width: var(--component-width-desktop);
+    --component-minimum-width: 50rem;
 
 
 }

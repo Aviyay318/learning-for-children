@@ -15,21 +15,19 @@ export default function ExerciseTabs() {
     const activeComponent = tabs.find(tab => tab.id === activeTab)?.component
 
     return (
-        <div>
+        <div className={"exercise-tab-container flex"}>
             <div className={"exercise-type-chooser"}>
                 {tabs.map(tab => (
                     <span
                         key={tab.id}
-                        className={`exercise-type ${activeTab === tab.id ? "active" : ""}`}
+                        className={`exercise-type ${activeTab === tab.id ? "active glass" : ""}`}
                         onClick={() => setActiveTab(tab.id)}
                     >
                         {tab.label}
                     </span>
                 ))}
             </div>
-            <div className={"exercise-container"}>
-                {activeComponent}
-            </div>
+            <div className={"active-tab-component"}>{activeComponent}</div>
         </div>
     )
 }
