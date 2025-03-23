@@ -17,14 +17,16 @@ export default function Navbar2() {
             </div>
             <div className={"nav-middle flex glass"}>
                 <NavLink to="/homepage" className={({isActive}) => isActive ? "active" : ""}>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="var(--navbar-svg-size)" viewBox="0 -960 960 960" width="var(--navbar-svg-size)"
+                    <svg xmlns="http://www.w3.org/2000/svg" height="var(--navbar-svg-size)" viewBox="0 -960 960 960"
+                         width="var(--navbar-svg-size)"
                          fill="#5f6368">
                         <path
                             d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/>
                     </svg>
                 </NavLink>
                 <NavLink to="/content" className={({isActive}) => isActive ? "active" : ""}>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="var(--navbar-svg-size)" viewBox="0 -960 960 960" width="var(--navbar-svg-size)"
+                    <svg xmlns="http://www.w3.org/2000/svg" height="var(--navbar-svg-size)" viewBox="0 -960 960 960"
+                         width="var(--navbar-svg-size)"
                          fill="#5f6368">
                         <path
                             d="M320-240h60v-80h80v-60h-80v-80h-60v80h-80v60h80v80Zm200-30h200v-60H520v60Zm0-100h200v-60H520v60Zm44-152 56-56 56 56 42-42-56-58 56-56-42-42-56 56-56-56-42 42 56 56-56 58 42 42Zm-314-70h200v-60H250v60Zm-50 472q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/>
