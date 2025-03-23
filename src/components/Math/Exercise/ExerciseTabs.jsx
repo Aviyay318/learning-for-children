@@ -28,6 +28,12 @@ export default function ExerciseTabs() {
                     </span>
                 ))}
             </div>
+            TODO חיצים לשלב הבא וכפתור לבדיקת תשובה
+            TODO לסדר את השיט הזה:
+        {/*    @RequestMapping("/check-exercise")*/}
+        {/*    public boolean checkExercise(String token, int id){*/}
+        {/*    return false;*/}
+        {/*}*/}
             <div className={"active-tab-component"}>{activeComponent}</div>
         </div>
     )

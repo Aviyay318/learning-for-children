@@ -45,7 +45,7 @@ export default function LiteralProblem() {
             <button onClick={() => window.confirm("האם אתה בטוח?") ? alert("כן") : alert("לא")}>
              רמז
             </button>
-             <div>{literalProblem.hint}</div>
+             {/*<div>{literalProblem.hint}</div>*/}
 
             <button onClick={() => {
                 checkLiteralProblem(userAnswer)

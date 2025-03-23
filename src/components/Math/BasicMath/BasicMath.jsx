@@ -21,7 +21,7 @@ export default function BasicMath(){
 
     return (
         <div className={"basic-math-container"}>
-                <button onClick={handleExercise}>get-exercise</button>
+            {data === null &&<button onClick={handleExercise}>התחל</button>}
                 {data !== null
                     &&
                     <div className={"basic-exercise-container"}>
