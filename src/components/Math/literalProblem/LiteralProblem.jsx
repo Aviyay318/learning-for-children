@@ -36,7 +36,7 @@ export default function LiteralProblem() {
     return (
         <div>
             <label>בעיה מילולית:</label>
-            {literalProblem !== null && <label>{literalProblem.question}</label>
+            {literalProblem !== null && <label >{literalProblem.question}</label>
             }
             <div><input type={"number"} value={userAnswer} onChange={(e) => {
                 setUserAnswer(e.target.value)

@@ -1,8 +1,4 @@
-import {useEffect, useState} from "react"
-// import {GET_MATH, SERVER_URL} from "../../../utils/Constants.js";
-// import useGetApi from "../../../../../../../../hooks/apiHooks/useGetApi.js";
-// import Cookies from "js-cookie";
-// import "../../Exercise/Exercise.css"
+import {useState} from "react"
 import "./BasicExercise.css"
 export default function BasicExercise({num1, num2, operand1, operandEqual, num3}){
     const [answerNumber,setAnswerNumber] = useState("");
