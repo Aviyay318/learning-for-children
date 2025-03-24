@@ -2,11 +2,13 @@ import BasicMath from "../BasicMath/BasicMath.jsx";
 import {useState} from "react";
 import "./ExerciseTabs.css"
 import LiteralProblem from "../literalProblem/LiteralProblem.jsx";
+import Equations from "../Equations/Equations.jsx";
+import MultiplicationProblems from "../MultiplicationProblems/MultiplicationProblems.jsx";
 
 export default function ExerciseTabs() {
     const tabs = [
-        {id:"multiplication", label:"לוח הכפל", component:null},
-        {id:"equations", label:"משוואות", component:null},
+        {id:"multiplication", label:"לוח הכפל", component:<MultiplicationProblems/>},
+        {id:"equations", label:"משוואות", component:<Equations/>},
         {id:"literalProblems", label:"בעיות מילוליות", component:<LiteralProblem/>},
         {id:"basicMath", label:"פעולות חשבון",component:<BasicMath/>},
 
