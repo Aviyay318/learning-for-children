@@ -12,22 +12,22 @@ const Login = ({ setIsLogin }) => {
     });
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
-    const { data, error, sendRequest } = usePostApi(LOGIN_API);
+    const { regData, regError, sendRegisterRequest } = usePostApi(LOGIN_API);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (data?.success) {
+        if (regData?.success) {
             setIsLogin();
             const cookies = new Cookies();
-            cookies.set("token", data.token, { path: "/" });
-            navigate(HOME_PAGE, { state: { isAdmin: data.admin } });
-        } else if (data?.success === false) {
+            cookies.set("token", regData.token, { path: "/" });
+            navigate(HOME_PAGE, { state: { isAdmin: regData.admin } });
+        } else if (regData?.success === false) {
             setErrors((prev) => ({ ...prev, login: "שם משתמש או סיסמה אינם נכונים" }));
         }
-        if (error) {
-            alert(error || "Something went wrong.");
+        if (regError) {
+            alert(regError || "Something went wrong.");
         }
-    }, [data, error]);
+    }, [regData, regError]);
 
     useEffect(() => {
         setIsFormValid(formData.email.length > 0 && formData.password.length > 0);
@@ -41,7 +41,7 @@ const Login = ({ setIsLogin }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await sendRequest(formData);
+        await sendRegisterRequest(formData);
     };
 
     return (

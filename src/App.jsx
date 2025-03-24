@@ -9,7 +9,6 @@ import Profile from "./pages/profile/Profile.jsx";
 import Login from "./pages/login/Login.jsx";
 import {useState} from "react";
 import useSetResponsiveProperty from "./hooks/responsiveHooks/useSetResponsiveProperty.js";
-import Navbar2 from "./components/Navbar/Navbar2.jsx";
 
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
             <BrowserRouter>
                 {/*{isLogin && <Navbar/> }*/}
                 {/*<Navbar/>*/}
-                <Navbar2/>
+                <Navbar/>
                 <Routes>
                     <Route path="/" element={<Login setIsLogin={setLogin}/>}/>
                     <Route path="/homePage" element={<Homepage/>}/>

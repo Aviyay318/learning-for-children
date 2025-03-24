@@ -58,7 +58,7 @@
     --component-minimum-width: 50rem;
 
     /*navbar variables*/
-    --navbar-svg-size-desktop:70px;
+    --navbar-svg-size-desktop:45px;
     --navbar-svg-size-tablet:50px;
     --navbar-svg-size-mobile:40px;
     --navbar-svg-size: var(--navbar-svg-size-desktop);

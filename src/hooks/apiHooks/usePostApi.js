@@ -13,8 +13,10 @@ const usePostApi = (url) =>{
         setError(null);
 
         try {
-            console.log(body);
+            console.log("body: ",body);
             const response = await axios.post(SERVER_URL + url, body);
+            console.log("url + body ",SERVER_URL + url, body);
+            console.log("response: ",response.data);
             setData(response.data);
         } catch (err) {
             setError(err.response?.data?.message || 'Request failed');
@@ -23,7 +25,7 @@ const usePostApi = (url) =>{
         }
     };
 
-    return { data, error, loading, sendRequest };
+    return {data, error, loading, sendRequest };
 
 }
 export default usePostApi;

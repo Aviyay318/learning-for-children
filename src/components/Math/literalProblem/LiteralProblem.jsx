@@ -22,9 +22,9 @@ export default function LiteralProblem() {
     const getLiteralProblem = async () => {
         const response = await axios.get(SERVER_URL + "/get-literal-problem?token=" + token);
         if (response.data!==null){
-            console.log(response.data); // assuming 'response.data' contains the question
+            console.log(response.data); // assuming 'response.regData' contains the question
             setLiteralProblem(response.data);
-            // setId(response.data.id);
+            // setId(response.regData.id);
         }
     };
 
