@@ -1,14 +1,14 @@
 import {NavLink} from "react-router-dom";
 import "./Navbar.css"
 import useSetResponsiveProperty from "../../hooks/responsiveHooks/useSetResponsiveProperty.js";
-export default function Navbar() {
+export default function Navbar({deleteCookies,username}) {
 
     useSetResponsiveProperty("--navbar-svg-size")
 
     return (
         <div className={"navbar flex"}>
             <div className={"nav-left flex glass"}>
-                <label className={"navbar-text"}>רם רביבו</label>
+                <label className={"navbar-text"}>{username!==null?<label>{username}</label>:<label>AYRD</label>}</label>
                 <NavLink to="/profile" className={({isActive}) => isActive ? "active" : ""}>
                     <svg xmlns="http://www.w3.org/2000/svg" height="var(--navbar-svg-size)" viewBox="0 -960 960 960" width="var(--navbar-svg-size)"
                          fill="#5f6368">
@@ -51,10 +51,16 @@ export default function Navbar() {
             </div>
             <div className={"nav-right flex glass"}>
                 <div className={"flex"}>
-                    <NavLink to="/" className={({isActive}) => isActive ? "active" : ""}>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="var(--navbar-svg-size)" viewBox="0 -960 960 960" width="var(--navbar-svg-size)" fill="#5f6368">
-                            <path d="M806-440H320v-80h486l-62-62 56-58 160 160-160 160-56-58 62-62ZM600-600v-160H200v560h400v-160h80v160q0 33-23.5 56.5T600-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h400q33 0 56.5 23.5T680-760v160h-80Z"/>
-                        </svg>
+                    <NavLink  to="/" className={({isActive}) => isActive ? "active" : ""}>
+                        <button onClick={deleteCookies}>
+                            <svg  xmlns="http://www.w3.org/2000/svg"
+                                 height="var(--navbar-svg-size)" viewBox="0 -960 960 960" width="var(--navbar-svg-size)"
+                                 fill="#5f6368">
+                                <path
+                                    d="M806-440H320v-80h486l-62-62 56-58 160 160-160 160-56-58 62-62ZM600-600v-160H200v560h400v-160h80v160q0 33-23.5 56.5T600-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h400q33 0 56.5 23.5T680-760v160h-80Z"/>
+                            </svg>
+                        </button>
+
                     </NavLink>
                     <label className={"navbar-text"}>התנתק</label>
                 </div>

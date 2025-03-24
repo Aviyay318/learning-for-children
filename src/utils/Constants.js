@@ -7,3 +7,5 @@ export const CHECK_OTP = "/check-otp-to-register";
 export const GET_USERNAME_AND_GENDER = "/getUsername-and-gender";
 export const GET_MATH = "/get-exercise";
 export const CHECK_ANSWER = "/check-answer";
+export const CHECK_EXERCISE = "/check-exercise";
+export const GET_USER_DATA = "/get-user-data";

@@ -3,10 +3,12 @@ import BasicExercise from "./BasicExercise/BasicExercise.jsx";
 import BasicHelper from "./BasicHelper/BasicHelper.jsx";
 import {useEffect, useState} from "react";
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
-import {GET_MATH} from "../../../utils/Constants.js";
+import {CHECK_EXERCISE, GET_MATH, SERVER_URL} from "../../../utils/Constants.js";
+import axios from "axios";
 import Cookies from "js-cookie";
 
-export default function BasicMath(){
+export default function BasicMath() {
+
     const [askForHelp, setAskForHelp] = useState(false);
     const { data, error, loading, sendRequest } = useGetApi(GET_MATH);
 
@@ -26,11 +28,14 @@ export default function BasicMath(){
                     &&
                     <div className={"basic-exercise-container"}>
                         <BasicExercise
-                            num1={data.num1}
-                            num2={data.num2}
-                            operand1={data.operand1}
-                            operandEqual={data.operandEqual}
-                            num3={data.num3}
+                            id={basicData.id}
+                            num1={basicData.num1}
+                            num2={basicData.num2}
+                            operand1={basicData.operand1}
+                            operandEqual={basicData.operandEqual}
+                            num3={basicData.num3}
+                            userAnswer={userAnswer}
+                            setUserAnswer={setUserAnswer}
                         />
                         <button
                             onClick={() => setAskForHelp(!askForHelp)}>

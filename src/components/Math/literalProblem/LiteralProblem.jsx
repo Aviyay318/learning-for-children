@@ -1,35 +1,39 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {SERVER_URL} from "../../../utils/Constants.js";
+import {CHECK_EXERCISE, SERVER_URL} from "../../../utils/Constants.js";
 import Cookies from "js-cookie";
 
 export default function LiteralProblem() {
     const [literalProblem, setLiteralProblem] = useState(null);
-    const [token,setToken] = useState();
     const [userAnswer, setUserAnswer] = useState("");
     const [success, setSuccess] = useState(null);
     const [id, setId] = useState(1);
 
 
-    const checkLiteralProblem = async ()=>{
-      const  response = await axios.get(SERVER_URL + "/check-literal-problem?token=" + token + "&id=" + id);
-        if (response.data!==null){
-             console.log(response.data);
-             setSuccess(response.data);
-        }
-    };
+
+    const checkLiteralProblem =()=>{
+        const token = Cookies.get("token");
+        axios.get(SERVER_URL+CHECK_EXERCISE+"?token="+token+"&id="+id+"&answer=" +userAnswer).then(
+            response=>{
+                console.log(response.data)
+                setSuccess(response.data)
+            }
+        )
+    }
 
     const getLiteralProblem = async () => {
+        const token = Cookies.get("token"); // נקרא ישירות מהעוגייה
+        console.log(token);
         const response = await axios.get(SERVER_URL + "/get-literal-problem?token=" + token);
-        if (response.data!==null){
-            console.log(response.data); // assuming 'response.regData' contains the question
+        if (response.data !== null) {
+            console.log(response.data);
             setLiteralProblem(response.data);
-            // setId(response.regData.id);
+            setId(response.data.id);
         }
     };
 
+
     useEffect(() => {
-        setToken(Cookies.get("token"))
         getLiteralProblem();
     }, []);
 
@@ -45,11 +49,10 @@ export default function LiteralProblem() {
             <button onClick={() => window.confirm("האם אתה בטוח?") ? alert("כן") : alert("לא")}>
              רמז
             </button>
-             {/*<div>{literalProblem.hint}</div>*/}
+             <div>{literalProblem!==null&&<label>{literalProblem.hint}</label>}</div>
 
-            <button onClick={() => {
-                checkLiteralProblem(userAnswer)
-            }}>בדוק פתרון
+            <button onClick={checkLiteralProblem
+            }>בדוק פתרון
             </button>
 
             {success !== null &&
