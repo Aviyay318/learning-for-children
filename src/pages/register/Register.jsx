@@ -24,10 +24,7 @@ const Register = () => {
 
     useEffect(() => {
         if (regData?.success) {
-            //TODO כאן רם תוכל לעשות את המעבר לOTP
             setShowOtp(true)
-
-
         }else if(regData?.success===false) {
             alert("Registration failed. Please try again.")
         }

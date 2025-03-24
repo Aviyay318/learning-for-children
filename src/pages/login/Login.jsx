@@ -12,25 +12,25 @@ const Login = ({ setIsLogin }) => {
     });
     const [errors, setErrors] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
-    const { regData, regError, sendRegisterRequest } = usePostApi(LOGIN_API);
+    const { data: loginData, error: loginError, sendRequest: sendLoginRequest } = usePostApi(LOGIN_API);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (regData?.success) {
+        if (loginData?.success) {
             setIsLogin();
             const cookies = new Cookies();
-            cookies.set("token", regData.token, { path: "/" });
-            navigate(HOME_PAGE, { state: { isAdmin: regData.admin } });
-        } else if (regData?.success === false) {
+            cookies.set("token", loginData.token, { path: "/" });
+            navigate(HOME_PAGE, { state: { isAdmin: loginData.admin } });
+        } else if (loginData?.success === false) {
             setErrors((prev) => ({ ...prev, login: "שם משתמש או סיסמה אינם נכונים" }));
         }
-        if (regError) {
-            alert(regError || "Something went wrong.");
+        if (loginError) {
+            alert(loginError || "Something went wrong.");
         }
-    }, [regData, regError]);
+    }, [loginData, loginError]);
 
     useEffect(() => {
-        setIsFormValid(formData.email.length > 0 && formData.password.length > 0);
+        setIsFormValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) && formData.password.length >= 6);
     }, [formData]);
 
     const handleChange = (e) => {
@@ -41,35 +41,41 @@ const Login = ({ setIsLogin }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await sendRegisterRequest(formData);
+        await sendLoginRequest(formData);
     };
 
     return (
-        <div className="main-container">
-            <h1 className="form-header">התחברות</h1>
-            <form className="grid-container" onSubmit={handleSubmit}>
-                <div className="form-input form-margins flex">
-                    <label htmlFor="email">אימייל</label>
-                    <input
-                        type="text"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
+        <div className="main-container flex">
+            <h1 className="form-header glass">התחברות</h1>
+            <form className="grid-container login" onSubmit={handleSubmit}>
+                <div className="form-input form-margins flex" id={"item-1"}>
+                    <div className={`input-wrapper ${formData.email ? 'has-content' : ''}`}>
+                        <label className={"input-placeholder"} htmlFor="email">אימייל</label>
+                        <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                        />
+                    </div>
+
                 </div>
                 <div className="form-input form-margins flex">
-                    <label htmlFor="password">סיסמה</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
+                    <div className={`input-wrapper ${formData.password? 'has-content' : ''}`}>
+                        <label className={"input-placeholder"} htmlFor="password">סיסמה</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                        />
+                    </div>
+
                 </div>
                 {errors.login && <label className="input-error">{errors.login}</label>}
-                <button type="submit" disabled={!isFormValid}>התחבר</button>
+                <button className={"form-submit form-margins"} type="submit" disabled={!isFormValid}>התחבר</button>
             </form>
             <button onClick={() => navigate(REGISTER_PAGE)}>אין לך משתמש? לחץ כאן על מנת להירשם</button>
         </div>

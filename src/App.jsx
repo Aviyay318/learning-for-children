@@ -2,7 +2,6 @@
 import './App.css'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Register from "./pages/register/Register.jsx";
-import Navbar from "./components/Navbar/Navbar.jsx";
 import Homepage from "./pages/homePage/Homepage.jsx";
 import Content from "./pages/content/Content.jsx";
 import Profile from "./pages/profile/Profile.jsx";

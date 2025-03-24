@@ -26,5 +26,7 @@ export default function BasicExercise({id,num1, num2, operand1, operandEqual, nu
         <div>
             {buildExercise()}
         </div>
+
+
     )
 };
