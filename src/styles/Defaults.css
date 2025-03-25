@@ -55,6 +55,7 @@ button:focus, button:focus-visible {
     -5px -5px 20px #ffffff;
 }
 .header{
+    width: 100%;
     background: #ff7200;
     color: white;
 }

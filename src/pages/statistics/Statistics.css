@@ -1,16 +1,14 @@
-.profile-container{
+.statistics-container {
+    flex-direction: column;
     width: var(--component-width);
     height: var(--component-height);
-    flex-direction: column;
     gap: var(--component-gap);
-
 }
-.profile-header{
+.statistics-header{
     width: 100%;
 }
-.profile-body{
-    flex-direction: column;
+.statistics-body{
     width: 100%;
     height: 100%;
-    /*margin-block-start: var(--margin-start);*/
+
 }

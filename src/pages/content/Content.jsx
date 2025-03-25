@@ -3,14 +3,15 @@ import useGetApi from "../../hooks/apiHooks/useGetApi.js"; // Rename this hook t
 import {GET_MATH, SERVER_URL} from "../../utils/Constants.js";
 import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
-import BasicMath from "../../components/Math/BasicMath/BasicMath.jsx";
 import ExerciseTabs from "../../components/Math/Exercise/ExerciseTabs.jsx";
 import axios from "axios";
+import {useUser} from "../../contexts/UserContext.jsx";
 export default function Content() {
     const { data, error, loading, sendRequest } = useGetApi(GET_MATH);
     const [userAnswer, setUserAnswer] = useState("");
     const [correct, setCorrect] = useState(null);
 
+    const {user} = useUser()
 
     const [level, setLevel] = useState(null);
 
@@ -65,6 +66,7 @@ export default function Content() {
             </div>
             <div className={"content-body flex glass"}>
                 <h1>User Level: {level !== null ? level : "Loading..."}</h1>
+                <h1>User Level: {user.level}</h1>
                 <ExerciseTabs/>
             </div>
         </div>

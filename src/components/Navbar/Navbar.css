@@ -12,9 +12,9 @@
 
 .nav-left, .nav-right {
     flex: 0 0 auto;
-    gap: 1rem;
-    align-self: center;
+    align-items: center;
     justify-content: center;
+
 }
 .nav-middle {
     flex: 1;
@@ -48,4 +48,5 @@
     font-weight: var(--font-weight-semi-bold);
     text-align: center;
     width: var(--navbar-text-width);
+    flex-direction: column;
 }

@@ -56,14 +56,16 @@
     --component-width-mobile: 95%;
     --component-width: var(--component-width-desktop);
     --component-minimum-width: 50rem;
+    --component-height: 80vh;
+    --component-gap: 1.5rem;
 
     /*navbar variables*/
     --navbar-svg-size-desktop:45px;
     --navbar-svg-size-tablet:50px;
     --navbar-svg-size-mobile:40px;
     --navbar-svg-size: var(--navbar-svg-size-desktop);
-    --navbar-text-width-desktop: 130px;
-    --navbar-text-width-tablet: 110px;
-    --navbar-text-width-mobile: 90px;
+    --navbar-text-width-desktop: 120px;
+    --navbar-text-width-tablet: 100px;
+    --navbar-text-width-mobile: 80px;
     --navbar-text-width: var(--navbar-text-width-desktop);
 }

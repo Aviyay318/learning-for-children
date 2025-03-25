@@ -24,7 +24,10 @@ const Register = () => {
 
     useEffect(() => {
         if (regData?.success) {
+            //TODO כאן רם תוכל לעשות את המעבר לOTP
             setShowOtp(true)
+
+
         }else if(regData?.success===false) {
             alert("Registration failed. Please try again.")
         }
@@ -34,6 +37,7 @@ const Register = () => {
 
 
     }, [regData,regError]);
+
     useEffect(() => {
         if(otpData){
             if (otpData.success && otpData.registeredSuccessfuly) {
@@ -138,7 +142,6 @@ const Register = () => {
             formData.lastName.length >= 2 &&
             formData.username.length >= 5 &&
             /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) &&
-            // formData.confirmEmail === formData.email &&
             formData.password.length >= 6 &&
             /\d/.test(formData.password) &&
             formData.confirmPassword === formData.password &&
@@ -147,7 +150,7 @@ const Register = () => {
         setIsFormValid(!isValid);
     }, [errors, formData]);
 
-    const handleSubmit =async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Form Data:', formData);
         await sendRegisterRequest(formData)

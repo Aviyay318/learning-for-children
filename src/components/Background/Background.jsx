@@ -1,6 +1,6 @@
 import "./Background.css"
-import ButtonImage from "../ButtonImage/ButtonImage.jsx";
 import {useEffect, useState} from "react";
+import ButtonImage from "../ButtonImage/ButtonImage.jsx";
 export default function Background() {
     const backgroundAlbum = ({
         1: "src/assets/images/1.jpg",
@@ -30,10 +30,6 @@ export default function Background() {
                         />
                     )
                 })}
-                {/*<ButtonImage id={"ch"} buttonNumber={1} setImageFrom={changeBackground} imageUrl={1}/>*/}
-                {/*<ButtonImage id={"ch"} buttonNumber={2} setImageFrom={changeBackground} imageUrl={2}/>*/}
-                {/*<ButtonImage id={"ch"} buttonNumber={3} setImageFrom={changeBackground} imageUrl={3}/>*/}
-                {/*<ButtonImage id={"ch"} buttonNumber={4} setImageFrom={changeBackground} imageUrl={4}/>*/}
             </div>
 
         </div>
