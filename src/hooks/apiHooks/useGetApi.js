@@ -6,13 +6,12 @@ const useGetApi = (url) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const sendRequest = async ({token,level}) => {
+    const sendRequest = async ({token,level} = {}) => {
         setLoading(true);
         setError(null);
-
         try {
             const response = await axios.get(SERVER_URL + url, {
-                params: {token:token, level: level }  // העברת ה-level כפרמטר
+                params: { token, level }  // העברת ה-level כפרמטר
             });
             console.log(response);
             setData(response.data);

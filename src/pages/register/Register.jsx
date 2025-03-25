@@ -56,10 +56,9 @@ const Register = () => {
     }, [otpData,otpError,navigate]);
 
     const onOtpSubmit =async (otp) => {
-        console.log("onOtpSubmit called with:", otp);
+        // console.log("onOtpSubmit called with:", otp);
         await sendOtpRequest({email: formData.email, otp});
         navigate("/")
-
     }
 
     const [errors, setErrors] = useState({});

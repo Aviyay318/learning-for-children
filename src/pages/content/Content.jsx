@@ -12,7 +12,7 @@ export default function Content() {
     const [correct, setCorrect] = useState(null);
     const [level, setLevel] = useState(null);
 
-    const getLevel = async () => {
+    const getLevel = async (suffix) => {
         try {
             const token = Cookies.get("token");
             if (!token) {
@@ -20,7 +20,7 @@ export default function Content() {
                 return;
             }
 
-            const response = await axios.get(`${SERVER_URL}/get-level`, {
+            const response = await axios.get(`${SERVER_URL}/get-level${suffix}`, {
                 params: { token }
             });
 

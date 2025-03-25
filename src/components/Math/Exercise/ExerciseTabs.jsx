@@ -10,17 +10,41 @@ import {GET_MATH, GET_QUESTION_TYPE, SERVER_URL} from "../../../utils/Constants.
 
 
 
-export default function ExerciseTabs() {
-    const tabs = [
-        {id:"multiplication", label:"לוח הכפל", component:<MultiplicationProblems/>},
-        {id:"equations", label:"משוואות", component:<Equations/>},
-        {id:"literalProblems", label:"בעיות מילוליות", component:<LiteralProblem/>},
-        {id:"basicMath", label:"פעולות חשבון",component:<BasicMath/>},
+export default function ExerciseTabs({level}) {
 
-    ]
+    const { data: questionTypeData, error: questionTypeError, loading: questionTypeLoading, sendRequest: sendQuestionTypeRequest } = useGetApi(GET_QUESTION_TYPE);
+    const [tabs, setTabs] = useState([])
 
-    const [activeTab, setActiveTab] = useState(tabs[0].id)
+    const handleQuestionType = async () => {
+        await sendQuestionTypeRequest({});
+    }
+
+    useEffect(() => {
+        handleQuestionType()
+    }, []);
+
+    const [activeTab, setActiveTab] = useState()
     const activeComponent = tabs.find(tab => tab.id === activeTab)?.component
+
+    const componentsMap = {
+        1: <BasicMath />,
+        2: <LiteralProblem />,
+        3: <Equations />,
+        4: <MultiplicationProblems />,
+    };
+
+    useEffect(() => {
+        if (questionTypeData) {
+            const mappedTabs = questionTypeData.map (type => ({
+                id: type.id,
+                label: type.name,
+                component: componentsMap[type.id] || <div>Component not defined</div>,
+            })).reverse();
+            setTabs(mappedTabs)
+        }
+    }, [questionTypeData]);
+
+
 
     return (
         <div className={"exercise-tab-container flex"}>
@@ -36,7 +60,11 @@ export default function ExerciseTabs() {
                 ))}
             </div>
 
-            <div className={"active-tab-component"}>{activeComponent}</div>
+            <div className={"active-tab-component"}>
+                <h1>User Level: {level !== null ? level : "Loading..."}</h1>
+                {activeComponent}
+            </div>
+
         </div>
     )
 }
