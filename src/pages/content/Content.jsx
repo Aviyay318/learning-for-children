@@ -10,9 +10,6 @@ export default function Content() {
     const { data, error, loading, sendRequest } = useGetApi(GET_MATH);
     const [userAnswer, setUserAnswer] = useState("");
     const [correct, setCorrect] = useState(null);
-
-    const {user} = useUser()
-
     const [level, setLevel] = useState(null);
 
     const getLevel = async () => {
@@ -65,9 +62,7 @@ export default function Content() {
                 <h1>תרגילים</h1>
             </div>
             <div className={"content-body flex glass"}>
-                <h1>User Level: {level !== null ? level : "Loading..."}</h1>
-                <h1>User Level: {user.level}</h1>
-                <ExerciseTabs/>
+                <ExerciseTabs level={level}/>
             </div>
         </div>
     );

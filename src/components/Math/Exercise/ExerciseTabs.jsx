@@ -1,9 +1,14 @@
 import BasicMath from "../BasicMath/BasicMath.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import "./ExerciseTabs.css"
 import LiteralProblem from "../literalProblem/LiteralProblem.jsx";
 import Equations from "../Equations/Equations.jsx";
 import MultiplicationProblems from "../MultiplicationProblems/MultiplicationProblems.jsx";
+import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
+import {GET_MATH, GET_QUESTION_TYPE, SERVER_URL} from "../../../utils/Constants.js";
+
+
+
 
 export default function ExerciseTabs() {
     const tabs = [

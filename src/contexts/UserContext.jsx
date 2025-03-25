@@ -6,7 +6,7 @@ export const UserContext = createContext({
 });
 
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(null); // user object will contain firstName, lastName, email, etc.
+    const [user, setUser] = useLocalStorage("user"); // user object will contain firstName, lastName, email, etc.
 
     return (
         <UserContext.Provider value={{ user, setUser }}>

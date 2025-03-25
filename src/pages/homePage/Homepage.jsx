@@ -1,5 +1,6 @@
 import "./Homepage.css"
 import {useLocation} from "react-router-dom";
+import MultiplicationTable from "../../components/Math/MultiplicationProblems/MultiplicationProblems.jsx";
 
 export default function Homepage() {
     const location = useLocation();
@@ -17,7 +18,6 @@ export default function Homepage() {
                     <h1>Welcome, User!</h1>
                 )}
             </div>
-
         </div>
     );
 }
