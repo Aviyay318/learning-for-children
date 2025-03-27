@@ -28,7 +28,7 @@ export default function BasicMath() {
     // const [timeOfAnswer, setTimeOfAnswer] = useState(null);
     const handleExercise = async () => {
         const token = Cookies.get("token"); // קבלת הטוקן מה-Cookie
-        await sendBasicMathRequest({ token: token, level:1}); // שליחת אובייקט תקין
+        await sendBasicMathRequest({ token: token, level:4}); // שליחת אובייקט תקין
         setUserAnswer("")
         setIsCorrectAnswer(null)
         setAskForHelp(false)
