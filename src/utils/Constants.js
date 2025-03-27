@@ -11,6 +11,7 @@ export const CHECK_ANSWER = "/check-answer";
 export const CHECK_EXERCISE = "/check-exercise";
 export const GET_USER_DATA = "/get-user-data";
 export const GET_STATISTICS_DATA = "/get-statistic-data";
+export const GET_EXERCISE_WITH_OPTION="/get-exercise-with-option";
 
 export const TRANSITION = "src/assets/sounds/Transition.wav"
 export const RIGHT_ANSWER = "src/assets/sounds/RightAnswer.wav"
