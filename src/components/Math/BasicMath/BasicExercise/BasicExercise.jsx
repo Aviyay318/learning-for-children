@@ -1,29 +1,47 @@
 import {useEffect, useState} from "react"
 import "./BasicExercise.css"
+import NumericInput from "./NumericInput.jsx";
+import {useSound} from "../../../../hooks/soundHooks/useSound.js";
+import {TRANSITION} from "../../../../utils/Constants.js";
 
-export default function BasicExercise({id,num1, num2, operand1, operandEqual, num3, userAnswer, setUserAnswer}){
+export default function BasicExercise({id,num1, num2, operand1, operandEqual, num3, userAnswer, setUserAnswer, checkAnswer, isCorrectAnswer}){
+
+    const playTransitionSound = useSound(TRANSITION)
 
 
     const buildExercise = () => {
         const parts = [
-            num1 === null ? <input key="num1" type="number" value={userAnswer} onChange={(e) => setUserAnswer(Number(e.target.value))} className="basic-exercise-input" /> : num1,
+            num1 === null
+                ? <NumericInput key='num1' value={userAnswer} onChange={setUserAnswer}/>
+                : num1,
             operand1,
-            num2 === null ? <input key="num2" type="number" value={userAnswer} onChange={(e) => setUserAnswer(Number(e.target.value))} className="basic-exercise-input" /> : num2,
+            num2 === null
+                ? <NumericInput key='num2' value={userAnswer} onChange={setUserAnswer}/>
+                : num2,
             operandEqual,
-            num3 === null ? <input key="num3" type="number" value={userAnswer} onChange={(e) => setUserAnswer(Number(e.target.value))} className="basic-exercise-input" /> : num3
+            num3 === null
+                ? <NumericInput key='num3' value={userAnswer} onChange={setUserAnswer}/>
+                : num3
         ];
         return (
-            <div className="basic-exercise-numeric flex">
-                {parts.map((part, index) => (
-                    <span key={index}>{part}</span>
-                ))}
-            </div>
+                <div className={"basic-exercise-container flex"}>
+                    {parts.map((part, index) => (
+                        <span key={index}>
+                        {
+                                <div className={"basic-exercise-numeric"}>{part}</div>
+                        }
+                    </span>
+                    ))}
+                    {!isCorrectAnswer && <button onMouseEnter={playTransitionSound} className={"check-answer-button"}  onClick={() => checkAnswer()} disabled={userAnswer === "" || userAnswer === 0}>
+                        הגש <br/>תשובה
+                    </button>}
+                </div>
         );
     };
 
 
     return (
-        <div>
+        <div className={"basic-exercise flex"}>
             {buildExercise()}
         </div>
 

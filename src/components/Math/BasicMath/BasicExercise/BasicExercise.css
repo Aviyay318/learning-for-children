@@ -1,22 +1,50 @@
+.basic-exercise{
+    width: 100%;
+    height: 30%;
+}
+.basic-exercise-container{
+    width: var(--component-width);
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .basic-exercise-numeric{
     font-size: var(--font-size-huge);
     font-weight: var(--font-weight-semi-bold);
-    justify-items: center;
-    gap:1.5rem;
-    /*height: 10rem;*/
-    width: 100%;
-    height: 100%;
 }
 
 .basic-exercise-input{
     width: 8rem;
-    height: 7rem;
-    /*background: transparent;*/
     border: none;
     border-bottom: 0.5rem solid var(--text-color);
     font-size: var(--font-size-huge);
     font-weight: var(--font-weight-semi-bold);
     font-family: Fredoka, serif;
     color: var(--text-color);
+    background-color: transparent;
     text-align: center;
+
+
+}
+.check-answer-button{
+    height: 10rem;
+    width: 10rem;
+
+    color: white;
+    background-color: var(--text-color);:
+    margin: 0;
+    padding: 0;
+
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-semi-bold);
+}
+.check-answer-button:disabled{
+    background: var(--inactive-color);
+    color: var(--inactive-color);
 }

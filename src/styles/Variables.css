@@ -26,10 +26,10 @@
     --font-size-mobile-small: 1rem;
 
     --font-size-small: 1rem;
-    --font-size-medium: 1.3rem;
-    --font-size-large: 1.5rem;
-    --font-size-very-large: 2rem;
-    --font-size-huge: 6rem;
+    --font-size-medium: 1.5rem;
+    --font-size-large: 2rem;
+    --font-size-very-large: 3rem;
+    --font-size-huge: 5rem;
     --font-size-h1: 3rem;
 
     /*weights*/
@@ -59,6 +59,7 @@
     --component-height: 80vh;
     --component-gap: 1.5rem;
 
+    --inner-component-width: 95%;
     /*navbar variables*/
     --navbar-svg-size-desktop:45px;
     --navbar-svg-size-tablet:50px;

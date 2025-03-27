@@ -1,0 +1,36 @@
+.exp-bar-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    direction: ltr;
+    /*gap: 1rem;*/
+    width: var(--component-width);
+
+    /*height: 100%;*/
+
+
+}
+/* ExpBar.css */
+.exp-bar-wrapper {
+    width: 100%;
+    height: 80%;
+    overflow: visible;
+    border: 1px solid transparent;
+}
+
+.exp-bar {
+    width: 100%;
+    height: 100%;
+}
+
+.exp-bar-fill {
+    transition: width 0.5s ease-in-out;
+    transition-delay: 1s;
+    transform-origin: left center;
+}
+.exp-label {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-semi-bold);
+    /*width: 3%;*/
+}

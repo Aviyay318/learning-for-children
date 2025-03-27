@@ -44,7 +44,7 @@
     cursor: pointer;
 }
 .navbar-text{
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-medium);
     font-weight: var(--font-weight-semi-bold);
     text-align: center;
     width: var(--navbar-text-width);

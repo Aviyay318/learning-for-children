@@ -1,21 +1,35 @@
+.exercise-tab-container{
+    width: 95%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: var(--component-gap);
+    margin-block-start: var(--margin-start);
+    margin-block-end: var(--margin-end);
+
+}
 
 .exercise-type-chooser{
     /*border: 1px solid red;*/
-    width: var(--component-width);
+    width: 100%;
+    /*margin-inline-start: var(--margin-start);*/
+    /*margin-inline-end: var(--margin-end);*/
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1.5rem;
     text-align: center;
 
-
 }
 .exercise-type{
     background-color: var(--inactive-color);
     cursor:pointer;
-    border-radius: 5px;
+    border-radius: 15px;
     font-size: var(--font-size-medium);
     margin-inline-start: 0.2rem ;
     margin-inline-end: 0.2rem ;
+    transition: all 0.2s ease-in-out;
+
 
 }
 .exercise-type:hover{
@@ -27,15 +41,7 @@
     font-weight: var(--font-weight-medium);
     scale: 1.05;
 }
-.exercise-tab-container{
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    margin-block-start: var(--margin-start);
-    margin-block-end: var(--margin-end);
-}
+
 .active-tab-component{
     width: 100%;
     height: 100%;

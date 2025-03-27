@@ -61,7 +61,6 @@ export default function ExerciseTabs({level}) {
             </div>
 
             <div className={"active-tab-component"}>
-                <h1>User Level: {level !== null ? level : "Loading..."}</h1>
                 {activeComponent}
             </div>
 
