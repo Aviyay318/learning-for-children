@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import {SERVER_URL} from "./Constants.js";
+import { SERVER_URL } from "./Constants.js";
 
 function SvgFromServer() {
-    const [svg, setSvg] = useState(null);
+    const [svgs, setSvgs] = useState([]);
 
     useEffect(() => {
-        fetch(SERVER_URL+"/api/svg") // החליפי ל-URL של השרת שלך
+        fetch(SERVER_URL + "/api/svg")
             .then(response => response.json())
             .then(data => {
-                setSvg(data.svg);
+
+                setSvgs(data);
             })
             .catch(error => {
                 console.error('שגיאה בטעינת ה-SVG:', error);
@@ -17,11 +18,18 @@ function SvgFromServer() {
 
     return (
         <div>
-            <h2>SVG מהשרת:</h2>
-            <div
-                dangerouslySetInnerHTML={{ __html: svg }}
-                style={{ width: '100px', height: '100px', border: '1px solid #ccc' }}
-            />
+            <h2>רשימת פריטים עם אייקונים:</h2>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+                {svgs.map((item, index) => (
+                    <div key={index} style={{ textAlign: 'center' }}>
+                        <div
+                            dangerouslySetInnerHTML={{ __html: item.svg }}
+                            style={{ width: '100px', height: '100px', marginBottom: '8px' }}
+                        />
+                        <div>{item.name}</div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
