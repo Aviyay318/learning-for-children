@@ -1,28 +1,35 @@
+.complete-the-board-container{
+    width: 80%;
+    height: 80%;
+    gap: 3rem;
+    justify-content: space-between;
+}
+
 .exercise-component{
     flex-direction: column;
+    width: 40%;
     height: 100%;
 
 }
-.complete-the-board-container{
+
+.complete-board{
     width: 100%;
     height: 100%;
-    gap: 3rem;
-}
-.complete-board{
-    width: 20rem;
-    height: 20rem;
     display: grid;
     grid-template-columns:1fr 1fr 1fr 1fr 1fr;
     grid-template-rows:1fr 1fr 1fr 1fr 1fr;
     column-gap: 1.5rem;
+
 }
 
-.grid-item{
-    width: 4rem;
-    height: 4rem;
+.grid-button{
     font-size: var(--font-size-large);
     font-weight: var(--font-weight-medium);
 }
+.grid-button:disabled{
+    opacity: var(0.8);
+    filter: grayscale(1);
+}
 #wood-sign-arrow{
-    rotate: 90deg;
+    vertical-align: text-bottom;
 }
