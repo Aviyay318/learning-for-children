@@ -67,26 +67,26 @@ export default function Feedback({
     }, [outcome]);
 
     // Use our sequence hook to chain sounds
-    const playSoundSequence = useSoundSequence();
+    // const playSoundSequence = useSoundSequence();
 
-    useEffect(() => {
-        if (outcome) {
-            // Build an array of sounds to play:
-            // First, always play the outcome sound from config.
-            // If the user leveled up, then play the level-up sound afterward.
-            const soundsToPlay = [config[outcome]?.sound];
-            if (hasLeveledUp) {
-                soundsToPlay.push(LEVEL_UP);
-            }
-            playSoundSequence(soundsToPlay)
-                .then(() => {
-                    // Optionally, do something after the sequence finishes
-                    console.log("Sound sequence complete");
-                })
-                .catch((err) => console.error("Sound sequence error:", err));
-        }
-    }, [outcome, hasLeveledUp, config, playSoundSequence]);
-
+    // useEffect(() => {
+    //     if (outcome) {
+    //         // Build an array of sounds to play:
+    //         // First, always play the outcome sound from config.
+    //         // If the user leveled up, then play the level-up sound afterward.
+    //         const soundsToPlay = [config[outcome]?.sound];
+    //         if (hasLeveledUp) {
+    //             soundsToPlay.push(LEVEL_UP);
+    //         }
+    //         playSoundSequence(soundsToPlay)
+    //             .then(() => {
+    //                 // Optionally, do something after the sequence finishes
+    //                 console.log("Sound sequence complete");
+    //             })
+    //             .catch((err) => console.error("Sound sequence error:", err));
+    //     }
+    // }, [outcome, hasLeveledUp, config, playSoundSequence]);
+    //
 
     return (
         <div className="feedback-container flex">

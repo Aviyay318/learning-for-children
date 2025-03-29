@@ -6,7 +6,7 @@ import {TRANSITION} from "../../../../utils/Constants.js";
 
 export default function BasicExercise({id,num1, num2, operand1, operandEqual, num3, userAnswer, setUserAnswer, checkAnswer, isCorrectAnswer}){
 
-    const playTransitionSound = useSound(TRANSITION)
+    // const playTransitionSound = useSound(TRANSITION)
 
 
     const buildExercise = () => {
@@ -32,7 +32,7 @@ export default function BasicExercise({id,num1, num2, operand1, operandEqual, nu
                         }
                     </span>
                     ))}
-                    {!isCorrectAnswer && <button onMouseEnter={playTransitionSound} className={"check-answer-button"}  onClick={() => checkAnswer()} disabled={userAnswer === "" || userAnswer === 0}>
+                    {!isCorrectAnswer && <button className={"check-answer-button"}  onClick={() => checkAnswer()} disabled={userAnswer === "" || userAnswer === 0}>
                         הגש <br/>תשובה
                     </button>}
                 </div>
