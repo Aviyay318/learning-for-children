@@ -6,6 +6,7 @@ import "./CompleteTheBoard.css"
 export default function CompleteTheBoard(){
     const { data: boardData, error: boardError, loading: boardLoading, sendRequest: sendBoardRequest } = useGetApi(GET_MULTIPLE_EXERCISES);
     const [currentExercise, setCurrentExercise] = useState(null)
+    const [shownExerciseIds, setShownExerciseIds] = useState([])
     const [disabledButtons, setDisabledButtons] = useState([])
     const handleExercise = async () => {
         const token = Cookies.get("token");
@@ -25,17 +26,22 @@ export default function CompleteTheBoard(){
     }, []);
 
     function getNewExercise() {
-        // console.log("Running getNewExercise");
         if (!boardData || boardData.length === 0) {
             return
         } else {
-            const randomIndex = Math.floor(Math.random() * boardData.length);
-            const newExercise = boardData[randomIndex];
-            setCurrentExercise(boardData[randomIndex]);
-            // console.log("Running getNewExercise3");
+            let availableExercises = boardData.filter(exercise => !shownExerciseIds.includes(exercise.id))
+            if (availableExercises.length === 0) {
+                availableExercises = boardData;
+                setShownExerciseIds([])
+            }
+            const randomIndex = Math.floor(Math.random() * availableExercises.length);
+            const newExercise = availableExercises[randomIndex];
+            if (newExercise.id){
+                setCurrentExercise(newExercise);
+                setShownExerciseIds(prev => [...prev, newExercise.id])
+            }
 
         }
-
 
     }
     useEffect(() => {
