@@ -8,7 +8,6 @@ export default function BasicExercise({id,num1, num2, operand1, operandEqual, nu
 
     // const playTransitionSound = useSound(TRANSITION)
 
-
     const buildExercise = () => {
         const parts = [
             num1 === null

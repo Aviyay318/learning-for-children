@@ -57,3 +57,7 @@ button:focus, button:focus-visible {
     background: #ff7200;
     color: white;
 }
+svg{
+    width: 80px;
+    height: 80px;
+}
