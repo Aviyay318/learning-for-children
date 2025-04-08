@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "../../styles/Form.css";
 import "./Login.css"
 import usePostApi from "../../hooks/apiHooks/usePostApi.js";
-import { HOME_PAGE, LOGIN_API, REGISTER_PAGE, SERVER_URL } from "../../utils/Constants.js";
+import {HOME_PAGE, LOGIN_API, PASSWORD_RECOVERY, REGISTER_PAGE, SERVER_URL} from "../../utils/Constants.js";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import axios from "axios";
@@ -57,15 +57,20 @@ const Login = () => {
         await sendLoginRequest(formData);
     };
 
+    const passwordRecovery=()=>{
+        navigate(PASSWORD_RECOVERY);
+    }
+
     return (
-        <div className="main-container login-main-container flex">
-            {/*<img className={"login-image"} src={"src/assets/images/login/login.png"}/>*/}
-            <form className="login-form" onSubmit={handleSubmit}>
-                <h1 className="login-title">התחברות</h1>
+        <div className="main-container form-main-container flex">
+            <img className={"form-image"} src={"src/assets/images/login/login.png"}/>
+            <form className="form" id={"form-login"} onSubmit={handleSubmit}>
+                <h1 className="form-title">התחברות</h1>
                 <div className="form-input form-margins flex" id="item-1">
                     <div className={`input-wrapper ${formData.email ? "has-content" : ""}`}>
                         <label className="input-placeholder" htmlFor="email">אימייל</label>
                         <input
+                            className={"input-field"}
                             type="text"
                             id="email"
                             name="email"
@@ -78,6 +83,7 @@ const Login = () => {
                     <div className={`input-wrapper ${formData.password ? "has-content" : ""}`}>
                         <label className="input-placeholder" htmlFor="password">סיסמה</label>
                         <input
+                            className={"input-field"}
                             type="password"
                             id="password"
                             name="password"
@@ -88,8 +94,17 @@ const Login = () => {
                 </div>
                 {errors.login && <label className="input-error">{errors.login}</label>}
                 <button className="form-submit form-margins" type="submit" disabled={!isFormValid}>התחבר</button>
-                <button onClick={() => navigate(REGISTER_PAGE)}>אין לך משתמש? לחץ כאן על מנת להירשם</button>
+
+                <div className={"new-account flex"}>
+                    <label className={"label-button"} onClick={passwordRecovery}>שכחת סיסמא?</label>
+                    <label>אין לך משתמש? על מנת להירשם
+                        {" "}
+                        <label className={"label-button"} onClick={() => navigate(REGISTER_PAGE)}>לחץ כאן</label>
+                    </label>
+
+                </div>
             </form>
+
         </div>
     );
 };

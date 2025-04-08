@@ -11,10 +11,11 @@ import Navbar from "./components/Navbar/Navbar.jsx";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import { useUser } from "./contexts/UserContext";
-
+import PasswordRecovery from "./components/PasswordRecovery/PasswordRecovery.jsx"
+import NewPassword from "./components/PasswordRecovery/NewPassword.jsx";
 function AppContent() {
     const location = useLocation();
-    const hideNavbarPaths = ["/", "/register"];
+    const hideNavbarPaths = ["/", "/register","/passwordRecovery" , "/newPassword"];
     const token = Cookies.get("token") || null;
     const { user } = useUser();
 
@@ -37,6 +38,8 @@ function AppContent() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/statistics" element={<Statistics />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/passwordRecovery" element={<PasswordRecovery />} />
+                <Route path="/newPassword" element={<NewPassword/>} />
             </Routes>
         </>
     );

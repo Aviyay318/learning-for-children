@@ -19,3 +19,5 @@ export const RIGHT_ANSWER = "src/assets/sounds/RightAnswer.wav"
 export const WRONG_ANSWER = "src/assets/sounds/WrongAnswer.wav"
 export const LEVEL_UP = "src/assets/sounds/LevelUp.wav"
 export const GET_LEVEL = "/get-level";
+export const PASSWORD_RECOVERY = "/passwordRecovery";
+export const EMAIL_ALREADY_EXISTS = 1001;
