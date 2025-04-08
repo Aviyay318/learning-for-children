@@ -167,7 +167,7 @@ const Register = () => {
     };
     return (
         <div className="main-container form-main-container flex">
-            <MessageBubble message="האימייל כבר קיים!" />
+            {emailAlreadyExists && <MessageBubble message="האימייל כבר קיים!" />}
             {/*{formData.emailAlreadyExists && (*/}
             {/*)}*/}
             <img className={"form-image"} src={"src/assets/images/login/login.png"}/>

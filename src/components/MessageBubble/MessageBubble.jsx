@@ -1,8 +1,11 @@
-import "./MessageBubble.css"
+// MessageBubble.jsx
+import React from "react";
+import "./MessageBubble.css";
+
 export default function MessageBubble({ message }) {
     return (
         <div className="message-bubble">
-            {message}
+            <span>{message}</span>
         </div>
     );
 }
