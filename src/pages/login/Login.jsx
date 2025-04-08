@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../../styles/Form.css";
+import "./Login.css"
 import usePostApi from "../../hooks/apiHooks/usePostApi.js";
 import { HOME_PAGE, LOGIN_API, REGISTER_PAGE, SERVER_URL } from "../../utils/Constants.js";
 import { useNavigate } from "react-router-dom";
@@ -57,9 +58,10 @@ const Login = () => {
     };
 
     return (
-        <div className="main-container flex">
-            <h1 className="form-header glass">התחברות</h1>
-            <form className="grid-container login" onSubmit={handleSubmit}>
+        <div className="main-container login-main-container flex">
+            {/*<img className={"login-image"} src={"src/assets/images/login/login.png"}/>*/}
+            <form className="login-form" onSubmit={handleSubmit}>
+                <h1 className="login-title">התחברות</h1>
                 <div className="form-input form-margins flex" id="item-1">
                     <div className={`input-wrapper ${formData.email ? "has-content" : ""}`}>
                         <label className="input-placeholder" htmlFor="email">אימייל</label>
@@ -86,8 +88,8 @@ const Login = () => {
                 </div>
                 {errors.login && <label className="input-error">{errors.login}</label>}
                 <button className="form-submit form-margins" type="submit" disabled={!isFormValid}>התחבר</button>
+                <button onClick={() => navigate(REGISTER_PAGE)}>אין לך משתמש? לחץ כאן על מנת להירשם</button>
             </form>
-            <button onClick={() => navigate(REGISTER_PAGE)}>אין לך משתמש? לחץ כאן על מנת להירשם</button>
         </div>
     );
 };

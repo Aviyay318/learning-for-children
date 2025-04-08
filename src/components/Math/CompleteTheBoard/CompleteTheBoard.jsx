@@ -72,7 +72,6 @@ export default function CompleteTheBoard(){
         {console.log("showing the exercise component")}
         return(
             <div className={"exercise-component flex"}>
-                {currentExercise.id}
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={woodSvgStyles.width}
@@ -157,7 +156,6 @@ export default function CompleteTheBoard(){
             <div className={"complete-board"}>
                 {boardData !== null ? boardData.map((exercise, index) => (
                     <div className={"board-grid"} key={index} style={{textAlign: 'center'}}>
-                        {exercise!=null && exercise.id}
                         <button
                             className={"grid-button flex"}
                             id={`board-button-${index}`}

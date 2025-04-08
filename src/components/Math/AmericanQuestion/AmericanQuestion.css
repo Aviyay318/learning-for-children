@@ -1,0 +1,68 @@
+/* ✅ AmericanQuestion.css */
+
+.american-container {
+    padding: 2rem;
+    font-family: "Varela Round", sans-serif;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.exercise-box {
+    margin: 2rem auto;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 400px;
+    margin: auto;
+}
+
+.option-button {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    width: 100%;
+}
+
+.option-button:hover {
+    transform: scale(1.05);
+}
+
+/* ✅ תשובה נכונה - אור */
+.option-button.correct {
+    animation: glow 0.6s ease-out;
+    box-shadow: 0 0 20px 10px rgba(255, 255, 150, 0.8);
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 0 rgba(255,255,150,0.8); }
+    50% { box-shadow: 0 0 30px 15px rgba(255,255,150,0.9); }
+    100% { box-shadow: 0 0 0 rgba(255,255,150,0); }
+}
+
+/* ❌ תשובה שגויה - רטט */
+.option-button.incorrect {
+    animation: shake 0.4s ease-in-out;
+    background-color: #ffdddd !important;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+.result-text {
+    margin-top: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}

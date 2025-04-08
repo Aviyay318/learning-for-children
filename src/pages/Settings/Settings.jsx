@@ -9,9 +9,8 @@ export default function Settings() {
             </div>
             <div className={"settings-body flex glass"}>
                 <h1>shit</h1>
-                <SvgFromServer/>
             </div>
-            {/*<Background/>*/}
+
         </div>
     )
 }

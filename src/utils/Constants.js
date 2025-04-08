@@ -18,3 +18,4 @@ export const TRANSITION = "src/assets/sounds/Transition.wav"
 export const RIGHT_ANSWER = "src/assets/sounds/RightAnswer.wav"
 export const WRONG_ANSWER = "src/assets/sounds/WrongAnswer.wav"
 export const LEVEL_UP = "src/assets/sounds/LevelUp.wav"
+export const GET_LEVEL = "/get-level";

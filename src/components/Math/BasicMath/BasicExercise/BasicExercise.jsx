@@ -31,7 +31,7 @@ export default function BasicExercise({id,num1, num2, operand1, operandEqual, nu
                         }
                     </span>
                     ))}
-                    {!isCorrectAnswer && <button className={"check-answer-button"}  onClick={() => checkAnswer()} disabled={userAnswer === "" || userAnswer === 0}>
+                    {!isCorrectAnswer && <button className={"check-answer-button"}  onClick={() => checkAnswer()} disabled={userAnswer === "" }>
                         הגש <br/>תשובה
                     </button>}
                 </div>

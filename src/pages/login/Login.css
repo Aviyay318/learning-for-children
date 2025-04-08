@@ -1,0 +1,48 @@
+:root{
+    --login-background-upper-color: #B3DCF9;
+    --login-background-lower-color: #FFF9E7;
+    --login-title-color: #012450;
+    --login-input-color: #9E8566;
+    --login-input-border-color: #DAC8AD;
+    --login-title-padding: 3rem;
+}
+.login-image{
+    width: 30rem;
+}
+.login-main-container{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    background: var(--login-background-upper-color);
+    background-image: url("src/assets/images/login/login.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.login-title{
+    /*padding-block-start: var(--login-title-padding);*/
+}
+.login-form{
+    justify-content: center;
+    background: var(--login-background-lower-color);
+    width: 30%;
+    height: 70%;
+    border-radius: 50px;
+
+}
+.input-placeholder {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    color: var(--login-input-color);
+    font-weight: var(--font-weight-medium);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    padding: 0 5px;
+}
+
+
+
+

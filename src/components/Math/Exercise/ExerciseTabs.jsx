@@ -6,6 +6,8 @@ import Equations from "../Equations/Equations.jsx";
 import MultiplicationProblems from "../MultiplicationProblems/MultiplicationProblems.jsx";
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import {GET_MATH, GET_QUESTION_TYPE, SERVER_URL} from "../../../utils/Constants.js";
+import AmericanQuestion from "../AmericanQuestion/AmericanQuestion.jsx";
+import CompleteTheBoard from "../CompleteTheBoard/CompleteTheBoard.jsx";
 
 
 
@@ -31,6 +33,8 @@ export default function ExerciseTabs({level}) {
         2: <LiteralProblem />,
         3: <Equations />,
         4: <MultiplicationProblems />,
+        5:<CompleteTheBoard/>,
+        6: <AmericanQuestion />,
     };
 
     useEffect(() => {

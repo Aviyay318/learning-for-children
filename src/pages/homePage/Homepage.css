@@ -15,3 +15,11 @@
     justify-content: center;
     align-items: center;
 }
+.level-box {
+    margin-top: 20px;
+    font-size: 20px;
+    background-color: #f3f3f3;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
