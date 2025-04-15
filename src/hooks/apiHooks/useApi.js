@@ -11,6 +11,7 @@ const useApi = (url, method = "GET", options = {}) => {
     const [error, setError] = useState(null);
     const { wrapRequest } = useApiManager();
     const maxRetries = options.retries || 0;
+    const minDelay = options.minDelay || 0;
 
     const sendRequest = async (payload = {}) => {
         setError(null);
@@ -20,19 +21,23 @@ const useApi = (url, method = "GET", options = {}) => {
         await wrapRequest(async () => {
             while (attempts <= maxRetries) {
                 try {
-                    const response = method === "POST"
-                        ? await axios.post(SERVER_URL + url, payload)
-                        : await axios.get(SERVER_URL + url, { params: payload });
-                    setData(response.data);
+                    const response = await Promise.all([
+                        method === "POST"
+                            ? axios.post(SERVER_URL + url, payload)
+                            : axios.get(SERVER_URL + url, { params: payload }),
+                        delay(minDelay)
+                    ]);
+
+                    setData(response[0].data);
                     return;
                 } catch (err) {
                     lastError = err;
                     if (err.response && err.response.status >= 400 && err.response.status < 500) {
-                        break; // Don't retry on client errors
+                        break;
                     }
                     attempts++;
                     if (attempts <= maxRetries) {
-                        await delay(2 ** attempts * 500); // Exponential backoff
+                        await delay(2 ** attempts * 500);
                     }
                 }
             }

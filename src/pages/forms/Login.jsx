@@ -33,7 +33,7 @@ const Login = () => {
         shouldDisable
     } = useFormValidator(formData, validationRules);
 
-    const { data: loginData, error: loginError, sendRequest: sendLoginRequest } = useApi(LOGIN_API, "POST");
+    const { data: loginData, error: loginError, sendRequest: sendLoginRequest } = useApi(LOGIN_API, "POST", { minDelay: 2000 });
     const { data: userData, error: userError, sendRequest: fetchUser } = useApi("/get-user-data", "GET");
 
     useEffect(() => {
