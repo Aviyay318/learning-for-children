@@ -1,12 +1,3 @@
-:root{
-    --form-background-upper-color: #B3DCF9;
-    --form-background-lower-color: #FFF9E7;
-    --form-title-color: #012450;
-    --form-input-color: #9E8566;
-    --form-input-border-color: #DAC8AD;
-    --form-submit: #0163B5;
-    --form-title-padding: 3rem;
-}
 .form-main-container {
     width: 100%;
     height: 100%;

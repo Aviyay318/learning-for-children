@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Login from "./pages/login/Login.jsx";
-import Register from "./pages/register/Register.jsx";
+import Login from "./pages/forms/Login.jsx";
+import Register from "./pages/forms/Register.jsx";
 import Homepage from "./pages/homePage/Homepage.jsx";
 import Content from "./pages/content/Content.jsx";
 import Profile from "./pages/profile/Profile.jsx";
@@ -13,6 +13,8 @@ import { useState, useEffect } from "react";
 import { useUser } from "./contexts/UserContext";
 import PasswordRecovery from "./components/PasswordRecovery/PasswordRecovery.jsx"
 import NewPassword from "./components/PasswordRecovery/NewPassword.jsx";
+import LoadingOverlay from "./components/Loading/LoadingOverlay.jsx";
+
 function AppContent() {
     const location = useLocation();
     const hideNavbarPaths = ["/", "/register","/passwordRecovery" , "/newPassword"];
@@ -49,6 +51,7 @@ function App() {
     return (
         <div className="App flex">
             <BrowserRouter>
+                <LoadingOverlay/>
                 <AppContent />
             </BrowserRouter>
         </div>

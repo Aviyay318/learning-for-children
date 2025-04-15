@@ -1,37 +1,7 @@
 /* src/components/Otp/Otp.css */
 
 /* Custom properties for OTP components */
-:root {
-    --otp-container-width: 35rem;
-    --otp-container-height: 30rem;
-    --otp-border-radius: 1.5rem;
 
-    --otp-input-width: 3rem;
-    --otp-input-height: 4rem;
-    --otp-input-font-size: 4rem;
-    --otp-input-gap: 1.3rem;
-    --otp-input-color-inactive: var(--inactive-text-color);
-    --otp-input-color-active: var(--active-color);
-
-    --otp-submit-width: 10rem;
-    --otp-submit-height: 3rem;
-    --otp-submit-padding: 0.5rem 1rem;
-    --otp-submit-bg-inactive: var(--inactive-color, #515151);
-    --otp-submit-bg-active: var(--active-color, #ff7200);
-    --otp-submit-text-color: #fff;
-    --otp-submit-font-size: var(--font-size-large);
-    --otp-submit-font-weight: var(--font-weight-medium);
-
-
-    --otp-title-font-size: var(--font-size-very-large, 1.5rem);
-    --otp-title-font-weight: var(--font-weight-semi-bold, 1.5rem);
-    --otp-subtitle-font-size: var(--font-size-large, 1.3rem);
-    --otp-subtitle-font-weight: var(--font-weight-medium, 1.5rem);
-
-
-    --otp-feedback-font-size: var(--font-size-small, 1rem);
-    --otp-feedback-color: var(--inactive-color, #515151);
-}
 
 .otp-container {
     width: var(--otp-container-width);
@@ -42,6 +12,7 @@
     justify-content: center;
     align-items: center;
     gap: 3rem;
+    direction: ltr;
 }
 
 .otp-header {
@@ -51,13 +22,16 @@
 .otp-title {
     font-size: var(--otp-title-font-size);
     font-weight: var(--otp-title-font-weight);
+    color: var(--otp-title-color);
     margin: 0;
 }
 
 .otp-subtitle {
     font-size: var(--otp-subtitle-font-size);
     font-weight: var(--otp-subtitle-font-weight);
+    color: var(--otp-subtitle-color);
     margin: 0;
+    direction: rtl;
 }
 
 .otp-input-wrapper {
@@ -74,32 +48,30 @@
     font-weight: bold;
     background: transparent;
     border: none;
-    border-bottom: 8px solid rgba(255, 255, 255, 0.41);
+    border-bottom: 8px solid var(--otp-input-color-inactive);
     transition: border-bottom 0.3s ease;
-    color: var(--otp-input-color-inactive);
-
+    color: var(--otp-input-color-active);
+}
+.otp-input:not(.otp-input:placeholder-shown){
+    border-bottom: 8px solid var(--otp-input-color-active);
 }
 
 .otp-input:focus {
     outline: none;
-    border-bottom: 5px solid var(--otp-submit-bg-active);
+    border-bottom: 5px solid var(--otp-input-color-inactive);
     color: var(--otp-input-color-active);
-
-
 }
-
 .otp-submit-button {
-    width: var(--otp-submit-width);
-    height: var(--otp-submit-height);
-    font-size: var(--otp-submit-font-size);
-    font-weight: var(--otp-submit-font-weight);
-    padding: var(--otp-submit-padding);
-    background-color: var(--otp-submit-bg-inactive);
-    color: var(--otp-submit-text-color);
+    background-color: var(--form-submit);
+    color: white;
+    padding: 12px 24px;
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-medium);
     border: none;
-    border-radius: var(--otp-border-radius);
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    width: 50%;
 
 }
 

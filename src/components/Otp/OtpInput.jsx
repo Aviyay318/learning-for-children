@@ -15,6 +15,7 @@ const OtpInput = forwardRef(
             onKeyDown={(e) => onKeyDown(e, index)}
             onClick={() => onClick(index)}
             onPaste={onPaste}
+            placeholder={" "}
         />
     )
 );

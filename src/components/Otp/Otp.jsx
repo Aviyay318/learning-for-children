@@ -17,11 +17,11 @@ function Otp({username = "Guest", arrayLength, onOtpSubmit, isVerified, verified
     };
 
     return (
-        <div className="otp-container glass">
+        <div className="otp-container">
             <header className="otp-header">
                 <label className="otp-title">🛡️ בדיקת אבטחה</label>
                 <p className="otp-subtitle">
-                    שלום, {username}
+                    שלום {username},
 שלחנו לך קוד התחברות דרך המייל                </p>
                 <p className="otp-subtitle">
                     נא הזן אותו כאן

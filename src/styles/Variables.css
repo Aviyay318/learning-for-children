@@ -1,4 +1,73 @@
 :root{
+    --otp-container-width: 35rem;
+
+    --otp-container-height: 30rem;
+
+    --otp-border-radius: 1.5rem;
+
+
+    --otp-input-width: 3rem;
+
+    --otp-input-height: 4rem;
+
+    --otp-input-font-size: 4rem;
+
+    --otp-input-gap: 1.3rem;
+
+    --otp-input-color-inactive: var(--form-title-color);
+
+    --otp-input-color-active: var(--form-submit);
+
+
+    --otp-submit-width: 10rem;
+
+    --otp-submit-height: 3rem;
+
+    --otp-submit-padding: 0.5rem 1rem;
+
+    --otp-submit-bg-inactive: var(--inactive-color, #515151);
+
+    --otp-submit-bg-active: var(--form-submit);
+
+    --otp-submit-text-color: #fff;
+
+    --otp-submit-font-size: var(--font-size-large);
+
+    --otp-submit-font-weight: var(--font-weight-medium);
+
+
+
+    --otp-title-font-size: var(--font-size-very-large, 1.5rem);
+
+    --otp-title-font-weight: var(--font-weight-semi-bold, 1.5rem);
+
+    --otp-subtitle-font-size: var(--font-size-large, 1.3rem);
+
+    --otp-subtitle-font-weight: var(--font-weight-medium, 1.5rem);
+
+    --otp-title-color: var(--form-title-color);
+
+    --otp-subtitle-color: var(--form-title-color);
+
+
+    --otp-feedback-font-size: var(--font-size-small, 1rem);
+
+    --otp-feedback-color: var(--inactive-color, #515151);
+
+    --form-background-upper-color: #B3DCF9;
+
+    --form-background-lower-color: var(--component-bg-color);
+
+    --form-title-color: #012450;
+
+    --form-input-color: #9E8566;
+
+    --form-input-border-color: #DAC8AD;
+
+    --form-submit: #0163B5;
+
+    --form-title-padding: 3rem;
+
     /*color variables*/
 
     /* Default Colors */
@@ -58,6 +127,7 @@
     --component-minimum-width: 50rem;
     --component-height: 80vh;
     --component-gap: 1.5rem;
+    --component-bg-color: #FFF9E3;
 
     --inner-component-width: 95%;
     /*navbar variables*/

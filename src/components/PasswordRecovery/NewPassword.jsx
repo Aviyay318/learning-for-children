@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { SERVER_URL } from "../../utils/Constants.js";
 import { useNavigate } from "react-router-dom";
@@ -42,6 +42,7 @@ export default function NewPassword() {
         <div className="password-recovery-wrapper new-password-wrapper">
             <div className="password-recovery-overlay">
                 <div className="recovery-box">
+                    <img className={"recovery-background"} src={"src/assets/images/PasswordRecovery/Picture1.png"} alt={"beach"}/>
                     <h1 className="title">איפוס סיסמה</h1>
 
                     <div className="form-fields">
