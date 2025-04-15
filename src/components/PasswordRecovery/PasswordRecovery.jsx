@@ -6,6 +6,7 @@ import Otp from "../Otp/Otp.jsx";
 import { useForm } from "../../hooks/formHooks/useForm.js";
 import { useFormValidator } from "../../hooks/formHooks/useFormValidator.js";
 import './PasswordRecovery.css';
+import MessageBubble from "../MessageBubble/MessageBubble.jsx";
 
 export default function PasswordRecovery() {
     const navigate = useNavigate();
@@ -61,6 +62,13 @@ export default function PasswordRecovery() {
                     !showOtp ? (
                         <div className="recovery-box">
                             <img className="recovery-background" src="src/assets/images/PasswordRecovery/password-recovery-bg.png" alt="beach" />
+                            {requestData!==null && (
+                                <MessageBubble
+                                    message={requestData.message}
+                                    position={{ top: "40%", right: "53%" }}
+                                    scale={"0.8"}
+                                />
+                            )}
                             <h1 className="title">שחזור סיסמא</h1>
                             <div className="recovery-form flex">
                                 <input

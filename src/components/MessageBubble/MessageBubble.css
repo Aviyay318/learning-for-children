@@ -1,7 +1,5 @@
 .message-bubble {
     position: absolute;
-    top: 38%;
-    right: 69%;
     transform: translate(50%, -100%);
     background-color: #fff0f0;
     border: 2px solid #ff4d4f;
@@ -13,9 +11,9 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     z-index: 10;
     animation: fadeIn 0.4s ease-in-out;
-    position: absolute;
     direction: rtl;
 }
+
 
 .message-bubble::after,
 .message-bubble::before {

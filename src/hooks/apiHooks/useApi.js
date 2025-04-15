@@ -10,7 +10,7 @@ const useApi = (url, method = "GET", options = {}) => {
     const [error, setError] = useState(null);
     const { wrapRequest } = useApiManager();
     const maxRetries = options.retries || 0;
-    const minDelay = options.minDelay || 0;
+    const minDelay = options.minDelay || 1500;
 
     const sendRequest = async (payload = {}) => {
         setError(null);
