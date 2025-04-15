@@ -8,10 +8,14 @@ import { useUser } from "../../contexts/UserContext";
 import { useForm } from "../../hooks/formHooks/useForm";
 import { useFormValidator } from "../../hooks/formHooks/useFormValidator";
 import FormField from "./FormField";
+import MessageBubble from "../../components/MessageBubble/MessageBubble.jsx";
+import { useBubbleError } from "../../hooks/uiHooks/useBubbleError.js";
 
 const Login = () => {
     const navigate = useNavigate();
     const { setUser } = useUser();
+
+    const { bubbleMessage, lockButton, showError, clearError } = useBubbleError();
 
     const initialValues = {
         email: "",
@@ -28,7 +32,6 @@ const Login = () => {
         errors,
         validateField,
         validateAll,
-        setErrors,
         touched,
         shouldDisable
     } = useFormValidator(formData, validationRules);
@@ -43,13 +46,13 @@ const Login = () => {
             cookies.set("token", loginData.token, { path: "/" });
             fetchUser({ token: loginData.token });
         } else if (loginData?.success === false) {
-            setErrors({ login: "שם משתמש או סיסמה אינם נכונים" });
+            showError("שם משתמש או סיסמה אינם נכונים");
         }
 
         if (loginError) {
-            alert(loginError || "Something went wrong.");
+            showError(loginError || "שגיאה בשרת");
         }
-    }, [loginData, loginError, setErrors]);
+    }, [loginData, loginError]);
 
     useEffect(() => {
         if (userData) {
@@ -59,7 +62,7 @@ const Login = () => {
 
         if (userError) {
             console.error("Error fetching user data:", userError);
-            alert("Error fetching user data");
+            showError("שגיאה בשליפת המשתמש");
         }
     }, [userData, userError, setUser, navigate, loginData?.admin]);
 
@@ -71,9 +74,22 @@ const Login = () => {
         }
     };
 
+    const wrappedHandleChange = (e) => {
+        handleChange(e);
+        clearError(); // 🧽 Clear bubble + unlock on change
+    };
+
     return (
         <div className="main-container form-main-container flex">
             <img className={"form-image"} src={"src/assets/images/FormBackgrounds/login.png"} />
+
+            {bubbleMessage && (
+                <MessageBubble
+                    message={bubbleMessage}
+                    position={{ top: "40%", right: "65%" }}
+                />
+            )}
+
             <form className="form" id={"form-login"} onSubmit={handleSubmit}>
                 <h1 className="form-title">התחברות</h1>
 
@@ -83,7 +99,7 @@ const Login = () => {
                     label="אימייל"
                     value={formData.email}
                     onChange={(e) => {
-                        handleChange(e);
+                        wrappedHandleChange(e);
                         validateField("email", e.target.value);
                     }}
                     error={touched.email && errors.email}
@@ -95,15 +111,13 @@ const Login = () => {
                     type="password"
                     value={formData.password}
                     onChange={(e) => {
-                        handleChange(e);
+                        wrappedHandleChange(e);
                         validateField("password", e.target.value);
                     }}
                     error={touched.password && errors.password}
                 />
 
-                {errors.login && <label className="input-error">{errors.login}</label>}
-
-                <button className="form-submit form-margins" type="submit" disabled={shouldDisable}>
+                <button className="form-submit form-margins" type="submit" disabled={shouldDisable || lockButton}>
                     התחבר
                 </button>
 

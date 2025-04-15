@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {CHECK_OTP, LOGIN_URL, PASSWORD_RECOVERY_API} from "../../utils/Constants.js";
+import { CHECK_OTP, LOGIN_URL, PASSWORD_RECOVERY_API } from "../../utils/Constants.js";
 import useApi from "../../hooks/apiHooks/useApi.js";
 import { useNavigate } from "react-router-dom";
 import Otp from "../Otp/Otp.jsx";
@@ -7,25 +7,28 @@ import { useForm } from "../../hooks/formHooks/useForm.js";
 import { useFormValidator } from "../../hooks/formHooks/useFormValidator.js";
 import './PasswordRecovery.css';
 import MessageBubble from "../MessageBubble/MessageBubble.jsx";
+import { useBubbleError } from "../../hooks/uiHooks/useBubbleError";
 
 export default function PasswordRecovery() {
     const navigate = useNavigate();
     const [showOtp, setShowOtp] = useState(false);
 
     const { formData, handleChange } = useForm({ email: "" });
-    const { errors, isValid, validateField, validateAll, setErrors, shouldDisable } = useFormValidator(formData, {
+    const { errors, validateField, validateAll, setErrors, shouldDisable } = useFormValidator(formData, {
         email: (v) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "כתובת אימייל לא תקינה" : "",
     });
 
     const { data: otpData, error: otpError, sendRequest: sendOtpRequest } = useApi(CHECK_OTP, "POST");
-    const { data: requestData, error: requestError, sendRequest: sendRecoveryRequest } = useApi(PASSWORD_RECOVERY_API, "GET");
+    const { sendRequest: sendRecoveryRequest } = useApi(PASSWORD_RECOVERY_API, "GET");
+
+    const { bubbleMessage, lockButton, showError, clearError } = useBubbleError();
 
     useEffect(() => {
         if (otpData?.success && otpData.registeredSuccessfully) {
             setShowOtp(false);
             navigate(LOGIN_URL);
         } else if (otpData?.success === false || otpError) {
-            alert("OTP is incorrect, please try again.");
+            showError("קוד שגוי. נסה שוב.");
         }
     }, [otpData, otpError, navigate]);
 
@@ -40,62 +43,64 @@ export default function PasswordRecovery() {
         if (Object.keys(validation).length === 0) {
             const response = await sendRecoveryRequest({ email: formData.email });
 
-            console.log("server response", response);
-            console.log("request data", requestData);
-
-
-            if (response.success) {
+            console.log(response);
+            if (response?.success) {
                 setShowOtp(true);
+                clearError();
             } else {
-
+                showError(response?.message || "שגיאה בשליחת המייל");
             }
         } else {
             setErrors(validation);
         }
     };
 
+    const wrappedHandleChange = (e) => {
+        handleChange(e);
+        clearError();
+    };
 
     return (
         <div className="password-recovery-wrapper">
             <div className="password-recovery-overlay flex">
-                {
-                    !showOtp ? (
-                        <div className="recovery-box">
-                            <img className="recovery-background" src="src/assets/images/PasswordRecovery/password-recovery-bg.png" alt="beach" />
-                            {requestData!==null && (
-                                <MessageBubble
-                                    message={requestData.message}
-                                    position={{ top: "40%", right: "53%" }}
-                                    scale={"0.8"}
-                                />
-                            )}
-                            <h1 className="title">שחזור סיסמא</h1>
-                            <div className="recovery-form flex">
-                                <input
-                                    type="email"
-                                    className="email-input"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={(e) => {
-                                        handleChange(e);
-                                        validateField("email", e.target.value);
-                                    }}
-                                    placeholder="הכנס/י את כתובת האימייל שלך"
-                                />
-                                <button
-                                    className="send-button"
-                                    onClick={handleRecovery}
-                                    disabled={shouldDisable}
-                                >
-                                    שלח
-                                </button>
-                            </div>
-                            {errors.email && <label className="input-error">{errors.email}</label>}
+                {!showOtp ? (
+                    <div className="recovery-box">
+                        <img className="recovery-background" src="src/assets/images/PasswordRecovery/password-recovery-bg.png" alt="beach" />
+
+                        {bubbleMessage && (
+                            <MessageBubble
+                                message={bubbleMessage}
+                                position={{ top: "40%", right: "50%" }}
+                                scale={"0.8"}
+                            />
+                        )}
+
+                        <h1 className="title">שחזור סיסמא</h1>
+                        <div className="recovery-form flex">
+                            <input
+                                type="email"
+                                className="email-input"
+                                name="email"
+                                value={formData.email}
+                                onChange={(e) => {
+                                    wrappedHandleChange(e);
+                                    validateField("email", e.target.value);
+                                }}
+                                placeholder="הכנס/י את כתובת האימייל שלך"
+                            />
+                            <button
+                                className="send-button"
+                                onClick={handleRecovery}
+                                disabled={shouldDisable || lockButton}
+                            >
+                                שלח
+                            </button>
                         </div>
-                    ) : (
-                        <Otp arrayLength={6} onOtpSubmit={onOtpSubmit} />
-                    )
-                }
+                        {errors.email && <label className="input-error">{errors.email}</label>}
+                    </div>
+                ) : (
+                    <Otp arrayLength={6} onOtpSubmit={onOtpSubmit} />
+                )}
             </div>
         </div>
     );
