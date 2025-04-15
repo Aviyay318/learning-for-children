@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CHECK_OTP, LOGIN_URL } from "../../utils/Constants.js";
+import {CHECK_OTP, LOGIN_URL, PASSWORD_RECOVERY_API} from "../../utils/Constants.js";
 import useApi from "../../hooks/apiHooks/useApi.js";
 import { useNavigate } from "react-router-dom";
 import Otp from "../Otp/Otp.jsx";
@@ -17,12 +17,12 @@ export default function PasswordRecovery() {
     });
 
     const { data: otpData, error: otpError, sendRequest: sendOtpRequest } = useApi(CHECK_OTP, "POST");
-    const { sendRequest: sendRecoveryRequest } = useApi("/forgotten-password", "GET");
+    const { data: requestData, error: requestError, sendRequest: sendRecoveryRequest } = useApi(PASSWORD_RECOVERY_API, "GET");
 
     useEffect(() => {
         if (otpData?.success && otpData.registeredSuccessfully) {
-                setShowOtp(false);
-                navigate(LOGIN_URL);
+            setShowOtp(false);
+            navigate(LOGIN_URL);
         } else if (otpData?.success === false || otpError) {
             alert("OTP is incorrect, please try again.");
         }
@@ -35,13 +35,24 @@ export default function PasswordRecovery() {
 
     const handleRecovery = async () => {
         const validation = validateAll();
+
         if (Object.keys(validation).length === 0) {
-            await sendRecoveryRequest({ email: formData.email });
-            setShowOtp(true);
+            const response = await sendRecoveryRequest({ email: formData.email });
+
+            console.log("server response", response);
+            console.log("request data", requestData);
+
+
+            if (response.success) {
+                setShowOtp(true);
+            } else {
+
+            }
         } else {
             setErrors(validation);
         }
     };
+
 
     return (
         <div className="password-recovery-wrapper">

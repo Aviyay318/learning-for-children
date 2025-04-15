@@ -7,6 +7,4 @@ export const feedbackConfig = {
         delayed: { exp: 10, stars: 1, message: "מספיק", maxTime: 30 ,sound: RIGHT_ANSWER},
         usedAClue: { exp: 10, stars: 1, message: "טעון שיפור" ,sound: RIGHT_ANSWER},
         wrong: { exp: 0, stars: 0, message: "נסה שוב" ,sound: WRONG_ANSWER},
-
-
 }

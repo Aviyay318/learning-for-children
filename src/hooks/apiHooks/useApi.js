@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import axios from "axios";
 import { SERVER_URL } from "../../utils/Constants";
@@ -15,21 +14,22 @@ const useApi = (url, method = "GET", options = {}) => {
 
     const sendRequest = async (payload = {}) => {
         setError(null);
+        setData(null);
         let attempts = 0;
         let lastError;
 
-        await wrapRequest(async () => {
+        return await wrapRequest(async () => {
             while (attempts <= maxRetries) {
                 try {
-                    const response = await Promise.all([
+                    const [response] = await Promise.all([
                         method === "POST"
                             ? axios.post(SERVER_URL + url, payload)
                             : axios.get(SERVER_URL + url, { params: payload }),
                         delay(minDelay)
                     ]);
 
-                    setData(response[0].data);
-                    return;
+                    setData(response.data);
+                    return response.data;
                 } catch (err) {
                     lastError = err;
                     if (err.response && err.response.status >= 400 && err.response.status < 500) {
@@ -41,11 +41,11 @@ const useApi = (url, method = "GET", options = {}) => {
                     }
                 }
             }
-        });
 
-        if (lastError) {
-            setError(lastError.response?.data?.message || "Request failed");
-        }
+            if (lastError) {
+                setError(lastError.response?.data?.message || "Request failed");
+            }
+        });
     };
 
     return { data, error, sendRequest };
