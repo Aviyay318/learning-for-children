@@ -4,7 +4,7 @@ export function useBubbleError() {
     const [bubbleMessage, setBubbleMessage] = useState(null);
     const [lockButton, setLockButton] = useState(false);
 
-    const showError = (message) => {
+    const showMessage = (message) => {
         setBubbleMessage(message);
         setLockButton(true);
     };
@@ -17,7 +17,7 @@ export function useBubbleError() {
     return {
         bubbleMessage,
         lockButton,
-        showError,
+        showMessage,
         clearError,
     };
 }

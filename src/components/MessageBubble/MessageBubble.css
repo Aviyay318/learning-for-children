@@ -1,13 +1,42 @@
+:root{
+
+    --error-backgroundg-color: #fff0f0;
+    --error-text-border-color: #ff4d4f;
+
+    --warning-backgroundg-color: #fffcf0;
+    --warning-text-border-color: #ffd04d;
+
+    --confirmation-backgroundg-color: #c3d8c3;
+    --confirmation-text-border-color: #0abc02;
+
+}
+
+#error{
+    --bubble-background-color: var(--error-backgroundg-color);
+    --bubble-text-color: var(--error-text-border-color);
+    --bubble-border-color: var(--error-text-border-color);
+}
+#warning{
+    --bubble-background-color: var(--warning-backgroundg-color);
+    --bubble-text-color: var(--warning-text-border-color);
+    --bubble-border-color: var(--warning-text-border-color);
+}
+#confirmation{
+    --bubble-background-color: var(--confirmation-backgroundg-color);
+    --bubble-text-color: var(--confirmation-text-border-color);
+    --bubble-border-color: var(--confirmation-text-border-color);
+}
+
 .message-bubble {
     position: absolute;
     transform: translate(50%, -100%);
-    background-color: #fff0f0;
-    border: 2px solid #ff4d4f;
+    background-color: var(--bubble-background-color);
+    color: var(--bubble-text-color);
+    border: 2px solid var(--bubble-border-color);
     border-radius: 20px;
     padding: 12px 18px;
     font-size: 2rem;
     font-weight: bold;
-    color: #ff4d4f;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     z-index: 10;
     animation: fadeIn 0.4s ease-in-out;
@@ -20,22 +49,22 @@
     content: '';
     position: absolute;
     border-radius: 50%;
-    background-color: #fff0f0;
-    border: 2px solid #ff4d4f;
+    background-color: var(--bubble-background-color);
+    border: 2px solid var(--bubble-border-color);
 }
 
 .message-bubble::before {
     width: 15px;
     height: 15px;
-    bottom: -18px;
-    right: 30px;
+    bottom: -25px;
+    right: 150px;
 }
 
 .message-bubble::after {
     width: 10px;
     height: 10px;
-    bottom: -28px;
-    right: 20px;
+    bottom: -38px;
+    right: 140px;
 }
 
 @keyframes fadeIn {

@@ -27,25 +27,49 @@
 }
 #form-register{
     max-width: 750px;
-    margin-inline-end: 10%;
+    margin-inline-end: 17%;
 }
 #form-login{
-    max-width: 550px;
-    margin-inline-end: 17%;
+    max-width: 600px;
+    margin-inline-end: 20%;
 }
 
 .form-input {
     direction: rtl;
     position: relative;
-    flex-direction: column;
     /*text-align: left;*/
-    gap: 10px;
+    gap: 4rem;
     border: 3px solid var(--form-input-border-color);
     border-radius: 10px;
     padding: 10px;
     width: 100%;
+    height: 100%;
     background: transparent;
 
+}
+
+.input-placeholder {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    color: var(--form-input-color);
+    font-weight: var(--font-weight-medium);
+    transition: all 0.3s ease;
+    background-color: transparent;
+    padding: 0 5px;
+}
+.input-field{
+    background: transparent;
+    border: none;
+    color: var(--form-input-color);
+    font-weight: var(--font-weight-medium);
+    width: 100%;
+    height: 100%;
+}
+.input-wrapper{
+    width: 100%;
+    height: 100%;
 }
 .input-wrapper.has-content .input-placeholder,
 .input-wrapper .input-focused + .input-placeholder {
@@ -151,23 +175,6 @@
     /*padding-block-start: var(--login-title-padding);*/
 }
 
-
-.input-placeholder {
-    position: absolute;
-    top: 50%;
-    right: 5px;
-    transform: translateY(-50%);
-    color: var(--form-input-color);
-    font-weight: var(--font-weight-medium);
-    pointer-events: none;
-    transition: all 0.3s ease;
-    background-color: transparent;
-    padding: 0 5px;
-}
-.input-field{
-    background: transparent;
-    border: none;
-}
 
 .form-submit{
     width: 100%;

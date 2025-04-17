@@ -15,7 +15,7 @@ const Login = () => {
     const navigate = useNavigate();
     const { setUser } = useUser();
 
-    const { bubbleMessage, lockButton, showError, clearError } = useBubbleError();
+    const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleError();
 
     const initialValues = {
         email: "",
@@ -46,11 +46,11 @@ const Login = () => {
             cookies.set("token", loginData.token, { path: "/" });
             fetchUser({ token: loginData.token });
         } else if (loginData?.success === false) {
-            showError("שם משתמש או סיסמה אינם נכונים");
+            showMessage("שם משתמש או סיסמה אינם נכונים");
         }
 
         if (loginError) {
-            showError(loginError || "שגיאה בשרת");
+            showMessage(loginError || "שגיאה בשרת");
         }
     }, [loginData, loginError]);
 
@@ -62,7 +62,7 @@ const Login = () => {
 
         if (userError) {
             console.error("Error fetching user data:", userError);
-            showError("שגיאה בשליפת המשתמש");
+            showMessage("שגיאה בשליפת המשתמש");
         }
     }, [userData, userError, setUser, navigate, loginData?.admin]);
 
@@ -87,6 +87,7 @@ const Login = () => {
                 <MessageBubble
                     message={bubbleMessage}
                     position={{ top: "40%", right: "65%" }}
+                    type={"error"}
                 />
             )}
 

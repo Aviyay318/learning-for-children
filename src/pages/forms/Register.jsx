@@ -14,7 +14,7 @@ const Register = () => {
     const navigate = useNavigate();
     const [showOtp, setShowOtp] = useState(false);
 
-    const { bubbleMessage, lockButton, showError, clearError } = useBubbleError();
+    const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleError();
 
     const initialValues = {
         firstName: "",
@@ -46,7 +46,7 @@ const Register = () => {
             navigate(LOGIN_URL);
             window.location.reload();
         } else if (otpData?.success === false || otpError) {
-            showError("זה לא הקוד הנכון, נסה שוב!");
+            showMessage("זה לא הקוד הנכון, נסה שוב!");
         }
     }, [otpData, otpError]);
 
@@ -62,11 +62,11 @@ const Register = () => {
             const response = await sendRegisterRequest(formData);
 
             if (response?.errorCode === EMAIL_ALREADY_EXISTS) {
-                showError("האימייל כבר קיים!");
+                showMessage("האימייל כבר קיים!");
             } else if (response?.success) {
                 setShowOtp(true);
             } else {
-                showError("שגיאה בהרשמה");
+                showMessage("שגיאה בהרשמה");
             }
         } else {
             const newErrors = { ...validation };
@@ -92,10 +92,11 @@ const Register = () => {
                 <MessageBubble
                     message={bubbleMessage}
                     position={{ top: "38%", right: "69%" }}
+                    type={"error"}
                 />
             )}
 
-            <img className="form-image" src="src/assets/images/FormBackgrounds/login.png" alt="login-bg" />
+            <img className="form-image" src="src/assets/images/FormBackgrounds/register.png" alt="login-bg" />
             <div className="form" id="form-register">
                 <h1 className="form-title">הירשמות</h1>
                 {!showOtp ? (

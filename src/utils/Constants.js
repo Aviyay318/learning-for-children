@@ -21,4 +21,5 @@ export const LEVEL_UP = "src/assets/sounds/LevelUp.wav"
 export const GET_LEVEL = "/get-level";
 export const PASSWORD_RECOVERY = "/passwordRecovery";
 export const PASSWORD_RECOVERY_API = "/forgotten-password";
+export const NEW_PASSWORD_API = "/recovery-password";
 export const EMAIL_ALREADY_EXISTS = 1001;
