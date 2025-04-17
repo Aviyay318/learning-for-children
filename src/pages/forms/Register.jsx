@@ -8,13 +8,13 @@ import FormField from "./FormField";
 import { useForm } from "../../hooks/formHooks/useForm";
 import { useFormValidator } from "../../hooks/formHooks/useFormValidator";
 import MessageBubble from "../../components/MessageBubble/MessageBubble.jsx";
-import { useBubbleError } from "../../hooks/uiHooks/useBubbleError";
+import { useBubbleMessage } from "../../hooks/uiHooks/useBubbleMessage.js";
 
 const Register = () => {
     const navigate = useNavigate();
     const [showOtp, setShowOtp] = useState(false);
 
-    const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleError();
+    const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleMessage();
 
     const initialValues = {
         firstName: "",

@@ -7,13 +7,14 @@ import { SERVER_URL, GET_LEVEL } from "../../utils/Constants.js";
 import MultiplicationTable from "../../components/Math/MultiplicationProblems/MultiplicationProblems.jsx";
 import AmericanQuestion from "../../components/Math/AmericanQuestion/AmericanQuestion.jsx";
 import CompleteTheBoard from "../../components/Math/CompleteTheBoard/CompleteTheBoard.jsx";
+import Tutorial from "../../components/Tutorial/Tutorial.jsx";
+import {useTutorial} from "../../hooks/uiHooks/useTutorial.js";
 
 export default function Homepage() {
     const location = useLocation();
     const { isAdmin } = location.state || {};
 
     const [userLevel, setUserLevel] = useState(null);
-
     useEffect(() => {
         getUserLevel();
     }, []);
@@ -36,6 +37,7 @@ export default function Homepage() {
 
             <div className="homepage-body flex glass">
                 <div className="level-box">
+                    <Tutorial topic={"longMultiplication"}/>
                     {userLevel !== null ? (
                         <h3>הרמה שלך: {userLevel}</h3>
                     ) : (

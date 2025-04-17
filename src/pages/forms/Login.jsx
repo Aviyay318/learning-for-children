@@ -9,13 +9,13 @@ import { useForm } from "../../hooks/formHooks/useForm";
 import { useFormValidator } from "../../hooks/formHooks/useFormValidator";
 import FormField from "./FormField";
 import MessageBubble from "../../components/MessageBubble/MessageBubble.jsx";
-import { useBubbleError } from "../../hooks/uiHooks/useBubbleError.js";
+import { useBubbleMessage } from "../../hooks/uiHooks/useBubbleMessage.js";
 
 const Login = () => {
     const navigate = useNavigate();
     const { setUser } = useUser();
 
-    const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleError();
+    const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleMessage();
 
     const initialValues = {
         email: "",

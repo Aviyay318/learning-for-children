@@ -7,7 +7,7 @@ import { useForm } from "../../hooks/formHooks/useForm.js";
 import { useFormValidator } from "../../hooks/formHooks/useFormValidator.js";
 import './PasswordRecovery.css';
 import MessageBubble from "../MessageBubble/MessageBubble.jsx";
-import { useBubbleError } from "../../hooks/uiHooks/useBubbleError";
+import { useBubbleMessage } from "../../hooks/uiHooks/useBubbleMessage.js";
 import FormField from "../../pages/forms/FormField.jsx";
 
 export default function PasswordRecovery() {
@@ -22,7 +22,7 @@ export default function PasswordRecovery() {
     const { data: otpData, error: otpError, sendRequest: sendOtpRequest } = useApi(CHECK_OTP, "POST");
     const { sendRequest: sendRecoveryRequest } = useApi(PASSWORD_RECOVERY_API, "GET");
 
-    const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleError();
+    const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleMessage();
 
     useEffect(() => {
         if (otpData?.success && otpData.registeredSuccessfully) {

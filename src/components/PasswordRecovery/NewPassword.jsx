@@ -5,7 +5,7 @@ import useApi from "../../hooks/apiHooks/useApi.js";
 import { useForm } from "../../hooks/formHooks/useForm.js";
 import { useFormValidator } from "../../hooks/formHooks/useFormValidator.js";
 import MessageBubble from "../MessageBubble/MessageBubble.jsx";
-import { useBubbleError } from "../../hooks/uiHooks/useBubbleError";
+import { useBubbleMessage } from "../../hooks/uiHooks/useBubbleMessage.js";
 import useSound from "use-sound";
 import successSoundFile from "../../assets/sounds/RightAnswer.wav";
 import "./PasswordRecovery.css";
@@ -44,7 +44,7 @@ export default function NewPassword() {
         sendRequest: sendPasswordReset,
     } = useApi(NEW_PASSWORD_API, "GET");
 
-    const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleError();
+    const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleMessage();
 
     useEffect(() => {
         console.log("asdsadas",resetData)
