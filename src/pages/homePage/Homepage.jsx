@@ -37,7 +37,7 @@ export default function Homepage() {
 
             <div className="homepage-body flex glass">
                 <div className="level-box">
-                    <Tutorial topic={"longMultiplication"}/>
+                    <Tutorial topic={"equationThreeVars"}/>
                     {userLevel !== null ? (
                         <h3>הרמה שלך: {userLevel}</h3>
                     ) : (

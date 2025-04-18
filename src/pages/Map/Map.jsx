@@ -29,13 +29,13 @@ export default function Map() {
     // Track which islands are unlocked
     const [unlockedIslands, setUnlockedIslands] = useState({
         simpleMathIsland: true,
-        multiplicationIsland: false,
-        divisionIsland: false,
-        floatingPointIsland: false,
-        longAddSubIsland: false,
-        longMultDivIsland: false,
-        horrorIsland: false,
-        equationsIsland: false,
+        multiplicationIsland: true,
+        divisionIsland: true,
+        floatingPointIsland: true,
+        longAddSubIsland: true,
+        longMultDivIsland: true,
+        horrorIsland: true,
+        equationsIsland: true,
     });
     const { bubbleMessage, showMessage, clearError } = useBubbleMessage();
     const {} = useApi(GET_QUESTION_TYPE)
@@ -71,7 +71,7 @@ export default function Map() {
         }
     };
 
-    const renderIsland = ({ key, name, className, island, background }) => (
+    const renderIsland = ({ key, name, className, island, background, types }) => (
         <>
             <Island
                 key={key}
@@ -82,6 +82,8 @@ export default function Map() {
                 locked={!unlockedIslands[key]}
                 onClick={handleIslandClick}
                 islandKey={key}
+                types={types}
+
             >
                 {bubbleMessage && (
                     <MessageBubble
@@ -96,6 +98,9 @@ export default function Map() {
     );
 
 
+    const navigateTo = () =>{
+
+    }
 
     const islandConfigs = [
         {
@@ -104,6 +109,13 @@ export default function Map() {
             className: "simpleMathIsland",
             island: SIMPLE_MATH_ISLAND,
             background: SIMPLE_MATH_ISLAND_BACKGROUND,
+            types: {
+                1: { label: "פעולות חשבון", color: "yellow" },
+                2: { label: "שאלות מילוליות", color: "pink" },
+                3: { label: "השלם לוח", color: "green" },
+                4: { label: "שאלה אמריקקית", color: "blue" },
+            }
+
         },
         {
             key: "multiplicationIsland",
@@ -111,6 +123,12 @@ export default function Map() {
             className: "multiplicationIsland",
             island: MULTIPLICATION_ISLAND,
             background: MULTIPLICATION_ISLAND_BACKGROUND,
+            types: {
+                1: { label: "פעולות חשבון", color: "yellow" },
+                2: { label: "שאלות מילוליות", color: "pink" },
+                3: { label: "השלם לוח", color: "green" },
+                4: { label: "שאלה אמריקקית", color: "blue" },
+            }
         },
         {
             key: "divisionIsland",
@@ -118,6 +136,12 @@ export default function Map() {
             className: "divisionIsland",
             island: DIVISION_ISLAND,
             background: DIVISION_ISLAND_BACKGROUND,
+            types: {
+                1: { label: "פעולות חשבון", color: "yellow" },
+                2: { label: "שאלות מילוליות", color: "pink" },
+                3: { label: "השלם לוח", color: "green" },
+                4: { label: "שאלה אמריקקית", color: "blue" },
+            }
         },
         {
             key: "floatingPointIsland",
@@ -125,6 +149,12 @@ export default function Map() {
             className: "floatingPointIsland",
             island: FLOATING_POINT_ISLAND,
             background: FLOATING_POINT_ISLAND_BACKGROUND,
+            types: {
+                1: { label: "פעולות חשבון", color: "yellow" },
+                2: { label: "שאלות מילוליות", color: "pink" },
+                3: { label: "השלם לוח", color: "green" },
+                4: { label: "שאלה אמריקקית", color: "blue" },
+            }
         },
         {
             key: "longAddSubIsland",
@@ -132,6 +162,10 @@ export default function Map() {
             className: "longAddSubIsland",
             island: LONG_ADDITION_SUBTRACTION_ISLAND,
             background: LONG_ADDITION_SUBTRACTION_ISLAND_BACKGROUND,
+            types: {
+                1: { label: "פעולות חשבון", color: "pink" },
+                2: { label: "שאלות מילוליות", color: "yellow" },
+            }
         },
         {
             key: "longMultDivIsland",
@@ -139,6 +173,10 @@ export default function Map() {
             className: "longMultDivIsland",
             island: LONG_MULTIPLICATION_DIVISION_ISLAND,
             background: LONG_MULTIPLICATION_DIVISION_ISLAND_BACKGROUND,
+            types: {
+                1: { label: "פעולות חשבון", color: "white" },
+                2: { label: "שאלות מילוליות", color: "blue" },
+            }
         },
         {
             key: "horrorIsland",
@@ -146,6 +184,10 @@ export default function Map() {
             className: "horrorIsland",
             island: HORROR_ISLAND,
             background: HORROR_ISLAND_BACKGROUND,
+            types: {
+                1: { label: "פעולות חשבון", color: "yellow" },
+                2: { label: "שאלות מילוליות", color: "blue" },
+            }
         },
         {
             key: "equationsIsland",
@@ -153,6 +195,10 @@ export default function Map() {
             className: "equationsIsland",
             island: EQUATIONS_ISLAND,
             background: EQUATIONS_ISLAND_BACKGROUND,
+            types: {
+                1: { label: "פעולות חשבון", color: "blue" },
+                2: { label: "שאלות מילוליות", color: "purple" },
+            }
         },
     ];
 

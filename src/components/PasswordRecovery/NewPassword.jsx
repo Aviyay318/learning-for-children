@@ -87,7 +87,7 @@ export default function NewPassword() {
                 <div className="recovery-box">
                     <img
                         className="recovery-background"
-                        src="src/assets/images/PasswordRecovery/Picture1.png"
+                        src="../../assets/images/PasswordRecovery/new-password-bg.png"
                         alt="beach"
                     />
 

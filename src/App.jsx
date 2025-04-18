@@ -18,7 +18,7 @@ import Map from "./pages/Map/Map.jsx";
 
 function AppContent() {
     const location = useLocation();
-    const hideNavbarPaths = ["/", "/register","/passwordRecovery" , "/newPassword", "/map"];
+    const hideNavbarPaths = ["/", "/register","/passwordRecovery" , "/newPassword"];
     const token = Cookies.get("token") || null;
     const { user } = useUser();
 

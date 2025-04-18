@@ -1,72 +1,41 @@
 :root{
     --otp-container-width: 35rem;
-
     --otp-container-height: 30rem;
-
     --otp-border-radius: 1.5rem;
 
-
     --otp-input-width: 3rem;
-
     --otp-input-height: 4rem;
-
     --otp-input-font-size: 4rem;
-
     --otp-input-gap: 1.3rem;
-
     --otp-input-color-inactive: var(--form-title-color);
-
     --otp-input-color-active: var(--form-submit);
 
-
     --otp-submit-width: 10rem;
-
     --otp-submit-height: 3rem;
-
     --otp-submit-padding: 0.5rem 1rem;
-
     --otp-submit-bg-inactive: var(--inactive-color, #515151);
-
     --otp-submit-bg-active: var(--form-submit);
-
     --otp-submit-text-color: #fff;
-
     --otp-submit-font-size: var(--font-size-large);
-
     --otp-submit-font-weight: var(--font-weight-medium);
 
-
-
     --otp-title-font-size: var(--font-size-very-large, 1.5rem);
-
     --otp-title-font-weight: var(--font-weight-semi-bold, 1.5rem);
-
     --otp-subtitle-font-size: var(--font-size-large, 1.3rem);
-
     --otp-subtitle-font-weight: var(--font-weight-medium, 1.5rem);
-
     --otp-title-color: var(--form-title-color);
-
     --otp-subtitle-color: var(--form-title-color);
 
-
     --otp-feedback-font-size: var(--font-size-small, 1rem);
-
     --otp-feedback-color: var(--inactive-color, #515151);
-
     --form-background-upper-color: #B3DCF9;
-
     --form-background-lower-color: var(--component-bg-color);
-
     --form-title-color: #012450;
-
     --form-input-color: #9E8566;
-
     --form-input-border-color: #DAC8AD;
-
     --form-submit: #0163B5;
-
     --form-title-padding: 3rem;
+
 
     /*color variables*/
 
@@ -86,7 +55,7 @@
     /*----------------*/
 
     /*margin variables*/
-    --margin-start: 20px;
+    --margin-start: 25px;
     --margin-end: 20px;
     /*----------------*/
 
@@ -128,8 +97,8 @@
     --component-height: 80vh;
     --component-gap: 1.5rem;
     --component-bg-color: #FFF9E3;
-
     --inner-component-width: 95%;
+
     /*navbar variables*/
     --navbar-svg-size-desktop:45px;
     --navbar-svg-size-tablet:50px;
@@ -139,4 +108,43 @@
     --navbar-text-width-tablet: 100px;
     --navbar-text-width-mobile: 80px;
     --navbar-text-width: var(--navbar-text-width-desktop);
+
+    /*button color variables*/
+    --btn-yellow-bg: #f8c446;
+    --btn-yellow-text: #4a2e0a;
+    --btn-yellow-border: #e29a2b;
+
+    --btn-green-bg: #78cb4e;
+    --btn-green-text: #2d3e0e;
+    --btn-green-border: #4ea52d;
+
+    --btn-blue-bg: #7fd5d7;
+    --btn-blue-text: #1d3d42;
+    --btn-blue-border: #4fb7bb;
+
+    --btn-orange-bg: #f19143;
+    --btn-orange-text: #4a2e0a;
+    --btn-orange-border: #d6792f;
+
+    --btn-red-bg: #f4655c;
+    --btn-red-text: #4a1e1e;
+    --btn-red-border: #d44d45;
+
+    --btn-purple-bg: #b07be1;
+    --btn-purple-text: #381d5d;
+    --btn-purple-border: #955fcb;
+
+    --btn-pink-bg: #f5a4c7;
+    --btn-pink-text: #5a1e3e;
+    --btn-pink-border: #e278a8;
+
+    --btn-white-bg: #ffffff;
+    --btn-white-text: #3e3e3e;
+    --btn-white-border: #d6d6d6;
+
+    /* === DEEP BLUE (Ocean Depth Style) === */
+    --btn-deep-blue-bg: #2b4a8d;
+    --btn-deep-blue-text: #ffffff;
+    --btn-deep-blue-border: #1d3669;
+
 }
