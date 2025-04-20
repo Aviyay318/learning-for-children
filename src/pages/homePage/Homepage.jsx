@@ -9,7 +9,6 @@ import AmericanQuestion from "../../components/Math/AmericanQuestion/AmericanQue
 import CompleteTheBoard from "../../components/Math/CompleteTheBoard/CompleteTheBoard.jsx";
 import Tutorial from "../../components/Tutorial/Tutorial.jsx";
 import {useTutorial} from "../../hooks/uiHooks/useTutorial.js";
-import EmailComponent from "../../components/EmailComponent.jsx";
 
 export default function Homepage() {
     const location = useLocation();
@@ -45,7 +44,6 @@ export default function Homepage() {
                 {/*        <h3>טוען רמה...</h3>*/}
                 {/*    )}*/}
                 {/*</div>*/}
-                <EmailComponent/>
             </div>
         </div>
     );
