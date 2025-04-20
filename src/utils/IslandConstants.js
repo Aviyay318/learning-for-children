@@ -16,5 +16,7 @@ export const LONG_MULTIPLICATION_DIVISION_ISLAND_BACKGROUND = "src/assets/images
 export const HORROR_ISLAND_BACKGROUND = "src/assets/images/Islands/backgrounds/hot_card_background.png";
 export const EQUATIONS_ISLAND_BACKGROUND = "src/assets/images/Islands/backgrounds/cosmic_card_background.png";
 
+export const SKY_BACKGROUND = "src/assets/images/Islands/sky_background.png";
+
 export const LOCK_ISLAND = "src/assets/images/Islands/props/lock.png";
 export const UNLOCK_ISLAND = "src/assets/images/Islands/props/unlock.png";

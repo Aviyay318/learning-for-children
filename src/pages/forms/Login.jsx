@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import "../../styles/Form.css";
 import useApi from "../../hooks/apiHooks/useApi";
-import { HOME_PAGE, LOGIN_API, PASSWORD_RECOVERY, REGISTER_PAGE } from "../../utils/Constants";
+import {CHECK_OTP, HOME_PAGE, LOGIN_API, PASSWORD_RECOVERY, REGISTER_PAGE} from "../../utils/Constants";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { useUser } from "../../contexts/UserContext";
@@ -10,9 +10,11 @@ import { useFormValidator } from "../../hooks/formHooks/useFormValidator";
 import FormField from "./FormField";
 import MessageBubble from "../../components/MessageBubble/MessageBubble.jsx";
 import { useBubbleMessage } from "../../hooks/uiHooks/useBubbleMessage.js";
+import Otp from "../../components/Otp/Otp.jsx";
 
 const Login = () => {
     const navigate = useNavigate();
+    const [showOtp, setShowOtp] = useState(false);
     const { setUser } = useUser();
 
     const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleMessage();
@@ -44,6 +46,8 @@ const Login = () => {
 
         if (loginData?.success) {
             cookies.set("token", loginData.token, { path: "/" });
+            setShowOtp(true);
+            clearError();
             fetchUser({ token: loginData.token });
         } else if (loginData?.success === false) {
             showMessage("שם משתמש או סיסמה אינם נכונים");
@@ -57,7 +61,7 @@ const Login = () => {
     useEffect(() => {
         if (userData) {
             setUser(userData);
-            navigate(HOME_PAGE, { state: { isAdmin: loginData.admin } });
+            // navigate(HOME_PAGE, { state: { isAdmin: loginData.admin } });
         }
 
         if (userError) {
@@ -80,57 +84,72 @@ const Login = () => {
     };
 
     return (
-        <div className="main-container form-main-container flex">
-            <img className={"form-image"} src={"src/assets/images/FormBackgrounds/login.png"} />
+        <>
+            {!showOtp ? (
 
-            {bubbleMessage && (
-                <MessageBubble
-                    message={bubbleMessage}
-                    position={{ top: "40%", right: "65%" }}
-                    type={"error"}
+                <div className="main-container form-main-container flex">
+
+                <img className={"form-image"} src={"src/assets/images/FormBackgrounds/login.png"} />
+
+                {bubbleMessage && (
+                    <MessageBubble
+                        message={bubbleMessage}
+                        position={{ top: "40%", right: "65%" }}
+                        type={"error"}
+                    />
+                )}
+
+                <form className="form" id={"form-login"} onSubmit={handleSubmit}>
+                    <h1 className="form-title">התחברות</h1>
+
+                    <FormField
+                        id="item-1"
+                        name="email"
+                        label="אימייל"
+                        value={formData.email}
+                        onChange={(e) => {
+                            wrappedHandleChange(e);
+                            validateField("email", e.target.value);
+                        }}
+                        error={touched.email && errors.email}
+                    />
+
+                    <FormField
+                        name="password"
+                        label="סיסמה"
+                        type="password"
+                        value={formData.password}
+                        onChange={(e) => {
+                            wrappedHandleChange(e);
+                            validateField("password", e.target.value);
+                        }}
+                        error={touched.password && errors.password}
+                    />
+
+                    <button className="form-submit form-margins" type="submit" disabled={shouldDisable || lockButton}>
+                        התחבר
+                    </button>
+
+                    <div className="new-account flex">
+                        <label className="label-button" onClick={() => navigate(PASSWORD_RECOVERY)}>שכחת סיסמא?</label>
+                        <label>
+                            אין לך משתמש? על מנת להירשם{" "}
+                            <label className="label-button" onClick={() => navigate(REGISTER_PAGE)}>לחץ כאן</label>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            ) : (
+                <Otp
+                    email={formData.email}
+                    url={HOME_PAGE}
+                    urlState={"state: { isAdmin: loginData.admin }"}
+                    arrayLength={6}
+                    endpoint={CHECK_OTP}
                 />
             )}
+        </>
 
-            <form className="form" id={"form-login"} onSubmit={handleSubmit}>
-                <h1 className="form-title">התחברות</h1>
-
-                <FormField
-                    id="item-1"
-                    name="email"
-                    label="אימייל"
-                    value={formData.email}
-                    onChange={(e) => {
-                        wrappedHandleChange(e);
-                        validateField("email", e.target.value);
-                    }}
-                    error={touched.email && errors.email}
-                />
-
-                <FormField
-                    name="password"
-                    label="סיסמה"
-                    type="password"
-                    value={formData.password}
-                    onChange={(e) => {
-                        wrappedHandleChange(e);
-                        validateField("password", e.target.value);
-                    }}
-                    error={touched.password && errors.password}
-                />
-
-                <button className="form-submit form-margins" type="submit" disabled={shouldDisable || lockButton}>
-                    התחבר
-                </button>
-
-                <div className="new-account flex">
-                    <label className="label-button" onClick={() => navigate(PASSWORD_RECOVERY)}>שכחת סיסמא?</label>
-                    <label>
-                        אין לך משתמש? על מנת להירשם{" "}
-                        <label className="label-button" onClick={() => navigate(REGISTER_PAGE)}>לחץ כאן</label>
-                    </label>
-                </div>
-            </form>
-        </div>
     );
 };
 

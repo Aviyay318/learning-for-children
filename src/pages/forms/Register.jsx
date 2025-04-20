@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import "../../styles/Form.css";
-import useApi from "../../hooks/apiHooks/useApi";
-import { CHECK_OTP, EMAIL_ALREADY_EXISTS, LOGIN_URL, REGISTER_PAGE } from "../../utils/Constants";
 import { useNavigate } from "react-router-dom";
-import Otp from "../../components/Otp/Otp.jsx";
-import FormField from "./FormField";
+import { CHECK_OTP_TO_REGISTER, EMAIL_ALREADY_EXISTS, LOGIN_URL, REGISTER_PAGE } from "../../utils/Constants";
+import useApi from "../../hooks/apiHooks/useApi";
 import { useForm } from "../../hooks/formHooks/useForm";
 import { useFormValidator } from "../../hooks/formHooks/useFormValidator";
-import MessageBubble from "../../components/MessageBubble/MessageBubble.jsx";
-import { useBubbleMessage } from "../../hooks/uiHooks/useBubbleMessage.js";
+import { useBubbleMessage } from "../../hooks/uiHooks/useBubbleMessage";
+import FormField from "./FormField";
+import MessageBubble from "../../components/MessageBubble/MessageBubble";
+import Otp from "../../components/Otp/Otp";
 
-const Register = () => {
+export default function Register() {
     const navigate = useNavigate();
     const [showOtp, setShowOtp] = useState(false);
 
@@ -39,20 +38,6 @@ const Register = () => {
     const { formData, handleChange, setField } = useForm(initialValues);
     const { errors, validateField, validateAll, setErrors, shouldDisable } = useFormValidator(formData, validationRules);
     const { sendRequest: sendRegisterRequest } = useApi(REGISTER_PAGE, "POST");
-    const { data: otpData, error: otpError, sendRequest: sendOtpRequest } = useApi(CHECK_OTP, "POST");
-
-    useEffect(() => {
-        if (otpData?.success && otpData.registeredSuccessfully) {
-            navigate(LOGIN_URL);
-            window.location.reload();
-        } else if (otpData?.success === false || otpError) {
-            showMessage("זה לא הקוד הנכון, נסה שוב!");
-        }
-    }, [otpData, otpError]);
-
-    const onOtpSubmit = async (otp) => {
-        await sendOtpRequest({ email: formData.email, otp });
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -65,6 +50,7 @@ const Register = () => {
                 showMessage("האימייל כבר קיים!");
             } else if (response?.success) {
                 setShowOtp(true);
+                clearError();
             } else {
                 showMessage("שגיאה בהרשמה");
             }
@@ -81,10 +67,15 @@ const Register = () => {
         clearError();
     };
 
-    const wrappedHandleChange = (e) => {
+    const onChange = (e) => {
         handleChange(e);
         clearError();
     };
+
+    // const handleOtpSubmit = () => {
+    //     navigate(LOGIN_URL);
+    //     window.location.reload();
+    // };
 
     return (
         <div className="main-container form-main-container flex">
@@ -92,22 +83,23 @@ const Register = () => {
                 <MessageBubble
                     message={bubbleMessage}
                     position={{ top: "38%", right: "69%" }}
-                    type={"error"}
+                    type="error"
                 />
             )}
 
             <img className="form-image" src="src/assets/images/FormBackgrounds/register.png" alt="login-bg" />
-            <div className="form" id="form-register">
-                <h1 className="form-title">הירשמות</h1>
-                {!showOtp ? (
+
+            {!showOtp ? (
+                <div className="form" id="form-register">
+                    <h1 className="form-title">הירשמות</h1>
                     <form className="grid-container" onSubmit={handleSubmit}>
-                        <FormField id="item-1" name="lastName" label="שם משפחה" value={formData.lastName} onChange={(e) => { wrappedHandleChange(e); validateField("lastName", e.target.value); }} error={errors.lastName} />
-                        <FormField id="item-2" name="firstName" label="שם פרטי" value={formData.firstName} onChange={(e) => { wrappedHandleChange(e); validateField("firstName", e.target.value); }} error={errors.firstName} />
-                        <FormField id="item-4" name="email" label="אימייל" type="email" value={formData.email} onChange={(e) => { wrappedHandleChange(e); validateField("email", e.target.value); }} error={errors.email} />
-                        <FormField id="item-5" name="username" label="שם משתמש" value={formData.username} onChange={(e) => { wrappedHandleChange(e); validateField("username", e.target.value); }} error={errors.username} />
-                        <FormField id="item-6" name="password" label="סיסמא" type="password" value={formData.password} onChange={(e) => { wrappedHandleChange(e); validateField("password", e.target.value); }} error={errors.password} />
-                        <FormField id="item-3" name="age" label="גיל" type="number" value={formData.age} onChange={wrappedHandleChange} error={errors.age} />
-                        <FormField id="item-7" name="confirmPassword" label="וידוא סיסמא" type="password" value={formData.confirmPassword} onChange={(e) => { wrappedHandleChange(e); validateField("confirmPassword", e.target.value); }} error={errors.confirmPassword} />
+                        <FormField id="item-1" name="lastName" label="שם משפחה" value={formData.lastName} onChange={(e) => { onChange(e); validateField("lastName", e.target.value); }} error={errors.lastName} />
+                        <FormField id="item-2" name="firstName" label="שם פרטי" value={formData.firstName} onChange={(e) => { onChange(e); validateField("firstName", e.target.value); }} error={errors.firstName} />
+                        <FormField id="item-4" name="email" label="אימייל" type="email" value={formData.email} onChange={(e) => { onChange(e); validateField("email", e.target.value); }} error={errors.email} />
+                        <FormField id="item-5" name="username" label="שם משתמש" value={formData.username} onChange={(e) => { onChange(e); validateField("username", e.target.value); }} error={errors.username} />
+                        <FormField id="item-6" name="password" label="סיסמא" type="password" value={formData.password} onChange={(e) => { onChange(e); validateField("password", e.target.value); }} error={errors.password} />
+                        <FormField id="item-3" name="age" label="גיל" type="number" value={formData.age} onChange={onChange} error={errors.age} />
+                        <FormField id="item-7" name="confirmPassword" label="וידוא סיסמא" type="password" value={formData.confirmPassword} onChange={(e) => { onChange(e); validateField("confirmPassword", e.target.value); }} error={errors.confirmPassword} />
 
                         <div className="form-input form-margins flex character-select-container" id="grid-item-8">
                             <label className="input-placeholder">בחר/י דמות</label>
@@ -132,12 +124,15 @@ const Register = () => {
                             הרשם
                         </button>
                     </form>
-                ) : (
-                    <Otp arrayLength={6} onOtpSubmit={onOtpSubmit} />
-                )}
-            </div>
+                </div>
+            ) : (
+                <Otp
+                    email={formData.email}
+                    url={LOGIN_URL}
+                    arrayLength={6}
+                    endpoint={CHECK_OTP_TO_REGISTER}
+                />
+            )}
         </div>
     );
-};
-
-export default Register;
+}

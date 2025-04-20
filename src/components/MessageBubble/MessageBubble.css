@@ -1,30 +1,39 @@
 :root{
 
-    --error-backgroundg-color: #fff0f0;
+    --error-background-color: #fff0f0;
     --error-text-border-color: #ff4d4f;
 
-    --warning-backgroundg-color: #fffcf0;
+    --warning-background-color: #fffcf0;
     --warning-text-border-color: #ffd04d;
 
-    --confirmation-backgroundg-color: #c3d8c3;
+    --confirmation-background-color: #e4ffe4;
     --confirmation-text-border-color: #0abc02;
+
+    --otp-background-color: #e6f3ff;
+    --otp-text-border-color: #2ea8ff;
+
 
 }
 
 #error{
-    --bubble-background-color: var(--error-backgroundg-color);
+    --bubble-background-color: var(--error-background-color);
     --bubble-text-color: var(--error-text-border-color);
     --bubble-border-color: var(--error-text-border-color);
 }
 #warning{
-    --bubble-background-color: var(--warning-backgroundg-color);
+    --bubble-background-color: var(--warning-background-color);
     --bubble-text-color: var(--warning-text-border-color);
     --bubble-border-color: var(--warning-text-border-color);
 }
 #confirmation{
-    --bubble-background-color: var(--confirmation-backgroundg-color);
+    --bubble-background-color: var(--confirmation-background-color);
     --bubble-text-color: var(--confirmation-text-border-color);
     --bubble-border-color: var(--confirmation-text-border-color);
+}
+#info{
+    --bubble-background-color: var(--otp-background-color);
+    --bubble-text-color: var(--otp-text-border-color);
+    --bubble-border-color: var(--otp-text-border-color);
 }
 
 .message-bubble {

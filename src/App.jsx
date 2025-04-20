@@ -15,10 +15,11 @@ import PasswordRecovery from "./components/PasswordRecovery/PasswordRecovery.jsx
 import NewPassword from "./components/PasswordRecovery/NewPassword.jsx";
 import LoadingOverlay from "./components/Loading/LoadingOverlay.jsx";
 import Map from "./pages/Map/Map.jsx";
+import Otp from "./components/Otp/Otp.jsx";
 
 function AppContent() {
     const location = useLocation();
-    const hideNavbarPaths = ["/", "/register","/passwordRecovery" , "/newPassword"];
+    const hideNavbarPaths = ["/", "/register","/passwordRecovery" , "/newPassword", "/otp"];
     const token = Cookies.get("token") || null;
     const { user } = useUser();
 
@@ -44,6 +45,7 @@ function AppContent() {
                 <Route path="/passwordRecovery" element={<PasswordRecovery />} />
                 <Route path="/newPassword" element={<NewPassword/>} />
                 <Route path="/map" element={<Map/>} />
+                <Route path="/otp" element={<Otp/>} />
             </Routes>
         </>
     );

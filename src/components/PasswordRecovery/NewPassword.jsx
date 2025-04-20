@@ -87,7 +87,7 @@ export default function NewPassword() {
                 <div className="recovery-box">
                     <img
                         className="recovery-background"
-                        src="../../assets/images/PasswordRecovery/new-password-bg.png"
+                        src="src/assets/images/PasswordRecovery/new-password-bg.png"
                         alt="beach"
                     />
 
@@ -103,7 +103,7 @@ export default function NewPassword() {
                     {success && (
                         <MessageBubble
                             message="הסיסמה עודכנה בהצלחה!"
-                            position={{ top: "40%", right: "50%" }}
+                            position={{ top: "38%", right: "50%" }}
                             scale="0.85"
                             type={"confirmation"}
                         />

@@ -3,27 +3,54 @@
 /* Custom properties for OTP components */
 
 
-.otp-container {
-    width: var(--otp-container-width);
-    height: var(--otp-container-height);
-    text-align: center;
+.otp-component-container {
+    background: linear-gradient(#1F9EF0,#38B8F5);
+    min-height: 100vh;
+    width: 100vw;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    direction: rtl;
+    overflow: hidden;
+}
+.otp-container{
+    background-color: var(--component-bg-color);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.otp-box{
+    width: 100%;
+    height: 100%;
+}
+.otp-image{
+    width: 100%;
+    height: 100%;
+}
+.otp-header {
+    margin-bottom: 1rem;
+    background-image: url("src/assets/images/Otp/otp_background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+.otp-footer{
+    /*background-color: lightgray;*/
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
-    direction: ltr;
+    gap: 2.5rem;
 }
-
-.otp-header {
-    margin-bottom: 1rem;
-}
-
 .otp-title {
     font-size: var(--otp-title-font-size);
     font-weight: var(--otp-title-font-weight);
     color: var(--otp-title-color);
     margin: 0;
+
 }
 
 .otp-subtitle {
@@ -38,6 +65,7 @@
     display: flex;
     justify-content: center;
     gap: var(--otp-input-gap);
+    direction: ltr;
 }
 
 .otp-input {
@@ -71,7 +99,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 50%;
+    width: 70%;
 
 }
 
