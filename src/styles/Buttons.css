@@ -42,7 +42,7 @@
     border: 3px solid var(--btn-white-border);
 }
 .btn-deep-blue {
-    background-color: var(--btn-white-bg);
-    color: var(--btn-white-text);
-    border: 3px solid var(--btn-white-border);
+    background-color: var(--btn-deep-blue-bg);
+    color: var(--btn-deep-blue-text);
+    border: 3px solid var(--btn-deep-blue-border);
 }

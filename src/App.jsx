@@ -24,7 +24,7 @@ function AppContent() {
     const { user } = useUser();
 
     return (
-        <>
+        <div className="App">
             {token && !hideNavbarPaths.includes(location.pathname) && (
                 <Navbar
                     deleteCookies={() => {
@@ -47,7 +47,7 @@ function AppContent() {
                 <Route path="/map" element={<Map/>} />
                 <Route path="/otp" element={<Otp/>} />
             </Routes>
-        </>
+        </div>
     );
 }
 

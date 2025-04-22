@@ -1,6 +1,6 @@
 import "./Island.css";
 import { useState } from "react";
-import { LOCK_ISLAND } from "../../utils/IslandConstants.js";
+import {LOCK_ISLAND, SIMPLE_MATH_ISLAND, SIMPLE_MATH_ISLAND_BACKGROUND} from "../../utils/IslandConstants.js";
 
 const colorClassMap = {
     yellow: "btn-yellow",
@@ -15,14 +15,15 @@ const colorClassMap = {
 };
 
 export default function Island({
-                                   className,
                                    name,
+                                   className,
                                    island,
                                    background,
+                                   url,
+                                   buttonColor,
+                                   islandKey,
                                    locked,
                                    onClick,
-                                   islandKey,
-                                   types
 
                                }) {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -51,24 +52,14 @@ export default function Island({
                     <label className="island-name">{name}</label>
                     <img className="island-image" src={island} alt="island" />
                     <img className="island-background-image" src={background} alt="background" />
-                        <div className={"question-type-chooser"}>
-                            {types &&
-                                Object.entries(types).map(([key, { label, color }]) => (
-                                    <button
-                                        key={key}
-                                        className={`question-type ${colorClassMap[color] || ""}`}
-                                    >
-                                        {label}
-                                    </button>
-                                ))}
-                        </div>
+                    <button className={`island-entrance-button ${colorClassMap[buttonColor] || ""}`}>היכנס!</button>
                 </div>
 
                 {
                     locked && (
-                    <div className="lock-overlay">
-                        <img src={LOCK_ISLAND} alt="locked" className="lock-icon" />
-                    </div>)
+                        <div className="lock-overlay">
+                            <img src={LOCK_ISLAND} alt="locked" className="lock-icon" />
+                        </div>)
                 }
             </div>
         </div>
