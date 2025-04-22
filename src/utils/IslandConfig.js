@@ -15,14 +15,14 @@ import {
     HORROR_ISLAND,
     HORROR_ISLAND_BACKGROUND,
     EQUATIONS_ISLAND,
-    EQUATIONS_ISLAND_BACKGROUND,
+    EQUATIONS_ISLAND_BACKGROUND, SIMPLE_MATH_BACKGROUND,
 } from "./IslandConstants";
 // import useApi from "../hooks/apiHooks/useApi.js";
 
 // const {islandNames} = useApi("/islands", "GET")
 // Array of island configs for iteration
 const ISLAND_CONFIGS = [
-    { key: "simpleMathIsland", name: "אי החיבור והחיסור", className: "simpleMathIsland", island: SIMPLE_MATH_ISLAND, background: SIMPLE_MATH_ISLAND_BACKGROUND, url: "/island/simpleMathIsland", buttonColor: "green" },
+    { key: "simpleMathIsland", name: "אי החיבור והחיסור", className: "simpleMathIsland", island: SIMPLE_MATH_ISLAND, background: SIMPLE_MATH_BACKGROUND, cardBackground: SIMPLE_MATH_ISLAND_BACKGROUND, url: "/island/simpleMathIsland", buttonColor: "green" },
     { key: "multiplicationIsland", name: "אי הכפל", className: "multiplicationIsland", island: MULTIPLICATION_ISLAND, background: MULTIPLICATION_ISLAND_BACKGROUND, url: "/multiplicationIsland", buttonColor: "yellow" },
     { key: "divisionIsland", name: "אי החילוק", className: "divisionIsland", island: DIVISION_ISLAND, background: DIVISION_ISLAND_BACKGROUND, url: "/island/divisionIsland", buttonColor: "blue" },
     { key: "floatingPointIsland", name: "האי העשרוני", className: "floatingPointIsland", island: FLOATING_POINT_ISLAND, background: FLOATING_POINT_ISLAND_BACKGROUND, url: "/floatingPointIsland", buttonColor: "orange" },

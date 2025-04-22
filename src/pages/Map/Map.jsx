@@ -44,7 +44,7 @@ export default function Map() {
                         className={island.className}
                         name={island.name}
                         island={island.island}
-                        background={island.background}
+                        cardBackground={island.cardBackground}
                         url={island.url}
                         buttonColor={island.buttonColor}
                         locked={!unlockedIslands[island.key]}

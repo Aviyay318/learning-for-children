@@ -1,9 +1,9 @@
 .map-container{
-    width: 100%;
-    height: 100%;
-    /*background-image: url("src/assets/images/Islands/sky_background.png");*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: cover;*/
+    width:100vw;
+    height:100vh;
+    /*cardBackground-image: url("src/assets/images/Islands/sky_background.png");*/
+    /*cardBackground-repeat: no-repeat;*/
+    /*cardBackground-size: cover;*/
     direction: rtl;
 }
 .islands-container{

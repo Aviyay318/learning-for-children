@@ -44,6 +44,11 @@
     width: 80%;
     /*height: auto;*/
     z-index: 0;
+    /*border: 1px solid red;*/
+    transition: scale 0.3s ease;
+}
+.island-image:hover {
+    scale: 1.1;
 }
 .island-image:hover{
     scale:1.1;
@@ -86,6 +91,7 @@
     align-items: center;
     z-index: 10;
     border-radius: 10%;
+    cursor: default;
 }
 
 .lock-icon {

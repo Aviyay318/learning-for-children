@@ -1,5 +1,6 @@
 // 📁 src/App.jsx
 import './App.css';
+import skyBackground from "/src/assets/images/Islands/sky_background.png"
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Login from "./pages/forms/Login.jsx";
 import Register from "./pages/forms/Register.jsx";
@@ -23,9 +24,13 @@ function AppContent() {
     const hideNavbarPaths = ["/", "/register", "/passwordRecovery", "/newPassword", "/otp"];
     const token = Cookies.get("token") || null;
     const { user } = useUser();
+    // const isIslandPage = location.pathname.startsWith("/island/");
 
     return (
-        <div className="App">
+        // <div className={`App ${isIslandPage ? "no-sky" : "with-sky"}`}>
+        <div className={`App with-sky`}
+             style={{ backgroundImage: `url(${skyBackground})` }}
+        >
             {token && !hideNavbarPaths.includes(location.pathname) && (
                 <Navbar
                     deleteCookies={() => {

@@ -1,22 +1,29 @@
 .App{
-
   width: 100vw;
   height: 100vh;
-
   padding:0;
   margin:0;
 
   display:flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+
   gap: 1.5rem;
+  position: relative;
+
 
 }
+.App.no-sky {
+  background: none;
+}
 
-.App{
-  background-image: url("src/assets/images/Islands/sky_background.png");
-  background-repeat: no-repeat;
+.App.with-sky {
+  background: repeat-x top/auto;
+  animation: scrollSky 60s linear infinite;
   background-size: cover;
+
+}
+@keyframes scrollSky {
+  0%   { background-position-x:   0; }
+  100%     { background-position-x: -1000px; }
 }

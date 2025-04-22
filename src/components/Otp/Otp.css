@@ -39,7 +39,7 @@
     height: 100%;
 }
 .otp-footer{
-    /*background-color: lightgray;*/
+    /*cardBackground-color: lightgray;*/
     flex-direction: column;
     justify-content: center;
     align-items: center;
