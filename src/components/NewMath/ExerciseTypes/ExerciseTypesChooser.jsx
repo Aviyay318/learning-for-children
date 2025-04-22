@@ -9,6 +9,13 @@ import LiteralProblem from "../../Math/literalProblem/LiteralProblem.jsx";
 // import CompleteTheBoard from "...";
 // import AmericanQuestion from "...";
 
+// const QUESTION_TYPES = {
+//     SIMPLE_MATH: 1,
+//     LITERAL_PROBLEM: 2,
+//     MULTIPLE_ANSWER: 3,
+//     COMPLETE_THE_BOARD: 4,
+// }
+
 export default function ExerciseTypesChooser({ buttonClassname }) {
     const { data: questionTypeData, error, loading, sendRequest } = useGetApi(GET_QUESTION_TYPE);
     const [types, setTypes] = useState([]);
@@ -18,9 +25,8 @@ export default function ExerciseTypesChooser({ buttonClassname }) {
     const componentsMap = {
         1: (id) => <SimpleMath questionType={id} />,
         2: (id) => <LiteralProblem questionType={id} />,
-        3: (id) =><MultipleAnswer questionType={id}/>,
+        3: (id) => <MultipleAnswer questionType={id}/>,
         // 4: (id) => <CompleteTheBoard questionType={id} />,
-
     };
 
     // טען סוגי שאלות
