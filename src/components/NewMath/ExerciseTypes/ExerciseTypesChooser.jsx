@@ -1,75 +1,75 @@
+// 📁 src/components/NewMath/ExerciseTypes/ExerciseTypesChooser.jsx
+import "./ExerciseTypeChooser.css";
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import { GET_QUESTION_TYPE } from "../../../utils/Constants.js";
 import { useEffect, useState } from "react";
-import {SimpleMath} from "../AddAndSubInsland/SimpleMath.jsx";
+import { SimpleMath } from "../AddAndSubInsland/SimpleMath.jsx";
 import MultipleAnswer from "../AddAndSubInsland/MultipleAnswer.jsx";
 import LiteralProblem from "../../Math/literalProblem/LiteralProblem.jsx";
-
-
-// import CompleteTheBoard from "...";
-// import AmericanQuestion from "...";
-
-// const QUESTION_TYPES = {
-//     SIMPLE_MATH: 1,
-//     LITERAL_PROBLEM: 2,
-//     MULTIPLE_ANSWER: 3,
-//     COMPLETE_THE_BOARD: 4,
-// }
+import { buttonColorClassMap } from "../../../utils/ButtonConstants.js";
 
 export default function ExerciseTypesChooser({ buttonClassname }) {
-    const { data: questionTypeData, error, loading, sendRequest } = useGetApi(GET_QUESTION_TYPE);
+    const { data: questionTypeData, sendRequest } = useGetApi(GET_QUESTION_TYPE);
     const [types, setTypes] = useState([]);
     const [activeType, setActiveType] = useState(null);
 
-    // מפה שמחזירה קומפוננטה לפי ID
+    // only these four colors:
+    const buttonColors = {
+        green: buttonColorClassMap.green,
+        yellow: buttonColorClassMap.yellow,
+        blue: buttonColorClassMap.blue,
+        white: buttonColorClassMap.white,
+    };
+    const palette = Object.values(buttonColors);
+    // => [ 'btn-green', 'btn-yellow', 'btn-blue', 'btn-white' ]
+
+    // map your incoming type‑IDs to the right exercise component
     const componentsMap = {
         1: (id) => <SimpleMath questionType={id} />,
         2: (id) => <LiteralProblem questionType={id} />,
-        3: (id) => <MultipleAnswer questionType={id}/>,
+        3: (id) => <MultipleAnswer questionType={id} />,
         // 4: (id) => <CompleteTheBoard questionType={id} />,
     };
 
-    // טען סוגי שאלות
     useEffect(() => {
         sendRequest({});
     }, []);
 
-    // עדכון סוגים מהשרת
     useEffect(() => {
         if (questionTypeData) {
-            const mapped = questionTypeData.map((type) => ({
-                id: type.id,
-                label: type.name,
-            }));
-            setTypes(mapped);
+            setTypes(
+                questionTypeData.map((t) => ({
+                    id: t.id,
+                    label: t.name,
+                }))
+            );
         }
     }, [questionTypeData]);
 
-    // בונה את הקומפוננטה רק אם קיים ב־map
-    const activeComponent = componentsMap[activeType]
+    // pick the right component (or a fallback)
+    const ActiveComponent = componentsMap[activeType]
         ? componentsMap[activeType](activeType)
         : <div className="text-red-500">Component not defined</div>;
 
     return (
-        <div className="flex flex-col items-center gap-6">
-            <div className="flex gap-3 flex-wrap justify-center">
-                {types.map((type) => (
-                    <button
-                        key={type.id}
-                        className={`${buttonClassname} ${activeType === type.id ? "bg-blue-600 text-white" : ""}`}
-                        onClick={() => {
-                            setActiveType(type.id);
-                            // alert(type.id); // רק אם את רוצה
-                        }}
-                    >
-                        {type.label}
-                    </button>
-                ))}
+        <div className="exercise-type-chooser-container">
+            <div className="exercise-type-chooser-box">
+                {types.map((type, idx) => {
+                    // cycle through your 4‑color palette
+                    const colorClass = palette[idx % palette.length];
+                    return (
+                        <button
+                            key={type.id}
+                            className={`${buttonClassname} ${colorClass}`}
+                            onClick={() => setActiveType(type.id)}
+                        >
+                            {type.label}
+                        </button>
+                    );
+                })}
             </div>
-
-
             <div className="w-full max-w-3xl mt-6">
-                {activeComponent}
+                {ActiveComponent}
             </div>
         </div>
     );

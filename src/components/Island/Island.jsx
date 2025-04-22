@@ -2,7 +2,6 @@ import "./Island.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LOCK_ISLAND } from "../../utils/IslandConstants.js";
-
 const colorClassMap = {
     yellow: "btn-yellow",
     pink: "btn-pink",

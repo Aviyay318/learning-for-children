@@ -1,0 +1,13 @@
+.exercise-type-chooser-container{
+    width: 100%;
+    height: 100%;
+
+}
+.exercise-type-chooser-box{
+    border: 1px solid red;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
