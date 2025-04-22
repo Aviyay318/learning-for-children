@@ -1,17 +1,22 @@
+import {useState} from "react";
 
 const FormField = ({ id, label, type, name,value, error, onChange }) => {
+
+    const [showPassword, setShowPassword] = useState(false);
+
     return (
         <div className="form-input form-margins flex" id={id}>
             <div className={`input-wrapper ${value ? "has-content" : ""}`}>
                 <label className="input-placeholder" htmlFor={name}>{label}</label>
                 <input
                     className="input-field"
-                    type={type}
+                    type={type==="password" && showPassword? "text": type}
                     id={name}
                     name={name}
                     value={value}
                     onChange={onChange}
                 />
+                {/*{type==='password' && <button className={"password-input-eye"} onClick={()=>setShowPassword(!showPassword)}>עין</button>}*/}
             </div>
             {error && <label className="input-error">{error}</label>}
         </div>

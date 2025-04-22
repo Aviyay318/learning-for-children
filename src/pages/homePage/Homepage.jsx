@@ -4,11 +4,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { SERVER_URL, GET_LEVEL } from "../../utils/Constants.js";
-import MultiplicationTable from "../../components/Math/MultiplicationProblems/MultiplicationProblems.jsx";
-import AmericanQuestion from "../../components/Math/AmericanQuestion/AmericanQuestion.jsx";
-import CompleteTheBoard from "../../components/Math/CompleteTheBoard/CompleteTheBoard.jsx";
-import Tutorial from "../../components/Tutorial/Tutorial.jsx";
-import {useTutorial} from "../../hooks/uiHooks/useTutorial.js";
+import MultipleAnswer from "../../components/NewMath/AddAndSubInsland/MultipleAnswer.jsx";
+import {SimpleMath} from "../../components/NewMath/AddAndSubInsland/SimpleMath.jsx";
+
 
 export default function Homepage() {
     const location = useLocation();
@@ -34,7 +32,8 @@ export default function Homepage() {
             <div className="homepage-header header glass">
                 <h1>דף הבית</h1>
             </div>
-
+            <SimpleMath questionType={1}/>
+            <MultipleAnswer questionType={3}/>
             <div className="homepage-body flex glass">
                 {/*<div className="level-box">*/}
                 {/*    <Tutorial topic={"equationThreeVars"}/>*/}

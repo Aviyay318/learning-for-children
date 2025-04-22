@@ -1,6 +1,7 @@
 import "./Island.css";
 import { useState } from "react";
-import {LOCK_ISLAND, SIMPLE_MATH_ISLAND, SIMPLE_MATH_ISLAND_BACKGROUND} from "../../utils/IslandConstants.js";
+import { useNavigate } from "react-router-dom";
+import { LOCK_ISLAND } from "../../utils/IslandConstants.js";
 
 const colorClassMap = {
     yellow: "btn-yellow",
@@ -19,23 +20,27 @@ export default function Island({
                                    className,
                                    island,
                                    background,
-                                   url,
+                                   url = "",
                                    buttonColor,
                                    islandKey,
                                    locked,
                                    onClick,
-
                                }) {
     const [isFlipped, setIsFlipped] = useState(false);
+    const navigate = useNavigate();
 
     const handleClick = (e) => {
         e.stopPropagation();
-
         if (locked) {
-            onClick?.({ locked, islandKey }); // show lock message
+            onClick?.({ locked, islandKey });
         } else {
-            setIsFlipped((prev) => !prev); // flip island
+            setIsFlipped((prev) => !prev);
         }
+    };
+
+    const handleEnterIsland = (e) => {
+        e.stopPropagation();
+        if (url) navigate(url);
     };
 
     return (
@@ -44,23 +49,33 @@ export default function Island({
             onClick={handleClick}
         >
             <div className={`island-card ${isFlipped ? "flipped" : ""}`}>
+                {/* Front Face */}
                 <div className="island-card-face island-card-front">
                     <img className="island-image" src={island} alt="island" />
                 </div>
 
+                {/* Back Face */}
                 <div className="island-card-face island-card-back">
                     <label className="island-name">{name}</label>
                     <img className="island-image" src={island} alt="island" />
                     <img className="island-background-image" src={background} alt="background" />
-                    <button className={`island-entrance-button ${colorClassMap[buttonColor] || ""}`}>היכנס!</button>
+
+                    {url && (
+                        <button
+                            className={`island-entrance-button ${colorClassMap[buttonColor] || ""}`}
+                            onClick={handleEnterIsland}
+                        >
+                            היכנס!
+                        </button>
+                    )}
                 </div>
 
-                {
-                    locked && (
-                        <div className="lock-overlay">
-                            <img src={LOCK_ISLAND} alt="locked" className="lock-icon" />
-                        </div>)
-                }
+                {/* Lock Overlay */}
+                {locked && (
+                    <div className="lock-overlay">
+                        <img src={LOCK_ISLAND} alt="locked" className="lock-icon" />
+                    </div>
+                )}
             </div>
         </div>
     );

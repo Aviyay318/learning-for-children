@@ -23,7 +23,7 @@ export default function Navbar({deleteCookies,username}) {
                 {user &&
                     <div className={"navbar-coins-container flex"}>
                         <img className={"navbar-icons"} src={icons.coin} alt="Homepage"/>
-                        <label className={"coins-label"}>300</label>
+                        <label className={"coins-label"}>{user.score}</label>
                     </div>}
                 <NavLink to="/homepage" className={({isActive}) => isActive ? "active" : ""}>
                     <img className={"navbar-icons"} src={icons.homepage} alt="Homepage"/>

@@ -1,13 +1,9 @@
-import BasicMath from "../BasicMath/BasicMath.jsx";
 import {useEffect, useState} from "react";
 import "./ExerciseTabs.css"
-import LiteralProblem from "../literalProblem/LiteralProblem.jsx";
-import Equations from "../Equations/Equations.jsx";
-import MultiplicationProblems from "../MultiplicationProblems/MultiplicationProblems.jsx";
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
-import {GET_MATH, GET_QUESTION_TYPE, SERVER_URL} from "../../../utils/Constants.js";
-import AmericanQuestion from "../AmericanQuestion/AmericanQuestion.jsx";
-import CompleteTheBoard from "../CompleteTheBoard/CompleteTheBoard.jsx";
+import {GET_QUESTION_TYPE} from "../../../utils/Constants.js";
+import {SimpleExercise} from "../../NewMath/ExerciseTypes/SimpleExercise.jsx";
+import {MultipleAnswerExercise} from "../../NewMath/ExerciseTypes/MultipleAnswerExercise.jsx";
 
 
 
@@ -29,12 +25,10 @@ export default function ExerciseTabs({level}) {
     const activeComponent = tabs.find(tab => tab.id === activeTab)?.component
 
     const componentsMap = {
-        1: <BasicMath />,
-        2: <LiteralProblem />,
-        3: <Equations />,
-        4: <MultiplicationProblems />,
-        5:<CompleteTheBoard/>,
-        6: <AmericanQuestion />,
+        1: <SimpleExercise />,
+        3: <MultipleAnswerExercise />,
+        // 3: <CompleteTheBoard/>,
+        // 4: <AmericanQuestion />,
     };
 
     useEffect(() => {
