@@ -5,8 +5,9 @@ import { GET_QUESTION_TYPE } from "../../../utils/Constants.js";
 import { useEffect, useState } from "react";
 import { SimpleMath } from "../AddAndSubInsland/SimpleMath.jsx";
 import MultipleAnswer from "../AddAndSubInsland/MultipleAnswer.jsx";
-import LiteralProblem from "../../Math/literalProblem/LiteralProblem.jsx";
 import { buttonColorClassMap } from "../../../utils/ButtonConstants.js";
+import LiteralProblemNew from "../AddAndSubInsland/LiteralProblemNew.jsx";
+import {CompleteTheBoardNew} from "../AddAndSubInsland/CompleteTheBoardNew.jsx";
 
 export default function ExerciseTypesChooser({ buttonClassname }) {
     const { data: questionTypeData, sendRequest } = useGetApi(GET_QUESTION_TYPE);
@@ -26,9 +27,9 @@ export default function ExerciseTypesChooser({ buttonClassname }) {
     // map your incoming type‑IDs to the right exercise component
     const componentsMap = {
         1: (id) => <SimpleMath questionType={id} />,
-        2: (id) => <LiteralProblem questionType={id} />,
+        2: (id) => <LiteralProblemNew questionType={id}/> ,
         3: (id) => <MultipleAnswer questionType={id} />,
-        // 4: (id) => <CompleteTheBoard questionType={id} />,
+        4: (id) => <CompleteTheBoardNew questionType={id} />,
     };
 
     useEffect(() => {

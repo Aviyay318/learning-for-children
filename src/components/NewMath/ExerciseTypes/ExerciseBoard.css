@@ -1,0 +1,44 @@
+:root{
+    --board-background-color: #385723;
+    --board-border-color: #ED7D32;
+    --board-exercise-text-color: white;
+}
+.exercise-board-container{
+    width: 100%;
+    height: 100%;
+    background-image: url("/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.exercise-board{
+    background: var(--board-background-color);
+    border: 1rem solid var(--board-border-color);
+    width: 80%;
+    height: 100%;
+    flex-direction: column;
+    gap: 2rem;
+    border-radius: 35px;
+    direction: ltr;
+}
+.exercise-question{
+    gap: 1rem;
+}
+.exercise-question label{
+    font-size: 5rem;
+    font-weight: bold;
+    direction: ltr;
+    text-align: center;
+    color: var(--board-exercise-text-color);
+}
+.exercise-question input{
+    background: transparent;
+    border: 1px solid transparent;
+    width: 5rem;
+    font-size: 5rem;
+    font-weight: bold;
+    height: 100%;
+}
+.exercise-question input::placeholder{
+    color: white
+}

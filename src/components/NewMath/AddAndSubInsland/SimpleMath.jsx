@@ -77,7 +77,7 @@ export const SimpleMath = ({ questionType }) => {
                 <div>טוען שאלה...</div>
             ) : (
                 <>
-                    <SimpleExercise question={questionText} checkAnswer={checkAnswer} />
+                    <SimpleExercise question={data} checkAnswer={checkAnswer} />
 
                     {/* זמן פתרון */}
                     <div className="text-sm text-gray-600 mt-2">

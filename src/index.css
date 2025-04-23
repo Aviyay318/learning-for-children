@@ -4,3 +4,20 @@
 @import "./styles/Variables.css";
 @import "./styles/Theme.css";
 @import "./styles/Buttons.css";
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+.animate-shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes flash-glow {
+    0% { box-shadow: 0 0 0px #4ade80; }
+    50% { box-shadow: 0 0 20px #4ade80; }
+    100% { box-shadow: 0 0 0px #4ade80; }
+}
+.animate-flash {
+    animation: flash-glow 0.8s ease-in-out;
+}

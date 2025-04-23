@@ -3,7 +3,7 @@ import axios from "axios";
 import { CHECK_EXERCISE, SERVER_URL } from "../../../utils/Constants.js";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
-import "./LiteralProblem.css";
+import "../../NewMath/ExerciseTypes/LiteralProblem.css";
 
 export default function LiteralProblem() {
     const [literalProblem, setLiteralProblem] = useState(null);
