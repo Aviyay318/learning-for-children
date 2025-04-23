@@ -7,7 +7,7 @@ import { useFormValidator } from "../../hooks/formHooks/useFormValidator.js";
 import MessageBubble from "../MessageBubble/MessageBubble.jsx";
 import { useBubbleMessage } from "../../hooks/uiHooks/useBubbleMessage.js";
 import useSound from "use-sound";
-import successSoundFile from "../../assets/sounds/RightAnswer.wav";
+import successSoundFile from "../../../public/sounds/RightAnswer.wav";
 import "./PasswordRecovery.css";
 import FormField from "../../pages/forms/FormField.jsx";
 

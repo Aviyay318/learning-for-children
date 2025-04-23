@@ -32,8 +32,7 @@ export default function Homepage() {
             <div className="homepage-header header glass">
                 <h1>דף הבית</h1>
             </div>
-            <SimpleMath questionType={1}/>
-            <MultipleAnswer questionType={3}/>
+            <SimpleMathMult questionType={1}/>
             <div className="homepage-body flex glass">
                 {/*<div className="level-box">*/}
                 {/*    <Tutorial topic={"equationThreeVars"}/>*/}

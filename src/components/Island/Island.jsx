@@ -3,15 +3,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LOCK_ISLAND } from "../../utils/IslandConstants.js";
 const colorClassMap = {
-    yellow: "btn-yellow",
-    pink: "btn-pink",
-    red: "btn-red",
-    blue: "btn-blue",
-    green: "btn-green",
-    orange: "btn-orange",
-    purple: "btn-purple",
-    white: "btn-white",
-    deepBlue: "btn-deep-blue",
+    yellow: "btn btn-yellow",
+    pink: "btn btn-pink",
+    red: "btn btn-red",
+    blue: "btn btn-blue",
+    green: "btn btn-green",
+    orange: "btn btn-orange",
+    purple: "btn btn-purple",
+    white: "btn btn-white",
+    deepBlue: "btn btn-deep-blue",
 };
 
 export default function Island({

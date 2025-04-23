@@ -1,70 +1,80 @@
-import React, { useState, useRef } from "react";
-import { motion } from "framer-motion";
-import clsx from "clsx";
+import React, {useState, useMemo, useEffect} from "react";
 
-export const CompleteTheBoardExercise = ({
-                                             question = "",
-                                             options = [],
-                                             correctIndex,
-                                             onNext
-                                         }) => {
-    const [selectedIndex, setSelectedIndex] = useState(null);
-    const [feedback, setFeedback] = useState("");
-    const timeoutRef = useRef(null);
+export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
+   const[answers, setAnswers] = useState([]);
+   const[questionIndex, setQuestionIndex] = useState(0);
+   const [question, setQuestion] = useState("");
+   const [isWin,setIsWin] = useState(0);
+useEffect(() => {
+    let answerArray = [];
+    questions.forEach((question) => {answerArray.push({answer:question.solution,isCorrect:false})});
+    setAnswers(answerArray)
+    setQuestionIndex(0)
+    setIsWin(0)
+    console.log(questions)
+},[])
 
-    const handleClick = (index) => {
-        setSelectedIndex(index);
-        const isCorrect = index === correctIndex;
+    useEffect(() => {
+        let answerArray = [];
+        questions.forEach((question,index) => {
+            answerArray.push({id:index, answer: question.solution, isCorrect: false });
+        });
+        setAnswers(answerArray);
+        setQuestionIndex(0);
+        setIsWin(0);
+        console.log(answerArray)
+    }, [questions]);
 
-        setFeedback(isCorrect ? "✔ תשובה נכונה!" : "✖ נסה שוב");
-        if (!isCorrect && navigator.vibrate) navigator.vibrate(200);
+   //TODO SHAFLE
 
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => {
-            setSelectedIndex(null);
-            setFeedback("");
-            onNext();
-        }, isCorrect ? 1500 : 1000);
-    };
 
-    if (!question || !Array.isArray(options)) return null;
+    const checkAnswer =(answer)=>{
+        console.log("a " ,answer)
+        console.log("qa " ,questions[questionIndex])
+        console.log("q " ,questionIndex-1)
+        if (answer.answer === questions[questionIndex].solution) {
+            answer.isCorrect = true;
 
+            if (answers.length !== (questionIndex+1)) {
+                setQuestionIndex(prevState => prevState + 1)
+            }
+            if (answers.length !== isWin) {
+                setIsWin(prevState => prevState + 1)
+            }
+            setAnswers((prevState) =>
+                prevState.map((a) =>
+                    a === answer ? { ...a, isCorrect: true } : a
+                )
+            );
+
+        }
+
+        }
+    useEffect(() => {
+        let q = questions[questionIndex].num1 + questions[questionIndex].operator + questions[questionIndex].num2;
+        setQuestion(q)
+    }, [questionIndex])
     return (
-        <div className="flex flex-col items-center gap-6">
-            <div className="text-2xl font-bold text-blue-800">{question}</div>
+        <div>
+            {answers.length !== 0 && <div>
+                {question.length !== 0 && <div>{question}</div>}
+               {
+                 answers.map((answer, index) => (
+                     <button onClick={()=>checkAnswer(answer)} style={{background:answer.isCorrect?"green":"pink"}} key={index}>
+                         {answer.answer}
+                     </button>
+                 ))
+               }
+           </div>}
 
-            <div className="grid grid-cols-4 gap-4 mt-4">
-                {options.map((opt, i) => {
-                    const isSelected = selectedIndex === i;
-                    const isCorrect = selectedIndex === correctIndex;
-                    const isWrong = isSelected && !isCorrect;
+            {
 
-                    return (
-                        <motion.button
-                            key={i}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => handleClick(i)}
-                            className={clsx(
-                                "w-20 h-20 rounded-full text-xl font-bold shadow transition duration-300",
-                                isSelected && i === correctIndex && "bg-green-500 text-white animate-flash",
-                                isWrong && "bg-red-400 animate-shake text-white",
-                                !isSelected && "bg-white hover:bg-blue-100"
-                            )}
-                        >
-                            {opt}
-                        </motion.button>
-                    );
-                })}
-            </div>
-
-            <div className="text-lg text-purple-700 font-semibold">{feedback}</div>
-
-            <button
-                onClick={onNext}
-                className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded"
-            >
-                שאלה הבאה
-            </button>
+                (isWin)===(answers.length) && <div>
+                    <h1>great job</h1>
+                <button onClick={onRestart}>לוח חדש </button>
+                </div>
+            }
         </div>
-    );
+
+   )
 };

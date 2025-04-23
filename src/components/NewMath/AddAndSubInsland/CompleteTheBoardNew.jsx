@@ -3,26 +3,26 @@ import Cookies from "js-cookie";
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import { CompleteTheBoardExercise } from "../ExerciseTypes/CompleteTheBoardExercise.jsx";
 
-export const CompleteTheBoardNew = ({ questionType }) => {
+export default function CompleteTheBoardNew  ({ questionType }) {
     const { data, error, loading, sendRequest } = useGetApi("/api/islands/Addition-and-subtraction");
-
-    useEffect(() => {
+    const fetchQuestions = () => {
         const token = Cookies.get("token");
         sendRequest({ token, questionType });
+    };
+
+    useEffect(() => {
+        fetchQuestions();
     }, []);
 
     return (
         <div className="p-6">
-            {loading && <div>טוען שאלה...</div>}
+            {loading && <div>טוען שאלות...</div>}
             {error && <div className="text-red-500">שגיאה: {error}</div>}
-            {data?.options && (
+            {data?.exercises?.length > 0 && (
                 <CompleteTheBoardExercise
-                    question={`${data.num1} ${data.operator} ${data.num2} = ?`}
-                    options={data.options}
-                    correctIndex={data.correctIndex}
-                    onNext={() => {
-                        const token = Cookies.get("token");
-                        sendRequest({ token, questionType });
+                    questions={data.exercises}
+                    onRestart={() => {
+                        fetchQuestions();
                     }}
                 />
             )}

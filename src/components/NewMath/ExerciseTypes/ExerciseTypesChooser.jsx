@@ -1,76 +1,65 @@
 // 📁 src/components/NewMath/ExerciseTypes/ExerciseTypesChooser.jsx
-import "./ExerciseTypeChooser.css";
+import React, { useEffect, useState } from "react";
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import { GET_QUESTION_TYPE } from "../../../utils/Constants.js";
-import { useEffect, useState } from "react";
-import { SimpleMath } from "../AddAndSubInsland/SimpleMath.jsx";
-import MultipleAnswer from "../AddAndSubInsland/MultipleAnswer.jsx";
-import { buttonColorClassMap } from "../../../utils/ButtonConstants.js";
+
+// your UIs:
+import SimpleMath from "../AddAndSubInsland/SimpleMath.jsx";
 import LiteralProblemNew from "../AddAndSubInsland/LiteralProblemNew.jsx";
-import {CompleteTheBoardNew} from "../AddAndSubInsland/CompleteTheBoardNew.jsx";
+import MultipleAnswer from "../AddAndSubInsland/MultipleAnswer.jsx";
+import CompleteTheBoardNew from "../AddAndSubInsland/CompleteTheBoardNew.jsx";
 
-export default function ExerciseTypesChooser({ buttonClassname }) {
-    const { data: questionTypeData, sendRequest } = useGetApi(GET_QUESTION_TYPE);
+import { buttonColorClassMap } from "../../../utils/ButtonConstants.js";
+import "./ExerciseTypeChooser.css";
+
+export default function ExerciseTypesChooser({ islandId, onChoose }) {
+    const { data, sendRequest } = useGetApi(GET_QUESTION_TYPE);
     const [types, setTypes] = useState([]);
-    const [activeType, setActiveType] = useState(null);
 
-    // only these four colors:
-    const buttonColors = {
-        green: buttonColorClassMap.green,
-        yellow: buttonColorClassMap.yellow,
-        blue: buttonColorClassMap.blue,
-        white: buttonColorClassMap.white,
-    };
-    const palette = Object.values(buttonColors);
-    // => [ 'btn-green', 'btn-yellow', 'btn-blue', 'btn-white' ]
-
-    // map your incoming type‑IDs to the right exercise component
-    const componentsMap = {
-        1: (id) => <SimpleMath questionType={id} />,
-        2: (id) => <LiteralProblemNew questionType={id}/> ,
-        3: (id) => <MultipleAnswer questionType={id} />,
-        4: (id) => <CompleteTheBoardNew questionType={id} />,
+    // static map from server‐id → route/component
+    const EXERCISE_TYPES = {
+        1: { component: <SimpleMath questionType={1}/> },
+        2: { component: <LiteralProblemNew questionType={2}/> },
+        3: { component: <MultipleAnswer questionType={3}/> },
+        4: { component: <CompleteTheBoardNew questionType={4}/> },
     };
 
-    useEffect(() => {
-        sendRequest({});
-    }, []);
+    // cycle colors
+    const palette = [
+        buttonColorClassMap.green,
+        buttonColorClassMap.yellow,
+        buttonColorClassMap.blue,
+        buttonColorClassMap.white,
+    ];
 
-    useEffect(() => {
-        if (questionTypeData) {
-            setTypes(
-                questionTypeData.map((t) => ({
-                    id: t.id,
-                    label: t.name,
-                }))
-            );
-        }
-    }, [questionTypeData]);
+    // fetch once
+    useEffect(() => void sendRequest({}), []);
 
-    // pick the right component (or a fallback)
-    const ActiveComponent = componentsMap[activeType]
-        ? componentsMap[activeType](activeType)
-        : <div className="text-red-500">Component not defined</div>;
+    // when data arrives, filter+map
+    useEffect(() => {
+        if (!data) return;
+        const supported = data
+            .filter((t) => EXERCISE_TYPES[t.id])
+            .map((t) => ({
+                id: t.id,
+                label: t.name,
+                component: EXERCISE_TYPES[t.id].component,
+            }));
+        setTypes(supported);
+    }, [data]);
 
     return (
-        <div className="exercise-type-chooser-container">
-            <div className="exercise-type-chooser-box">
-                {types.map((type, idx) => {
-                    // cycle through your 4‑color palette
-                    const colorClass = palette[idx % palette.length];
-                    return (
-                        <button
-                            key={type.id}
-                            className={`${buttonClassname} ${colorClass}`}
-                            onClick={() => setActiveType(type.id)}
-                        >
-                            {type.label}
-                        </button>
-                    );
-                })}
-            </div>
-            <div className="w-full max-w-3xl mt-6">
-                {ActiveComponent}
+        <div className="exercise-type-chooser-container flex">
+            <div className="exercise-type-chooser-box flex">
+                {types.map((type, idx) => (
+                    <button
+                        key={type.id}
+                        className={`type-chooser ${palette[idx % palette.length]}`}
+                        onClick={() => onChoose(type.component)}
+                    >
+                        {type.label}
+                    </button>
+                ))}
             </div>
         </div>
     );

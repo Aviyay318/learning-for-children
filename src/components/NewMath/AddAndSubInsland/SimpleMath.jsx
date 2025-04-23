@@ -4,8 +4,9 @@ import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { SERVER_URL } from "../../../utils/Constants.js";
+import "./AddAndSubIsland.css"
 
-export const SimpleMath = ({ questionType }) => {
+export default function SimpleMath ({ questionType ,url}) {
     const { data, loading, error, sendRequest } = useGetApi("/api/islands/Addition-and-subtraction");
 
     const [feedback, setFeedback] = useState(null);
@@ -72,11 +73,11 @@ export const SimpleMath = ({ questionType }) => {
     const questionText = data ? `${data.num1} ${data.operator} ${data.num2} ${data.equalsSign} ?` : "";
 
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-blue-100 gap-4" dir="rtl">
+        <div className="simple-math-container" dir="rtl">
             {loading || !data ? (
                 <div>טוען שאלה...</div>
             ) : (
-                <>
+                <div className={"simple-math-box flex"}>
                     <SimpleExercise question={data} checkAnswer={checkAnswer} />
 
                     {/* זמן פתרון */}
@@ -123,7 +124,8 @@ export const SimpleMath = ({ questionType }) => {
                             הצג עזר
                         </button>
                     </div>
-                </>
+
+                </div>
             )}
         </div>
     );
