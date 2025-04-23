@@ -3,28 +3,36 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { SERVER_URL, GET_LEVEL } from "../../utils/Constants.js";
-import SimpleMathMult from "../../components/NewMath/MultiplicationTable/SimpleMathMult.jsx";
+import { SERVER_URL} from "../../utils/Constants.js";
 
 
 export default function Homepage() {
     const location = useLocation();
     const { isAdmin } = location.state || {};
-
-    const [userLevel, setUserLevel] = useState(null);
+    const [levels,setLevels] = useState([]);
     useEffect(() => {
-        getUserLevel();
+        getUserLevel()
     }, []);
 
     const getUserLevel = async () => {
         const token = Cookies.get("token");
+
+        if (!token) {
+            console.error("לא נמצא טוקן");
+            return;
+        }
+
         try {
-            const response = await axios.get(`${SERVER_URL}${GET_LEVEL}?token=${token}`);
-            setUserLevel(response.data);
+            const { data } = await axios.get(`${SERVER_URL}/api/islands/get-level-by-user`, {
+                params: { token }
+            });
+            console.log(data)
+            setLevels(data);
         } catch (error) {
             console.error("שגיאה בקבלת שלב המשתמש:", error);
         }
     };
+
 
     return (
         <div className="homepage-container flex">
@@ -32,14 +40,26 @@ export default function Homepage() {
                 <h1>דף הבית</h1>
             </div>
             <div className="homepage-body flex glass">
-                {/*<div className="level-box">*/}
-                {/*    <Tutorial topic={"equationThreeVars"}/>*/}
-                {/*    {userLevel !== null ? (*/}
-                {/*        <h3>הרמה שלך: {userLevel}</h3>*/}
-                {/*    ) : (*/}
-                {/*        <h3>טוען רמה...</h3>*/}
-                {/*    )}*/}
-                {/*</div>*/}
+                <h1>שלבים</h1>
+                {
+                    levels.length!==0&&<table>
+                        <tr>
+                            <td>האי</td>
+                            <td>שלב</td>
+                        </tr>
+                        {
+
+                                    levels.map((level, index) => (
+                                        <tr key={index} >
+                                           <td> {level.island.name}</td>
+                                           <td> {level.level}</td>
+                                        </tr>
+                                    ))
+
+
+                        }
+                    </table>
+                }
             </div>
         </div>
     );
