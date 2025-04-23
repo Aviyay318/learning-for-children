@@ -1,44 +1,103 @@
-:root{
+:root {
+    /* Board styling */
     --board-background-color: #385723;
     --board-border-color: #ED7D32;
     --board-exercise-text-color: white;
-}
-.exercise-board-container{
-    width: 100%;
-    height: 100%;
-    background-image: url("/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+    --board-text-size: 10rem;
+
+    /* Layout & sizing */
+    /* Change 16/9 to e.g. 4/3 if you want a squarer board */
+    --board-aspect-ratio: 16 / 9;
+    /* Drive the board’s width relative to viewport */
+    --board-width: 50vw;
+    /* Never exceed this width */
+    --board-max-width: 900px;
+    /* Ensure the container is tall enough */
+    --board-container-min-height: 60vh;
+
+    /* Internal gaps/padding */
+    --board-padding: 1rem;
+    --board-gap: 2rem;
 }
 
-.exercise-board{
+/* Center & size container */
+.exercise-board-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--board-padding);
+    min-height: var(--board-container-min-height);
+    width: 100%;
+    height:100%;
+    box-sizing: border-box;
+}
+
+/* The board itself */
+.exercise-board {
+    width: var(--board-width);
+    max-width: var(--board-max-width);
+    aspect-ratio: var(--board-aspect-ratio);
+
     background: var(--board-background-color);
     border: 1rem solid var(--board-border-color);
-    width: 80%;
-    height: 100%;
-    flex-direction: column;
-    gap: 2rem;
     border-radius: 35px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: var(--board-gap);
+    padding: var(--board-padding);
+
+    box-sizing: border-box;
     direction: ltr;
 }
-.exercise-question{
-    gap: 1rem;
+
+/* The row with question items */
+.exercise-question {
+    display: flex;
+    align-items: center;
+    gap: var(--board-gap);
 }
-.exercise-question label{
-    font-size: 5rem;
+
+/* Big numbers/text */
+.exercise-question label,
+.exercise-question input {
+    font-size: var(--board-text-size);
     font-weight: bold;
-    direction: ltr;
-    text-align: center;
     color: var(--board-exercise-text-color);
 }
-.exercise-question input{
+
+/* Input styling */
+.exercise-question input {
     background: transparent;
-    border: 1px solid transparent;
-    width: 5rem;
-    font-size: 5rem;
-    font-weight: bold;
-    height: 100%;
+    border: none;
+    border-bottom: 0.5rem solid white;
+    width: 1.3em;              /* width of one character */
+    text-align: center;
+    box-sizing: border-box;
 }
-.exercise-question input::placeholder{
-    color: white
+
+/* Placeholder color */
+.exercise-question input::placeholder {
+    color: white;
+}
+
+/* (Optional) if you have a submit button inside the board */
+.exercise-submit-button {
+    margin-top: var(--board-gap);
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    background: var(--board-border-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.exercise-submit-button:hover {
+    background: #c86a29;
 }

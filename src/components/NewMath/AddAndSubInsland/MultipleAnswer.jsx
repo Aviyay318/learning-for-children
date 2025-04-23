@@ -5,8 +5,8 @@ import { MultipleAnswerExercise } from "../ExerciseTypes/MultipleAnswerExercise.
 import axios from "axios";
 import {SERVER_URL} from "../../../utils/Constants.js";
 
-export default function MultipleAnswer({ questionType }) {
-    const { data, error, loading, sendRequest } = useGetApi("/api/islands/Addition-and-subtraction");
+export default function MultipleAnswer({ questionType, url}) {
+    const { data, error, loading, sendRequest } = useGetApi(url);
     const [feedback, setFeedback] = useState("");
     const [solutionTime, setSolutionTime] = useState(0);
     const startTimeRef = useRef(Date.now());

@@ -1,28 +1,46 @@
 // 📁 src/pages/Map/Map.jsx
-import "./Map.css";
-import { useState } from "react";
-import ISLAND_CONFIGS from "../../utils/IslandConfig.js"; // array
+import { useEffect, useState } from "react";
+import { GET_USER_OPEN_ISLAND } from "../../utils/Constants.js";
+import { ISLAND_CONFIGS } from "../../utils/IslandConfig.js";
 import Island from "../../components/Island/Island.jsx";
 import MessageBubble from "../../components/MessageBubble/MessageBubble.jsx";
 import { useBubbleMessage } from "../../hooks/uiHooks/useBubbleMessage.js";
+import useApi from "../../hooks/apiHooks/useApi.js";
+import Cookies from "js-cookie";
+import "./Map.css";
 
 export default function Map() {
-    const [unlockedIslands, setUnlockedIslands] = useState(() => {
-        const init = {};
-        ISLAND_CONFIGS.forEach((isl, idx) => {
-            init[isl.key] = idx === 0; // unlock only the first island
-        });
-        return init;
-    });
-
     const { bubbleMessage, showMessage, clearError } = useBubbleMessage();
+    const { sendRequest } = useApi(GET_USER_OPEN_ISLAND, "GET",0);
+
+    const [openStatus, setOpenStatus] = useState({});
+
+    useEffect(() => {
+        const fetchOpenIslands = async () => {
+            const token = Cookies.get("token");
+            const response = await sendRequest({ token });
+
+            if (Array.isArray(response)) {
+                const statusMap = {};
+                response.forEach(({ id, isOpen }) => {
+                    statusMap[id] = isOpen;
+                });
+                setOpenStatus(statusMap);
+            } else {
+                showMessage("שגיאה בטעינת האיים ❌");
+            }
+        };
+
+        fetchOpenIslands();
+    }, []);
 
     const handleIslandClick = ({ locked }) => {
         if (locked) {
-            clearError()
+            clearError();
             showMessage("🔒 האי הזה נעול!");
+        } else {
+            clearError();
         }
-        else clearError();
     };
 
     return (
@@ -32,8 +50,7 @@ export default function Map() {
                     message={bubbleMessage}
                     position={{ top: "50%", right: "50%" }}
                     scale="1.1"
-                    // type={}
-                    duration={"1.5"}
+                    duration="1.5"
                 />
             )}
             <div className="islands-container">
@@ -47,7 +64,7 @@ export default function Map() {
                         cardBackground={island.cardBackground}
                         url={island.url}
                         buttonColor={island.buttonColor}
-                        locked={!unlockedIslands[island.key]}
+                        locked={!openStatus[island.id]} // ✅ preserves order by ID
                         onClick={handleIslandClick}
                     />
                 ))}

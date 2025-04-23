@@ -1,48 +1,52 @@
-
+.btn{
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 35px;
+}
 
 /*button styles*/
 .btn-yellow {
     background-color: var(--btn-yellow-bg);
     color: var(--btn-yellow-text);
-    border: 3px solid var(--btn-yellow-border);
+    border-color: var(--btn-yellow-border);
 }
 .btn-green {
     background-color: var(--btn-green-bg);
     color: var(--btn-green-text);
-    border: 3px solid var(--btn-green-border);
+    border-color: var(--btn-green-border);
 }
 .btn-blue {
     background-color: var(--btn-blue-bg);
     color: var(--btn-blue-text);
-    border: 3px solid var(--btn-blue-border);
+    border-color: var(--btn-blue-border);
 }
 .btn-orange {
     background-color: var(--btn-orange-bg);
     color: var(--btn-orange-text);
-    border: 3px solid var(--btn-orange-border);
+    border-color: var(--btn-orange-border);
 }
 .btn-red {
     background-color: var(--btn-red-bg);
     color: var(--btn-red-text);
-    border: 3px solid var(--btn-red-border);
+    border-color: var(--btn-red-border);
 }
 .btn-purple {
     background-color: var(--btn-purple-bg);
     color: var(--btn-purple-text);
-    border: 3px solid var(--btn-purple-border);
+    border-color: var(--btn-purple-border);
 }
 .btn-pink {
     background-color: var(--btn-pink-bg);
     color: var(--btn-pink-text);
-    border: 3px solid var(--btn-pink-border);
+    border-color: var(--btn-pink-border);
 }
 .btn-white {
     background-color: var(--btn-white-bg);
     color: var(--btn-white-text);
-    border: 3px solid var(--btn-white-border);
+    border-color: var(--btn-white-border);
 }
 .btn-deep-blue {
     background-color: var(--btn-deep-blue-bg);
     color: var(--btn-deep-blue-text);
-    border: 3px solid var(--btn-deep-blue-border);
+    border-color: var(--btn-deep-blue-border);
 }

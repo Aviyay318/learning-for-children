@@ -23,7 +23,11 @@ export default function IslandPage() {
                 {!selectedExercise ? (
                     <div className="island-page-content flex">
                         <h1>ברוכים הבאים ל{island.name}</h1>
-                        <ExerciseTypesChooser islandId={islandId} onChoose={(comp) => setSelectedExercise(() => comp)}/>
+                        <ExerciseTypesChooser
+                            islandId={islandId}
+                            onChoose={(comp) => setSelectedExercise(() => comp)}
+                            url={island.exerciseUrl}
+                        />
                     </div>
                 ) : (
                     <div className="island-page-content flex">

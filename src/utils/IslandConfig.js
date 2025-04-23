@@ -29,7 +29,9 @@ const ISLAND_CONFIGS = [
         background: SIMPLE_MATH_BACKGROUND,
         cardBackground: SIMPLE_MATH_ISLAND_BACKGROUND,
         url: "/island/simpleMathIsland",
+        exerciseUrl:"/api/islands/Addition-and-subtraction",
         buttonColor: "green",
+
     },
     {
         id: 2,
@@ -39,6 +41,7 @@ const ISLAND_CONFIGS = [
         island: MULTIPLICATION_ISLAND,
         background: MULTIPLICATION_ISLAND_BACKGROUND,
         url: "/island/multiplicationIsland",
+        exerciseUrl:"/api/islands/multiplication",
         buttonColor: "yellow",
     },
     {
@@ -49,6 +52,7 @@ const ISLAND_CONFIGS = [
         island: DIVISION_ISLAND,
         background: DIVISION_ISLAND_BACKGROUND,
         url: "/island/divisionIsland",
+        exerciseUrl:"/api/islands/division",
         buttonColor: "blue",
     },
     {
@@ -59,6 +63,7 @@ const ISLAND_CONFIGS = [
         island: FLOATING_POINT_ISLAND,
         background: FLOATING_POINT_ISLAND_BACKGROUND,
         url: "/island/floatingPointIsland",
+        exerciseUrl:"/api/islands/floating-point",
         buttonColor: "orange",
     },
     {

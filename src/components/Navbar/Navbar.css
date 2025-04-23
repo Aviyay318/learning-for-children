@@ -2,14 +2,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    /*gap: 5%;*/
-    margin-block-start: var(--margin-start);
-    width: 90%;
+    justify-content: space-between;
+    margin-block-start: var(--navbar-margin-size);
+    width: var(--navbar-width);
     border-radius: 30px;
-    height: 10%;
-    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
-    /*height: 0;*/
+    height: var(--navbar-height);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
@@ -23,35 +21,17 @@
 
 }
 .nav-middle {
-    flex: 1;
+    /*flex: 1;*/
     justify-content: space-evenly;
 }
-.navbar a {
-    color: var(--inactive-color);
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: background 0.3s;
-    cursor: pointer;
-}
-.navbar svg{
-    scale: 1.1;
-    fill: var(--inactive-color);
-    width: var(--navbar-svg-size);
-    height: var(--navbar-svg-size);
-}
-.navbar .active svg{
-    scale: 1.1;
-    fill: var(--active-color);
-}
-.back{
-    background-color: #3c3c3c;
-    border-color: transparent;
-    cursor: pointer;
-}
+
 .navbar-icons{
     width: 80px;
     height: 80px;
+    transition: all 0.2s ease;
+}
+.navbar-icons:hover{
+    scale: 1.3;
 }
 .profile{
     width: 90px;

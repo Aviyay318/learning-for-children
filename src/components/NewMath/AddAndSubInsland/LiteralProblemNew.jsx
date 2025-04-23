@@ -6,8 +6,8 @@ import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import axios from "axios";
 import {SERVER_URL} from "../../../utils/Constants.js";
 
-export default function LiteralProblemNew({ questionType }) {
-    const { data, error, loading, sendRequest } = useGetApi("/api/islands/Addition-and-subtraction");
+export default function LiteralProblemNew({ questionType,url }) {
+    const { data, error, loading, sendRequest } = useGetApi(url);
 
     const [userAnswer, setUserAnswer] = useState("");
     const [success, setSuccess] = useState(null);

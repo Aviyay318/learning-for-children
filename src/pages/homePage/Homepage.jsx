@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { SERVER_URL, GET_LEVEL } from "../../utils/Constants.js";
-import MultipleAnswer from "../../components/NewMath/AddAndSubInsland/MultipleAnswer.jsx";
-import {SimpleMath} from "../../components/NewMath/AddAndSubInsland/SimpleMath.jsx";
+import SimpleMathMult from "../../components/NewMath/MultiplicationTable/SimpleMathMult.jsx";
 
 
 export default function Homepage() {
@@ -32,7 +31,6 @@ export default function Homepage() {
             <div className="homepage-header header glass">
                 <h1>דף הבית</h1>
             </div>
-            <SimpleMathMult questionType={1}/>
             <div className="homepage-body flex glass">
                 {/*<div className="level-box">*/}
                 {/*    <Tutorial topic={"equationThreeVars"}/>*/}

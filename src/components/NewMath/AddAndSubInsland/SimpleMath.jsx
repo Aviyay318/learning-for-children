@@ -7,7 +7,7 @@ import { SERVER_URL } from "../../../utils/Constants.js";
 import "./AddAndSubIsland.css"
 
 export default function SimpleMath ({ questionType ,url}) {
-    const { data, loading, error, sendRequest } = useGetApi("/api/islands/Addition-and-subtraction");
+    const { data, loading, error, sendRequest } = useGetApi(url);
 
     const [feedback, setFeedback] = useState(null);
     const [showSolution, setShowSolution] = useState(false);

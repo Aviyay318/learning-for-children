@@ -2,12 +2,34 @@
     width: 100%;
     height: 100%;
 
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+
 }
 .exercise-type-chooser-box{
-    border: 1px solid red;
-    width: 100%;
+    width: 50%;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: 10rem;
+    align-items: center;
+    justify-content: center;
+    flex: 0;
+
+    /*flex: none !important;*/
+
+}
+.type-chooser{
+    font-size: var(--font-size-very-large);
+    font-weight: var(--font-weight-medium);
+}
+.type-chooser:hover{
+    scale: 1.05;
+}
+.exercise-component{
+    width: 100%;
+    height: 100%;
 }

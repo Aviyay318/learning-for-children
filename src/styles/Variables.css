@@ -39,7 +39,7 @@
 
     /*color variables*/
 
-    /* Default Colors */
+    /*----------------*/
 
     --background-color: #FFFFFF;
     --text-color: #ff7200;
@@ -51,7 +51,14 @@
     --active-color: #ff7200;
     --active-text-color: white;
 
-    --navbar-bg-color: #FFFFFF;
+    /*----------------*/
+
+    /*navbar variables*/
+
+    --navbar-width: 90%;
+    --navbar-height: 6rem;
+    --navbar-margin-size: 1rem;
+
     /*----------------*/
 
     /*margin variables*/

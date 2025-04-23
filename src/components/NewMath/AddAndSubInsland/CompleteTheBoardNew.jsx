@@ -3,8 +3,8 @@ import Cookies from "js-cookie";
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import { CompleteTheBoardExercise } from "../ExerciseTypes/CompleteTheBoardExercise.jsx";
 
-export default function CompleteTheBoardNew  ({ questionType }) {
-    const { data, error, loading, sendRequest } = useGetApi("/api/islands/Addition-and-subtraction");
+export default function CompleteTheBoardNew  ({ questionType,url }) {
+    const { data, error, loading, sendRequest } = useGetApi(url);
     const fetchQuestions = () => {
         const token = Cookies.get("token");
         sendRequest({ token, questionType });

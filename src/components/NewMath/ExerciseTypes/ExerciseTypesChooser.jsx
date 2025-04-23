@@ -11,17 +11,18 @@ import CompleteTheBoardNew from "../AddAndSubInsland/CompleteTheBoardNew.jsx";
 
 import { buttonColorClassMap } from "../../../utils/ButtonConstants.js";
 import "./ExerciseTypeChooser.css";
+import useApi from "../../../hooks/apiHooks/useApi.js";
 
-export default function ExerciseTypesChooser({ islandId, onChoose }) {
-    const { data, sendRequest } = useGetApi(GET_QUESTION_TYPE);
+export default function ExerciseTypesChooser({ islandId, onChoose, url}) {
+    const { data, sendRequest } = useApi(GET_QUESTION_TYPE, "GET",0);
     const [types, setTypes] = useState([]);
 
     // static map from server‐id → route/component
     const EXERCISE_TYPES = {
-        1: { component: <SimpleMath questionType={1}/> },
-        2: { component: <LiteralProblemNew questionType={2}/> },
-        3: { component: <MultipleAnswer questionType={3}/> },
-        4: { component: <CompleteTheBoardNew questionType={4}/> },
+        1: { component: <SimpleMath questionType={1} url={url}/> },
+        2: { component: <LiteralProblemNew questionType={2} url={url}/> },
+        3: { component: <MultipleAnswer questionType={3} url={url}/> },
+        4: { component: <CompleteTheBoardNew questionType={4} url={url}/> },
     };
 
     // cycle colors

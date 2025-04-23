@@ -14,7 +14,7 @@ export const GET_USER_DATA = "/get-user-data";
 export const GET_STATISTICS_DATA = "/get-statistic-data";
 export const GET_EXERCISE_WITH_OPTION="/get-exercise-with-option";
 export const GET_MULTIPLE_EXERCISES="/get-multiple-exercises";
-
+export const GET_USER_OPEN_ISLAND = "/api/islands/get-user-open-island"
 export const TRANSITION = "src/assets/sounds/Transition.wav"
 export const RIGHT_ANSWER = "src/assets/sounds/RightAnswer.wav"
 export const WRONG_ANSWER = "src/assets/sounds/WrongAnswer.wav"
