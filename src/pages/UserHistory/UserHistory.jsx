@@ -1,117 +1,94 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-// import {GET_ISLAND_LIST, GET_USER_HISTORY, SERVER_URL} from "../../utils/Constants.js";
 import Cookies from "js-cookie";
-import {GET_USER_HISTORY, SERVER_URL} from "../../utils/Constants.js";
+import { GET_USER_HISTORY, SERVER_URL } from "../../utils/Constants.js";
 
+import Box from "@mui/material/Box";
+import { DataGrid } from "@mui/x-data-grid";
 
 export default function UserHistory() {
-    const [historyList,setHistoryList] = useState([]);
-    // const [filteredList, setFilteredList] = useState(historyList);
-    // const [islandList, setIslandList] = useState([]);
-    // const [showAllFilter, setShowAllFilter] = useState(true);
-    // const [onlyCorrectFilter, setOnlyCorrectFilter] = useState(true);
-    // const [onlyIncorrectFilter, setOnlyIncorrectFilter] = useState(true);
-    // const [chosenIslandFilter, setChosenIslandFilter] = useState(true);
+    const [historyList, setHistoryList] = useState([]);
 
-//TODO לא לשכוח להוסיף SELECT של האיים
-    //TODO לכל איבר ברשימת איים יש .ID ו- .NAME שקיבלתי מהשרת
-    //TODO להתאים שם בין האי שבהיסטורי כי הוא מגיע עם ID
+    const columns = [
+        {
+            field: "exercise",
+            headerName: "🧮🔢 תרגיל",
+            width: 150,
+        },
+        {
+            field: "isCorrectAnswer",
+            headerName: "❌/✔ תוצאה",
+            width: 100,
+            renderCell: (params) => (params.value ? "✔" : "❌"),
+        },
+        {
+            field: "level",
+            headerName: "🎯 רמה",
+            width: 100,
+        },
+        {
+            field: "questionType",
+            headerName: "📘🔍 סוג שאלה",
+            width: 160,
+            renderCell: (params) => params.row?.questionType?.name ?? "לא זמין",
+        },
+        {
+            field: "answer",
+            headerName: "📝 תשובה סופית",
+            width: 160,
+        },
+        {
+            field: "solutionTime",
+            headerName: "⏱ זמן פתרון",
+            width: 160,
+        },
+        {
+            field: "islands",
+            headerName: "🌴 אי",
+            width: 150,
+            renderCell: (params) => params.row?.islands?.name ?? "לא זמין",
+        },
+    ];
 
     useEffect(() => {
-        const token = Cookies.get('token') ;
+        const token = Cookies.get("token");
         getUserHistory(token);
-        // getIslandList;
     }, []);
 
-    // useEffect(()=>{
-    //     filterList;
-    // },[showAllFilter,onlyCorrectFilter,onlyIncorrectFilter]);
-
-    // const getIslandList = async ()=>{
-    //     const response = await axios.get(SERVER_URL+GET_ISLAND_LIST);
-    //     if (response.status === 200) {
-    //         if (response.data.length > 0) {
-    //             setIslandList(response.data);
-    //         }
-    //     }
-    // }
-
     const getUserHistory = async (token) => {
-        const response = await axios.get(SERVER_URL + GET_USER_HISTORY + "?token=" + token);
-        if (response.status === 200) {
-            if (response.data.length > 0 ) {
-                setHistoryList(response.data)
+        try {
+            const response = await axios.get(`${SERVER_URL}${GET_USER_HISTORY}?token=${token}`);
+            if (response.status === 200 && Array.isArray(response.data)) {
+                const normalizedList = response.data.map((item, index) => ({
+                    ...item,
+                    id: item.id ?? index, // חובה ל־DataGrid
+                    questionType: item.questionType ?? { name: "לא זמין" },
+                    islands: item.islands ?? { name: "לא זמין" },
+                }));
+                setHistoryList(normalizedList);
             }
+        } catch (error) {
+            console.error("שגיאה בשליפת היסטוריית המשתמש:", error);
         }
+    };
 
-    }
-
-    // const filterList = ()=>{
-    //     let filteredList = historyList;
-    //     filteredList= filterIsland(filteredList);
-    //     if (!showAllFilter) {
-    //         if (onlyCorrectFilter) {
-    //             filteredList = filterCorrect(filteredList);
-    //         }else if (onlyIncorrectFilter) {
-    //             filteredList = filterIncorrect(filteredList);
-    //         }
-    //     }
-    //     setFilteredList(filteredList);
-    // }
-
-    // const filterCorrect = (listToFiler)=>{
-    //     return listToFiler.filter((history)=>{history.is_correct_answer === true});
-    // }
-    //
-    // const filterIncorrect = (listToFiler)=>{
-    //     return listToFiler.filter((history)=>{history.is_correct_answer === false});
-    // }
-    //
-    // const filterIsland = (listToFiler)=>{
-    //     return listToFiler.filter((history)=>{history.island === chosenIslandFilter});
-    // }
-
-//TODO @RequestMapping("/get-question-type")
-    //TODO לאתר את השם הנכון של סוג השאלה לפי הID
-    return(
+    return (
         <div>
-
-
-
-            <table>
-                <tr>
-                    <th>🧮🔢 תרגיל</th>
-                    <th>❌/✔ תוצאה</th>
-                    <th>🎯 רמה</th>
-                    <th>📘🔍 סוג שאלה</th>
-                    <th>📝 תשובה סופית</th>
-                    <th>⏱ זמן פתרון</th>
-                    <th>🌴 אי</th>
-                </tr>
-
-                {
-                    // filteredList.map((history, index) => {
-                        historyList.map((history, index) => {
-                        return (
-                            <tr key={index}>
-                                <td>{history.exercise}</td>
-                                <td>{history.correctAnswer?"✔":"❌"}</td>
-                                <td>{history.level}</td>
-                                <td>{history.questionType.name}</td>
-                                <td>{history.answer}</td>
-                                <td>{history.solutionTime}</td>
-                                <td>{history.islands.name}</td>
-                            </tr>
-                        );
-
-                    })
-                }
-            </table>
+            <h2>📊 היסטוריית תרגולים</h2>
+            <Box sx={{ height: 500, width: "100%" }}>
+                <DataGrid
+                    rows={historyList}
+                    columns={columns}
+                    pageSizeOptions={[10]}
+                    initialState={{
+                        pagination: {
+                            paginationModel: { pageSize: 10 },
+                        },
+                    }}
+                    checkboxSelection
+                    disableRowSelectionOnClick
+                />
+            </Box>
         </div>
     );
 }
-//TODO כאן קוראים לפונקציה ששולחים את מה שפה והיא מחזירה את השם שורה 102
-//TODO כאן קוראים לפונקציה ששולחים את מה שפה והיא מחזירה את השם שורה 105
-
-

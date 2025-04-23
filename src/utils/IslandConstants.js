@@ -34,6 +34,8 @@ export const SIMPLE_MATH_ISLAND_BACKGROUND = greenCardBg;
 export const SIMPLE_MATH_BACKGROUND = simpleMathBackground;
 
 export const MULTIPLICATION_ISLAND = multiplicationIsland;
+export const MULTIPLICATION_ISLAND_BACKGROUND = yellowCardBg;
+
 export const DIVISION_ISLAND = divisionIsland;
 export const FLOATING_POINT_ISLAND = floatingPointIsland;
 export const LONG_ADDITION_SUBTRACTION_ISLAND = longAddSubIsland;
@@ -41,7 +43,6 @@ export const LONG_MULTIPLICATION_DIVISION_ISLAND = longMultDivIsland;
 export const HORROR_ISLAND = horrorIsland;
 export const EQUATIONS_ISLAND = equationsIsland;
 
-export const MULTIPLICATION_ISLAND_BACKGROUND = yellowCardBg;
 export const DIVISION_ISLAND_BACKGROUND = lagoonCardBg;
 export const FLOATING_POINT_ISLAND_BACKGROUND = woodCardBg;
 export const LONG_ADDITION_SUBTRACTION_ISLAND_BACKGROUND = purpleCardBg;
