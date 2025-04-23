@@ -24,4 +24,7 @@ export const PASSWORD_RECOVERY = "/passwordRecovery";
 export const PASSWORD_RECOVERY_API = "/forgotten-password";
 export const NEW_PASSWORD_API = "/recovery-password";
 export const EMAIL_ALREADY_EXISTS = 1001;
+export const GET_USER_HISTORY = "/user-exercise-history"
+export const GET_ISLAND_LIST = "/api/islands/islands"
+
 

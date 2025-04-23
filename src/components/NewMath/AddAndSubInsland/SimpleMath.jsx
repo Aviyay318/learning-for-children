@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { SERVER_URL } from "../../../utils/Constants.js";
 import "./AddAndSubIsland.css"
+import {useUser} from "../../../contexts/UserContext.jsx";
 
 export default function SimpleMath ({ questionType ,url}) {
     const { data, loading, error, sendRequest } = useGetApi(url);
@@ -15,6 +16,7 @@ export default function SimpleMath ({ questionType ,url}) {
     const [usedClue, setUsedClue] = useState(false);
     const [solutionTime, setSolutionTime] = useState(0);
     const startTimeRef = useRef(Date.now());
+    const { user, setUser } = useUser();
 
     const loadNewQuestion = () => {
         const token = Cookies.get("token");
@@ -61,7 +63,8 @@ export default function SimpleMath ({ questionType ,url}) {
 
             const result = response.data;
             setFeedback(result.message);
-
+            console.log(result);
+          setUser(result.user)
             if (result.message === "wrong answer") {
                 setShowSolution(true);
             }

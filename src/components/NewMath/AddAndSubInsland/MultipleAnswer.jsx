@@ -4,13 +4,14 @@ import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import { MultipleAnswerExercise } from "../ExerciseTypes/MultipleAnswerExercise.jsx";
 import axios from "axios";
 import {SERVER_URL} from "../../../utils/Constants.js";
+import {useUser} from "../../../contexts/UserContext.jsx";
 
 export default function MultipleAnswer({ questionType, url}) {
     const { data, error, loading, sendRequest } = useGetApi(url);
     const [feedback, setFeedback] = useState("");
     const [solutionTime, setSolutionTime] = useState(0);
     const startTimeRef = useRef(Date.now());
-
+    const { user, setUser } = useUser();
     const loadQuestion = () => {
         const token = Cookies.get("token");
         sendRequest({ token, questionType });
@@ -46,6 +47,8 @@ export default function MultipleAnswer({ questionType, url}) {
             });
 
             const result = response.data;
+            setUser(result.user)
+
             setFeedback(result.message);
 
             // תוכל להפעיל לוגיקה נוספת אם התשובה שגויה

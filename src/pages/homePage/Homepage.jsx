@@ -43,21 +43,23 @@ export default function Homepage() {
                 <h1>שלבים</h1>
                 {
                     levels.length!==0&&<table>
+                        <tbody>
                         <tr>
                             <td>האי</td>
                             <td>שלב</td>
                         </tr>
                         {
 
-                                    levels.map((level, index) => (
-                                        <tr key={index} >
-                                           <td> {level.island.name}</td>
-                                           <td> {level.level}</td>
-                                        </tr>
-                                    ))
+                            levels.map((level, index) => (
+                                <tr key={index} >
+                                    <td> {level.island.name}</td>
+                                    <td> {level.level}</td>
+                                </tr>
+                            ))
 
 
                         }
+                        </tbody>
                     </table>
                 }
             </div>

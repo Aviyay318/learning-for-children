@@ -72,10 +72,19 @@ export default function Register() {
         clearError();
     };
 
-    // const handleOtpSubmit = () => {
-    //     navigate(LOGIN_URL);
-    //     window.location.reload();
-    // };
+    const handleFieldChangeWithValidation = (e) => {
+        const { name, value } = e.target;
+        const updatedFormData = { ...formData, [name]: value };
+
+        onChange(e);
+        validateField(name, value, updatedFormData);
+
+        if (name === "password" && updatedFormData.confirmPassword) {
+            validateField("confirmPassword", updatedFormData.confirmPassword, updatedFormData);
+        } else if (name === "confirmPassword" && updatedFormData.password) {
+            validateField("password", updatedFormData.password, updatedFormData);
+        }
+    };
 
     return (
         <div className="main-container form-main-container flex">
@@ -93,13 +102,21 @@ export default function Register() {
                 <div className="form" id="form-register">
                     <h1 className="form-title">הירשמות</h1>
                     <form className="grid-container" onSubmit={handleSubmit}>
-                        <FormField id="item-1" name="lastName" label="שם משפחה" value={formData.lastName} onChange={(e) => { onChange(e); validateField("lastName", e.target.value); }} error={errors.lastName} />
-                        <FormField id="item-2" name="firstName" label="שם פרטי" value={formData.firstName} onChange={(e) => { onChange(e); validateField("firstName", e.target.value); }} error={errors.firstName} />
-                        <FormField id="item-4" name="email" label="אימייל" type="email" value={formData.email} onChange={(e) => { onChange(e); validateField("email", e.target.value); }} error={errors.email} />
-                        <FormField id="item-5" name="username" label="שם משתמש" value={formData.username} onChange={(e) => { onChange(e); validateField("username", e.target.value); }} error={errors.username} />
-                        <FormField id="item-6" name="password" label="סיסמא" type="password" value={formData.password} onChange={(e) => { onChange(e); validateField("password", e.target.value); }} error={errors.password} />
-                        <FormField id="item-3" name="age" label="גיל" type="number" value={formData.age} onChange={onChange} error={errors.age} />
-                        <FormField id="item-7" name="confirmPassword" label="וידוא סיסמא" type="password" value={formData.confirmPassword} onChange={(e) => { onChange(e); validateField("confirmPassword", e.target.value); }} error={errors.confirmPassword} />
+                        <FormField id="item-1" name="lastName" label="שם משפחה" value={formData.lastName}
+                                   onChange={(e) => handleFieldChangeWithValidation(e)} error={errors.lastName}/>
+                        <FormField id="item-2" name="firstName" label="שם פרטי" value={formData.firstName}
+                                   onChange={(e) => handleFieldChangeWithValidation(e)} error={errors.firstName}/>
+                        <FormField id="item-4" name="email" label="אימייל" type="email" value={formData.email}
+                                   onChange={(e) => handleFieldChangeWithValidation(e)} error={errors.email}/>
+                        <FormField id="item-5" name="username" label="שם משתמש" value={formData.username}
+                                   onChange={(e) => handleFieldChangeWithValidation(e)} error={errors.username}/>
+                        <FormField id="item-6" name="password" label="סיסמא" type="password" value={formData.password}
+                                   onChange={handleFieldChangeWithValidation} error={errors.password}/>
+                        <FormField id="item-3" name="age" label="גיל" type="number" value={formData.age}
+                                   onChange={onChange} error={errors.age}/>
+                        <FormField id="item-7" name="confirmPassword" label="וידוא סיסמא" type="password"
+                                   value={formData.confirmPassword}
+                                   onChange={handleFieldChangeWithValidation} error={errors.confirmPassword}/>
 
                         <div className="form-input form-margins flex character-select-container" id="grid-item-8">
                             <label className="input-placeholder">בחר/י דמות</label>
@@ -120,10 +137,12 @@ export default function Register() {
                             {errors.gender && <label className="input-error">{errors.gender}</label>}
                         </div>
 
-                        <button className="form-submit form-margins" type="submit" disabled={shouldDisable || lockButton} id="grid-item-9">
+                        <button className="form-submit form-margins" type="submit"
+                                disabled={shouldDisable || lockButton} id="grid-item-9">
                             הרשם
                         </button>
                     </form>
+                    <button onClick={() => navigate(LOGIN_URL)}>אם יש לך משתמש לחץ כאן</button>
                 </div>
             ) : (
                 <Otp

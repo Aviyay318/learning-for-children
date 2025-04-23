@@ -5,11 +5,11 @@ export function useFormValidator(formData, rules) {
     const [touched, setTouched] = useState({});
     const [isValid, setIsValid] = useState(false);
 
-    const validateField = (name, value) => {
+    const validateField = (name, value, updatedData = formData) => {
         const rule = rules[name];
         if (!rule) return;
 
-        const error = rule(value, formData);
+        const error = rule(value, updatedData);
         setErrors((prev) => ({ ...prev, [name]: error }));
         setTouched((prev) => ({ ...prev, [name]: true }));
     };
@@ -18,11 +18,11 @@ export function useFormValidator(formData, rules) {
         const newErrors = {};
         const newTouched = {};
 
-        Object.entries(rules).forEach(([field, rule]) => {
+        for (const [field, rule] of Object.entries(rules)) {
             const error = rule(formData[field], formData);
             if (error) newErrors[field] = error;
             newTouched[field] = true;
-        });
+        }
 
         setErrors(newErrors);
         setTouched(newTouched);

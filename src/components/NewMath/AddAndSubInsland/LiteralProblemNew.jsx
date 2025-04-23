@@ -5,6 +5,7 @@ import LiteralProblemExercise from "../ExerciseTypes/LiteralProblemExercise.jsx"
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import axios from "axios";
 import {SERVER_URL} from "../../../utils/Constants.js";
+import {useUser} from "../../../contexts/UserContext.jsx";
 
 export default function LiteralProblemNew({ questionType,url }) {
     const { data, error, loading, sendRequest } = useGetApi(url);
@@ -17,6 +18,7 @@ export default function LiteralProblemNew({ questionType,url }) {
     const [activeImageIndex, setActiveImageIndex] = useState(null);
     const [solutionTime, setSolutionTime] = useState(0);
     const [showConfetti, setShowConfetti] = useState(false);
+    const { user, setUser } = useUser();
 
     const startTimeRef = useRef(Date.now());
 
@@ -78,6 +80,7 @@ export default function LiteralProblemNew({ questionType,url }) {
             });
 
             const result = response.data;
+            setUser(result.user)
             setSuccess(result.success);
 
             if (result.success && solutionTime <= 10) {
