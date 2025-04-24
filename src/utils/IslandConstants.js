@@ -1,4 +1,3 @@
-// 📁 src/utils/IslandConstants.js
 // simpleMathIsland
 import simpleMathIsland from "/src/assets/images/Islands/SimpleMathIsland/simple_math_island.png";
 import greenCardBg from "/src/assets/images/Islands/SimpleMathIsland/green_card_background.png";
@@ -9,7 +8,6 @@ export const SIMPLE_MATH_ISLAND = simpleMathIsland;
 export const SIMPLE_MATH_ISLAND_BACKGROUND = greenCardBg;
 export const SIMPLE_MATH_BACKGROUND = simpleMathBackground;
 export const SIMPLE_MATH_CHILDREN = simpleMathChildren;
-
 
 // multiplicationIsland
 import multiplicationIsland from "/src/assets/images/Islands/MutiplicationIsland/multiplication_island.png";

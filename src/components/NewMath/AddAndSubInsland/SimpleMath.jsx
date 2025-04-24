@@ -15,6 +15,8 @@ export default function SimpleMath({ questionType, url }) {
     const [usedClue, setUsedClue] = useState(false);
     const [solutionTime, setSolutionTime] = useState(0);
     const { user, setUser } = useUser();
+    const { islandId } = useParams();
+    const island = ISLAND_CONFIGS_MAP[islandId];
     const { checkAnswer, feedback, showSolution, setShowSolution, resetTimer, startTimeRef } = useAnswerCheck({ questionType, setUser });
 
     const loadNewQuestion = () => {
@@ -44,7 +46,9 @@ export default function SimpleMath({ questionType, url }) {
     };
 
     return (
-        <div className="simple-math-container" dir="rtl">
+        <div className="simple-math-container"
+             style={{backgroundImage: "url("+`${island.children}`+")"}}
+             dir="rtl">
             {loading || !data ? (
                 <div>טוען שאלה...</div>
             ) : (

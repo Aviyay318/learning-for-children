@@ -2,11 +2,11 @@
     width: 100%;
     height: 100%;
     padding: var(--board-padding);
-    background-image: url("/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1.png");
+    /*background-image: url("/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1.png");*/
     /*background-image: url("/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1_success.png");*/
     background-repeat: no-repeat;
     background-position: center;
-    background-size:85rem;
+    background-size: 100rem;
 
 }
 .simple-math-box{
