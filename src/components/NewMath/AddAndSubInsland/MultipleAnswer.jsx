@@ -1,22 +1,21 @@
+// 2. MultipleAnswer.jsx
 import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import { MultipleAnswerExercise } from "../ExerciseTypes/MultipleAnswerExercise.jsx";
-import axios from "axios";
-import {SERVER_URL} from "../../../utils/Constants.js";
-import {useUser} from "../../../contexts/UserContext.jsx";
+import { useUser } from "../../../contexts/UserContext.jsx";
+import useAnswerCheck from "../../../hooks/apiHooks/useAnswerCheck.jsx";
 
-export default function MultipleAnswer({ questionType, url}) {
+export default function MultipleAnswer({ questionType, url }) {
     const { data, error, loading, sendRequest } = useGetApi(url);
-    const [feedback, setFeedback] = useState("");
     const [solutionTime, setSolutionTime] = useState(0);
-    const startTimeRef = useRef(Date.now());
     const { user, setUser } = useUser();
+    const { checkAnswer, feedback, resetTimer, startTimeRef } = useAnswerCheck({ questionType, setUser });
+
     const loadQuestion = () => {
         const token = Cookies.get("token");
         sendRequest({ token, questionType });
-        setFeedback("");
-        startTimeRef.current = Date.now();
+        resetTimer();
         setSolutionTime(0);
     };
 
@@ -31,37 +30,9 @@ export default function MultipleAnswer({ questionType, url}) {
         return () => clearInterval(interval);
     }, []);
 
-    const checkAnswer = async (selectedAnswer) => {
-        const token = Cookies.get("token");
-        const time = Math.floor((Date.now() - startTimeRef.current) / 1000);
-        try {
-            const response = await axios.get(`${SERVER_URL}/api/islands/check-exercise`, {
-                params: {
-                    token: token,
-                    exerciseId: data.id,
-                    answer: Number(selectedAnswer),
-                    solution_time: time,
-                    usedClue: false,
-                    questionType: questionType,
-                },
-            });
-
-            const result = response.data;
-            setUser(result.user)
-
-            setFeedback(result.message);
-
-            // תוכל להפעיל לוגיקה נוספת אם התשובה שגויה
-            // if (result.message === "wrong answer") {
-            //     setShowSolution(true);
-            // }
-        } catch (error) {
-            console.error("שגיאה בבדיקה:", error);
-            setFeedback("שגיאה בבדיקה מול השרת");
-        }
+    const handleCheck = (selectedAnswer) => {
+        checkAnswer({ userAnswer: Number(selectedAnswer), data });
     };
-
-
 
     const question = data ? `${data.num1} ${data.operator} ${data.num2} = ?` : "";
     const options = data ? data.options.map((val) => ({ value: val })) : [];
@@ -74,17 +45,12 @@ export default function MultipleAnswer({ questionType, url}) {
                 <MultipleAnswerExercise
                     question={question}
                     options={options}
-                    checkAnswer={checkAnswer}
+                    checkAnswer={handleCheck}
                     solutionTime={solutionTime}
                 />
             )}
             {feedback && <div className="text-lg text-purple-800 font-bold">{feedback}</div>}
-            <button
-                onClick={loadQuestion}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded mt-4"
-            >
-                שאלה הבאה
-            </button>
+            <button onClick={loadQuestion} className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded mt-4">שאלה הבאה</button>
         </div>
     );
 }
