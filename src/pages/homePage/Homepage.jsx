@@ -36,33 +36,33 @@ export default function Homepage() {
 
     return (
         <div className="homepage-container flex">
-            <div className="homepage-header header glass">
-                <h1>דף הבית</h1>
-            </div>
-            <div className="homepage-body flex glass">
-                <h1>שלבים</h1>
-                {
-                    levels.length!==0&&<table>
-                        <tbody>
-                        <tr>
-                            <td>האי</td>
-                            <td>שלב</td>
-                        </tr>
-                        {
+            {/*<div className="homepage-header header glass">*/}
+            {/*    <h1>דף הבית</h1>*/}
+            {/*</div>*/}
+            {/*<div className="homepage-body flex glass">*/}
+            {/*    <h1>שלבים</h1>*/}
+            {/*    {*/}
+            {/*        levels.length!==0&&<table>*/}
+            {/*            <tbody>*/}
+            {/*            <tr>*/}
+            {/*                <td>האי</td>*/}
+            {/*                <td>שלב</td>*/}
+            {/*            </tr>*/}
+            {/*            {*/}
 
-                            levels.map((level, index) => (
-                                <tr key={index} >
-                                    <td> {level.island.name}</td>
-                                    <td> {level.level}</td>
-                                </tr>
-                            ))
+            {/*                levels.map((level, index) => (*/}
+            {/*                    <tr key={index} >*/}
+            {/*                        <td> {level.island.name}</td>*/}
+            {/*                        <td> {level.level}</td>*/}
+            {/*                    </tr>*/}
+            {/*                ))*/}
 
 
-                        }
-                        </tbody>
-                    </table>
-                }
-            </div>
+            {/*            }*/}
+            {/*            </tbody>*/}
+            {/*        </table>*/}
+            {/*    }*/}
+            {/*</div>*/}
         </div>
     );
 }

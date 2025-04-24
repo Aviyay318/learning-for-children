@@ -1,10 +1,24 @@
 // 📁 src/utils/IslandConstants.js
-// Import all island images so bundler resolves them correctly
+// simpleMathIsland
 import simpleMathIsland from "/src/assets/images/Islands/SimpleMathIsland/simple_math_island.png";
 import greenCardBg from "/src/assets/images/Islands/SimpleMathIsland/green_card_background.png";
 import simpleMathBackground from "/src/assets/images/Islands/SimpleMathIsland/simple_math_background.png"
 
-import multiplicationIsland from "/src/assets/images/Islands/islands/multiplication_island.png";
+export const SIMPLE_MATH_ISLAND = simpleMathIsland;
+export const SIMPLE_MATH_ISLAND_BACKGROUND = greenCardBg;
+export const SIMPLE_MATH_BACKGROUND = simpleMathBackground;
+
+
+
+// multiplicationIsland
+import multiplicationIsland from "/src/assets/images/Islands/MutiplicationIsland/multiplication_island.png";
+import yellowCardBg from "/src/assets/images/Islands/MutiplicationIsland/yellow_card_background.png";
+import multiplicationBackground from "/src/assets/images/Islands/MutiplicationIsland/simple_math_background.png"
+export const MULTIPLICATION_ISLAND = multiplicationIsland;
+export const MULTIPLICATION_ISLAND_BACKGROUND = yellowCardBg;
+export const MULTIPLICATION_BACKGROUND = multiplicationBackground;
+
+// multiplicationIsland
 import divisionIsland from "/src/assets/images/Islands/islands/division_island.png";
 import floatingPointIsland from "/src/assets/images/Islands/islands/floating_point_island.png";
 import longAddSubIsland from "/src/assets/images/Islands/islands/long_addition_subtraction_island.png";
@@ -12,8 +26,8 @@ import longMultDivIsland from "/src/assets/images/Islands/islands/long_multiplic
 import horrorIsland from "/src/assets/images/Islands/islands/horror_island.png";
 import equationsIsland from "/src/assets/images/Islands/islands/equations_island.png";
 
+
 // Island card_backgrounds
-import yellowCardBg from "/src/assets/images/Islands/card_backgrounds/yellow_card_background.png";
 import lagoonCardBg from "/src/assets/images/Islands/card_backgrounds/lagoon_card_background.png";
 import woodCardBg from "/src/assets/images/Islands/card_backgrounds/wood_card_background.png";
 import purpleCardBg from "/src/assets/images/Islands/card_backgrounds/purple_card_background.png";
@@ -29,12 +43,6 @@ import unlockIcon from "/src/assets/images/Islands/props/unlock.png";
 // Inner cardBackground (can reuse simpleMathIsland if desired)
 
 
-export const SIMPLE_MATH_ISLAND = simpleMathIsland;
-export const SIMPLE_MATH_ISLAND_BACKGROUND = greenCardBg;
-export const SIMPLE_MATH_BACKGROUND = simpleMathBackground;
-
-export const MULTIPLICATION_ISLAND = multiplicationIsland;
-export const MULTIPLICATION_ISLAND_BACKGROUND = yellowCardBg;
 
 export const DIVISION_ISLAND = divisionIsland;
 export const FLOATING_POINT_ISLAND = floatingPointIsland;
