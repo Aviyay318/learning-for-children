@@ -1,28 +1,31 @@
+// LiteralProblemNew.jsx
 import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import Confetti from "react-confetti";
 import LiteralProblemExercise from "../ExerciseTypes/LiteralProblemExercise.jsx";
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
-import axios from "axios";
-import {SERVER_URL} from "../../../utils/Constants.js";
-import {useUser} from "../../../contexts/UserContext.jsx";
+import { useUser } from "../../../contexts/UserContext.jsx";
+import useAnswerCheck from "../../../hooks/useAnswerCheck.js";
 
-export default function LiteralProblemNew({ questionType,url }) {
+export default function LiteralProblemNew({ questionType, url }) {
     const { data, error, loading, sendRequest } = useGetApi(url);
-
     const [userAnswer, setUserAnswer] = useState("");
     const [success, setSuccess] = useState(null);
-    const [id, setId] = useState(null);
     const [showHint, setShowHint] = useState(false);
     const [showImageHint, setShowImageHint] = useState(false);
     const [activeImageIndex, setActiveImageIndex] = useState(null);
     const [solutionTime, setSolutionTime] = useState(0);
     const [showConfetti, setShowConfetti] = useState(false);
-    const { user, setUser } = useUser();
 
     const startTimeRef = useRef(Date.now());
+    const { checkAnswer } = useAnswerCheck({
+        getData: () => data,
+        questionType,
+        startTimeRef,
+        setResult: setSuccess,
+        usedClue: showHint || showImageHint
+    });
 
-    // 🧠 הפעלת שליפת שאלה דרך useGetApi
     const loadQuestion = () => {
         const token = Cookies.get("token");
         sendRequest({ token, questionType });
@@ -64,31 +67,10 @@ export default function LiteralProblemNew({ questionType,url }) {
     };
 
     const checkLiteralProblem = async () => {
-        const token = Cookies.get("token");
-        if (!token || !data || userAnswer === "") return;
-
-        try {
-            const response = await axios.get(`${SERVER_URL}/api/islands/check-exercise`, {
-                params: {
-                    token,
-                    exerciseId: data.id,
-                    answer: userAnswer,
-                    solution_time: solutionTime,
-                    usedClue: showHint || showImageHint,
-                    questionType
-                }
-            });
-
-            const result = response.data;
-            setUser(result.user)
-            setSuccess(result.success);
-
-            if (result.success && solutionTime <= 10) {
-                setShowConfetti(true);
-                setTimeout(() => setShowConfetti(false), 4000);
-            }
-        } catch (error) {
-            console.error("שגיאה בבדיקת תשובה:", error);
+        await checkAnswer(userAnswer);
+        if (success && solutionTime <= 10) {
+            setShowConfetti(true);
+            setTimeout(() => setShowConfetti(false), 4000);
         }
     };
 

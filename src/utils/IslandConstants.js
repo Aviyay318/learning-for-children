@@ -3,20 +3,24 @@
 import simpleMathIsland from "/src/assets/images/Islands/SimpleMathIsland/simple_math_island.png";
 import greenCardBg from "/src/assets/images/Islands/SimpleMathIsland/green_card_background.png";
 import simpleMathBackground from "/src/assets/images/Islands/SimpleMathIsland/simple_math_background.png"
+import simpleMathChildren from "/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1.png"
 
 export const SIMPLE_MATH_ISLAND = simpleMathIsland;
 export const SIMPLE_MATH_ISLAND_BACKGROUND = greenCardBg;
 export const SIMPLE_MATH_BACKGROUND = simpleMathBackground;
-
+export const SIMPLE_MATH_CHILDREN = simpleMathChildren;
 
 
 // multiplicationIsland
 import multiplicationIsland from "/src/assets/images/Islands/MutiplicationIsland/multiplication_island.png";
 import yellowCardBg from "/src/assets/images/Islands/MutiplicationIsland/yellow_card_background.png";
-import multiplicationBackground from "/src/assets/images/Islands/MutiplicationIsland/simple_math_background.png"
+import multiplicationBackground from "/src/assets/images/Islands/MutiplicationIsland/multipllication_background.png"
+import multiplicationChildren from "/src/assets/images/Islands/MutiplicationIsland/questions/multiplication_1.png"
+
 export const MULTIPLICATION_ISLAND = multiplicationIsland;
 export const MULTIPLICATION_ISLAND_BACKGROUND = yellowCardBg;
 export const MULTIPLICATION_BACKGROUND = multiplicationBackground;
+export const MULTIPLICATION_CHILDREN = multiplicationChildren;
 
 // multiplicationIsland
 import divisionIsland from "/src/assets/images/Islands/islands/division_island.png";

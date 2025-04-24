@@ -15,7 +15,7 @@ import {
     HORROR_ISLAND_BACKGROUND,
     EQUATIONS_ISLAND,
     EQUATIONS_ISLAND_BACKGROUND,
-    SIMPLE_MATH_BACKGROUND,
+    SIMPLE_MATH_BACKGROUND, MULTIPLICATION_BACKGROUND, MULTIPLICATION_CHILDREN, SIMPLE_MATH_CHILDREN,
 } from "./IslandConstants.js";
 
 // 💡 Main config as an array
@@ -28,6 +28,7 @@ const ISLAND_CONFIGS = [
         island: SIMPLE_MATH_ISLAND,
         background: SIMPLE_MATH_BACKGROUND,
         cardBackground: SIMPLE_MATH_ISLAND_BACKGROUND,
+        children:SIMPLE_MATH_CHILDREN,
         url: "/island/simpleMathIsland",
         exerciseUrl:"/api/islands/Addition-and-subtraction",
         buttonColor: "green",
@@ -39,7 +40,9 @@ const ISLAND_CONFIGS = [
         name: "אי הכפל",
         className: "multiplicationIsland",
         island: MULTIPLICATION_ISLAND,
+        background: MULTIPLICATION_BACKGROUND,
         cardBackground: MULTIPLICATION_ISLAND_BACKGROUND,
+        children: MULTIPLICATION_CHILDREN,
         url: "/island/multiplicationIsland",
         exerciseUrl:"/api/islands/multiplication",
         buttonColor: "yellow",
