@@ -1,29 +1,32 @@
-// LiteralProblemNew.jsx
 import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import Confetti from "react-confetti";
 import LiteralProblemExercise from "../ExerciseTypes/LiteralProblemExercise.jsx";
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import { useUser } from "../../../contexts/UserContext.jsx";
-import useAnswerCheck from "../../../hooks/useAnswerCheck.js";
+import useAnswerCheck from "../../../hooks/apiHooks/useAnswerCheck.js";
 
 export default function LiteralProblemNew({ questionType, url }) {
     const { data, error, loading, sendRequest } = useGetApi(url);
+    const { user, setUser } = useUser();
+
     const [userAnswer, setUserAnswer] = useState("");
     const [success, setSuccess] = useState(null);
     const [showHint, setShowHint] = useState(false);
     const [showImageHint, setShowImageHint] = useState(false);
-    const [activeImageIndex, setActiveImageIndex] = useState(null);
     const [solutionTime, setSolutionTime] = useState(0);
     const [showConfetti, setShowConfetti] = useState(false);
+    const [activeImageIndex, setActiveImageIndex] = useState(null);
 
     const startTimeRef = useRef(Date.now());
+
+    // נוודא שה-hook נוצר רק כשיש את הנתונים הדרושים
     const { checkAnswer } = useAnswerCheck({
-        getData: () => data,
         questionType,
-        startTimeRef,
-        setResult: setSuccess,
-        usedClue: showHint || showImageHint
+        setUser,
+        userAnswer,
+        data,
+        usedClue: showHint || showImageHint,
     });
 
     const loadQuestion = () => {
@@ -48,6 +51,17 @@ export default function LiteralProblemNew({ questionType, url }) {
         return () => clearInterval(interval);
     }, []);
 
+    const handleCheck = async () => {
+        const result = await checkAnswer({ userAnswer, data, usedClue: showHint || showImageHint });
+        setSuccess(result?.success);
+
+        if (result?.success && solutionTime <= 10) {
+            setShowConfetti(true);
+            setTimeout(() => setShowConfetti(false), 4000);
+        }
+    };
+
+
     const speak = () => {
         const utterance = new SpeechSynthesisUtterance(data?.question);
         utterance.lang = "he-IL";
@@ -66,14 +80,6 @@ export default function LiteralProblemNew({ questionType, url }) {
         setActiveImageIndex(null);
     };
 
-    const checkLiteralProblem = async () => {
-        await checkAnswer(userAnswer);
-        if (success && solutionTime <= 10) {
-            setShowConfetti(true);
-            setTimeout(() => setShowConfetti(false), 4000);
-        }
-    };
-
     return (
         <div>
             {showConfetti && <Confetti />}
@@ -88,7 +94,7 @@ export default function LiteralProblemNew({ questionType, url }) {
                     hint={data.hint}
                     userAnswer={userAnswer}
                     setUserAnswer={setUserAnswer}
-                    onCheckAnswer={checkLiteralProblem}
+                    onCheckAnswer={handleCheck}
                     onSpeak={speak}
                     onHint={() => setShowHint(!showHint)}
                     onImageHint={() => setShowImageHint(!showImageHint)}

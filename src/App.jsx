@@ -2,6 +2,7 @@
 import './App.css';
 import skyBackground from '/src/assets/images/Islands/sky_background.png';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 import Login            from './pages/forms/Login.jsx';
 import Register         from './pages/forms/Register.jsx';
@@ -21,6 +22,7 @@ import LoadingOverlay   from './components/Loading/LoadingOverlay.jsx';
 
 import Cookies          from 'js-cookie';
 import { useUser }      from './contexts/UserContext';
+import Users from "./components/Admin/Users.jsx";
 
 function AppContent() {
     const location = useLocation();
@@ -54,6 +56,7 @@ function AppContent() {
 
             <Routes>
                 <Route path="/"                           element={<Login />} />
+                <Route path="/users"                           element={<Users/>} />
                 <Route path="/register"                   element={<Register />} />
                 <Route path="/homePage"                   element={<Homepage />} />
                 <Route path="/content"                    element={<Content />} />
@@ -80,6 +83,17 @@ export default function App() {
                 <LoadingOverlay />
                 <AppContent />
             </BrowserRouter>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     );
 }

@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import { MultipleAnswerExercise } from "../ExerciseTypes/MultipleAnswerExercise.jsx";
 import { useUser } from "../../../contexts/UserContext.jsx";
-import useAnswerCheck from "../../../hooks/apiHooks/useAnswerCheck.jsx";
+import useAnswerCheck from "../../../hooks/apiHooks/useAnswerCheck.js";
 
 export default function MultipleAnswer({ questionType, url }) {
     const { data, error, loading, sendRequest } = useGetApi(url);

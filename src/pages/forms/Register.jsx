@@ -41,11 +41,12 @@ export default function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const validation = validateAll();
 
         if (Object.keys(validation).length === 0 && formData.age && formData.gender) {
             const response = await sendRegisterRequest(formData);
-
+            console.log(response.data);
             if (response?.errorCode === EMAIL_ALREADY_EXISTS) {
                 showMessage("האימייל כבר קיים!");
             } else if (response?.success) {

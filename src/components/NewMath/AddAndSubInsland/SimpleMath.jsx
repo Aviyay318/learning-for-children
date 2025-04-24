@@ -5,7 +5,9 @@ import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import Cookies from "js-cookie";
 import "./AddAndSubIsland.css";
 import { useUser } from "../../../contexts/UserContext.jsx";
-import useAnswerCheck from "../../../hooks/apiHooks/useAnswerCheck.jsx";
+import useAnswerCheck from "../../../hooks/apiHooks/useAnswerCheck.js";
+import {useParams} from "react-router-dom";
+import {ISLAND_CONFIGS_MAP} from "../../../utils/IslandConfig.js";
 
 export default function SimpleMath({ questionType, url }) {
     const { data, loading, error, sendRequest } = useGetApi(url);
