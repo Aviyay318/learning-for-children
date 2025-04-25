@@ -16,7 +16,7 @@ export default function MultipleAnswerExercise ({ question, options, checkAnswer
     return (
         <div className="exercise-board-container" dir="rtl">
             {question && (
-                <>
+                <div className={"exercise-board flex"}>
                     <div className="exercise-question flex">
                         <label>{question.num1}</label>
                         <label>{question.operator}</label>
@@ -34,7 +34,7 @@ export default function MultipleAnswerExercise ({ question, options, checkAnswer
                             </button>
                         ))}
                     </div>
-                </>
+                </div>
             )}
 
             <AnimatePresence>
