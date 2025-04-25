@@ -1,8 +1,23 @@
-import React, { useState } from "react";
+import React, {useState, useMemo, useEffect} from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import "./ExerciseBoard.css"
+import "./ExerciseBoard.css";
+import { buttonColorClassMap } from "../../../utils/ButtonConstants.js";
 
-export default function MultipleAnswerExercise ({ question, options, checkAnswer, solutionTime }) {
+// simple in-place shuffle (Durstenfeld algorithm)
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+export default function MultipleAnswerExercise({
+                                                   question,
+                                                   options,
+                                                   checkAnswer,
+                                                   solutionTime,
+                                               }) {
     const [selected, setSelected] = useState(null);
     const [showFeedback, setShowFeedback] = useState(false);
 
@@ -13,25 +28,45 @@ export default function MultipleAnswerExercise ({ question, options, checkAnswer
         setTimeout(() => setShowFeedback(false), 1000);
     };
 
+    const palette = [
+        buttonColorClassMap.green,
+        buttonColorClassMap.yellow,
+        buttonColorClassMap.blue,
+        buttonColorClassMap.white,
+        buttonColorClassMap.orange,
+        buttonColorClassMap.pink,
+    ];
+
+    // shuffle once per question change, then take as many as we need
+    function getNewButtonColor(){
+        const randomIndex = Math.floor(Math.random() * palette.length);
+        return palette[randomIndex];
+    }
+
     return (
         <div className="exercise-board-container" dir="rtl">
             {question && (
-                <div className={"exercise-board flex"}>
-                    <div className="exercise-question flex">
-                        <label>{question.num1}</label>
-                        <label>{question.operator}</label>
-                        <label>{question.num2}</label>
-                        <label>{question.equalsSign}</label>
+                <div className="exercise-board-box flex">
+                    <div className="exercise-board flex">
+                        <div className="exercise-question flex">
+                            <label>{question.num1}</label>
+                            <label>{question.operator}</label>
+                            <label>{question.num2}</label>
+                            <label>{question.equalsSign}</label>
+                        </div>
                     </div>
-
-                    <div className="flex flex-wrap justify-center gap-4 mb-6">
+                    <div className="options-button-box flex">
                         {options.map((option, idx) => (
-                            <button
-                                key={idx}
-                                onClick={() => handleClick(option.value)}
-                            >
-                                {option.value}
-                            </button>
+                            <>
+                                <button
+                                    key={idx}
+                                    className={`option-button ${buttonColorClassMap.yellow}`}
+                                    onClick={() => handleClick(option.value)}
+                                >
+                                    {option.value}
+                                </button>
+                            </>
+
                         ))}
                     </div>
                 </div>
@@ -54,4 +89,4 @@ export default function MultipleAnswerExercise ({ question, options, checkAnswer
             {!question && <div className="text-gray-500">לא נטענה שאלה...</div>}
         </div>
     );
-};
+}

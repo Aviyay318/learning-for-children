@@ -29,8 +29,15 @@
     padding: var(--board-padding);
     min-height: var(--board-container-min-height);
     width: 100%;
-    height:100%;
     box-sizing: border-box;
+}
+.exercise-board-box{
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
 }
 
 /* The board itself */
@@ -57,6 +64,8 @@
 
 /* The row with question items */
 .exercise-question {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     gap: var(--board-gap);
@@ -100,4 +109,26 @@
 }
 .exercise-submit-button:hover {
     background: #c86a29;
+}
+.options-button-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    /*gap: rem;*/
+    /*background: var(--board-background-color);*/
+    width: var(--board-max-width);
+
+}
+.option-button{
+    font-size: 5rem;
+    font-weight: bold;
+    width: 12rem;
+    background-color: var(--board-background-color);
+    border: 12px solid var(--board-border-color);
+    border-radius: 35px;
+    color: white;
+
+}
+.option-button:hover{
+    scale: 1.2;
 }
