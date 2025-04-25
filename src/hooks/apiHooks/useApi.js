@@ -44,6 +44,8 @@ const useApi = (url, method = "GET", options = {}) => {
 
             if (lastError) {
                 setError(lastError.response?.data?.message || "Request failed");
+                console.warn("🚨 API request failed", lastError);
+                return null;
             }
         });
     };

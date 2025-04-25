@@ -61,6 +61,7 @@ export default function Map() {
                         className={island.className}
                         name={island.name}
                         island={island.island}
+                        islandFlipped={island.islandFlipped}
                         cardBackground={island.cardBackground}
                         url={island.url}
                         buttonColor={island.buttonColor}

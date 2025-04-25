@@ -1,7 +1,7 @@
 import React from "react";
 import "./ExerciseBoard.css"
 
-export const SimpleExercise = ({ question, checkAnswer }) => {
+export default function SimpleExercise  ({ question, checkAnswer })  {
     const [answer, setAnswer] = React.useState("");
 
     const handleSubmit = () => {

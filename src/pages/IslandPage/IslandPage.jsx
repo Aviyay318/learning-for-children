@@ -28,6 +28,7 @@ export default function IslandPage() {
                             onChoose={(comp) => setSelectedExercise(() => comp)}
                             url={island.exerciseUrl}
                         />
+                        {console.log("asdsadasdasadasda",island.exerciseUrl)}
                     </div>
                 ) : (
                     <div className="island-page-content flex">

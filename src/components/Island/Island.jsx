@@ -18,6 +18,7 @@ export default function Island({
                                    name,
                                    className,
                                    island,
+                                   islandFlipped,
                                    cardBackground,
                                    url = "",
                                    buttonColor,
@@ -56,7 +57,7 @@ export default function Island({
                 {/* Back Face */}
                 <div className="island-card-face island-card-back">
                     <label className="island-name">{name}</label>
-                    <img className="island-image" src={island} alt="island" />
+                    <img className="island-image" src={islandFlipped} alt="island" />
                     <img className="island-background-image" src={cardBackground} alt="cardBackground" />
 
                     {url && (

@@ -2,8 +2,8 @@ import {useEffect, useState} from "react";
 import "./ExerciseTabs.css"
 import useGetApi from "../../../hooks/apiHooks/useGetApi.js";
 import {GET_QUESTION_TYPE} from "../../../utils/Constants.js";
-import {SimpleExercise} from "../../NewMath/ExerciseTypes/SimpleExercise.jsx";
-import {MultipleAnswerExercise} from "../../NewMath/ExerciseTypes/MultipleAnswerExercise.jsx";
+import SimpleExercise from "../../NewMath/ExerciseTypes/SimpleExercise.jsx";
+import MultipleAnswerExercise from "../../NewMath/ExerciseTypes/MultipleAnswerExercise.jsx";
 
 
 
