@@ -19,12 +19,14 @@ import multiplicationIslandFlipped from "/src/assets/images/Islands/Multiplicati
 import yellowCardBg from "/src/assets/images/Islands/MultiplicationIsland/yellow_card_background.png";
 import multiplicationBackground from "/src/assets/images/Islands/MultiplicationIsland/multipllication_background.png"
 import multiplicationChildren from "/src/assets/images/Islands/MultiplicationIsland/questions/multiplication_1.png"
+import multiplicationChildrenThinking from "/src/assets/images/Islands/MultiplicationIsland/multiplication_island_kid_thinking.png"
 
 export const MULTIPLICATION_ISLAND = multiplicationIsland;
 export const MULTIPLICATION_ISLAND_FLIPPED = multiplicationIslandFlipped;
 export const MULTIPLICATION_ISLAND_BACKGROUND = yellowCardBg;
 export const MULTIPLICATION_BACKGROUND = multiplicationBackground;
 export const MULTIPLICATION_CHILDREN = multiplicationChildren;
+export const MULTIPLICATION_CHILDREN_THINKING = multiplicationChildrenThinking;
 
 // divisionIsland
 import divisionIsland from "/src/assets/images/Islands/DivisionIsland/division_island.png";

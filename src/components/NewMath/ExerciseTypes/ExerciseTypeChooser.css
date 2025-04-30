@@ -1,6 +1,7 @@
 .exercise-type-chooser-container{
     width: 100%;
     height: 100%;
+
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -11,7 +12,7 @@
     width: 50%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr ;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     align-items: center;
     justify-content: center;
@@ -45,14 +46,29 @@
     font-size: var(--font-size-large);
     font-weight: var(--font-weight-medium);
     opacity: 0;
+    background-color: rgba(216, 216, 216, 0.35);
     border-radius: 15px;
-    /*width:100%;*/
     pointer-events: none;      /* so it doesn’t block your hover */
-    transition: opacity .15s ease-in;
+    transition: opacity .2s ease-in;
     backdrop-filter: blur(10px);
 }
 
 /* when you hover the button, fade the label in */
 .type-chooser:hover .type-chooser-label {
     opacity: 1;
+}
+.children-thinking{
+    width: 20rem;
+    /* keep it spanning your center column */
+    grid-column: 2;
+    grid-row:    1 / span 2;
+    transition: 0.2s transform ease-out;
+}
+
+.children-thinking.face-left  {
+    transform: rotateY(0deg);
+
+}
+.children-thinking.face-right {
+    transform: rotateY(180deg);
 }

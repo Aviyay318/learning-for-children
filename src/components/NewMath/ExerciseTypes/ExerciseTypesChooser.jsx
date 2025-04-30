@@ -15,12 +15,11 @@ import MultipleChoiceIcon  from "/src/assets/images/Islands/props/question selec
 import CompleteBoardIcon   from "/src/assets/images/Islands/props/question selection icons/complete_board.png";
 
 import "./ExerciseTypeChooser.css";
-import {ISLAND_CONFIGS_BY_ID} from "../../../utils/IslandConfig.js";
 
-export default function ExerciseTypesChooser({ islandId, onChoose, url }) {
+export default function ExerciseTypesChooser({island, onChoose, url }) {
     const { data, sendRequest } = useApi(GET_QUESTION_TYPE, "GET", { minDelay: 0 });
     const [types, setTypes]     = useState([]);
-    const island = ISLAND_CONFIGS_BY_ID[islandId];
+    const [hoveredIdx, setHoveredIdx] = useState(null);
 
     const ICON_MAP = {
         1: SimpleMathIcon,
@@ -59,51 +58,41 @@ export default function ExerciseTypesChooser({ islandId, onChoose, url }) {
 
     if (!types.length) return null;
 
-    // split into two rows
-    const half      = Math.ceil(types.length / 2);
-    const topRow    = types.slice(0, half);
-    const bottomRow = types.slice(half);
 
     return (
-        <div className="exercise-type-chooser-container">
-            <div className="chooser-row">
-                {topRow.map((type, i) => (
+        <div className="exercise-type-chooser-container flex">
+            <div className="exercise-type-chooser-box grid">
+                {types.map((type, idx) => (
                     <button
                         key={type.id}
-                        className={`type-chooser ${palette[i % palette.length]}`}
+                        className={`type-chooser ${palette[idx % palette.length]}`}
                         onClick={() => onChoose(type.component)}
+                        onMouseEnter={() => {
+                            console.log("hovered button idx:", idx);
+                            setHoveredIdx(idx);
+                        }}
+                        // onMouseLeave={() => setHoveredIdx(null)}
                     >
                         <img
                             src={ICON_MAP[type.id]}
-                            alt=""
+                            alt={`${type.label} icon`}
                             className="type-chooser-icon"
                         />
                         <span className="type-chooser-label">{type.label}</span>
                     </button>
                 ))}
-            </div>
 
-            <img
-                src={island.childrenThinking}
-                alt="thinking"
-                className="chooser-child-thinking"
-            />
-
-            <div className="chooser-row">
-                {bottomRow.map((type, i) => (
-                    <button
-                        key={type.id}
-                        className={`type-chooser ${palette[(i+half) % palette.length]}`}
-                        onClick={() => onChoose(type.component)}
-                    >
-                        <img
-                            src={ICON_MAP[type.id]}
-                            alt=""
-                            className="type-chooser-icon"
-                        />
-                        <span className="type-chooser-label">{type.label}</span>
-                    </button>
-                ))}
+                <img
+                    className={`children-thinking ${
+                        hoveredIdx === null
+                            ? ""
+                            : hoveredIdx % 2 === 0
+                                ? "face-left"
+                                : "face-right"
+                    }`}
+                    src={island.childrenThinking}
+                    alt="thinking"
+                />
             </div>
         </div>
     );

@@ -25,6 +25,7 @@ export default function IslandPage() {
                         <h1>ברוכים הבאים ל{island.name}</h1>
                         <ExerciseTypesChooser
                             islandId={islandId}
+                            island={island}
                             onChoose={(comp) => setSelectedExercise(() => comp)}
                             url={island.exerciseUrl}
                         />

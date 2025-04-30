@@ -12,7 +12,6 @@
     transform-style: preserve-3d;
     transition: transform 0.6s ease;
     position: relative;
-
 }
 
 .island-card.flipped {
@@ -37,7 +36,6 @@
 .island-card-back {
     transform: rotateY(180deg);
     border-radius: 10%;
-
 }
 .island-image {
     position: absolute;

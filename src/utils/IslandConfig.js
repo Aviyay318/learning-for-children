@@ -23,7 +23,7 @@ import {
     MULTIPLICATION_ISLAND_FLIPPED,
     DIVISION_ISLAND_FLIPPED,
     DIVISION_BACKGROUND,
-    DIVISION_CHILDREN, SIMPLE_MATH_CHILDREN_THINKING,
+    DIVISION_CHILDREN, SIMPLE_MATH_CHILDREN_THINKING, MULTIPLICATION_CHILDREN_THINKING,
 } from "./IslandConstants.js";
 
 // 💡 Main config as an array
@@ -54,6 +54,7 @@ const ISLAND_CONFIGS = [
         background: MULTIPLICATION_BACKGROUND,
         cardBackground: MULTIPLICATION_ISLAND_BACKGROUND,
         children: MULTIPLICATION_CHILDREN,
+        childrenThinking:MULTIPLICATION_CHILDREN_THINKING,
         url: "/island/multiplicationIsland",
         exerciseUrl:"/api/islands/multiplication",
         buttonColor: "yellow",
