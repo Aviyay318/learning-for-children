@@ -10,13 +10,13 @@
     --board-aspect-ratio: 16 / 9;
     /* Drive the board’s width relative to viewport */
     --board-width: 50vw;
+    --board-height: 50vh;
     /* Never exceed this width */
     --board-max-width: 900px;
     /* Ensure the container is tall enough */
-    --board-container-min-height: 60vh;
-
-    /* Internal gaps/padding */
+    --board-container-min-height: 20vh;
     --board-padding: 1rem;
+    /* Internal gaps/padding */
     --board-gap: 2rem;
 }
 
@@ -26,24 +26,28 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--board-padding);
-    min-height: var(--board-container-min-height);
+    /*padding: var(--board-padding);*/
+    /*height: 100%;*/
+    /*border: 10px solid red;*/
     width: 100%;
     box-sizing: border-box;
 }
 .exercise-board-box{
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
+    display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 4rem;
+    gap: 2rem;
+    /*border: 1px solid red;*/
 }
 
 /* The board itself */
 .exercise-board {
     width: var(--board-width);
     max-width: var(--board-max-width);
+    height: var(--board-height);
     aspect-ratio: var(--board-aspect-ratio);
 
     background: var(--board-background-color);
@@ -113,18 +117,18 @@
 .options-button-box{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    /*gap: rem;*/
+    /*justify-content: space-evenly;*/
+    gap: 2rem;
     /*background: var(--board-background-color);*/
     width: var(--board-max-width);
 
 }
 .option-button{
-    font-size: 5rem;
+    font-size: 3rem;
     font-weight: bold;
-    width: 12rem;
+    width: 10rem;
     background-color: var(--board-background-color);
-    border: 12px solid var(--board-border-color);
+    border: 8px solid var(--board-border-color);
     border-radius: 35px;
     color: white;
 

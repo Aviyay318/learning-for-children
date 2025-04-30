@@ -28,7 +28,6 @@ export default function IslandPage() {
                             onChoose={(comp) => setSelectedExercise(() => comp)}
                             url={island.exerciseUrl}
                         />
-                        {console.log("asdsadasdasadasda",island.exerciseUrl)}
                     </div>
                 ) : (
                     <div className="island-page-content flex">
@@ -36,6 +35,7 @@ export default function IslandPage() {
                             ← חזרה לבחירת פעילות
                         </button>
                         <div className="exercise-component">
+
                             {selectedExercise}
                         </div>
                     </div>
