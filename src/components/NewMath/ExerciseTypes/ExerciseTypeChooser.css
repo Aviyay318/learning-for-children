@@ -11,24 +11,48 @@
     width: 50%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10rem;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: 1fr 1fr;
     align-items: center;
     justify-content: center;
-    flex: 0;
-
-    /*flex: none !important;*/
-
-}
-.type-chooser{
-    font-size: var(--font-size-very-large);
-    font-weight: var(--font-weight-medium);
-}
-.type-chooser:hover{
-    scale: 1.2;
+    flex: 1;
 }
 .exercise-component{
     width: 95%;
     height: 90%;
     /*border:1px solid red;*/
+}
+.type-chooser{
+    /*position: relative;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 15rem;    /* tweak to taste */
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    place-self: center;
+}
+.type-chooser:hover {
+    transform: scale(1.2);
+}
+
+.type-chooser-icon{
+    width: 14rem;
+}
+.type-chooser-label {
+    position: absolute;
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-medium);
+    opacity: 0;
+    border-radius: 15px;
+    /*width:100%;*/
+    pointer-events: none;      /* so it doesn’t block your hover */
+    transition: opacity .15s ease-in;
+    backdrop-filter: blur(10px);
+}
+
+/* when you hover the button, fade the label in */
+.type-chooser:hover .type-chooser-label {
+    opacity: 1;
 }

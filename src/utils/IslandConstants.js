@@ -4,12 +4,14 @@ import simpleMathIslandFlipped from "/src/assets/images/Islands/SimpleMathIsland
 import greenCardBg from "/src/assets/images/Islands/SimpleMathIsland/green_card_background.png";
 import simpleMathBackground from "/src/assets/images/Islands/SimpleMathIsland/simple_math_background.png"
 import simpleMathChildren from "/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1.png"
+import simpleMathChildrenThinking from "/src/assets/images/Islands/SimpleMathIsland/simple_math_island_kid_thinking.png"
 
 export const SIMPLE_MATH_ISLAND = simpleMathIsland;
 export const SIMPLE_MATH_ISLAND_FLIPPED = simpleMathIslandFlipped;
 export const SIMPLE_MATH_ISLAND_BACKGROUND = greenCardBg;
 export const SIMPLE_MATH_BACKGROUND = simpleMathBackground;
 export const SIMPLE_MATH_CHILDREN = simpleMathChildren;
+export const SIMPLE_MATH_CHILDREN_THINKING = simpleMathChildrenThinking;
 
 // multiplicationIsland
 import multiplicationIsland from "/src/assets/images/Islands/MultiplicationIsland/multiplication_island.png";

@@ -23,7 +23,7 @@ import {
     MULTIPLICATION_ISLAND_FLIPPED,
     DIVISION_ISLAND_FLIPPED,
     DIVISION_BACKGROUND,
-    DIVISION_CHILDREN,
+    DIVISION_CHILDREN, SIMPLE_MATH_CHILDREN_THINKING,
 } from "./IslandConstants.js";
 
 // 💡 Main config as an array
@@ -38,6 +38,7 @@ const ISLAND_CONFIGS = [
         background: SIMPLE_MATH_BACKGROUND,
         cardBackground: SIMPLE_MATH_ISLAND_BACKGROUND,
         children:SIMPLE_MATH_CHILDREN,
+        childrenThinking:SIMPLE_MATH_CHILDREN_THINKING,
         url: "/island/simpleMathIsland",
         exerciseUrl:"/api/islands/Addition-and-subtraction",
         buttonColor: "green",
