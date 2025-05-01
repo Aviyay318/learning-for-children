@@ -14,16 +14,9 @@
     top: 0;
     z-index: 2;
 }
-
-.nav-left, .nav-right {
-    flex: 0 0 auto;
-    align-items: center;
+.admin-navbar{
     justify-content: center;
-
-}
-.nav-middle {
-    /*flex: 1;*/
-    justify-content: space-evenly;
+    width: auto;
 }
 
 .navbar-icons{
@@ -43,24 +36,26 @@
     height: 120px;
 }
 .navbar-text{
-    font-size: var(--font-size-medium);
-    color: white;
+    font-size: var(--font-size-large);
+    color: #DD511B;
     font-weight: var(--font-weight-semi-bold);
     text-align: center;
     margin-inline-start: var(--margin-start);
-
     flex-direction: column;
+    position: absolute;
+    right: 3.5rem;
+    width:0;
+    transition: all 0.3s ease;
+
 }
 
 .coins-label{
-    color: var(--btn-yellow-bg);
     font-size: var(--font-size-large);
-    width:0;
-    transform: translateX(3.5rem);
     font-weight: var(--font-weight-semi-bold);
-    transition: all 0.3s ease;
-}
-.admin-navbar{
-    justify-content: center;
-    width: auto;
+    position: absolute;
+
+    color: var(--btn-yellow-bg);
+    margin-inline-end: var(--margin-start);
+    left: 3.5rem;
+
 }

@@ -1,7 +1,9 @@
 // CompleteTheBoardExercise.jsx
+import "./CompleteTheBoardExercise.css"
 import React, { useState, useEffect, useCallback } from "react";
 import {buttonColorClassMap} from "../../../utils/ButtonConstants.js";
-
+import QuestionBoard from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/question_board.png"
+import YellowButton from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/yellow_button.png"
 function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -65,8 +67,9 @@ export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
 
     return (
         <div>
-            <div className="complete exercise-board  flex" dir="rtl">
+            <div className="complete flex" dir="rtl">
                 <div className="exercise-question flex">
+                    <img className={"question-board"} src={QuestionBoard} alt="Question Board"/>
                     <label>{currentQ.num1}</label>
                     <label>{currentQ.operator}</label>
                     <label>{currentQ.num2}</label>
@@ -77,7 +80,6 @@ export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
                 {board.map((ans, i) => (
                     <button
                         key={i}
-                        className={"board-answer-button"}
                         onClick={() => handleClick(ans)}
                     >
                         {ans}

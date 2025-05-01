@@ -76,10 +76,10 @@ export default function Navbar({ deleteCookies }) {
             {username && (
                 <label className="navbar-text">{username}</label>
             )}
-
             <NavLink to="/" onClick={logoutFunction} className={({ isActive }) => isActive ? "active" : ""}>
                 <img className="navbar-icons" src={logout} alt="Logout" />
             </NavLink>
+
         </div>
     );
 }

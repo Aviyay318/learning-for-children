@@ -9,10 +9,10 @@ import CompleteTheBoardNew from "../AddAndSubInsland/CompleteTheBoardNew.jsx";
 
 import { buttonColorClassMap } from "../../../utils/ButtonConstants.js";
 
-import SimpleMathIcon      from "/src/assets/images/Islands/props/question selection icons/simple_math.png";
-import LiteralProblemIcon  from "/src/assets/images/Islands/props/question selection icons/literal_problems.png";
-import MultipleChoiceIcon  from "/src/assets/images/Islands/props/question selection icons/multiple_choice.png";
-import CompleteBoardIcon   from "/src/assets/images/Islands/props/question selection icons/complete_board.png";
+import SimpleMathIcon      from "/src/assets/images/Islands/Props/QuestionSelectionIcons/simple_math.png";
+import LiteralProblemIcon  from "/src/assets/images/Islands/Props/QuestionSelectionIcons/literal_problems.png";
+import MultipleChoiceIcon  from "/src/assets/images/Islands/Props/QuestionSelectionIcons/multiple_choice.png";
+import CompleteBoardIcon   from "/src/assets/images/Islands/Props/QuestionSelectionIcons/complete_board.png";
 
 import "./ExerciseTypeChooser.css";
 

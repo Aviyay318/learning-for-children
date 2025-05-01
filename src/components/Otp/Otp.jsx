@@ -113,7 +113,7 @@ export default function Otp({
                                 message={bubbleMessage}
                                 type={bubbleType}
                                 scale="0.8"
-                                position={{ top: "23%", right: "55%" }}
+                                position={{ top: "17%", right: "40%" }}
                             />
                         )}
                         <img className="otp-image" src={image} alt="otp" />

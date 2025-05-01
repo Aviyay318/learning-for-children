@@ -65,6 +65,11 @@
     box-sizing: border-box;
     direction: ltr;
 }
+.question-board{
+    position: absolute;
+    z-index: -1;
+    width: var(--board-width);
+}
 
 /* The row with question items */
 .exercise-question {
@@ -73,6 +78,8 @@
     display: flex;
     align-items: center;
     gap: var(--board-gap);
+    position: relative;
+    direction: ltr;
 }
 
 /* Big numbers/text */

@@ -44,24 +44,24 @@ export const DIVISION_CHILDREN = divisionChildren;
 
 
 // divisionIsland
-import floatingPointIsland from "/src/assets/images/Islands/islands/floating_point_island.png";
-import longAddSubIsland from "/src/assets/images/Islands/islands/long_addition_subtraction_island.png";
-import longMultDivIsland from "/src/assets/images/Islands/islands/long_multiplication_division_island.png";
-import horrorIsland from "/src/assets/images/Islands/islands/horror_island.png";
-import equationsIsland from "/src/assets/images/Islands/islands/equations_island.png";
+import floatingPointIsland from "/src/assets/images/Islands/FloatingPointIsland/floating_point_island.png";
+import longAddSubIsland from "/src/assets/images/Islands/LongAddAndSubIsland/long_addition_subtraction_island.png";
+import longMultDivIsland from "/src/assets/images/Islands/LongMultAndDivIsland/long_multiplication_division_island.png";
+import horrorIsland from "/src/assets/images/Islands/HorrorIsland/horror_island.png";
+import equationsIsland from "/src/assets/images/Islands/EquationsIsland/equations_island.png";
 
 
 // Island card_backgrounds
-import woodCardBg from "/src/assets/images/Islands/card_backgrounds/wood_card_background.png";
-import purpleCardBg from "/src/assets/images/Islands/card_backgrounds/purple_card_background.png";
-import coldCardBg from "/src/assets/images/Islands/card_backgrounds/cold_card_background.png";
-import hotCardBg from "/src/assets/images/Islands/card_backgrounds/hot_card_background.png";
-import cosmicCardBg from "/src/assets/images/Islands/card_backgrounds/cosmic_card_background.png";
+import woodCardBg from "/src/assets/images/Islands/FloatingPointIsland/wood_card_background.png";
+import purpleCardBg from "/src/assets/images/Islands/LongAddAndSubIsland/purple_card_background.png";
+import coldCardBg from "/src/assets/images/Islands/LongMultAndDivIsland/cold_card_background.png";
+import hotCardBg from "/src/assets/images/Islands/HorrorIsland/hot_card_background.png";
+import cosmicCardBg from "/src/assets/images/Islands/EquationsIsland/cosmic_card_background.png";
 
-// Misc card_backgrounds & props
+// Misc card_backgrounds & Props
 import skyBackground from "/src/assets/images/Islands/sky_background.png";
-import lockIcon from "/src/assets/images/Islands/props/lock.png";
-import unlockIcon from "/src/assets/images/Islands/props/unlock.png";
+import lockIcon from "/src/assets/images/Islands/Props/lock.png";
+import unlockIcon from "/src/assets/images/Islands/Props/unlock.png";
 
 // Inner cardBackground (can reuse simpleMathIsland if desired)
 
