@@ -7,6 +7,9 @@ import { useBubbleMessage } from "../../hooks/uiHooks/useBubbleMessage";
 import MessageBubble from "../MessageBubble/MessageBubble.jsx";
 import "./Otp.css";
 import {useUser} from "../../contexts/UserContext.jsx";
+import axios from "axios";
+import {SERVER_URL} from "../../utils/Constants.js";
+import Cookies from "js-cookie";
 
 const images = {
     BOY_OTP: "src/assets/images/Otp/boy_otp.png",
@@ -59,6 +62,10 @@ export default function Otp({
     }
 
     useEffect(() => {
+        const token = Cookies.get("token");
+        axios.get(SERVER_URL+"/get-user?token="+token).then(response => {
+            setUser({user:response.data,isVerified: false});
+        })
         handleBubbleAndImage("שלחנו לך קוד התחברות דרך המייל", images.BOY_OTP, "info")
     }, []);
 

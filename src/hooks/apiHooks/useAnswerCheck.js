@@ -28,7 +28,8 @@ export default function useAnswerCheck({ questionType, setUser }) {
 
             const result = response.data;
             setFeedback(result.message);
-            setUser && setUser(result.user);
+            setUser && setUser({ user: result.user, isVerified: true });
+
 
             if (result.islandOpen) {
                 alert(result.islandOpen);

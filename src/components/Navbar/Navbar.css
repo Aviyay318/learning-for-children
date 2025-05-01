@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    text-align: center;
     justify-content: space-between;
     margin-block-start: var(--navbar-margin-size);
     width: var(--navbar-width);
@@ -50,15 +51,16 @@
 
     flex-direction: column;
 }
-.coin-icon:hover + .coins-label{
-    scale: 1;
-    font-size: var(--font-size-large);
-}
+
 .coins-label{
     color: var(--btn-yellow-bg);
-    scale: 0;
-    font-size: 0;
-
+    font-size: var(--font-size-large);
+    width:0;
+    transform: translateX(3.5rem);
     font-weight: var(--font-weight-semi-bold);
     transition: all 0.3s ease;
+}
+.admin-navbar{
+    justify-content: center;
+    width: auto;
 }

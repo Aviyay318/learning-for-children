@@ -25,8 +25,8 @@ export default function Profile() {
             </h1>
 
             <div className="profile-body flex glass">
-                <h1>שלום, {user.firstName}</h1>
-                <ProfilePicture gender={user.gender} />
+                <h1>שלום, {user.user.firstName}</h1>
+                <ProfilePicture gender={user.user.gender} />
                 <PrivateDetails userData={user} />
             </div>
         </div>
