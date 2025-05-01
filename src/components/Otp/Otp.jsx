@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import OtpInput from "./OtpInput";
 import { useOtpLogic } from "../../hooks/useOtpLogic";
 import useApi from "../../hooks/apiHooks/useApi";
-import { CHECK_OTP, CHECK_OTP_TO_REGISTER } from "../../utils/Constants.js";
 import { useBubbleMessage } from "../../hooks/uiHooks/useBubbleMessage";
 import MessageBubble from "../MessageBubble/MessageBubble.jsx";
 import "./Otp.css";
+import {useUser} from "../../contexts/UserContext.jsx";
 
 const images = {
     BOY_OTP: "src/assets/images/Otp/boy_otp.png",
@@ -32,6 +32,8 @@ export default function Otp({
         handleClick,
         handlePaste,
     } = useOtpLogic(arrayLength);
+    const { setUser } = useUser();
+
 
     const {
         bubbleMessage,
@@ -67,6 +69,12 @@ export default function Otp({
         console.log("OTP ERROR:", otpError);
         if (otpData?.success && otpData.registeredSuccessfully) {
             clearError();
+            setUser(prev => ({
+                ...prev,
+                isVerified: true
+            }));
+
+
             handleBubbleAndImage("האימות הצליח!", images.BOY_OTP_SUCCESS, "confirmation")
             setTimeout(() => navigate(navigateToUrl, urlState), 1500);
         } else if (otpData?.success === false || otpError) {

@@ -3,6 +3,7 @@ import useLocalStorage from "../hooks/useLocalStorage.js";
 
 export const UserContext = createContext({
     user: null,
+    isVerified: false ,
     setUser: () => {}
 });
 

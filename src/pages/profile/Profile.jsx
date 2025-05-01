@@ -6,6 +6,7 @@ import PrivateDetails from "../privateDetails/PrivateDetails.jsx";
 import Cookies from "js-cookie";
 import axios from "axios";
 import {useUser} from "../../contexts/UserContext.jsx";
+import {useNavigate} from "react-router-dom";
 
 export default function Profile() {
     const { user } = useUser();

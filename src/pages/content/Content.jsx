@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import ExerciseTabs from "../../components/Math/Exercise/ExerciseTabs.jsx";
 import axios from "axios";
 import {useUser} from "../../contexts/UserContext.jsx";
+import {useNavigate} from "react-router-dom";
 export default function Content() {
     const { data, error, loading, sendRequest } = useGetApi(GET_MATH);
     const [userAnswer, setUserAnswer] = useState("");

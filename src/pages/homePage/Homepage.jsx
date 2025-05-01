@@ -1,5 +1,5 @@
 import "./Homepage.css";
-import { useLocation } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -16,6 +16,7 @@ export default function Homepage() {
     useEffect(() => {
         getUserLevel();
     }, []);
+
 
     useEffect(() => {
         if (!token) return;

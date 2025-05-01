@@ -6,17 +6,23 @@ import Box from "@mui/material/Box";
 import { SERVER_URL } from "../../utils/Constants.js";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import {useNavigate} from "react-router-dom";
 
 export default function Users() {
     const [users, setUsers] = useState([]);
     const [selectedIds, setSelectedIds] = useState([]);
-    const[emails,setEmails] = useState([])
+    const [emails, setEmails] = useState([]);
     const [message, setMessage] = useState("");
-    const token = "admin12345";
+    const [loggedUsers, setLoggedUsers] = useState([]);
+    const navigate = useNavigate(); // בתוך הפונקציה הראשית
+
+    const token = "admin12345"; // זמני, ניתן להחליף ב־Cookies.get("token")
+
+    // שליפת כל המשתמשים
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/admin/get-all-users?token=${token}`);
+                const response = await axios.get(`${SERVER_URL}/admin/get-all-users?token=${token}`);
                 if (response.status === 200 && Array.isArray(response.data)) {
                     const usersWithId = response.data.map((user, index) => ({
                         ...user,
@@ -32,24 +38,41 @@ export default function Users() {
         fetchUsers();
     }, []);
 
-    const handleRowSelectionChange = (newSelectionModel) => {
+    // שליפת משתמשים מחוברים כל 5 דקות
+    useEffect(() => {
+        const fetchLoggedUsers = async () => {
+            try {
+                const response = await axios.get(`${SERVER_URL}/get-logged-users?token=${token}`);
+                if (response.status === 200 && Array.isArray(response.data)) {
+                    setLoggedUsers(response.data.map(user => user.username));
+                }
+            } catch (error) {
+                console.error("שגיאה בשליפת משתמשים מחוברים:", error);
+            }
+        };
 
+        fetchLoggedUsers(); // מידית
+        const interval = setInterval(fetchLoggedUsers, 300000); // כל 5 דקות
+
+        return () => clearInterval(interval); // ניקוי
+    }, []);
+
+    // טיפול בבחירת שורות
+    const handleRowSelectionChange = (newSelectionModel) => {
         let array = newSelectionModel.ids;
-        let filterArray = []
+        let filterArray = [];
         for (const id of array) {
-            let u = users.filter(user => user.id === id);
-            if (u.length>0){
-                filterArray.push(u[0].email);
+            let u = users.find(user => user.id === id);
+            if (u) {
+                filterArray.push(u.email);
             }
         }
-        console.log(filterArray)
-        setEmails(filterArray)
+        setEmails(filterArray);
         setSelectedIds(Array.from(newSelectionModel));
     };
 
+    // שליחת הודעה לנבחרים
     const handleSendMessage = async () => {
-        console.log("s : ", emails);
-
         try {
             const response = await axios.post(`${SERVER_URL}/admin/send-email-for-users`, {
                 token: token,
@@ -62,15 +85,13 @@ export default function Users() {
             } else {
                 alert("❌ " + response.data.message);
             }
-
-            console.log("שרת החזיר:", response.data);
         } catch (error) {
             console.error("שגיאה בשליחה לשרת:", error);
             alert("שגיאה בשליחת ההודעה לשרת");
         }
     };
 
-
+    // הגדרת עמודות הטבלה
     const columns = [
         { field: "firstName", headerName: "שם פרטי", width: 130 },
         { field: "lastName", headerName: "שם משפחה", width: 130 },
@@ -79,11 +100,36 @@ export default function Users() {
         { field: "email", headerName: "אימייל", width: 180 },
         { field: "score", headerName: "ציון", width: 100 },
         { field: "gender", headerName: "מגדר", width: 100 },
+        {
+            field: "status",
+            headerName: "סטטוס",
+            width: 130,
+            renderCell: (params) => {
+                const isOnline = loggedUsers.includes(params.row.username);
+                return isOnline ? (
+                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                        <span style={{
+                            display: 'inline-block',
+                            width: 12,
+                            height: 12,
+                            backgroundColor: 'green',
+                            borderRadius: '50%',
+                        }}></span>
+                        <span style={{ fontSize: "0.9em" }}>מחובר</span>
+                    </div>
+                ) : null;
+            }
+        }
     ];
 
     return (
         <div dir="rtl" style={{ padding: "20px" }}>
             <h2 style={{ textAlign: "center" }}>📋 רשימת משתמשים</h2>
+
+            <p style={{ textAlign: "center", fontSize: "18px", marginBottom: "10px" }}>
+                מספר משתמשים: <b>{users.length}</b> |
+                <span style={{ color: "green" }}> מחוברים כעת: <b>{loggedUsers.length}</b></span>
+            </p>
 
             <Box sx={{ height: 500, width: "100%", marginBottom: 3 }}>
                 <DataGrid
@@ -93,6 +139,8 @@ export default function Users() {
                     checkboxSelection
                     disableRowSelectionOnClick
                     onRowSelectionModelChange={handleRowSelectionChange}
+                    onRowClick={(params) => navigate(`/user-info/${params.row.email}`)}
+
                 />
             </Box>
 
@@ -116,15 +164,6 @@ export default function Users() {
                     שלח הודעה לנבחרים
                 </Button>
             </div>
-            {
-                emails.length!==0&&<div>
-                    {
-                        emails.map((email,index)=>{
-                          return  <div key={index}>{email.email}</div>
-                        })
-                    }
-                </div>
-            }
         </div>
     );
 }

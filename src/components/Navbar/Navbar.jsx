@@ -11,6 +11,9 @@ import settings from "/src/assets/images/Navbar/Icons/settings.png";
 import statistics from "/src/assets/images/Navbar/Icons/statistics.png";
 import coin from "/src/assets/images/Navbar/Icons/coin.png";
 import logout from "/src/assets/images/Navbar/Icons/logout.png";
+import Cookies from "js-cookie";
+import {SERVER_URL} from "../../utils/Constants.js";
+import axios from "axios";
 
 export default function Navbar({ deleteCookies, username }) {
     const { user } = useUser();
@@ -19,6 +22,20 @@ export default function Navbar({ deleteCookies, username }) {
 
     // 👇 Check if we are currently inside any island page
     const isOnIslandPage = location.pathname.startsWith("/island/") && location.pathname !== "/map";
+    const logoutFunction =()=>{
+        const token    = Cookies.get('token')
+        axios.get(SERVER_URL + "/logout?token=" +token).then(
+            response =>{
+                console.log(response.data)
+                if (response.data!==null){
+                    if (response.data){
+                        console.log(response.data)
+                        Cookies.remove('token');
+                        window.location.reload();
+                    }
+                }
+            }
+        )}
 
     return (
         <div className="navbar flex">
@@ -53,7 +70,7 @@ export default function Navbar({ deleteCookies, username }) {
                 <img className={"navbar-icons"} src={statistics} alt="Statistics" />
             </NavLink>
 
-            <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
+            <NavLink to="/" onClick={logoutFunction} className={({ isActive }) => isActive ? "active" : ""}>
                 <img className={"navbar-icons"} src={logout} alt="Logout" />
             </NavLink>
         </div>
