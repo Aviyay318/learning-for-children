@@ -24,7 +24,7 @@ export default function Navbar({ deleteCookies, username }) {
         <div className="navbar flex">
             {user && (
                 <div className={"navbar-coins-container flex"}>
-                    <img className={"navbar-icons"} src={coin} alt="Homepage"/>
+                    <img className={"navbar-icons coin-icon"} src={coin} alt="Homepage"/>
                     <label className={"coins-label"}>{user.score}</label>
                 </div>
             )}

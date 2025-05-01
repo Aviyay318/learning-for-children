@@ -50,8 +50,15 @@
 
     flex-direction: column;
 }
+.coin-icon:hover + .coins-label{
+    scale: 1;
+    font-size: var(--font-size-large);
+}
 .coins-label{
     color: var(--btn-yellow-bg);
-    font-size: var(--font-size-large);
+    scale: 0;
+    font-size: 0;
+
     font-weight: var(--font-weight-semi-bold);
+    transition: all 0.3s ease;
 }

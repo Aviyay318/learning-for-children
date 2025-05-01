@@ -1,80 +1,90 @@
-import React, {useState, useMemo, useEffect} from "react";
+// CompleteTheBoardExercise.jsx
+import React, { useState, useEffect, useCallback } from "react";
+import {buttonColorClassMap} from "../../../utils/ButtonConstants.js";
+
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
 
 export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
-   const[answers, setAnswers] = useState([]);
-   const[questionIndex, setQuestionIndex] = useState(0);
-   const [question, setQuestion] = useState("");
-   const [isWin,setIsWin] = useState(0);
-useEffect(() => {
-    let answerArray = [];
-    questions.forEach((question) => {answerArray.push({answer:question.solution,isCorrect:false})});
-    setAnswers(answerArray)
-    setQuestionIndex(0)
-    setIsWin(0)
-    console.log(questions)
-},[])
+    const [remaining, setRemaining] = useState([]);
+    const [currentQ, setCurrentQ]   = useState(null);
+    const [board, setBoard]         = useState([]);
 
+    // 1) whenever `questions` prop changes, reset our state
     useEffect(() => {
-        let answerArray = [];
-        questions.forEach((question,index) => {
-            answerArray.push({id:index, answer: question.solution, isCorrect: false });
-        });
-        setAnswers(answerArray);
-        setQuestionIndex(0);
-        setIsWin(0);
-        console.log(answerArray)
+        if (questions?.length) {
+            setRemaining(questions.slice());   // copy
+            setCurrentQ(null);
+            setBoard([]);
+        }
     }, [questions]);
 
-   //TODO SHAFLE
-
-
-    const checkAnswer =(answer)=>{
-        console.log("a " ,answer)
-        console.log("qa " ,questions[questionIndex])
-        console.log("q " ,questionIndex-1)
-        if (answer.answer === questions[questionIndex].solution) {
-            answer.isCorrect = true;
-
-            if (answers.length !== (questionIndex+1)) {
-                setQuestionIndex(prevState => prevState + 1)
-            }
-            if (answers.length !== isWin) {
-                setIsWin(prevState => prevState + 1)
-            }
-            setAnswers((prevState) =>
-                prevState.map((a) =>
-                    a === answer ? { ...a, isCorrect: true } : a
-                )
-            );
-
+    // 2) pick the next question + build its board
+    const advance = useCallback(() => {
+        if (remaining.length === 0) {
+            // we’ve exhausted this batch → tell parent to fetch a new one
+            onRestart();
+            return;
         }
 
-        }
+        const [next, ...rest] = remaining;
+        setCurrentQ(next);
+        setRemaining(rest);
+
+        // include this question's solution + the rest’s solutions
+        const sols = [next.solution, ...rest.map((q) => q.solution)];
+        shuffle(sols);
+        setBoard(sols);
+    }, [remaining, onRestart]);
+
+    // 3) on first load (or after a restart) kick off the first question
     useEffect(() => {
-        let q = questions[questionIndex].num1 + questions[questionIndex].operator + questions[questionIndex].num2;
-        setQuestion(q)
-    }, [questionIndex])
+        if (remaining.length && currentQ === null) {
+            advance();
+        }
+    }, [remaining, currentQ, advance]);
+
+    const handleClick = (ans) => {
+        if (!currentQ) return;
+        if (ans === currentQ.solution) {
+            // if that was the LAST one, advance() will fire onRestart()
+            // otherwise we just advance to the next question
+            advance();
+        }
+    };
+
+    // while we’re waiting for parent to fetch new questions, show a loader
+    if (!currentQ) {
+        return <div>טוען שאלות...</div>;
+    }
+
     return (
         <div>
-            {answers.length !== 0 && <div>
-                {question.length !== 0 && <div>{question}</div>}
-               {
-                 answers.map((answer, index) => (
-                     <button onClick={()=>checkAnswer(answer)} style={{background:answer.isCorrect?"green":"pink"}} key={index}>
-                         {answer.answer}
-                     </button>
-                 ))
-               }
-           </div>}
-
-            {
-
-                (isWin)===(answers.length) && <div>
-                    <h1>great job</h1>
-                <button onClick={onRestart}>לוח חדש </button>
+            <div className="complete exercise-board  flex" dir="rtl">
+                <div className="exercise-question flex">
+                    <label>{currentQ.num1}</label>
+                    <label>{currentQ.operator}</label>
+                    <label>{currentQ.num2}</label>
+                    <label>{currentQ.equalsSign}</label>
                 </div>
-            }
+            </div>
+            <div className="options-button-box board-answers">
+                {board.map((ans, i) => (
+                    <button
+                        key={i}
+                        className={"board-answer-button"}
+                        onClick={() => handleClick(ans)}
+                    >
+                        {ans}
+                    </button>
+                ))}
+            </div>
         </div>
 
-   )
+    );
 };

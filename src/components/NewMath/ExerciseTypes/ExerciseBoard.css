@@ -17,7 +17,7 @@
     --board-container-min-height: 20vh;
     --board-padding: 1rem;
     /* Internal gaps/padding */
-    --board-gap: 2rem;
+    --board-gap: 4rem;
 }
 
 /* Center & size container */
@@ -121,7 +121,11 @@
     gap: 2rem;
     /*background: var(--board-background-color);*/
     width: var(--board-max-width);
-
+}
+.board-answers{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .option-button{
     font-size: 3rem;
@@ -135,4 +139,9 @@
 }
 .option-button:hover{
     scale: 1.2;
+}
+.complete{
+    width: auto;
+    height: auto;
+    /*gap: 20rem;*/
 }
