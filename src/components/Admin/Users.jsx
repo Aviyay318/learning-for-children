@@ -14,9 +14,9 @@ export default function Users() {
     const [emails, setEmails] = useState([]);
     const [message, setMessage] = useState("");
     const [loggedUsers, setLoggedUsers] = useState([]);
-    const navigate = useNavigate(); // בתוך הפונקציה הראשית
+    const navigate = useNavigate();
 
-    const token = "admin12345"; // זמני, ניתן להחליף ב־Cookies.get("token")
+    const token = "admin12345";
 
     useEffect(() => {
         const fetchUsers = async () => {
