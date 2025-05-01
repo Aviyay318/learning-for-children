@@ -66,27 +66,25 @@ export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
     }
 
     return (
-        <div>
-            <div className="complete flex" dir="rtl">
-                <div className="exercise-question flex">
-                    <img className={"question-board"} src={QuestionBoard} alt="Question Board"/>
-                    <label>{currentQ.num1}</label>
-                    <label>{currentQ.operator}</label>
-                    <label>{currentQ.num2}</label>
-                    <label>{currentQ.equalsSign}</label>
-                </div>
+        <div className="complete flex" dir="rtl">
+            <div className="exercise-question flex">
+                <img className={"question-board flex"} src={QuestionBoard} alt="Question Board"/>
+                <label>{currentQ.num1}</label>
+                <label>{currentQ.operator}</label>
+                <label>{currentQ.num2}</label>
+                <label>{currentQ.equalsSign}</label>
             </div>
             <div className="options-button-box board-answers">
                 {board.map((ans, i) => (
                     <button
                         key={i}
                         onClick={() => handleClick(ans)}
+                        className={"answer-button"}
                     >
                         {ans}
                     </button>
                 ))}
             </div>
         </div>
-
     );
 };

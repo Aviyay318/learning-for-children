@@ -3,21 +3,22 @@
     --board-background-color: #385723;
     --board-border-color: #ED7D32;
     --board-exercise-text-color: white;
-    --board-text-size: 10rem;
+    --board-text-size-big: 10rem;
+    --board-text-size-small: 8rem;
 
     /* Layout & sizing */
     /* Change 16/9 to e.g. 4/3 if you want a squarer board */
     --board-aspect-ratio: 16 / 9;
     /* Drive the board’s width relative to viewport */
     --board-width: 50vw;
-    --board-height: 50vh;
+    --board-height: 45vh;
     /* Never exceed this width */
     --board-max-width: 900px;
     /* Ensure the container is tall enough */
     --board-container-min-height: 20vh;
     --board-padding: 1rem;
     /* Internal gaps/padding */
-    --board-gap: 4rem;
+    --board-gap: 3rem;
 }
 
 /* Center & size container */
@@ -80,15 +81,18 @@
     gap: var(--board-gap);
     position: relative;
     direction: ltr;
+    overflow: auto;
 }
 
 /* Big numbers/text */
 .exercise-question label,
 .exercise-question input {
-    font-size: var(--board-text-size);
     font-weight: bold;
     color: var(--board-exercise-text-color);
+    font-size: var(--board-text-size-small);
+
 }
+/*.exercise-question label*/
 
 /* Input styling */
 .exercise-question input {

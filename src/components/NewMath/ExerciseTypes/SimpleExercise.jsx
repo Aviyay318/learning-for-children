@@ -1,5 +1,6 @@
 import React from "react";
 import "./ExerciseBoard.css"
+import {ResponsiveLabel} from "../../ResponsiveLabel/ResponsiveLabel.jsx";
 
 export default function SimpleExercise  ({ question, checkAnswer })  {
     const [answer, setAnswer] = React.useState("");
