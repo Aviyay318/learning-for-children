@@ -18,7 +18,6 @@ export default function Users() {
 
     const token = "admin12345"; // זמני, ניתן להחליף ב־Cookies.get("token")
 
-    // שליפת כל המשתמשים
     useEffect(() => {
         const fetchUsers = async () => {
             try {
@@ -38,7 +37,6 @@ export default function Users() {
         fetchUsers();
     }, []);
 
-    // שליפת משתמשים מחוברים כל 5 דקות
     useEffect(() => {
         const fetchLoggedUsers = async () => {
             try {
@@ -51,13 +49,12 @@ export default function Users() {
             }
         };
 
-        fetchLoggedUsers(); // מידית
-        const interval = setInterval(fetchLoggedUsers, 300000); // כל 5 דקות
+        fetchLoggedUsers();
+        const interval = setInterval(fetchLoggedUsers, 300000);
 
-        return () => clearInterval(interval); // ניקוי
+        return () => clearInterval(interval);
     }, []);
 
-    // טיפול בבחירת שורות
     const handleRowSelectionChange = (newSelectionModel) => {
         let array = newSelectionModel.ids;
         let filterArray = [];
@@ -71,7 +68,6 @@ export default function Users() {
         setSelectedIds(Array.from(newSelectionModel));
     };
 
-    // שליחת הודעה לנבחרים
     const handleSendMessage = async () => {
         try {
             const response = await axios.post(`${SERVER_URL}/admin/send-email-for-users`, {
@@ -91,7 +87,6 @@ export default function Users() {
         }
     };
 
-    // הגדרת עמודות הטבלה
     const columns = [
         { field: "firstName", headerName: "שם פרטי", width: 130 },
         { field: "lastName", headerName: "שם משפחה", width: 130 },
