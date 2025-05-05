@@ -11,6 +11,8 @@ import NextQuestion from "/src/assets/images/Islands/Props/ExercisePage/next_que
 import TakeHint from "/src/assets/images/Islands/Props/ExercisePage/take_hint.png"
 import RevealAnswer from "/src/assets/images/Islands/Props/ExercisePage/reveal_answer.png"
 import Modal from "../../Modal/Modal.jsx";
+import axios from "axios";
+import {GET_LEVEL_OF_ISLAND, SERVER_URL} from "../../../utils/Constants.js";
 export default function ExerciseWrapper({ questionType, haveHint=true,haveSolution=true,renderComponent, url, customCheckAnswer }) {
     const { islandId } = useParams();
     const island = ISLAND_CONFIGS_MAP[islandId];

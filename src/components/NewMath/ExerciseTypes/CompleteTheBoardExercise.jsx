@@ -1,5 +1,4 @@
-// CompleteTheBoardExercise.jsx
-import "./CompleteTheBoardExercise.css"
+import "./CompleteTheBoardExercise.css";
 import React, { useState, useEffect, useCallback } from "react";
 import { buttonColorClassMap } from "../../../utils/ButtonConstants.js";
 import QuestionBoard from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/question_board.png";
@@ -17,10 +16,6 @@ export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
     const [remaining, setRemaining] = useState([]);
     const [currentQ, setCurrentQ] = useState(null);
     const [board, setBoard] = useState([]);
-    const [currentQ, setCurrentQ]   = useState(null);
-    const [board, setBoard]         = useState([]);
-    const {height} = useWindowSize()
-    const scale = Math.min(1, height / 1080);
 
     useEffect(() => {
         if (questions?.length) {
@@ -70,6 +65,9 @@ export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
             <div className="question-container flex">
                 <img className="question-board" src={QuestionBoard} alt="Question Board" />
                 <label>{currentQ.num1} {currentQ.operator} {currentQ.num2} {currentQ.equalsSign}</label>
+                <label></label>
+                <label></label>
+                <label></label>
             </div>
             <div className="board-answers">
                 {board.map((ans, i) => (
