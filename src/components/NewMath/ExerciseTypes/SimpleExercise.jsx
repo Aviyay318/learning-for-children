@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./ExerciseBoard.css"
 import BasicHelper from "../../Math/BasicMath/BasicHelper/BasicHelper.jsx";
 
-export default function SimpleExercise  ({ question, checkAnswer })  {
+export default function SimpleExercise  ({ question, setHint, checkAnswer })  {
     const [answer, setAnswer] = React.useState("");
 
     const handleSubmit = () => {
