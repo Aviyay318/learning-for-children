@@ -5,6 +5,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { SERVER_URL } from "../../utils/Constants.js";
 import { toast } from "react-toastify";
+import {ISLAND_CONFIGS} from "../../utils/IslandConfig.js";
+import Island from "../../components/Island/Island.jsx";
 
 export default function Homepage() {
     const location = useLocation();
@@ -61,33 +63,66 @@ export default function Homepage() {
         }
     };
 
+
     return (
         <div className="homepage-container flex">
-            <div className="homepage-header header glass">
-                <h1>דף הבית</h1>
-            </div>
-
-            <div className="homepage-body flex glass">
+            <div className={"homepage-content flex"}>
+                <div className="homepage-header glass">
+                    <label className={"header"}>ברוכים השבים!</label>
+                </div>
+                {/* name,
+                    className,
+                    island,
+                */}
                 <h1>שלבים</h1>
-                {levels.length !== 0 && (
-                    <table >
-                        <tbody>
-                        <tr>
-                            <td> האי  </td>
-                            <td> שלב  </td>
-                            <td>שיא  </td>
-                        </tr>
-                        {levels.map((level, index) => (
-                            <tr key={index}>
-                                <td>{level.island.name}</td>
-                                <td>{level.level}</td>
-                                <td>{level.highestLevel}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                )}
+
+                <div className="homepage-body flex">
+                    {levels.length > 0 ? (
+                        levels.map((level) => {
+                            // 🔍 Find the matching island config by its `id`
+                            const island = ISLAND_CONFIGS.find(
+                                (isl) => isl.id === level.island.id
+                            );
+                            if (!island) return null;
+
+                            return (
+                                <div key={island.id} className="homepage-island-card flex">
+                                    <Island
+                                        island={island.island}
+                                        cardBackground={island.cardBackground}
+                                        shouldFlip={false}
+                                    />
+                                    <label className={"level-label"}>
+                                        רמה {level.level}
+                                    </label>
+                                    <label className={"level-label"}>
+                                        רמה גבוהה {level.highestLevel}
+                                    </label>
+                                </div>
+                            );
+                        })
+                    ) : (
+                        <p>טוען השלבים שלך…</p>
+                    )}
+                    {/*{levels.length !== 0 && (*/}
+                    {/*    <table>*/}
+                    {/*        <tbody>*/}
+                    {/*        <tr>*/}
+                    {/*            <td>האי</td>*/}
+                    {/*            <td>שלב</td>*/}
+                    {/*        </tr>*/}
+                    {/*        {levels.map((level, index) => (*/}
+                    {/*            <tr key={index}>*/}
+                    {/*                <td>{level.island.name}</td>*/}
+                    {/*                <td>{level.level}</td>*/}
+                    {/*            </tr>*/}
+                    {/*        ))}*/}
+                    {/*        </tbody>*/}
+                    {/*    </table>*/}
+                    {/*)}*/}
+                </div>
             </div>
         </div>
+
     );
 }

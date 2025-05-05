@@ -86,7 +86,7 @@
     /*----------------*/
 
     /*shapes variables*/
-    --shapes-size-desktop: 80px;
+    --shapes-size-desktop: 100px;
     --shapes-size-tablet: 60px;
     --shapes-size-mobile: 40px;
     --shapes-size: var(--shapes-size-desktop);

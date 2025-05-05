@@ -8,8 +8,8 @@ export default function SimpleMath({ questionType, url }) {
         <ExerciseWrapper
             questionType={questionType}
             url={url}
-            renderComponent={(data, checkAnswer) => (
-                <SimpleExercise question={data} checkAnswer={checkAnswer} />
+            renderComponent={(data, setHint,checkAnswer) => (
+                <SimpleExercise question={data} setHint={setHint} checkAnswer={checkAnswer} />
             )}
         />
     );

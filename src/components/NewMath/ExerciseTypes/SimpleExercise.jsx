@@ -1,6 +1,6 @@
 import React from "react";
 import "./ExerciseBoard.css"
-import {ResponsiveLabel} from "../../ResponsiveLabel/ResponsiveLabel.jsx";
+import BasicHelper from "../../Math/BasicMath/BasicHelper/BasicHelper.jsx";
 
 export default function SimpleExercise  ({ question, checkAnswer })  {
     const [answer, setAnswer] = React.useState("");
@@ -9,6 +9,10 @@ export default function SimpleExercise  ({ question, checkAnswer })  {
         checkAnswer(answer);
         setAnswer("");
     };
+
+    useEffect(() => {
+        setHint(<BasicHelper num1={question.num1} num2={question.num2} operand={question.operator}/>)
+    }, []);
 
     return (
         <div className="exercise-board-container">

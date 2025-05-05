@@ -1,10 +1,10 @@
 // CompleteTheBoardExercise.jsx
 import "./CompleteTheBoardExercise.css"
 import React, { useState, useEffect, useCallback } from "react";
-import {buttonColorClassMap} from "../../../utils/ButtonConstants.js";
-import QuestionBoard from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/question_board.png"
-import YellowButton from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/yellow_button.png"
-import useWindowSize from "../../../hooks/responsiveHooks/useWindowSize.js";
+import { buttonColorClassMap } from "../../../utils/ButtonConstants.js";
+import QuestionBoard from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/question_board.png";
+import YellowButton from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/yellow_button.png";
+
 function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -15,24 +15,23 @@ function shuffle(arr) {
 
 export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
     const [remaining, setRemaining] = useState([]);
+    const [currentQ, setCurrentQ] = useState(null);
+    const [board, setBoard] = useState([]);
     const [currentQ, setCurrentQ]   = useState(null);
     const [board, setBoard]         = useState([]);
     const {height} = useWindowSize()
     const scale = Math.min(1, height / 1080);
 
-    // 1) whenever `questions` prop changes, reset our state
     useEffect(() => {
         if (questions?.length) {
-            setRemaining(questions.slice());   // copy
+            setRemaining(questions.slice());
             setCurrentQ(null);
             setBoard([]);
         }
     }, [questions]);
 
-    // 2) pick the next question + build its board
     const advance = useCallback(() => {
         if (remaining.length === 0) {
-            // we’ve exhausted this batch → tell parent to fetch a new one
             onRestart();
             return;
         }
@@ -41,13 +40,11 @@ export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
         setCurrentQ(next);
         setRemaining(rest);
 
-        // include this question's solution + the rest’s solutions
         const sols = [next.solution, ...rest.map((q) => q.solution)];
         shuffle(sols);
         setBoard(sols);
     }, [remaining, onRestart]);
 
-    // 3) on first load (or after a restart) kick off the first question
     useEffect(() => {
         if (remaining.length && currentQ === null) {
             advance();
@@ -57,40 +54,28 @@ export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
     const handleClick = (ans) => {
         if (!currentQ) return;
         if (ans === currentQ.solution) {
-            // if that was the LAST one, advance() will fire onRestart()
-            // otherwise we just advance to the next question
             advance();
         }
     };
 
-    // while we’re waiting for parent to fetch new questions, show a loader
     if (!currentQ) {
         return <div>טוען שאלות...</div>;
     }
 
     return (
-        <div className="complete flex" dir="rtl"
-             style={{
-                 transform: `scale(${scale})`,
-             }}
+        <div
+            className="complete-the-board-container flex"
+            dir="rtl"
         >
-            <div className="exercise-question flex">
-                <img className={"question-board flex"} src={QuestionBoard} alt="Question Board"/>
-                <label>{currentQ.num1}</label>
-                <label>{currentQ.operator}</label>
-                <label>{currentQ.num2}</label>
-                <label>{currentQ.equalsSign}</label>
+            <div className="question-container flex">
+                <img className="question-board" src={QuestionBoard} alt="Question Board" />
+                <label>{currentQ.num1} {currentQ.operator} {currentQ.num2} {currentQ.equalsSign}</label>
             </div>
-            <div className="options-button-box board-answers">
+            <div className="board-answers">
                 {board.map((ans, i) => (
-                    <div className={"answer-button flex"}>
-                        <img src={YellowButton} alt="Question Board"/>
-                        <button
-                            key={i}
-                            onClick={() => handleClick(ans)}
-                        >
-                            {ans}
-                        </button>
+                    <div className="answer-button flex" key={i}>
+                        <img src={YellowButton} alt="Question Board" />
+                        <button onClick={() => handleClick(ans)}>{ans}</button>
                     </div>
                 ))}
             </div>

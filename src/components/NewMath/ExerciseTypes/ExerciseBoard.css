@@ -3,13 +3,13 @@
     --board-background-color: #385723;
     --board-border-color: #ED7D32;
     --board-exercise-text-color: white;
-    --board-text-size: 8rem;
+    --board-text-size: 10rem;
 
     /* Layout & sizing */
     /* Change 16/9 to e.g. 4/3 if you want a squarer board */
     --board-aspect-ratio: 16 / 9;
     /* Drive the board’s width relative to viewport */
-    --board-width: 50vw;
+    --board-width: 45vw;
     --board-height: 50vh;
     /* Never exceed this width */
     --board-max-width: 900px;
@@ -17,7 +17,7 @@
     --board-container-min-height: 20vh;
     --board-padding: 1rem;
     /* Internal gaps/padding */
-    --board-gap: 4rem;
+    --board-gap: 3rem;
 }
 
 /* Center & size container */
@@ -66,7 +66,6 @@
     direction: ltr;
 }
 
-
 /* The row with question items */
 .exercise-question {
     width: 100%;
@@ -107,7 +106,7 @@
 .exercise-submit-button {
     margin-top: var(--board-gap);
     padding: 0.75rem 1.5rem;
-    font-size: 1.25rem;
+    font-size: 2.5rem;
     font-weight: bold;
     background: var(--board-border-color);
     color: white;

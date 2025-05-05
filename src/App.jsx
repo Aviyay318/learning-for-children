@@ -27,6 +27,8 @@ import {publicRoutes} from "./utils/Constants.js";
 import NavbarAdmin from "./components/NavbarAdmin/NavbarAdmin.jsx";
 import UserInfo from "./components/Admin/UserInfo.jsx";
 import StatisticsPage from "./components/Admin/StatisticsPage.jsx";
+import {ResponsiveProvider} from "./contexts/ResponsiveContext.jsx";
+import LayoutWrapper from "./utils/LayoutWrapper.jsx";
 
 function AppContent() {
     const location = useLocation();
@@ -35,16 +37,16 @@ function AppContent() {
 
     const isPublic = publicRoutes.some(path => location.pathname.startsWith(path));
     const showNavbar = token && user?.isVerified ;
-const print=()=>{
-    {
-        console.log("token:", token);
-        console.log("user:", user);
-        console.log("showNavbar:", showNavbar);
-        console.log("location:", location.pathname);
-        console.log("isPublic:", isPublic);
+    const print=()=>{
+        {
+            console.log("token:", token);
+            console.log("user:", user);
+            console.log("showNavbar:", showNavbar);
+            console.log("location:", location.pathname);
+            console.log("isPublic:", isPublic);
 
+        }
     }
-}
     return (
         <div
             className="App with-sky"
@@ -100,10 +102,12 @@ const print=()=>{
 export default function App() {
     return (
         <div className="App flex">
-            <BrowserRouter>
-                <LoadingOverlay />
-                <AppContent />
-            </BrowserRouter>
+
+                    <BrowserRouter>
+                        <LoadingOverlay />
+                        <AppContent />
+                    </BrowserRouter>
+
             <ToastContainer
                 position="top-right"
                 autoClose={5000}

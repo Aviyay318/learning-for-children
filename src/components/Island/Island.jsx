@@ -1,7 +1,9 @@
-import "./Island.css";
-import { useState } from "react";
+// 📁 src/components/Island/Island.jsx
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LOCK_ISLAND } from "../../utils/IslandConstants.js";
+import "./Island.css";
+
 const colorClassMap = {
     yellow: "btn btn-yellow",
     pink: "btn btn-pink",
@@ -25,6 +27,7 @@ export default function Island({
                                    islandKey,
                                    locked,
                                    onClick,
+                                   shouldFlip = true,       // ◀ default to “flip enabled”
                                }) {
     const [isFlipped, setIsFlipped] = useState(false);
     const navigate = useNavigate();
@@ -33,8 +36,11 @@ export default function Island({
         e.stopPropagation();
         if (locked) {
             onClick?.({ locked, islandKey });
+        } else if (shouldFlip) {
+            setIsFlipped((f) => !f);
         } else {
-            setIsFlipped((prev) => !prev);
+            // non-flipping islands just navigate on click
+            if (url) navigate(url);
         }
     };
 
@@ -43,26 +49,56 @@ export default function Island({
         if (url) navigate(url);
     };
 
+    // — if flipping is turned off, we’ll only render the front face,
+    //   clicking it goes straight to `url` (or does your locked callback).
+    if (!shouldFlip) {
+        return (
+            <div
+                className={`${className} island-container no-flip`}
+                onClick={handleClick}
+            >
+                <img
+                    className="island-background-image"
+                    style={!shouldFlip && {
+                        cursor: "pointer",
+
+                    }}
+                    src={cardBackground}
+                    alt=""
+                />
+                <img className="island-image" src={island} alt={name} />
+                {locked && (
+                    <div className="lock-overlay">
+                        <img src={LOCK_ISLAND} alt="locked" className="lock-icon" />
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    // — otherwise, full flipping card
     return (
-        <div
-            className={`${className} island-container`}
-            onClick={handleClick}
-        >
+        <div className={`${className} island-container`} onClick={handleClick}>
             <div className={`island-card ${isFlipped ? "flipped" : ""}`}>
                 {/* Front Face */}
                 <div className="island-card-face island-card-front">
-                    <img className="island-image" src={island} alt="island" />
+                    <img className="island-image" src={island} alt={name} />
                 </div>
 
                 {/* Back Face */}
                 <div className="island-card-face island-card-back">
+                    <img
+                        className="island-background-image"
+                        src={cardBackground}
+                        alt=""
+                    />
                     <label className="island-name">{name}</label>
-                    <img className="island-image" src={islandFlipped} alt="island" />
-                    <img className="island-background-image" src={cardBackground} alt="cardBackground" />
-
+                    <img className="island-image" src={islandFlipped} alt={name} />
                     {url && (
                         <button
-                            className={`island-entrance-button ${colorClassMap[buttonColor] || ""}`}
+                            className={`island-entrance-button ${
+                                colorClassMap[buttonColor] || ""
+                            }`}
                             onClick={handleEnterIsland}
                         >
                             היכנס!

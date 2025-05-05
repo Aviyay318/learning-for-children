@@ -6,6 +6,8 @@ export default function CompleteTheBoardNew({ questionType, url }) {
     return (
         <ExerciseWrapper
             questionType={questionType}
+            haveHint={false}
+            haveSolution={false}
             url={url}
             renderComponent={(data, checkAnswer) => (
                 <CompleteTheBoardExercise

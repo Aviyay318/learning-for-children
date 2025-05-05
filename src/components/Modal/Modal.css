@@ -1,0 +1,106 @@
+.modal{
+    position: absolute;
+    top: 0;
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /*border: 1rem solid deeppink;*/
+    backdrop-filter: blur(10px);
+    z-index: 999;
+
+}
+
+.modal-board-container{
+    position: relative;
+    /*border: 1rem solid deepskyblue;*/
+    width: 100%;
+    height: 100%;
+
+}
+.modal-board{
+    position: absolute;
+    width: 80rem;
+    z-index:-1;
+    box-shadow: 1px 1px 30px 2px rgba(0,0,0,0.3);
+    border-radius: 7rem;
+    /*border: 1rem solid greenyellow;*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modal-content{
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+    position: absolute;
+    /*border: 1rem solid orange;*/
+    z-index: 21;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+.modal-title-container{
+    width: 100px;
+    position: absolute;
+    z-index:22;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modal-title{
+    /*border: 1rem solid red;*/
+    position: relative;
+    top: 5rem;
+}
+.modal-title-image{
+    position: absolute;
+    width: 400px;
+}
+.modal-title-label{
+    position: absolute;
+    font-size: 5rem;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    z-index:999;
+}
+.modal-button-container{
+    width: 100px;
+    position: absolute;
+    z-index:21;
+    /*border: 1rem solid gold;*/
+    top: 20rem;
+    /*bottom: 0;*/
+
+}
+.modal-button{
+    position: relative;
+    transition: scale 0.1s ease;
+    /*bottom: 12rem;*/
+}
+.modal-button:hover{
+    scale: 1.2;
+}
+.modal-button img{
+    position: absolute;
+    width:15rem;
+}
+.modal-button button{
+    position: absolute;
+    direction: rtl;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: var(--font-size-very-large);
+    font-weight: bold;
+}

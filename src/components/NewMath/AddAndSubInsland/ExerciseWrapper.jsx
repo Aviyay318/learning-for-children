@@ -7,10 +7,11 @@ import useAnswerCheck from "../../../hooks/apiHooks/useAnswerCheck.js";
 import Cookies from "js-cookie";
 import {useUser} from "../../../contexts/UserContext.jsx";
 import "./AddAndSubIsland.css"
-import {GET_LEVEL_OF_ISLAND, GET_USER_OPEN_ISLAND, SERVER_URL} from "../../../utils/Constants.js";
-import axios from "axios";
-
-export default function ExerciseWrapper({ questionType, renderComponent, url, customCheckAnswer }) {
+import NextQuestion from "/src/assets/images/Islands/Props/ExercisePage/next_question.png"
+import TakeHint from "/src/assets/images/Islands/Props/ExercisePage/take_hint.png"
+import RevealAnswer from "/src/assets/images/Islands/Props/ExercisePage/reveal_answer.png"
+import Modal from "../../Modal/Modal.jsx";
+export default function ExerciseWrapper({ questionType, haveHint=true,haveSolution=true,renderComponent, url, customCheckAnswer }) {
     const { islandId } = useParams();
     const island = ISLAND_CONFIGS_MAP[islandId];
 
@@ -18,12 +19,16 @@ export default function ExerciseWrapper({ questionType, renderComponent, url, cu
     const [showHint, setShowHint] = useState(false);
     const [usedClue, setUsedClue] = useState(false);
     const [solutionTime, setSolutionTime] = useState(0);
+    const [hint, setHint] = useState(null);
     const { user, setUser } = useUser();
+
     const { data, error, sendRequest } = useApi(url, "GET", { minDelay: 0 });
     const { checkAnswer, feedback, showSolution, setShowSolution, resetTimer, startTimeRef } = useAnswerCheck({ questionType, setUser });
     const [level,setLevel]= useState(1);
     const [highestLevel,setHighestLevel]= useState(1);
 
+    const [rightHovered, setRightHovered] = useState(false);
+    const [leftHovered,  setLeftHovered]  = useState(false);
 
 
     const loadNewQuestion = async () => {
@@ -85,7 +90,7 @@ console.log("כדי לא לשגע את רם: ",result)
 
     return (
         <div className="simple island-math-container"
-             style={{backgroundImage: "url("+`${island.children}`+")"}}
+             // style={{backgroundImage: "url("+`${island.children}`+")"}}
              dir="rtl">
             {loading ? (
                 <div>טוען שאלה...</div>
@@ -95,20 +100,51 @@ console.log("כדי לא לשגע את רם: ",result)
                 <div>שאלה לא זמינה כרגע</div>
             ) : (
                 <div className="simple island-math-box flex">
-                    {/*<SimpleExercise question={data} checkAnswer={handleCheck} />*/}
                     <div>level :{level} | highestLevel: {highestLevel}</div>
-                    {renderComponent(data, handleCheck, solutionTime)}
 
-                    <div className="text-sm text-gray-600 mt-2">⏱ זמן פתרון: {solutionTime} שניות</div>
+                    <div className={"exercise-right-container flex"}
+                         onClick={loadNewQuestion}
+                         onMouseEnter={()=> setRightHovered(true)}
+                         onMouseLeave={()=> setRightHovered(false)}
+                         style={{backgroundImage: "url("+`${rightHovered?island.child1Happy:island.child1}`+")"}}>
+                        {rightHovered && <img className={"exercise-page-prop-images"} src={NextQuestion} alt="NextQuestion" />}
+                        {/*<button  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">שאלה הבאה</button>*/}
+                    </div>
+                    <div className={"exercise-middle-container"}>
+                        <div className="text-sm text-gray-600 mt-2">⏱ זמן פתרון: {solutionTime} שניות</div>
+                        {/*<SimpleExercise question={data} checkAnswer={handleCheck} />*/}
+                        {renderComponent(data, setHint,handleCheck, solutionTime)}
+                        {feedback && <div className="text-lg font-semibold text-purple-700">{feedback}</div>}
+                        {showSolution && <div className="text-green-800 font-bold">הפתרון הנכון הוא: {data.solution}</div>}
 
-                    {feedback && <div className="text-lg font-semibold text-purple-700">{feedback}</div>}
-                    {showSolution && <div className="text-green-800 font-bold">הפתרון הנכון הוא: {data.solution}</div>}
-                    {showHint && <div className="text-orange-600 font-medium">טיפ: נסה לפרק את המספרים 🍊</div>}
+                        {showHint &&
+                            <Modal showModal={showHint} title={"רמז"} setShowModal={setShowHint} component={hint}/>
+                        }
 
-                    <div className="flex gap-4 mt-4">
-                        <button onClick={loadNewQuestion} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">שאלה הבאה</button>
-                        <button onClick={() => setShowSolution(true)} className="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded">הצג פתרון</button>
-                        <button onClick={() => { setShowHint(true); setUsedClue(true); }} className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded">הצג עזר</button>
+                    </div>
+
+                    <div className={"exercise-left-container flex"}
+                         onMouseEnter={()=> setLeftHovered(true)}
+                         onMouseLeave={()=> setLeftHovered(false)}
+                         style={{backgroundImage: "url("+`${leftHovered?island.child2Happy:island.child2}`+")"}}>
+
+                        {leftHovered &&
+                            <div className={"exercise-left-container-options flex"}>
+                                {
+                                    haveHint &&
+                                    <img className={"exercise-page-prop-images"} onClick={() => {
+                                        setShowHint(!showHint);
+                                        setUsedClue(!usedClue);}}
+                                         src={TakeHint} alt="NextQuestion"/>
+                                }
+                                {
+                                    haveSolution &&
+                                    <img className={"exercise-page-prop-images"}
+                                      onClick={() => setShowSolution(!showSolution)}
+                                      src={RevealAnswer} alt="NextQuestion"/>
+                                }
+                            </div>
+                        }
                     </div>
                 </div>
             )}

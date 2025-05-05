@@ -4,6 +4,10 @@ import simpleMathIslandFlipped from "/src/assets/images/Islands/SimpleMathIsland
 import greenCardBg from "/src/assets/images/Islands/SimpleMathIsland/green_card_background.png";
 import simpleMathBackground from "/src/assets/images/Islands/SimpleMathIsland/simple_math_background.png"
 import simpleMathChildren from "/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1.png"
+import simpleMathBoy from "/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1_boy.png"
+import simpleMathBoyHappy from "/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1_boy_happy.png"
+import simpleMathGirlHappy from "/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1_girl_happy.png"
+import simpleMathGirl from "/src/assets/images/Islands/SimpleMathIsland/questions/simple_math_1_girl.png"
 import simpleMathChildrenThinking from "/src/assets/images/Islands/SimpleMathIsland/simple_math_island_kid_thinking.png"
 
 export const SIMPLE_MATH_ISLAND = simpleMathIsland;
@@ -11,6 +15,10 @@ export const SIMPLE_MATH_ISLAND_FLIPPED = simpleMathIslandFlipped;
 export const SIMPLE_MATH_ISLAND_BACKGROUND = greenCardBg;
 export const SIMPLE_MATH_BACKGROUND = simpleMathBackground;
 export const SIMPLE_MATH_CHILDREN = simpleMathChildren;
+export const SIMPLE_MATH_BOY = simpleMathBoy;
+export const SIMPLE_MATH_BOY_HAPPY = simpleMathBoyHappy;
+export const SIMPLE_MATH_GIRL = simpleMathGirl;
+export const SIMPLE_MATH_GIRL_HAPPY = simpleMathGirlHappy;
 export const SIMPLE_MATH_CHILDREN_THINKING = simpleMathChildrenThinking;
 
 // multiplicationIsland
@@ -19,6 +27,11 @@ import multiplicationIslandFlipped from "/src/assets/images/Islands/Multiplicati
 import yellowCardBg from "/src/assets/images/Islands/MultiplicationIsland/yellow_card_background.png";
 import multiplicationBackground from "/src/assets/images/Islands/MultiplicationIsland/multipllication_background.png"
 import multiplicationChildren from "/src/assets/images/Islands/MultiplicationIsland/questions/multiplication_1.png"
+import multiplicationBoy from "/src/assets/images/Islands/MultiplicationIsland/questions/multiplication_1_boy.png"
+import multiplicationBoyHappy from "/src/assets/images/Islands/MultiplicationIsland/questions/multiplication_1_boy_happy.png"
+import multiplicationGirlHappy from "/src/assets/images/Islands/MultiplicationIsland/questions/multiplication_1_girl_happy.png"
+import multiplicationGirl from "/src/assets/images/Islands/MultiplicationIsland/questions/multiplication_1_girl.png"
+
 import multiplicationChildrenThinking from "/src/assets/images/Islands/MultiplicationIsland/multiplication_island_kid_thinking.png"
 
 export const MULTIPLICATION_ISLAND = multiplicationIsland;
@@ -26,6 +39,10 @@ export const MULTIPLICATION_ISLAND_FLIPPED = multiplicationIslandFlipped;
 export const MULTIPLICATION_ISLAND_BACKGROUND = yellowCardBg;
 export const MULTIPLICATION_BACKGROUND = multiplicationBackground;
 export const MULTIPLICATION_CHILDREN = multiplicationChildren;
+export const MULTIPLICATION_BOY = multiplicationBoy;
+export const MULTIPLICATION_BOY_HAPPY = multiplicationBoyHappy;
+export const MULTIPLICATION_GIRL = multiplicationGirl;
+export const MULTIPLICATION_GIRL_HAPPY = multiplicationGirlHappy;
 export const MULTIPLICATION_CHILDREN_THINKING = multiplicationChildrenThinking;
 
 // divisionIsland

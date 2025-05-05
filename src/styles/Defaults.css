@@ -35,3 +35,10 @@ input[type="number"] {
     justify-content: center;
     align-items: center;
 }
+
+/* styles/ResponsiveLabel.css */
+.responsive-label {
+    transition: font-size 0.2s ease-in-out;
+    white-space: nowrap;
+}
+

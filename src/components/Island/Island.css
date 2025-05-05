@@ -36,6 +36,10 @@
 .island-card-back {
     transform: rotateY(180deg);
     border-radius: 10%;
+    /*scale: ;*/
+}
+.island-card-back .island-image{
+    scale: 0.8;
 }
 .island-image {
     position: absolute;
@@ -46,10 +50,7 @@
     transition: scale 0.3s ease;
 }
 .island-image:hover {
-    scale: 1.1;
-}
-.island-image:hover{
-    scale:1.1;
+    scale: 1;
 }
 
 .island-background-image {
