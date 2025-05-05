@@ -3,22 +3,21 @@
     --board-background-color: #385723;
     --board-border-color: #ED7D32;
     --board-exercise-text-color: white;
-    --board-text-size-big: 10rem;
-    --board-text-size-small: 8rem;
+    --board-text-size: 8rem;
 
     /* Layout & sizing */
     /* Change 16/9 to e.g. 4/3 if you want a squarer board */
     --board-aspect-ratio: 16 / 9;
     /* Drive the board’s width relative to viewport */
     --board-width: 50vw;
-    --board-height: 45vh;
+    --board-height: 50vh;
     /* Never exceed this width */
     --board-max-width: 900px;
     /* Ensure the container is tall enough */
     --board-container-min-height: 20vh;
     --board-padding: 1rem;
     /* Internal gaps/padding */
-    --board-gap: 3rem;
+    --board-gap: 4rem;
 }
 
 /* Center & size container */
@@ -66,11 +65,7 @@
     box-sizing: border-box;
     direction: ltr;
 }
-.question-board{
-    position: absolute;
-    z-index: -1;
-    width: var(--board-width);
-}
+
 
 /* The row with question items */
 .exercise-question {
@@ -78,21 +73,20 @@
     height: 100%;
     display: flex;
     align-items: center;
+    text-align: center;
+    justify-content: center;
     gap: var(--board-gap);
     position: relative;
     direction: ltr;
-    overflow: auto;
 }
 
 /* Big numbers/text */
 .exercise-question label,
 .exercise-question input {
+    font-size: var(--board-text-size);
     font-weight: bold;
     color: var(--board-exercise-text-color);
-    font-size: var(--board-text-size-small);
-
 }
-/*.exercise-question label*/
 
 /* Input styling */
 .exercise-question input {
@@ -133,11 +127,7 @@
     /*background: var(--board-background-color);*/
     width: var(--board-max-width);
 }
-.board-answers{
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-}
+
 .option-button{
     font-size: 3rem;
     font-weight: bold;
@@ -150,9 +140,4 @@
 }
 .option-button:hover{
     scale: 1.2;
-}
-.complete{
-    width: auto;
-    height: auto;
-    /*gap: 20rem;*/
 }

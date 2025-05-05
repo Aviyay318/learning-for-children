@@ -70,16 +70,18 @@ export default function Homepage() {
             <div className="homepage-body flex glass">
                 <h1>שלבים</h1>
                 {levels.length !== 0 && (
-                    <table>
+                    <table >
                         <tbody>
                         <tr>
-                            <td>האי</td>
-                            <td>שלב</td>
+                            <td> האי  </td>
+                            <td> שלב  </td>
+                            <td>שיא  </td>
                         </tr>
                         {levels.map((level, index) => (
                             <tr key={index}>
                                 <td>{level.island.name}</td>
                                 <td>{level.level}</td>
+                                <td>{level.highestLevel}</td>
                             </tr>
                         ))}
                         </tbody>

@@ -7,6 +7,8 @@ import useAnswerCheck from "../../../hooks/apiHooks/useAnswerCheck.js";
 import Cookies from "js-cookie";
 import {useUser} from "../../../contexts/UserContext.jsx";
 import "./AddAndSubIsland.css"
+import {GET_LEVEL_OF_ISLAND, GET_USER_OPEN_ISLAND, SERVER_URL} from "../../../utils/Constants.js";
+import axios from "axios";
 
 export default function ExerciseWrapper({ questionType, renderComponent, url, customCheckAnswer }) {
     const { islandId } = useParams();
@@ -17,9 +19,10 @@ export default function ExerciseWrapper({ questionType, renderComponent, url, cu
     const [usedClue, setUsedClue] = useState(false);
     const [solutionTime, setSolutionTime] = useState(0);
     const { user, setUser } = useUser();
-
     const { data, error, sendRequest } = useApi(url, "GET", { minDelay: 0 });
     const { checkAnswer, feedback, showSolution, setShowSolution, resetTimer, startTimeRef } = useAnswerCheck({ questionType, setUser });
+    const [level,setLevel]= useState(1);
+    const [highestLevel,setHighestLevel]= useState(1);
 
 
 
@@ -43,10 +46,20 @@ export default function ExerciseWrapper({ questionType, renderComponent, url, cu
 
         setLoading(false);
     };
-
+const getLevel= ()=>{
+    const token = Cookies.get("token");
+    axios.get(SERVER_URL+GET_LEVEL_OF_ISLAND+"?token="+token+"&islandId="+island.id).then((res) => {
+        if (res!==null) {
+            console.log(res.data, " =res.data= ")
+setLevel(res.data.level)
+            setHighestLevel(res.data.highestLevel)
+        }
+    })
+}
     useEffect(() => {
         console.log("⏳ Fetching question...");
         loadNewQuestion();
+        getLevel()
     }, []);
 
 
@@ -64,7 +77,9 @@ export default function ExerciseWrapper({ questionType, renderComponent, url, cu
         const result = customCheckAnswer
             ? await customCheckAnswer(answer, data)
             : await checkAnswer({ userAnswer: answer, data, usedClue });
-
+        setLevel(result.level.level)
+        setHighestLevel(result.level.highestLevel);
+console.log("כדי לא לשגע את רם: ",result)
         return result;
     };
 
@@ -81,6 +96,7 @@ export default function ExerciseWrapper({ questionType, renderComponent, url, cu
             ) : (
                 <div className="simple island-math-box flex">
                     {/*<SimpleExercise question={data} checkAnswer={handleCheck} />*/}
+                    <div>level :{level} | highestLevel: {highestLevel}</div>
                     {renderComponent(data, handleCheck, solutionTime)}
 
                     <div className="text-sm text-gray-600 mt-2">⏱ זמן פתרון: {solutionTime} שניות</div>

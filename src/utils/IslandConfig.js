@@ -92,6 +92,7 @@ const ISLAND_CONFIGS = [
         island: LONG_ADDITION_SUBTRACTION_ISLAND,
         cardBackground: LONG_ADDITION_SUBTRACTION_ISLAND_BACKGROUND,
         url: "/island/longAddSubIsland",
+        exerciseUrl:"/api/islands/long-addition-and-subtraction",
         buttonColor: "pink",
     },
     {
@@ -102,6 +103,7 @@ const ISLAND_CONFIGS = [
         island: LONG_MULTIPLICATION_DIVISION_ISLAND,
         cardBackground: LONG_MULTIPLICATION_DIVISION_ISLAND_BACKGROUND,
         url: "/island/longMultDivIsland",
+        exerciseUrl:"/api/islands/long-multiplication-and-division",
         buttonColor: "white",
     },
     {
@@ -112,6 +114,7 @@ const ISLAND_CONFIGS = [
         island: HORROR_ISLAND,
         cardBackground: HORROR_ISLAND_BACKGROUND,
         url: "/island/horrorIsland",
+        exerciseUrl:"/api/islands/mixed-challenge-island",
         buttonColor: "deepBlue",
     },
     {
@@ -122,6 +125,7 @@ const ISLAND_CONFIGS = [
         island: EQUATIONS_ISLAND,
         cardBackground: EQUATIONS_ISLAND_BACKGROUND,
         url: "/island/equationsIsland",
+        exerciseUrl:"/api/islands/equations-island",
         buttonColor: "purple",
     },
 ];

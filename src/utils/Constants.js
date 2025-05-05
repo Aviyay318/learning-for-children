@@ -33,6 +33,7 @@ export const publicRoutes = [
     '/newPassword',
     '/otp'
 ];
+export const GET_LEVEL_OF_ISLAND= "/api/islands/get-level-of-island";
 
 
 

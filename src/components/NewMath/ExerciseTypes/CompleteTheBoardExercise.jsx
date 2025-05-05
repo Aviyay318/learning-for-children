@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import {buttonColorClassMap} from "../../../utils/ButtonConstants.js";
 import QuestionBoard from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/question_board.png"
 import YellowButton from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/yellow_button.png"
+import useWindowSize from "../../../hooks/responsiveHooks/useWindowSize.js";
 function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -16,6 +17,8 @@ export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
     const [remaining, setRemaining] = useState([]);
     const [currentQ, setCurrentQ]   = useState(null);
     const [board, setBoard]         = useState([]);
+    const {height} = useWindowSize()
+    const scale = Math.min(1, height / 1080);
 
     // 1) whenever `questions` prop changes, reset our state
     useEffect(() => {
@@ -66,7 +69,11 @@ export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
     }
 
     return (
-        <div className="complete flex" dir="rtl">
+        <div className="complete flex" dir="rtl"
+             style={{
+                 transform: `scale(${scale})`,
+             }}
+        >
             <div className="exercise-question flex">
                 <img className={"question-board flex"} src={QuestionBoard} alt="Question Board"/>
                 <label>{currentQ.num1}</label>
@@ -76,13 +83,15 @@ export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
             </div>
             <div className="options-button-box board-answers">
                 {board.map((ans, i) => (
-                    <button
-                        key={i}
-                        onClick={() => handleClick(ans)}
-                        className={"answer-button"}
-                    >
-                        {ans}
-                    </button>
+                    <div className={"answer-button flex"}>
+                        <img src={YellowButton} alt="Question Board"/>
+                        <button
+                            key={i}
+                            onClick={() => handleClick(ans)}
+                        >
+                            {ans}
+                        </button>
+                    </div>
                 ))}
             </div>
         </div>
