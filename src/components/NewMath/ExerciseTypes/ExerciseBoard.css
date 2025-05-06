@@ -9,10 +9,10 @@
     /* Change 16/9 to e.g. 4/3 if you want a squarer board */
     --board-aspect-ratio: 16 / 9;
     /* Drive the board’s width relative to viewport */
-    --board-width: 45vw;
+    --board-width: 55vw;
     --board-height: 50vh;
     /* Never exceed this width */
-    --board-max-width: 900px;
+    --board-max-width: 1200px;
     /* Ensure the container is tall enough */
     --board-container-min-height: 20vh;
     --board-padding: 1rem;

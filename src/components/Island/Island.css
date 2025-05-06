@@ -17,7 +17,21 @@
 .island-card.flipped {
     transform: rotateY(180deg);
 }
+/* make the no-flip container a flexbox and center its contents */
+.island-container.no-flip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* so the background-image can still be positioned absolutely */
+}
 
+/* put the background full-size behind everything */
+.no-flip .island-background-image {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    z-index: 0;
+}
 .island-card-face {
     position: absolute;
     width: 100%;

@@ -1,8 +1,9 @@
-import "./CompleteTheBoardExercise.css";
+// 📁 CompleteTheBoardExercise.jsx
 import React, { useState, useEffect, useCallback } from "react";
-import { buttonColorClassMap } from "../../../utils/ButtonConstants.js";
 import QuestionBoard from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/question_board.png";
 import YellowButton from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/yellow_button.png";
+import BlueButton   from "/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/blue_button.png";
+import "./CompleteTheBoardExercise.css";
 
 function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -13,67 +14,75 @@ function shuffle(arr) {
 }
 
 export const CompleteTheBoardExercise = ({ questions, onRestart }) => {
-    const [remaining, setRemaining] = useState([]);
-    const [currentQ, setCurrentQ] = useState(null);
+    const [questionIndex, setQuestionIndex] = useState(0);
+
+    // board: array of { value: number, isCorrect: boolean }
     const [board, setBoard] = useState([]);
 
     useEffect(() => {
-        if (questions?.length) {
-            setRemaining(questions.slice());
-            setCurrentQ(null);
-            setBoard([]);
-        }
+        if (!questions?.length) return;
+        const initBoard = shuffle(
+            questions.map((q, idx) => ({
+                id: idx,              // stable ID
+                value: q.solution,
+                isCorrect: false
+            }))
+        );
+        setBoard(initBoard);
+        setQuestionIndex(0);
     }, [questions]);
 
-    const advance = useCallback(() => {
-        if (remaining.length === 0) {
-            onRestart();
-            return;
-        }
+    const currentQ = questions[questionIndex];
 
-        const [next, ...rest] = remaining;
-        setCurrentQ(next);
-        setRemaining(rest);
+    const handleClick = useCallback(
+        (id) => {
+            // find that board entry
+            const clicked = board.find((b) => b.id === id);
+            if (!clicked || clicked.value !== currentQ.solution) return;
 
-        const sols = [next.solution, ...rest.map((q) => q.solution)];
-        shuffle(sols);
-        setBoard(sols);
-    }, [remaining, onRestart]);
+            // mark only that one correct
+            setBoard((prev) =>
+                prev.map((b) =>
+                    b.id === id ? { ...b, isCorrect: true } : b
+                )
+            );
 
-    useEffect(() => {
-        if (remaining.length && currentQ === null) {
-            advance();
-        }
-    }, [remaining, currentQ, advance]);
+            // advance or restart
+            if (questionIndex + 1 < questions.length) {
+                setQuestionIndex((i) => i + 1);
+            } else {
+                onRestart();
+            }
+        },
+        [board, currentQ, questionIndex, questions.length, onRestart]
+    );
 
-    const handleClick = (ans) => {
-        if (!currentQ) return;
-        if (ans === currentQ.solution) {
-            advance();
-        }
-    };
-
-    if (!currentQ) {
-        return <div>טוען שאלות...</div>;
+    if (!questions?.length) {
+        return <div>טוען שאלות…</div>;
     }
 
     return (
-        <div
-            className="complete-the-board-container flex"
-            dir="rtl"
-        >
+        <div className="complete-the-board-container flex" dir="rtl">
             <div className="question-container flex">
                 <img className="question-board" src={QuestionBoard} alt="Question Board" />
-                <label>{currentQ.num1} {currentQ.operator} {currentQ.num2} {currentQ.equalsSign}</label>
-                <label></label>
-                <label></label>
-                <label></label>
+                <label>
+                    {currentQ.num1} {currentQ.operator} {currentQ.num2} {currentQ.equalsSign}
+                </label>
             </div>
-            <div className="board-answers">
-                {board.map((ans, i) => (
-                    <div className="answer-button flex" key={i}>
-                        <img src={YellowButton} alt="Question Board" />
-                        <button onClick={() => handleClick(ans)}>{ans}</button>
+
+            <div className="board-answers flex">
+                {board.map((btn) => (
+                    <div className="answer-button flex" key={btn.id}>
+                        <img
+                            src={btn.isCorrect ? BlueButton : YellowButton}
+                            alt="answer button"
+                        />
+                        <button
+                            onClick={() => handleClick(btn.id)}   // pass btn.id, not array index
+                            disabled={btn.isCorrect}
+                        >
+                            {!btn.isCorrect && btn.value}
+                        </button>
                     </div>
                 ))}
             </div>

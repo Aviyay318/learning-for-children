@@ -13,6 +13,7 @@ import RevealAnswer from "/src/assets/images/Islands/Props/ExercisePage/reveal_a
 import Modal from "../../Modal/Modal.jsx";
 import axios from "axios";
 import {GET_LEVEL_OF_ISLAND, SERVER_URL} from "../../../utils/Constants.js";
+
 export default function ExerciseWrapper({ questionType, haveHint=true,haveSolution=true,renderComponent, url, customCheckAnswer }) {
     const { islandId } = useParams();
     const island = ISLAND_CONFIGS_MAP[islandId];
@@ -102,7 +103,7 @@ console.log("כדי לא לשגע את רם: ",result)
                 <div>שאלה לא זמינה כרגע</div>
             ) : (
                 <div className="simple island-math-box flex">
-                    <div>level :{level} | highestLevel: {highestLevel}</div>
+                    {/*<div>level :{level} | highestLevel: {highestLevel}</div>*/}
 
                     <div className={"exercise-right-container flex"}
                          onClick={loadNewQuestion}
