@@ -35,10 +35,11 @@
     transform: translate(-50%, -50%);
 }
 .modal-content{
+    /*width:100%*/
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: fit-content;
+    width: 90rem;
     position: absolute;
     /*border: 1rem solid orange;*/
     z-index: 21;
@@ -46,6 +47,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
+}
+.modal-component{
+    position: relative;
+    width: 100%;
 }
 .modal-title-container{
     width: 100px;

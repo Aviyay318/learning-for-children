@@ -16,7 +16,9 @@ export default function ModalContent({ component, title, onClose }) {
                 </div>
                 <div className={"modal-content flex"}>
                     <img className={"modal-board"} src={ModalBoard} alt="Modal board" />
-                    {component}
+                    <div className={"modal-component"}>
+                        {component}
+                    </div>
                 </div>
                 <div className={"modal-button-container"}>
                     <div className={"modal-button flex"}>

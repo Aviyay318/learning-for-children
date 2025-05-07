@@ -1,7 +1,66 @@
 .canvas-container{
-    background-color: white;
-    width: 500px;
-    height: 500px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.canvas-right-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    height: 100%;
+}
+.canvas-exercise label{
+    font-size: var(--font-size-very-large);
+    font-weight: var(--font-weight-medium);
+}
+.canvas-content{
+    position: relative;
+    width: 80%;
+    height: 700px;
+    background-color: var(--board-background-color);
+    border: 1rem solid var(--board-border-color);
+    border-radius: 25px;
+}
+.toolbar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+.slider-label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.canvas-icon{
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+
+}
+.canvas-icon:hover{
+    transform: scale(1.2);
+}
+.selected{
+    opacity: 1;
+    transform: scale(1.2);
+    border: 2px solid #666;
+    border-radius: 50%;
 }
 .canvas-text{
     font-size: var(--font-size-very-large);
