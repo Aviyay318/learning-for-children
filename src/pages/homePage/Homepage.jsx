@@ -20,7 +20,6 @@ export default function Homepage() {
     const { user } = useUser();
     const [levels, setLevels] = useState([]);
     const token = Cookies.get("token");
-
     const carouselRef = useRef(null);
 
     const scrollByCard = (direction = 1) => {
@@ -83,7 +82,6 @@ export default function Homepage() {
 
     return (
         <div className="homepage-container flex">
-            <Modal title={"הוראות"} component={<Guide/>} showModal={true} />
             <div className={"homepage-content flex"}>
                 <div className="homepage-header">
                     <img className={"user-board"} src={UserBoard} alt="User Board"/>

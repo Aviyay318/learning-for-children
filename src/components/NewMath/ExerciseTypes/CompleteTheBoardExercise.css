@@ -2,7 +2,7 @@
 :root {
     --question-board: url("/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/question_board.png");
     --yellow-button: url("/src/assets/images/Islands/Props/MultiChoiceQuestionAssets/yellow_button.png");
-    --question-board-width: 30rem;
+    --question-board-width: 40rem;
     --question-board-height: 15rem;
     --question-board-text-size: 8rem;
 

@@ -37,7 +37,7 @@ function AppContent() {
     const { user } = useUser();
 
     const isPublic = publicRoutes.some(path => location.pathname.startsWith(path));
-    const showNavbar = token && user?.isVerified ;
+    const showNavbar = token && user?.isVerified && user?.user;
     const print=()=>{
         {
             console.log("token:", token);
@@ -45,7 +45,7 @@ function AppContent() {
             console.log("showNavbar:", showNavbar);
             console.log("location:", location.pathname);
             console.log("isPublic:", isPublic);
-
+            console.log("Loading NAVBAR TYPE:", user?.username === 'admin' ? 'ADMIN' : 'USER')
         }
     }
     return (
@@ -55,13 +55,13 @@ function AppContent() {
         >
             {print()}
             {showNavbar && (
-                user?.username === 'admin' ? (
+                user?.user?.username === 'admin' ? (
                     <NavbarAdmin
                         deleteCookies={() => {
                             Cookies.remove('token');
                             window.location.reload();
                         }}
-                        username={user?.username}
+                        username={user?.user?.username}
                     />
                 ) : (
                     <Navbar
@@ -69,10 +69,11 @@ function AppContent() {
                             Cookies.remove('token');
                             window.location.reload();
                         }}
-                        username={user?.username}
+                        username={user?.user?.username}
                     />
                 )
             )}
+
 
             <Routes>
                 {/* Public routes */}

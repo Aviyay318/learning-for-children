@@ -15,7 +15,7 @@ import Otp from "../../components/Otp/Otp.jsx";
 const Login = () => {
     const navigate = useNavigate();
     const [showOtp, setShowOtp] = useState(false);
-    const { setUser } = useUser();
+    const { user,setUser } = useUser();
 
     const { bubbleMessage, lockButton, showMessage, clearError } = useBubbleMessage();
 

@@ -2,15 +2,20 @@ import useApi from "../../hooks/apiHooks/useApi.js";
 import { GET_GUIDE } from "../../utils/Constants.js";
 import { useEffect } from "react";
 
-export default function Guide() {
-    const { data, sendRequest } = useApi(GET_GUIDE, "GET", { minDelay: 0 });
+export default function Guide({url, payload}) {
+    const { data, sendRequest } = useApi(url, "GET", { minDelay: 0 });
 
     useEffect(() => {
-        sendRequest();
+        if (payload){
+            sendRequest(payload); // שליחת אובייקט תקין
+        } else{
+            sendRequest()
+        }
+
     }, []);
 
     return (
-        <div style={{ direction: "rtl", padding: "1rem", background: "#fff8dc", borderRadius: "12px" }}>
+        <div style={{ direction: "rtl", padding: "1rem", borderRadius: "12px" }}>
             {data ? (
                 <div
                     dangerouslySetInnerHTML={{ __html: data }}

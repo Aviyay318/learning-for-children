@@ -36,3 +36,4 @@ export const publicRoutes = [
 export const GET_LEVEL_OF_ISLAND= "/api/islands/get-level-of-island";
 
 export const GET_GUIDE = "/get-instruction-of-game"
+export const GET_GUIDE_FOR_ISLAND = "/get-instruction-by-island-id"
