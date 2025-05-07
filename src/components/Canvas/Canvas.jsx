@@ -114,7 +114,6 @@ export default function Canvas({ text }) {
                     onTouchEnd={handleMouseUp}
                 >
                     <Layer>
-                        <Text className="canvas-text"  text={text} />
                         {lines.map((line, i) => (
                             <Line
                                 key={i}
