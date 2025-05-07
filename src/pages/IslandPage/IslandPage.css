@@ -41,7 +41,7 @@
 }
 .island-guide{
     position: absolute;
-    top: 20%;
+    top: 7rem;
     display: flex;
     flex-direction: row;
     /*gap:0;*/
