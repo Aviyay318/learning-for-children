@@ -83,8 +83,7 @@ export default function Homepage() {
 
     return (
         <div className="homepage-container flex">
-            {/*<Modal title={"הוראות"} component={<Guide/>} showModal={true} />*/}
-            <Guide/>
+            <Modal title={"הוראות"} component={<Guide/>} showModal={true} setShowModal={} />
             <div className={"homepage-content flex"}>
                 <div className="homepage-header">
                     <img className={"user-board"} src={UserBoard} alt="User Board"/>
