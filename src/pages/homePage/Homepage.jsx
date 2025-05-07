@@ -12,6 +12,7 @@ import BoyPicture from "/src/assets/images/Homepage/boy.png"
 import GirlPicture from "/src/assets/images/Homepage/girl.png"
 import {useUser} from "../../contexts/UserContext.jsx";
 import Modal from "../../components/Modal/Modal.jsx";
+import Guide from "../../components/Guide/Guide.jsx";
 
 export default function Homepage() {
     const location = useLocation();
@@ -82,8 +83,8 @@ export default function Homepage() {
 
     return (
         <div className="homepage-container flex">
-            <Modal title={"הוראות"} />
-
+            {/*<Modal title={"הוראות"} component={<Guide/>} showModal={true} />*/}
+            <Guide/>
             <div className={"homepage-content flex"}>
                 <div className="homepage-header">
                     <img className={"user-board"} src={UserBoard} alt="User Board"/>
