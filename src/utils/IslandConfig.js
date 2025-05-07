@@ -32,7 +32,10 @@ import {
     SIMPLE_MATH_GIRL_HAPPY,
     MULTIPLICATION_BOY,
     MULTIPLICATION_BOY_HAPPY,
-    MULTIPLICATION_GIRL, MULTIPLICATION_GIRL_HAPPY,
+    MULTIPLICATION_GIRL,
+    MULTIPLICATION_GIRL_HAPPY,
+    FLOATING_POINT_ISLAND_FLIPPED,
+    LONG_ADDITION_SUBTRACTION_ISLAND_FLIPPED,
 } from "./IslandConstants.js";
 
 // 💡 Main config as an array
@@ -95,6 +98,7 @@ const ISLAND_CONFIGS = [
         name: "האי העשרוני",
         className: "floatingPointIsland",
         island: FLOATING_POINT_ISLAND,
+        islandFlipped: FLOATING_POINT_ISLAND_FLIPPED,
         cardBackground: FLOATING_POINT_ISLAND_BACKGROUND,
         url: "/island/floatingPointIsland",
         exerciseUrl:"/api/islands/floating-point",
@@ -106,6 +110,7 @@ const ISLAND_CONFIGS = [
         name: "אי החיבור והחיסור הארוך",
         className: "longAddSubIsland",
         island: LONG_ADDITION_SUBTRACTION_ISLAND,
+        islandFlipped: LONG_ADDITION_SUBTRACTION_ISLAND_FLIPPED,
         cardBackground: LONG_ADDITION_SUBTRACTION_ISLAND_BACKGROUND,
         url: "/island/longAddSubIsland",
         exerciseUrl:"/api/islands/long-addition-and-subtraction",

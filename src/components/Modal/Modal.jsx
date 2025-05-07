@@ -6,7 +6,7 @@ export default function Modal({component, title,showModal, setShowModal}) {
     return (
         <>
             {showModal && createPortal(
-                <ModalContent onClose={() => setShowModal(false)} title={title} component={component}/>,
+                <ModalContent onClose={() => setShowModal(true)} title={title} component={component}/>,
                 document.body
             )}
         </>

@@ -31,7 +31,6 @@ import multiplicationBoy from "/src/assets/images/Islands/MultiplicationIsland/q
 import multiplicationBoyHappy from "/src/assets/images/Islands/MultiplicationIsland/questions/multiplication_1_boy_happy.png"
 import multiplicationGirlHappy from "/src/assets/images/Islands/MultiplicationIsland/questions/multiplication_1_girl_happy.png"
 import multiplicationGirl from "/src/assets/images/Islands/MultiplicationIsland/questions/multiplication_1_girl.png"
-
 import multiplicationChildrenThinking from "/src/assets/images/Islands/MultiplicationIsland/multiplication_island_kid_thinking.png"
 
 export const MULTIPLICATION_ISLAND = multiplicationIsland;
@@ -60,18 +59,37 @@ export const DIVISION_CHILDREN = divisionChildren;
 
 
 
-// divisionIsland
+// floating point island
 import floatingPointIsland from "/src/assets/images/Islands/FloatingPointIsland/floating_point_island.png";
+import floatingPointIslandFlipped from "/src/assets/images/Islands/FloatingPointIsland/floating_point_island_flipped.png";
+import woodCardBg from "/src/assets/images/Islands/FloatingPointIsland/wood_card_background.png";
+export const FLOATING_POINT_ISLAND = floatingPointIsland;
+export const FLOATING_POINT_ISLAND_FLIPPED = floatingPointIslandFlipped;
+export const FLOATING_POINT_ISLAND_BACKGROUND = woodCardBg;
+
+// long add and sub island
 import longAddSubIsland from "/src/assets/images/Islands/LongAddAndSubIsland/long_addition_subtraction_island.png";
+import longAddSubIslandFlipped from "/src/assets/images/Islands/LongAddAndSubIsland/long_addition_subtraction_island_flipped.png";
+import purpleCardBg from "/src/assets/images/Islands/LongAddAndSubIsland/purple_card_background.png";
+export const LONG_ADDITION_SUBTRACTION_ISLAND = longAddSubIsland;
+export const LONG_ADDITION_SUBTRACTION_ISLAND_FLIPPED = longAddSubIslandFlipped;
+export const LONG_ADDITION_SUBTRACTION_ISLAND_BACKGROUND = purpleCardBg;
+
+
+
+// long mult and div island
 import longMultDivIsland from "/src/assets/images/Islands/LongMultAndDivIsland/long_multiplication_division_island.png";
+import coldCardBg from "/src/assets/images/Islands/LongMultAndDivIsland/cold_card_background.png";
+export const LONG_MULTIPLICATION_DIVISION_ISLAND = longMultDivIsland;
+export const LONG_MULTIPLICATION_DIVISION_ISLAND_BACKGROUND = coldCardBg;
+
+
+
 import horrorIsland from "/src/assets/images/Islands/HorrorIsland/horror_island.png";
 import equationsIsland from "/src/assets/images/Islands/EquationsIsland/equations_island.png";
 
 
 // Island card_backgrounds
-import woodCardBg from "/src/assets/images/Islands/FloatingPointIsland/wood_card_background.png";
-import purpleCardBg from "/src/assets/images/Islands/LongAddAndSubIsland/purple_card_background.png";
-import coldCardBg from "/src/assets/images/Islands/LongMultAndDivIsland/cold_card_background.png";
 import hotCardBg from "/src/assets/images/Islands/HorrorIsland/hot_card_background.png";
 import cosmicCardBg from "/src/assets/images/Islands/EquationsIsland/cosmic_card_background.png";
 
@@ -84,15 +102,9 @@ import unlockIcon from "/src/assets/images/Islands/Props/unlock.png";
 
 
 
-export const FLOATING_POINT_ISLAND = floatingPointIsland;
-export const LONG_ADDITION_SUBTRACTION_ISLAND = longAddSubIsland;
-export const LONG_MULTIPLICATION_DIVISION_ISLAND = longMultDivIsland;
 export const HORROR_ISLAND = horrorIsland;
 export const EQUATIONS_ISLAND = equationsIsland;
 
-export const FLOATING_POINT_ISLAND_BACKGROUND = woodCardBg;
-export const LONG_ADDITION_SUBTRACTION_ISLAND_BACKGROUND = purpleCardBg;
-export const LONG_MULTIPLICATION_DIVISION_ISLAND_BACKGROUND = coldCardBg;
 export const HORROR_ISLAND_BACKGROUND = hotCardBg;
 export const EQUATIONS_ISLAND_BACKGROUND = cosmicCardBg;
 

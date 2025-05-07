@@ -17,7 +17,32 @@ export default function ModalContent({ component, title,onClose }) {
                     </div>
                     <div className={"modal-content flex"}>
                         <img className={"modal-board"} src={ModalBoard} alt="Modal board" />
-                        {component}
+                        {/*{component}*/}
+                        <label>
+                            🧮 הוראות שימוש במערכת הלמידה:
+
+                            🎯 ניקוד:
+
+                            תשובה נכונה רגילה: %d נקודות.
+                            תשובה נכונה ללא שימוש ברמז בשאלה מילולית: %d נקודות.
+                            תשובה נכונה מהירה (פחות מ-2 דקות בשאלות טבלה): %d נקודות.
+                            שימוש ברמז: %d נקודות בלבד.
+                            תשובה שגויה: הפחתה של %d נקודות.
+
+                            ⬆️ קידום רמה:
+
+                            הצלחה של מעל %d%% מהשאלות + רצף של %d תשובות נכונות + %d תשובות מהירות – קידום מהיר.
+                            הצלחה רגילה (%d%% ומעלה) – קידום רגיל.
+                            הצלחה חלשה (פחות מ-%d%%) + רצף טעויות – ירידה ברמה.
+
+                            🧠 טיפים:
+
+                            נסה לענות מהר (פחות מ-%d שניות) כדי לקבל בונוס!
+                            שימוש ברמז מקטין ניקוד – השתמש בו רק כשצריך.
+                            טעות זה חלק מהלמידה! המערכת תתאים את הרמה עבורך.
+
+                            בהצלחה! 💪
+                        </label>
                         <div className={"modal-button-container"}>
                             <div className={"modal-button flex"}>
                                 <img  src={ModalButton} alt="Modal button" />

@@ -29,6 +29,7 @@ import UserInfo from "./components/Admin/UserInfo.jsx";
 import StatisticsPage from "./components/Admin/StatisticsPage.jsx";
 import {ResponsiveProvider} from "./contexts/ResponsiveContext.jsx";
 import LayoutWrapper from "./utils/LayoutWrapper.jsx";
+import Modal from "./components/Modal/Modal.jsx";
 
 function AppContent() {
     const location = useLocation();
