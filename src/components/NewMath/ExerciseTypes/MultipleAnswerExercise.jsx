@@ -24,6 +24,7 @@ export default function MultipleAnswerExercise({
     const handleClick = (val) => {
         setSelected(val);
         setShowFeedback(true);
+        console.log("val : ",val)
         checkAnswer(val);
         setTimeout(() => setShowFeedback(false), 1000);
     };

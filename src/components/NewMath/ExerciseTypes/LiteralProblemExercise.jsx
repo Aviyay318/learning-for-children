@@ -8,7 +8,7 @@ export default function LiteralProblemExercise({
                                                    hint,
                                                    userAnswer,
                                                    setUserAnswer,
-                                                   onCheckAnswer,
+                                                   checkAnswer,
                                                    onSpeak,
                                                    onHint,
                                                    onImageHint,
@@ -18,6 +18,13 @@ export default function LiteralProblemExercise({
                                                    countWithAudio,
                                                    activeImageIndex
                                                }) {
+
+    const handleSubmit = async () => {
+        const result = await checkAnswer({ userAnswer }); // שלח כאובייקט, לא רק מחרוזת
+        console.log("✔ תוצאה מהשרת:", result);
+    };
+
+
     return (
         <motion.div
             className="literal-problem-container"
@@ -26,7 +33,6 @@ export default function LiteralProblemExercise({
             transition={{ duration: 0.4 }}
         >
             <h2>בעיה מילולית</h2>
-
             <div className="images">
                 {svg1 && <div dangerouslySetInnerHTML={{ __html: svg1 }} className="svg-icon" />}
                 {svg2 && <div dangerouslySetInnerHTML={{ __html: svg2 }} className="svg-icon" />}
@@ -50,7 +56,7 @@ export default function LiteralProblemExercise({
                 <button className="speak-btn" onClick={onSpeak}>🔊 קריאה</button>
                 <button className="hint-btn" onClick={onHint}>רמז</button>
                 <button className="hint-btn" onClick={onImageHint}>רמז עם תמונות</button>
-                <button className="check-btn" onClick={onCheckAnswer}>בדוק פתרון</button>
+                <button className="check-btn" onClick={handleSubmit}>בדוק פתרון</button>
             </div>
 
             {showHint && hint && (

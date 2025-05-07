@@ -29,7 +29,7 @@ export default function ExerciseWrapper({ questionType, haveHint=true,haveSoluti
     const { user, setUser } = useUser();
 
     const { data, error, sendRequest } = useApi(url, "GET", { minDelay: 0 });
-    const { checkAnswer, feedback, showSolution, setShowSolution, resetTimer, startTimeRef } = useAnswerCheck({ questionType, setUser });
+    const { checkAnswer, feedback, showSolution, setShowSolution, resetTimer, startTimeRef,setFeedback } = useAnswerCheck({ questionType, setUser });
     const { levels, loading: levelsLoading } = useUserLevels();
     const myLevelObj = levels.find(l => l.island.id === island.id);
     const myLevel    = myLevelObj?.level ?? 1;
@@ -47,8 +47,13 @@ export default function ExerciseWrapper({ questionType, haveHint=true,haveSoluti
         const token = Cookies.get("token");
         if (!token || !questionType) return;
 
+
         setShowHint(false);
+        setShowSolution(false);
+        setHint(null);
         setUsedClue(false);
+        if (typeof setFeedback === "function") setFeedback(null);
+
         setLoading(true);
 
         const result = await sendRequest({ token, questionType });
@@ -63,7 +68,8 @@ export default function ExerciseWrapper({ questionType, haveHint=true,haveSoluti
 
         setLoading(false);
     };
-const getLevel= ()=>{
+
+    const getLevel= ()=>{
     const token = Cookies.get("token");
     axios.get(SERVER_URL+GET_LEVEL_OF_ISLAND+"?token="+token+"&islandId="+island.id).then((res) => {
         if (res!==null) {
@@ -90,15 +96,31 @@ setLevel(res.data.level)
     const handleCheck = async (answer) => {
         if (!data) return;
 
-        // Use a custom answer check if provided (like in LiteralProblem)
         const result = customCheckAnswer
             ? await customCheckAnswer(answer, data)
             : await checkAnswer({ userAnswer: answer, data, usedClue });
-        setLevel(result.level.level)
+
+        setLevel(result.level.level);
         setHighestLevel(result.level.highestLevel);
-console.log("כדי לא לשגע את רם: ",result)
+        console.log("כדי לא לשגע את רם: ", result);
+        //TODO FOR RAM REVIVO
+        if (result?.success) {
+            alert("כל הכבוד! תשובה נכונה 🎉");
+            setTimeout(() => {
+                loadNewQuestion();
+            }, 500);
+        }else {
+            alert(result.answer
+            +"טעית התשובה נכונה היא 🎉");
+            console.log("try: ,solutionMethod: "+result.solutionMethod)
+            setTimeout(() => {
+                loadNewQuestion();
+            }, 500);
+        }
+
         return result;
     };
+
 
     // function showGuideComponent() {
     //     return <Modal title={"הוראות"} component={<Guide/>} showModal={showGuide} setShowModal={setShowGuide}/>;
@@ -137,7 +159,7 @@ console.log("כדי לא לשגע את רם: ",result)
                         {/*<SimpleExercise question={data} checkAnswer={handleCheck} />*/}
                         {renderComponent(data, setHint, handleCheck, solutionTime, myLevel)}
                         {feedback && <div className="text-lg font-semibold text-purple-700">{feedback}</div>}
-                        {showSolution && <div className="text-green-800 font-bold">הפתרון הנכון הוא: {data.solution}</div>}
+                        {showSolution && <div className="text-green-800 font-bold">הדרך לפתרון {data.solutionMethod}</div>}
 
                     </div>
 

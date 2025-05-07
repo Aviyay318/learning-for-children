@@ -55,6 +55,7 @@ export default function useAnswerCheck({ questionType, setUser }) {
         showSolution,
         setShowSolution,
         resetTimer,
-        startTimeRef
+        startTimeRef,
+        setFeedback
     };
 }

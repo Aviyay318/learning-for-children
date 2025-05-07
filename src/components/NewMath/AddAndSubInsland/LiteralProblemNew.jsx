@@ -23,15 +23,18 @@ export default function LiteralProblemNew({ questionType, url }) {
             usedClue: showHint || showImageHint
         });
 
-        setSuccess(result?.success ?? false);
+        const isSuccess = result?.success ?? false;
+        setSuccess(isSuccess);
+        console.log("suc :", isSuccess);
 
-        if (result?.success && solutionTime <= 10) {
+        if (isSuccess && solutionTime <= 10) {
             setShowConfetti(true);
             setTimeout(() => setShowConfetti(false), 4000);
         }
 
         return result;
     };
+
 
 
     useEffect(() => {
@@ -57,7 +60,9 @@ export default function LiteralProblemNew({ questionType, url }) {
                         hint={data.hint}
                         userAnswer={userAnswer}
                         setUserAnswer={setUserAnswer}
-                        onCheckAnswer={() => checkAnswer(userAnswer)}
+                        checkAnswer={({ userAnswer }) =>
+                            customCheck(userAnswer, data)
+                        }
                         onSpeak={() => {
                             const utterance = new SpeechSynthesisUtterance(data?.question);
                             utterance.lang = "he-IL";
