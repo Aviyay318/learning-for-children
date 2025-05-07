@@ -1,12 +1,12 @@
-import { NavLink, useLocation } from "react-router-dom";
+import {NavLink, useLocation, useParams} from "react-router-dom";
 import "./Navbar.css";
 import useSetResponsiveProperty from "../../hooks/responsiveHooks/useSetResponsiveProperty.js";
 import { useUser } from "../../contexts/UserContext.jsx";
 
 import homepage from "/src/assets/images/Navbar/Icons/homepage.png";
 import profile from "/src/assets/images/Navbar/Icons/profile.png";
-import play from "/src/assets/images/Navbar/Icons/play.png";
 import map from "/src/assets/images/Navbar/Icons/map.png";
+import exerciseChooser from "/src/assets/images/Navbar/Icons/exercise_type_chooser.png";
 import settings from "/src/assets/images/Navbar/Icons/settings.png";
 import statistics from "/src/assets/images/Navbar/Icons/statistics.png";
 import coin from "/src/assets/images/Navbar/Icons/coin.png";
@@ -14,13 +14,35 @@ import logout from "/src/assets/images/Navbar/Icons/logout.png";
 import Cookies from "js-cookie";
 import { SERVER_URL } from "../../utils/Constants.js";
 import axios from "axios";
+import {useEffect} from "react";
 
 export default function Navbar({ deleteCookies }) {
     const { user, setUser } = useUser();
-    const location = useLocation();
     useSetResponsiveProperty("--navbar-svg-size");
 
-    const isOnIslandPage = location.pathname.startsWith("/island/") && location.pathname !== "/map";
+    const { pathname } = useLocation();
+
+    const segments = pathname.split("/").filter(Boolean);
+
+    // default to the map button
+    let middleIcon   = map;
+    let middleLinkTo = "/map";
+    let middleAlt    = "Map";
+
+    // if URL is at least "/island/:id/:anything"
+    if (segments[0] === "island" && segments.length >= 3) {
+        middleIcon   = exerciseChooser;
+        middleLinkTo = `/island/${segments[1]}`;
+        middleAlt    = "Choose Exercise";
+    }
+
+    useEffect(() => {
+        console.log(pathname)
+    },[pathname])
+
+    // const isOnIslandPage = location.pathname.startsWith("/island/") && location.pathname !== "/map";
+
+
 
     const logoutFunction = () => {
         const token = Cookies.get('token');
@@ -57,11 +79,11 @@ export default function Navbar({ deleteCookies }) {
                 <img className="navbar-icons profile" src={profile} alt="Profile" />
             </NavLink>
 
-            <NavLink to={isOnIslandPage ? "/map" : "/map"} className={({ isActive }) => isActive ? "active" : ""}>
+            <NavLink to={middleLinkTo} className={({ isActive }) => isActive ? "active" : ""}>
                 <img
                     className="navbar-icons play"
-                    src={isOnIslandPage ? map : play}
-                    alt={isOnIslandPage ? "Map" : "Play"}
+                    src={middleIcon}
+                    alt={middleAlt}
                 />
             </NavLink>
 
