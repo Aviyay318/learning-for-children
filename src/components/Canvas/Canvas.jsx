@@ -9,7 +9,7 @@ import { HexColorPicker } from "react-colorful";
 export default function Canvas({ text }) {
     const [tool, setTool] = useState("pen");
     const [penSize, setPenSize] = useState(5);
-    const [penColor, setColor] = useState("#000");
+    const [penColor, setColor] = useState("#fff");
     const [colorChooserVisible, setColorChooserVisible] = useState(false);
     const [eraserSize, setEraserSize] = useState(20);
     const [lines, setLines] = useState([]);
