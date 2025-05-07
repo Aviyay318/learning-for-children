@@ -6,8 +6,6 @@ import Cookies from "js-cookie";
 import QuestionTypeRadarChart from "./QuestionTypeRadarChart.jsx";
 import ProgressLineChart from "./ProgressLineChart.jsx";
 
-
-
 const typeColors = {
     "פעולות חשבון": "#e3f2fd",
     "בעיות מילוליות": "#fce4ec",
@@ -24,6 +22,15 @@ const typeIcons = {
     "לוח הכפל": "✖️",
     "שברים": "🧁",
     "כפל ארוך": "📐"
+};
+
+const typeDescriptions = {
+    "פעולות חשבון": "תרגילים כמו חיבור, חיסור, כפל וחילוק רגילים.",
+    "בעיות מילוליות": "שאלות טקסט שצריך להבין ולתרגם לפעולה מתמטית.",
+    "משוואות": "פתרון משוואות עם נעלמים – כמו x + 3 = 5.",
+    "לוח הכפל": "תרגילי כפל בסיסיים לפי לוח הכפל.",
+    "שברים": "שאלות עם שברים – חיבור, השוואה וכו'.",
+    "כפל ארוך": "כפל של מספרים גדולים בעמודות."
 };
 
 export default function Statistics() {
@@ -85,6 +92,7 @@ export default function Statistics() {
                                             style={{ backgroundColor: typeColors[type] || "#f0f0f0" }}
                                         >
                                             <h3>{typeIcons[type] || "❓"} {type}{getStarIfExcellent(data.correctRate)}</h3>
+                                            <p>{typeDescriptions[type]}</p>
                                             <p>🔢 שאלות: {data.total}</p>
                                             <p>✅ נכונות: {data.correct}</p>
                                             <p>📈 הצלחה: {data.correctRate}%</p>
@@ -114,11 +122,24 @@ export default function Statistics() {
                             {Object.entries(statistics.byIslandAndType || {}).map(([island, types]) => (
                                 <div key={island} className="island-card">
                                     <h3>{island}</h3>
-                                    <ul>
+                                    <table className="island-stats-table">
+                                        <thead>
+                                        <tr>
+                                            <th>סוג שאלה</th>
+                                            <th>כמה פעמים פתרת</th>
+                                            <th>הסבר</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
                                         {Object.entries(types).map(([type, count]) => (
-                                            <li key={type}>🔸 {type}: {count}</li>
+                                            <tr key={type}>
+                                                <td>{typeIcons[type] || "📘"} {type}</td>
+                                                <td>{count}</td>
+                                                <td>{typeDescriptions[type] || ""}</td>
+                                            </tr>
                                         ))}
-                                    </ul>
+                                        </tbody>
+                                    </table>
                                 </div>
                             ))}
                         </div>
