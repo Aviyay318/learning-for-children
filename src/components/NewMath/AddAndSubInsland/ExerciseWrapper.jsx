@@ -110,9 +110,9 @@ setLevel(res.data.level)
                 loadNewQuestion();
             }, 500);
         }else {
-            alert(result.answer
+            alert(data.solution
             +"טעית התשובה נכונה היא 🎉");
-            console.log("try: ,solutionMethod: "+result.solutionMethod)
+            console.log("try: ,solutionMethod: "+data.solutionMethod)
             setTimeout(() => {
                 loadNewQuestion();
             }, 500);
@@ -144,7 +144,9 @@ setLevel(res.data.level)
                         showModal={showHint}
                         setShowModal={setShowHint}
                     />
-                    {/*<div>level :{level} | highestLevel: {highestLevel}</div>*/}
+
+
+                    <h2>TODO RAM level :{level}</h2>
                     <div className={"exercise-right-container flex"}
                          onClick={loadNewQuestion}
                          onMouseEnter={()=> setRightHovered(true)}
