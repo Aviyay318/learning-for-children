@@ -36,6 +36,9 @@ import {
     MULTIPLICATION_GIRL_HAPPY,
     FLOATING_POINT_ISLAND_FLIPPED,
     LONG_ADDITION_SUBTRACTION_ISLAND_FLIPPED,
+    LONG_MULTIPLICATION_DIVISION_ISLAND_FLIPPED,
+    HORROR_ISLAND_FLIPPED,
+    EQUATIONS_ISLAND_FLIPPED,
 } from "./IslandConstants.js";
 
 // 💡 Main config as an array
@@ -122,6 +125,7 @@ const ISLAND_CONFIGS = [
         name: "אי הכפל והחילוק הארוך",
         className: "longMultDivIsland",
         island: LONG_MULTIPLICATION_DIVISION_ISLAND,
+        islandFlipped: LONG_MULTIPLICATION_DIVISION_ISLAND_FLIPPED,
         cardBackground: LONG_MULTIPLICATION_DIVISION_ISLAND_BACKGROUND,
         url: "/island/longMultDivIsland",
         exerciseUrl:"/api/islands/long-multiplication-and-division",
@@ -133,6 +137,7 @@ const ISLAND_CONFIGS = [
         name: "האי הסיוטי",
         className: "horrorIsland",
         island: HORROR_ISLAND,
+        islandFlipped: HORROR_ISLAND_FLIPPED,
         cardBackground: HORROR_ISLAND_BACKGROUND,
         url: "/island/horrorIsland",
         exerciseUrl:"/api/islands/mixed-challenge-island",
@@ -144,6 +149,7 @@ const ISLAND_CONFIGS = [
         name: "אי המשוואות",
         className: "equationsIsland",
         island: EQUATIONS_ISLAND,
+        islandFlipped: EQUATIONS_ISLAND_FLIPPED,
         cardBackground: EQUATIONS_ISLAND_BACKGROUND,
         url: "/island/equationsIsland",
         exerciseUrl:"/api/islands/equations-island",

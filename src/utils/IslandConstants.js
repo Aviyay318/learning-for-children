@@ -79,34 +79,36 @@ export const LONG_ADDITION_SUBTRACTION_ISLAND_BACKGROUND = purpleCardBg;
 
 // long mult and div island
 import longMultDivIsland from "/src/assets/images/Islands/LongMultAndDivIsland/long_multiplication_division_island.png";
+import longMultDivIslandFlipped from "/src/assets/images/Islands/LongMultAndDivIsland/long_multiplication_division_island_flipped.png";
 import coldCardBg from "/src/assets/images/Islands/LongMultAndDivIsland/cold_card_background.png";
 export const LONG_MULTIPLICATION_DIVISION_ISLAND = longMultDivIsland;
+export const LONG_MULTIPLICATION_DIVISION_ISLAND_FLIPPED = longMultDivIslandFlipped;
 export const LONG_MULTIPLICATION_DIVISION_ISLAND_BACKGROUND = coldCardBg;
 
-
-
+// horror island
 import horrorIsland from "/src/assets/images/Islands/HorrorIsland/horror_island.png";
-import equationsIsland from "/src/assets/images/Islands/EquationsIsland/equations_island.png";
-
-
-// Island card_backgrounds
+import horrorIslandFlipped from "/src/assets/images/Islands/HorrorIsland/horror_island_flipped.png";
 import hotCardBg from "/src/assets/images/Islands/HorrorIsland/hot_card_background.png";
+export const HORROR_ISLAND = horrorIsland;
+export const HORROR_ISLAND_FLIPPED = horrorIslandFlipped;
+export const HORROR_ISLAND_BACKGROUND = hotCardBg;
+
+// equations island
+import equationsIsland from "/src/assets/images/Islands/EquationsIsland/equations_island.png";
+import equationsIslandFlipped from "/src/assets/images/Islands/EquationsIsland/equations_island_flipped.png";
 import cosmicCardBg from "/src/assets/images/Islands/EquationsIsland/cosmic_card_background.png";
+export const EQUATIONS_ISLAND = equationsIsland;
+export const EQUATIONS_ISLAND_FLIPPED = equationsIslandFlipped;
+export const EQUATIONS_ISLAND_BACKGROUND = cosmicCardBg;
+
+
+
 
 // Misc card_backgrounds & Props
 import skyBackground from "/src/assets/images/Islands/sky_background.png";
 import lockIcon from "/src/assets/images/Islands/Props/lock.png";
 import unlockIcon from "/src/assets/images/Islands/Props/unlock.png";
 
-// Inner cardBackground (can reuse simpleMathIsland if desired)
-
-
-
-export const HORROR_ISLAND = horrorIsland;
-export const EQUATIONS_ISLAND = equationsIsland;
-
-export const HORROR_ISLAND_BACKGROUND = hotCardBg;
-export const EQUATIONS_ISLAND_BACKGROUND = cosmicCardBg;
 
 export const SKY_BACKGROUND = skyBackground;
 
