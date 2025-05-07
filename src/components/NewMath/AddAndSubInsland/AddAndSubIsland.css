@@ -43,6 +43,7 @@
     /*left: 0;*/
 }
 .exercise-middle-container{
+    position: relative;
     width: 70%;
     /*border: 1rem solid blue;*/
     height: 100%;
@@ -61,4 +62,19 @@
 .exercise-page-prop-images{
     width: 150px;
     height: 150px;
+}
+.exercise-guide{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    /*transform: translate(-50%, -50%);*/
+    width: 200px;
+    height: 200px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 1;
+}
+.exercise-guide:hover{
+    transform: scale(1.2);
 }

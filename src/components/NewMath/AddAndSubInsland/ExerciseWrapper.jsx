@@ -10,9 +10,12 @@ import "./AddAndSubIsland.css"
 import NextQuestion from "/src/assets/images/Islands/Props/ExercisePage/next_question.png"
 import TakeHint from "/src/assets/images/Islands/Props/ExercisePage/take_hint.png"
 import RevealAnswer from "/src/assets/images/Islands/Props/ExercisePage/reveal_answer.png"
+import ExerciseGuide from "/src/assets/images/Islands/Props/Guide/game_guide.png"
 import Modal from "../../Modal/Modal.jsx";
 import axios from "axios";
 import {GET_LEVEL_OF_ISLAND, SERVER_URL} from "../../../utils/Constants.js";
+import Guide from "../../Guide/Guide.jsx";
+import useUserLevels from "../../../hooks/apiHooks/useUserLevels.js";
 
 export default function ExerciseWrapper({ questionType, haveHint=true,haveSolution=true,renderComponent, url, customCheckAnswer }) {
     const { islandId } = useParams();
@@ -27,11 +30,17 @@ export default function ExerciseWrapper({ questionType, haveHint=true,haveSoluti
 
     const { data, error, sendRequest } = useApi(url, "GET", { minDelay: 0 });
     const { checkAnswer, feedback, showSolution, setShowSolution, resetTimer, startTimeRef } = useAnswerCheck({ questionType, setUser });
+    const { levels, loading: levelsLoading } = useUserLevels();
+    const myLevelObj = levels.find(l => l.island.id === island.id);
+    const myLevel    = myLevelObj?.level ?? 1;
+
     const [level,setLevel]= useState(1);
     const [highestLevel,setHighestLevel]= useState(1);
 
     const [rightHovered, setRightHovered] = useState(false);
     const [leftHovered,  setLeftHovered]  = useState(false);
+
+    const [showGuide, setShowGuide] = useState(true);
 
 
     const loadNewQuestion = async () => {
@@ -91,8 +100,12 @@ console.log("כדי לא לשגע את רם: ",result)
         return result;
     };
 
+    // function showGuideComponent() {
+    //     return <Modal title={"הוראות"} component={<Guide/>} showModal={showGuide} setShowModal={setShowGuide}/>;
+    // }
+
     return (
-        <div className="simple island-math-container"
+        <div className="simple island-math-container flex"
              // style={{backgroundImage: "url("+`${island.children}`+")"}}
              dir="rtl">
             {loading ? (
@@ -103,8 +116,13 @@ console.log("כדי לא לשגע את רם: ",result)
                 <div>שאלה לא זמינה כרגע</div>
             ) : (
                 <div className="simple island-math-box flex">
+                    <Modal
+                        title="רמז"
+                        component={hint}
+                        showModal={showHint}
+                        setShowModal={setShowHint}
+                    />
                     {/*<div>level :{level} | highestLevel: {highestLevel}</div>*/}
-
                     <div className={"exercise-right-container flex"}
                          onClick={loadNewQuestion}
                          onMouseEnter={()=> setRightHovered(true)}
@@ -114,15 +132,12 @@ console.log("כדי לא לשגע את רם: ",result)
                         {/*<button  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">שאלה הבאה</button>*/}
                     </div>
                     <div className={"exercise-middle-container"}>
+                        <img className={"exercise-guide"} src={ExerciseGuide} alt={"guide"} />
                         <div className="text-sm text-gray-600 mt-2">⏱ זמן פתרון: {solutionTime} שניות</div>
                         {/*<SimpleExercise question={data} checkAnswer={handleCheck} />*/}
-                        {renderComponent(data, setHint,handleCheck, solutionTime)}
+                        {renderComponent(data, setHint, handleCheck, solutionTime, myLevel)}
                         {feedback && <div className="text-lg font-semibold text-purple-700">{feedback}</div>}
                         {showSolution && <div className="text-green-800 font-bold">הפתרון הנכון הוא: {data.solution}</div>}
-
-                        {showHint &&
-                            <Modal showModal={showHint} title={"רמז"} setShowModal={setShowHint} component={hint}/>
-                        }
 
                     </div>
 

@@ -1,0 +1,9 @@
+.canvas-container{
+    background-color: white;
+    width: 500px;
+    height: 500px;
+}
+.canvas-text{
+    font-size: var(--font-size-very-large);
+
+}

@@ -1,8 +1,9 @@
 import React, {useEffect} from "react";
 import "./ExerciseBoard.css"
 import BasicHelper from "../../Math/BasicMath/BasicHelper/BasicHelper.jsx";
+import Canvas from "../../Canvas/Canvas.jsx";
 
-export default function SimpleExercise  ({ question, setHint, checkAnswer })  {
+export default function SimpleExercise  ({ question, level, setHint, checkAnswer })  {
     const [answer, setAnswer] = React.useState("");
 
     const handleSubmit = () => {
@@ -11,8 +12,22 @@ export default function SimpleExercise  ({ question, setHint, checkAnswer })  {
     };
 
     useEffect(() => {
-        setHint(<BasicHelper num1={question.num1} num2={question.num2} operand={question.operator}/>)
-    }, []);
+        // Decide which helper to show based on `level`
+        if (level >= 4) {
+            setHint(
+                <Canvas text={question.num1 + question.operator + question.num2 + question.equalsSign}
+                />
+            );
+        } else {
+            setHint(
+                <BasicHelper
+                    num1={question.num1}
+                    num2={question.num2}
+                    operand={question.operator}
+                />
+            );
+        }
+    }, [question, level, setHint]);
 
     return (
         <div className="exercise-board-container">
@@ -32,7 +47,6 @@ export default function SimpleExercise  ({ question, setHint, checkAnswer })  {
                         />
 
                     </div>
-
                 </div>
             )}
             <button

@@ -59,6 +59,28 @@
     cursor: pointer;
     transition: 0.2s;
     z-index: 1;
+.island-guide{
+    position: absolute;
+    top: 20%;
+    display: flex;
+    flex-direction: row;
+    /*gap:0;*/
+    align-items: center;
+    justify-content: left;
+    z-index: 1;
+    border: 1rem solid red;
+    cursor: pointer;
+
+    /*width: 80%;*/
+}
+.island-guide-img{
+    position: relative;
+    /*transform: translate(-50%, -50%);*/
+    width: 150px;
+    height: 150px;
+    transition: 0.2s;
+    z-index: 1;
+    cursor: pointer;
 
 }
 .island-guide-img:hover{
@@ -74,6 +96,26 @@
     width: 0;
     font-weight: bold;
     color: #D77701;
+    transition: 0.2s;
+    /*border: 1rem solid pink;*/
+
+}
+
+}
+.island-guide-img:hover{
+    transform: scale(1.1);
+}
+.island-guide-img:hover + .island-guide-label, .island-guide-label:hover{
+    font-size: 4rem;
+    width: 12rem;
+}
+.island-guide-label{
+    position: relative;
+    font-size: 0;
+    width: 0;
+    font-weight: bold;
+    color: #D77701;
+    cursor: pointer;
     transition: 0.2s;
     /*border: 1rem solid pink;*/
 
