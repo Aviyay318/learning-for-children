@@ -66,7 +66,7 @@ export default function ExerciseTypesChooser({island, onChoose, url }) {
                     <button
                         key={type.id}
                         className={`type-chooser ${palette[idx % palette.length]}`}
-                        onClick={() => onChoose(type.component)}
+                        onClick={() => onChoose(type.component, type.id)}
                         onMouseEnter={() => {
                             console.log("hovered button idx:", idx);
                             setHoveredIdx(idx);

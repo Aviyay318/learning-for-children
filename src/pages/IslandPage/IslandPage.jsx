@@ -1,19 +1,35 @@
 // 📁 src/pages/IslandPage/IslandPage.jsx
-import { useParams } from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import { ISLAND_CONFIGS_MAP } from "../../utils/IslandConfig.js";
 import "./IslandPage.css";
 import ExerciseTypesChooser from "../../components/NewMath/ExerciseTypes/ExerciseTypesChooser.jsx";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import IslandGuide from "../../assets/images/Islands/Props/Guide/island_guide.png";
 import Modal from "../../components/Modal/Modal.jsx";
 import Guide from "../../components/Guide/Guide.jsx";
 import {GET_GUIDE_FOR_ISLAND} from "../../utils/Constants.js";
+import TypeChooser   from "/src/assets/images/Navbar/Icons/exercise_type_chooser.png";
 
 export default function IslandPage() {
     const { islandId } = useParams();
+    const navigate      = useNavigate();
+
     const island = ISLAND_CONFIGS_MAP[islandId];
     const [selectedExercise, setSelectedExercise] = useState(null);
     const [showGuide, setShowGuide] = useState(false);
+
+    useEffect(() => {
+        const segments = location.pathname.split("/").filter(Boolean);
+        if (segments[0] === "island" && segments.length === 2) {
+            setSelectedExercise(null);
+        }
+    }, [location.pathname]);
+
+    function handleChoose(component, typeId) {
+        setSelectedExercise(() => component);
+        // push into a “third segment”
+        navigate(`/island/${islandId}/${typeId}`);
+    }
 
     if (!island) return <h2>Island not found 🚫</h2>;
 
@@ -50,18 +66,12 @@ export default function IslandPage() {
                     <ExerciseTypesChooser
                         islandId={islandId}
                         island={island}
-                        onChoose={(comp) => setSelectedExercise(() => comp)}
+                        onChoose={handleChoose}
                         url={island.exerciseUrl}
                     />
                 </div>
             ) : (
                 <div className="island-page-content flex">
-                    <button
-                        className="btn-back"
-                        onClick={() => setSelectedExercise(null)}
-                    >
-                        ← חזרה לבחירת פעילות
-                    </button>
                     <div className="exercise-component">{selectedExercise}</div>
                 </div>
             )}
