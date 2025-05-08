@@ -7,6 +7,7 @@ export default function useAnswerCheck({ questionType, setUser }) {
     const [feedback, setFeedback] = useState("");
     const [showSolution, setShowSolution] = useState(false);
     const startTimeRef = useRef(Date.now());
+    const [islandOpen, setIslandOpen] = useState(null)
 
     const checkAnswer = async ({ userAnswer, data, usedClue = false }) => {
         const token = Cookies.get("token");
@@ -32,7 +33,8 @@ export default function useAnswerCheck({ questionType, setUser }) {
 
 
             if (result.islandOpen) {
-                alert(result.islandOpen);
+                setIslandOpen(result.islandOpen)
+                // alert(result.islandOpen);
             }
             if (result.message === "wrong answer") {
                 setShowSolution(true);
@@ -56,6 +58,7 @@ export default function useAnswerCheck({ questionType, setUser }) {
         setShowSolution,
         resetTimer,
         startTimeRef,
-        setFeedback
+        setFeedback,
+        islandOpen
     };
 }
