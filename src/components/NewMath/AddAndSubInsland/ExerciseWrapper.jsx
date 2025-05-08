@@ -176,8 +176,9 @@ const loadProgress =()=>{
                         <SimpleFeedback
                             message={
                                 isWrong
-                                    ? "טעית, תשובה שגויה"
-                                    : "כל הכבוד, תשובה נכונה"
+                               ?<p>{"טעית, תשובה שגויה - התשובה הנכונה היא " + data.solution}</p>
+
+                                : "כל הכבוד, תשובה נכונה"
                             }
                             color={isWrong ? "red" : "green"}
                             autoCloseTime={isWrong ? null : 1000}
