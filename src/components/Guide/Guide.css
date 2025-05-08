@@ -1,0 +1,53 @@
+.guide-container {
+    padding: 1.5rem;
+    border-radius: 16px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #333;
+    max-height: 60vh;
+    overflow-y: auto;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4rem;
+    text-align: right;
+}
+.guide-box{
+    text-align: center;
+}
+.guide-title{
+    font-size: var(--font-size-very-large);
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+}
+.instruction{
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+#center-this{
+    text-align: center;
+}
+/*.guide-section{*/
+/*    display:grid;*/
+/*    grid-template-columns: 1fr 1fr;*/
+/*    grid-template-rows: 1fr 1fr;*/
+/*}*/
+
+.guide-list {
+    list-style: none;
+    padding-right: 1rem;
+}
+
+.guide-item {
+    margin-bottom: 0.5rem;
+}
+
+.guide-loading,
+.guide-error {
+    color: #777;
+    font-style: italic;
+}

@@ -6,7 +6,7 @@ import EraserIcon from "/src/assets/images/Canvas/eraser.png";
 import ColorChooser from "/src/assets/images/Canvas/color_chooser.png";
 import { HexColorPicker } from "react-colorful";
 
-export default function Canvas({ text }) {
+export default function Canvas({ text ,component}) {
     const [tool, setTool] = useState("pen");
     const [penSize, setPenSize] = useState(5);
     const [penColor, setColor] = useState("#fff");
