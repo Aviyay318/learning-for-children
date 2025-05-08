@@ -9,6 +9,7 @@
   align-items: center;
 
   position: relative;
+
 }
 .App.no-sky {
   background: none;
@@ -23,4 +24,18 @@
 @keyframes scrollSky {
   0%   { background-position-x:   0; }
   100%     { background-position-x: -1000px; }
+}
+
+html, body, *, *::before, *::after {
+  cursor: none !important;
+}
+
+/* Kill Konva canvas cursor if still visible */
+canvas {
+  cursor: none !important;
+}
+
+/* Safety for React root */
+#root, .App, .cursor-killer {
+  cursor: none !important;
 }

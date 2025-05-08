@@ -30,6 +30,7 @@ import StatisticsPage from "./components/Admin/StatisticsPage.jsx";
 import {ResponsiveProvider} from "./contexts/ResponsiveContext.jsx";
 import LayoutWrapper from "./utils/LayoutWrapper.jsx";
 import Modal from "./components/Modal/Modal.jsx";
+import CustomCursor from "./components/CustomCursor/CustomCursor.jsx";
 
 function AppContent() {
     const location = useLocation();
@@ -104,7 +105,7 @@ function AppContent() {
 export default function App() {
     return (
         <div className="App flex">
-
+            <CustomCursor />
                     <BrowserRouter>
                         <LoadingOverlay />
                         <AppContent />

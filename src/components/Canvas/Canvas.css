@@ -26,6 +26,10 @@
     border: 1rem solid var(--board-border-color);
     border-radius: 25px;
 }
+.canvas-content canvas {
+    pointer-events: none;
+    cursor: none !important;
+}
 .toolbar {
     width: 100%;
     height: 100%;

@@ -76,7 +76,7 @@ export default function ExerciseTypesChooser({island, onChoose, url }) {
                         <img
                             src={ICON_MAP[type.id]}
                             alt={`${type.label} icon`}
-                            className="type-chooser-icon"
+                            className="clickable type-chooser-icon"
                         />
                         <span className="type-chooser-label">{type.label}</span>
                     </button>

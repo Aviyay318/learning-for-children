@@ -1,6 +1,7 @@
 import React, {useState, useMemo, useEffect} from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import "./ExerciseBoard.css";
+import "./ExerciseBoard.css"
+import "./MultiAnswerExercise.css";
 import { buttonColorClassMap } from "../../../utils/ButtonConstants.js";
 
 // simple in-place shuffle (Durstenfeld algorithm)
@@ -48,8 +49,8 @@ export default function MultipleAnswerExercise({
         <div className="exercise-board-container" dir="rtl">
             {question && (
                 <div className="exercise-board-box flex">
-                    <div className="exercise-board flex">
-                        <div className="exercise-question flex">
+                    <div className="multiple-board flex">
+                        <div className="multiple-question flex">
                             <label>{question.num1}</label>
                             <label>{question.operator}</label>
                             <label>{question.num2}</label>

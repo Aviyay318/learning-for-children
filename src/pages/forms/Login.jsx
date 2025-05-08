@@ -131,10 +131,10 @@ const Login = () => {
                     </button>
 
                     <div className="new-account flex">
-                        <label className="label-button" onClick={() => navigate(PASSWORD_RECOVERY)}>שכחת סיסמא?</label>
+                        <label className="clickable label-button" onClick={() => navigate(PASSWORD_RECOVERY)}>שכחת סיסמא?</label>
                         <label>
                             אין לך משתמש? על מנת להירשם{" "}
-                            <label className="label-button" onClick={() => navigate(REGISTER_PAGE)}>לחץ כאן</label>
+                            <label className="clickable label-button" onClick={() => navigate(REGISTER_PAGE)}>לחץ כאן</label>
                         </label>
                     </div>
                 </form>

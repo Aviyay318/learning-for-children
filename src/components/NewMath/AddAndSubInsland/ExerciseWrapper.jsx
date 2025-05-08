@@ -216,7 +216,7 @@ const loadProgress =()=>{
                     </div>
                     <div className={"exercise-middle-container"}>
                         <img
-                            className={"exercise-guide"}
+                            className={"clickable exercise-guide"}
                             onClick={() => setShowGuide(true)}
                             src={ExerciseGuide}
                             alt={"guide"}
@@ -249,13 +249,13 @@ const loadProgress =()=>{
                             <div className={"exercise-left-container-options flex"}>
                                 {
                                     haveSolution &&
-                                    <img className={"exercise-page-prop-images"}
+                                    <img className={"clickable exercise-page-prop-images"}
                                          onClick={() => setShowCanvas(!showCanvas)}
                                          src={Canvas} alt="NextQuestion"/>
                                 }
                                 {
                                     haveHint &&
-                                    <img className={"exercise-page-prop-images"} onClick={() => {
+                                    <img className={"clickable exercise-page-prop-images"} onClick={() => {
                                         setShowHint(!showHint);
                                         setUsedClue(!usedClue);}}
                                          src={TakeHint} alt="NextQuestion"/>
