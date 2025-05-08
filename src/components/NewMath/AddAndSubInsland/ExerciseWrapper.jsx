@@ -15,7 +15,10 @@ import Modal from "../../Modal/Modal.jsx";
 import axios from "axios";
 import {GET_GUIDE, GET_GUIDE_FOR_ISLAND, GET_LEVEL_OF_ISLAND, SERVER_URL} from "../../../utils/Constants.js";
 import Guide from "../../Guide/Guide.jsx";
+import time from "/src/assets/images/Islands/Props/ExercisePage/time.png"
 import useUserLevels from "../../../hooks/apiHooks/useUserLevels.js";
+import ExpBar from "../../Feedback/ExpBar/ExpBar.jsx";
+import Confetti from "react-confetti";
 
 export default function ExerciseWrapper({ questionType, haveHint=true,haveSolution=true,renderComponent, url, customCheckAnswer }) {
     const { islandId } = useParams();
@@ -104,6 +107,7 @@ const loadProgress =()=>{
         return () => clearInterval(interval);
     }, []);
 
+    const [currentExp, setCurrentExp] = useState(null)
     const handleCheck = async (answer) => {
         if (!data) return;
 
@@ -113,6 +117,7 @@ const loadProgress =()=>{
 
         setLevel(result.level.level);
         setHighestLevel(result.level.highestLevel);
+        setCurrentExp(result.progress)
         console.log("כדי לא לשגע את רם: ", result);
         //TODO FOR RAM REVIVO
         if (result?.success) {
@@ -183,6 +188,12 @@ const loadProgress =()=>{
                         </div>
                         {/*<SimpleExercise question={data} checkAnswer={handleCheck} />*/}
                         {renderComponent(data, setHint, handleCheck, solutionTime, myLevel)}
+                        <ExpBar currentExp={currentExp} maxExp={100} currentLevel={level} nextLevel={level+1} />
+                        {currentExp===100&&
+                            <>
+                                <Confetti/>
+                            </>
+                        }
                         {feedback && <div className="text-lg font-semibold text-purple-700">{feedback}</div>}
                         {showSolution && <div className="text-green-800 font-bold">הדרך לפתרון {data.solutionMethod}</div>}
 

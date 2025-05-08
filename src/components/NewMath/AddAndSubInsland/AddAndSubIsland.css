@@ -65,7 +65,7 @@
 }
 .exercise-guide{
     position: absolute;
-    top: 1rem;
+    top: 0;
     left: 1rem;
     /*transform: translate(-50%, -50%);*/
     width: 200px;
