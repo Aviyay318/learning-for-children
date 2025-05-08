@@ -78,3 +78,21 @@
 .exercise-guide:hover{
     transform: scale(1.2);
 }
+.exercise-time{
+    flex-direction: column;
+    position:absolute;
+    top: 1rem;
+    right: 3rem;
+    padding: 1rem;
+
+}
+.exercise-time label{
+    text-align: center;
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-medium);
+    color: white;
+}
+.exercise-time img{
+    width: 90px;
+    height: 100px;
+}

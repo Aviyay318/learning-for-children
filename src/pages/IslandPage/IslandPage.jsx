@@ -7,7 +7,7 @@ import React, {useEffect, useState} from "react";
 import IslandGuide from "../../assets/images/Islands/Props/Guide/island_guide.png";
 import Modal from "../../components/Modal/Modal.jsx";
 import Guide from "../../components/Guide/Guide.jsx";
-import {GET_GUIDE_FOR_ISLAND} from "../../utils/Constants.js";
+import {GET_GUIDE, GET_GUIDE_FOR_ISLAND} from "../../utils/Constants.js";
 import TypeChooser   from "/src/assets/images/Navbar/Icons/exercise_type_chooser.png";
 
 export default function IslandPage() {
@@ -41,7 +41,7 @@ export default function IslandPage() {
             {/* 1) Render the Modal here, so React can actually mount/unmount it */}
             <Modal
                 title="הוראות"
-                component={<Guide url={GET_GUIDE_FOR_ISLAND} payload={{islandId: island.id}}/>}
+                component={<Guide url={GET_GUIDE} payload={{islandId: island.id}}/>}
                 showModal={showGuide}
                 setShowModal={setShowGuide}
             />

@@ -13,7 +13,7 @@ import RevealAnswer from "/src/assets/images/Islands/Props/ExercisePage/reveal_a
 import ExerciseGuide from "/src/assets/images/Islands/Props/Guide/game_guide.png"
 import Modal from "../../Modal/Modal.jsx";
 import axios from "axios";
-import {GET_LEVEL_OF_ISLAND, SERVER_URL} from "../../../utils/Constants.js";
+import {GET_GUIDE, GET_GUIDE_FOR_ISLAND, GET_LEVEL_OF_ISLAND, SERVER_URL} from "../../../utils/Constants.js";
 import Guide from "../../Guide/Guide.jsx";
 import useUserLevels from "../../../hooks/apiHooks/useUserLevels.js";
 
@@ -40,7 +40,7 @@ export default function ExerciseWrapper({ questionType, haveHint=true,haveSoluti
     const [rightHovered, setRightHovered] = useState(false);
     const [leftHovered,  setLeftHovered]  = useState(false);
 
-    const [showGuide, setShowGuide] = useState(true);
+    const [showGuide, setShowGuide] = useState(false);
 
 
     const loadNewQuestion = async () => {
@@ -79,8 +79,19 @@ setLevel(res.data.level)
         }
     })
 }
+
+
+const loadProgress =()=>{
+        const token = Cookies.get("token")
+        axios.get(SERVER_URL+"/api/islands/progress?token="+token+"&level="+level+"&islandId="+island.id).then(
+            (res) => {
+                console.log("rammm:  ",res.data)
+               setCurrentExp(res.data.progress)
+            })
+}
     useEffect(() => {
         console.log("⏳ Fetching question...");
+        loadProgress()
         loadNewQuestion();
         getLevel()
     }, []);
@@ -122,9 +133,7 @@ setLevel(res.data.level)
     };
 
 
-    // function showGuideComponent() {
-    //     return <Modal title={"הוראות"} component={<Guide/>} showModal={showGuide} setShowModal={setShowGuide}/>;
-    // }
+
 
     return (
         <div className="simple island-math-container flex"
@@ -138,15 +147,19 @@ setLevel(res.data.level)
                 <div>שאלה לא זמינה כרגע</div>
             ) : (
                 <div className="simple island-math-box flex">
+
                     <Modal
                         title="רמז"
                         component={hint}
                         showModal={showHint}
                         setShowModal={setShowHint}
                     />
-
-
-                    <h2>TODO RAM level :{level}</h2>
+                    <Modal
+                            title="הוראות"
+                            component={<Guide url={GET_GUIDE_FOR_ISLAND} payload={{islandId: island.id}}/>}
+                            showModal={showGuide}
+                            setShowModal={setShowGuide}
+                        />
                     <div className={"exercise-right-container flex"}
                          onClick={loadNewQuestion}
                          onMouseEnter={()=> setRightHovered(true)}
@@ -156,8 +169,18 @@ setLevel(res.data.level)
                         {/*<button  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">שאלה הבאה</button>*/}
                     </div>
                     <div className={"exercise-middle-container"}>
-                        <img className={"exercise-guide"} src={ExerciseGuide} alt={"guide"} />
-                        <div className="text-sm text-gray-600 mt-2">⏱ זמן פתרון: {solutionTime} שניות</div>
+                        <img
+                            className={"exercise-guide"}
+                            onClick={() => setShowGuide(true)}
+                            src={ExerciseGuide}
+                            alt={"guide"}
+                        />
+                        <div className="exercise-time flex">
+                            <img src={time} alt={"time"}/>
+                            <label>
+                                {solutionTime} שניות
+                            </label>
+                        </div>
                         {/*<SimpleExercise question={data} checkAnswer={handleCheck} />*/}
                         {renderComponent(data, setHint, handleCheck, solutionTime, myLevel)}
                         {feedback && <div className="text-lg font-semibold text-purple-700">{feedback}</div>}
