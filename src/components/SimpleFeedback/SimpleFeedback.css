@@ -1,0 +1,27 @@
+.simple-feedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 5rem 5rem;
+    border: 0.5rem solid;
+    border-radius: 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.simple-feedback-message {
+    font-size: 1.2rem;
+}
+
+.simple-feedback-close {
+    margin-left: 1rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: inherit;
+}

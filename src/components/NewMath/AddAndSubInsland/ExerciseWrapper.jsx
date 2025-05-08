@@ -9,6 +9,7 @@ import {useUser} from "../../../contexts/UserContext.jsx";
 import "./AddAndSubIsland.css"
 import NextQuestion from "/src/assets/images/Islands/Props/ExercisePage/next_question.png"
 import TakeHint from "/src/assets/images/Islands/Props/ExercisePage/take_hint.png"
+import Canvas from "/src/assets/images/Islands/Props/ExercisePage/canvas.png"
 import RevealAnswer from "/src/assets/images/Islands/Props/ExercisePage/reveal_answer.png"
 import ExerciseGuide from "/src/assets/images/Islands/Props/Guide/game_guide.png"
 import Modal from "../../Modal/Modal.jsx";
@@ -19,6 +20,7 @@ import time from "/src/assets/images/Islands/Props/ExercisePage/time.png"
 import useUserLevels from "../../../hooks/apiHooks/useUserLevels.js";
 import ExpBar from "../../Feedback/ExpBar/ExpBar.jsx";
 import Confetti from "react-confetti";
+import SimpleFeedback from "../../SimpleFeedback/SimpleFeedback.jsx";
 
 export default function ExerciseWrapper({ questionType, haveHint=true,haveSolution=true,renderComponent, url, customCheckAnswer }) {
     const { islandId } = useParams();
@@ -29,6 +31,12 @@ export default function ExerciseWrapper({ questionType, haveHint=true,haveSoluti
     const [usedClue, setUsedClue] = useState(false);
     const [solutionTime, setSolutionTime] = useState(0);
     const [hint, setHint] = useState(null);
+    const [canvas, setCanvas] = useState(null);
+    const [showCanvas, setShowCanvas] = useState(false);
+
+    const [showFeedback, setShowFeedback] = useState(false);
+    const [isWrong, setIsWrong] = useState(false);
+
     const { user, setUser } = useUser();
 
     const { data, error, sendRequest } = useApi(url, "GET", { minDelay: 0 });
@@ -36,7 +44,6 @@ export default function ExerciseWrapper({ questionType, haveHint=true,haveSoluti
     const { levels, loading: levelsLoading } = useUserLevels();
     const myLevelObj = levels.find(l => l.island.id === island.id);
     const myLevel    = myLevelObj?.level ?? 1;
-
     const [level,setLevel]= useState(1);
     const [highestLevel,setHighestLevel]= useState(1);
 
@@ -118,21 +125,34 @@ const loadProgress =()=>{
         setLevel(result.level.level);
         setHighestLevel(result.level.highestLevel);
         setCurrentExp(result.progress)
-        console.log("כדי לא לשגע את רם: ", result);
-        //TODO FOR RAM REVIVO
-        if (result?.success) {
-            alert("כל הכבוד! תשובה נכונה 🎉");
+
+        const wrong = !result.success;
+        setIsWrong(wrong);
+        setShowFeedback(true);
+
+        if (!wrong) {
+            // correct: auto-close in 1s & next question
             setTimeout(() => {
+                setShowFeedback(false);
                 loadNewQuestion();
-            }, 500);
-        }else {
-            alert(data.solution
-            +"טעית התשובה נכונה היא 🎉");
-            console.log("try: ,solutionMethod: "+data.solutionMethod)
-            setTimeout(() => {
-                loadNewQuestion();
-            }, 500);
+            }, 1000);
         }
+        //
+        // console.log("כדי לא לשגע את רם: ", result);
+        // //TODO FOR RAM REVIVO
+        // if (result?.success) {
+        //     alert("כל הכבוד! תשובה נכונה 🎉");
+        //     setTimeout(() => {
+        //         loadNewQuestion();
+        //     }, 500);
+        // }else {
+        //     alert(data.solution
+        //     +"טעית התשובה נכונה היא 🎉");
+        //     console.log("try: ,solutionMethod: "+data.solutionMethod)
+        //     setTimeout(() => {
+        //         loadNewQuestion();
+        //     }, 500);
+        // }
 
         return result;
     };
@@ -152,12 +172,32 @@ const loadProgress =()=>{
                 <div>שאלה לא זמינה כרגע</div>
             ) : (
                 <div className="simple island-math-box flex">
-
+                    {showFeedback && (
+                        <SimpleFeedback
+                            message={
+                                isWrong
+                                    ? "טעית, תשובה שגויה"
+                                    : "כל הכבוד, תשובה נכונה"
+                            }
+                            color={isWrong ? "red" : "green"}
+                            autoCloseTime={isWrong ? null : 1000}
+                            onClose={() => {
+                                setShowFeedback(false);
+                                if (isWrong) loadNewQuestion();
+                            }}
+                        />
+                    )}
                     <Modal
                         title="רמז"
                         component={hint}
                         showModal={showHint}
                         setShowModal={setShowHint}
+                    />
+                    <Modal
+                        title="לוח"
+                        component={canvas}
+                        showModal={showCanvas}
+                        setShowModal={setShowCanvas}
                     />
                     <Modal
                             title="הוראות"
@@ -187,7 +227,7 @@ const loadProgress =()=>{
                             </label>
                         </div>
                         {/*<SimpleExercise question={data} checkAnswer={handleCheck} />*/}
-                        {renderComponent(data, setHint, handleCheck, solutionTime, myLevel)}
+                        {renderComponent(data, setHint, setCanvas, handleCheck, solutionTime, myLevel)}
                         <ExpBar currentExp={currentExp} maxExp={100} currentLevel={level} nextLevel={level+1} />
                         {currentExp===100&&
                             <>
@@ -207,18 +247,20 @@ const loadProgress =()=>{
                         {leftHovered &&
                             <div className={"exercise-left-container-options flex"}>
                                 {
+                                    haveSolution &&
+                                    <img className={"exercise-page-prop-images"}
+                                         onClick={() => setShowCanvas(!showCanvas)}
+                                         src={Canvas} alt="NextQuestion"/>
+                                }
+                                {
                                     haveHint &&
                                     <img className={"exercise-page-prop-images"} onClick={() => {
                                         setShowHint(!showHint);
                                         setUsedClue(!usedClue);}}
                                          src={TakeHint} alt="NextQuestion"/>
+
                                 }
-                                {
-                                    haveSolution &&
-                                    <img className={"exercise-page-prop-images"}
-                                      onClick={() => setShowSolution(!showSolution)}
-                                      src={RevealAnswer} alt="NextQuestion"/>
-                                }
+
                             </div>
                         }
                     </div>

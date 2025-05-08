@@ -3,7 +3,7 @@ import "./ExerciseBoard.css"
 import BasicHelper from "../../Math/BasicMath/BasicHelper/BasicHelper.jsx";
 import Canvas from "../../Canvas/Canvas.jsx";
 
-export default function SimpleExercise  ({ question, level, setHint, checkAnswer })  {
+export default function SimpleExercise  ({ question, level, setHint, setCanvas,checkAnswer })  {
     const [answer, setAnswer] = React.useState("");
 
     const handleSubmit = () => {
@@ -13,12 +13,7 @@ export default function SimpleExercise  ({ question, level, setHint, checkAnswer
 
     useEffect(() => {
         // Decide which helper to show based on `level`
-        if (level >= 4) {
-            setHint(
-                <Canvas text={question.num1 + question.operator + question.num2 + question.equalsSign}
-                />
-            );
-        } else {
+        if ((question.num1 || question.num2) <= 30) {
             setHint(
                 <BasicHelper
                     num1={question.num1}
@@ -26,8 +21,16 @@ export default function SimpleExercise  ({ question, level, setHint, checkAnswer
                     operand={question.operator}
                 />
             );
+        } else {
+            setHint("Need to add some fucking text")
         }
-    }, [question, level, setHint]);
+    }, [question, setHint]);
+
+    useEffect(() => {
+        if (question) {
+            setCanvas(<Canvas text={question.num1 + question.operator + question.num2}/>)
+        }
+    },[question, setCanvas]);
 
     return (
         <div className="exercise-board-container">
