@@ -54,7 +54,7 @@ export default function Island({
     if (!shouldFlip) {
         return (
             <div
-                className={`${className} island-container no-flip`}
+                className={`${className} clickable island-container no-flip`}
                 onClick={handleClick}
             >
                 <img
@@ -78,7 +78,7 @@ export default function Island({
 
     // — otherwise, full flipping card
     return (
-        <div className={`${className} island-container`} onClick={handleClick}>
+        <div className={`${className} clickable island-container`} onClick={handleClick}>
             <div className={`island-card ${isFlipped ? "flipped" : ""}`}>
                 {/* Front Face */}
                 <div className="island-card-face island-card-front">

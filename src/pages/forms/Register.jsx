@@ -124,13 +124,13 @@ export default function Register() {
                             <div className="gender-chooser input-field flex">
                                 <img
                                     src="src/assets/profile-pictures/girl1.jpg"
-                                    className={`character-icon ${formData.gender === 'girl' ? 'selected has-content' : ''}`}
+                                    className={`clickable character-icon ${formData.gender === 'girl' ? 'selected has-content' : ''}`}
                                     onClick={() => handleCharacterSelect('girl')}
                                     alt="Girl Character"
                                 />
                                 <img
                                     src="src/assets/profile-pictures/boy1.jpg"
-                                    className={`character-icon ${formData.gender === 'boy' ? 'selected has-content' : ''}`}
+                                    className={`clickable character-icon ${formData.gender === 'boy' ? 'selected has-content' : ''}`}
                                     onClick={() => handleCharacterSelect('boy')}
                                     alt="Boy Character"
                                 />

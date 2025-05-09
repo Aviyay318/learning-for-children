@@ -8,7 +8,7 @@ import { HexColorPicker } from "react-colorful";
 
 export default function Canvas({ text ,component}) {
     const [tool, setTool] = useState("pen");
-    const [penSize, setPenSize] = useState(5);
+    const [penSize, setPenSize] = useState(10);
     const [penColor, setColor] = useState("#fff");
     const [colorChooserVisible, setColorChooserVisible] = useState(false);
     const [eraserSize, setEraserSize] = useState(20);
@@ -72,18 +72,19 @@ export default function Canvas({ text ,component}) {
                     <img
                         src={ColorChooser}
                         alt="Color Chooser"
-                        className={`canvas-icon ${tool === "color" ? "selected" : ""}`}
-                        onClick={() => toggleColorVisibility()}/>
+                        className={`clickable canvas-icon ${tool === "color" ? "selected" : ""}`}
+                        onClick={() => toggleColorVisibility()}
+                    />
                     <img
                         src={PencilIcon}
                         alt="Pen"
-                        className={`canvas-icon ${tool === "pen" ? "selected" : ""}`}
+                        className={`clickable canvas-icon ${tool === "pen" ? "selected" : ""}`}
                         onClick={() => setTool("pen")}
                     />
                     <img
                         src={EraserIcon}
                         alt="Eraser"
-                        className={`canvas-icon ${tool === "eraser" ? "selected" : ""}`}
+                        className={`clickable canvas-icon ${tool === "eraser" ? "selected" : ""}`}
                         onClick={() => setTool("eraser")}
                     />
 
@@ -93,8 +94,8 @@ export default function Canvas({ text ,component}) {
                         {tool === "pen" ? "Pen Size" : "Eraser Size"}: {currentSize}
                         <input
                             type="range"
-                            min="1"
-                            max="50"
+                            min="10"
+                            max={tool==="pen"?"30":"100"}
                             value={currentSize}
                             onChange={onSizeChange}
                         />
@@ -102,8 +103,14 @@ export default function Canvas({ text ,component}) {
                 </div>
             </div>
 
-            <div className={"canvas-content"} ref={containerRef} >
+            <div className={"canvas-content"}
+                 ref={containerRef}
+                 data-tool={tool}
+                 data-pen-size={penSize}
+                 data-eraser-size={eraserSize}
+            >
                 <Stage
+                    style={{ cursor: "none" }}
                     width={size.width}
                     height={size.height}
                     onMouseDown={handleMouseDown}

@@ -52,7 +52,7 @@ export default function IslandPage() {
 
                     {/* 2) Toggle the boolean on click, don't return JSX from click */}
                     <div
-                        className="island-guide flex"
+                        className="clickable island-guide flex"
                         onClick={() => setShowGuide(true)}
                     >
                         <img

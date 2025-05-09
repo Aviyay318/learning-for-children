@@ -1,0 +1,26 @@
+.custom-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    user-select: none;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+}
+
+.default, .pointer{
+    transform: translate(-30%, -20%);
+}
+
+.pencil, .eraser{
+    transform: translate(-15%, -82%);
+}
+
+.click-effect {
+    animation: bounce 0.15s ease;
+}
+
+@keyframes bounce {
+    0%   { transform: translate(-30%, -20%) scale(1); }
+    50%  { transform: translate(-30%, -20%) scale(0.85); }
+    100% { transform: translate(-30%, -20%) scale(1); }
+}

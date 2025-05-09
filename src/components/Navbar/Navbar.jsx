@@ -72,34 +72,34 @@ export default function Navbar({ deleteCookies }) {
             )}
 
             <NavLink to="/homepage" className={({ isActive }) => isActive ? "active" : ""}>
-                <img className="navbar-icons" src={homepage} alt="Homepage" />
+                <img className="clickable navbar-icons" src={homepage} alt="Homepage" />
             </NavLink>
 
             <NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}>
-                <img className="navbar-icons profile" src={profile} alt="Profile" />
+                <img className="clickable navbar-icons profile" src={profile} alt="Profile" />
             </NavLink>
 
             <NavLink to={middleLinkTo} className={({ isActive }) => isActive ? "active" : ""}>
                 <img
-                    className="navbar-icons play"
+                    className="clickable navbar-icons play"
                     src={middleIcon}
                     alt={middleAlt}
                 />
             </NavLink>
 
             <NavLink to="/settings" className={({ isActive }) => isActive ? "active" : ""}>
-                <img className="navbar-icons" src={settings} alt="Settings" />
+                <img className="clickable navbar-icons" src={settings} alt="Settings" />
             </NavLink>
 
             <NavLink to="/statistics" className={({ isActive }) => isActive ? "active" : ""}>
-                <img className="navbar-icons" src={statistics} alt="Statistics" />
+                <img className="clickable navbar-icons" src={statistics} alt="Statistics" />
             </NavLink>
 
             {username && (
                 <label className="navbar-text">{username}</label>
             )}
             <NavLink to="/" onClick={logoutFunction} className={({ isActive }) => isActive ? "active" : ""}>
-                <img className="navbar-icons" src={logout} alt="Logout" />
+                <img className="clickable navbar-icons" src={logout} alt="Logout" />
             </NavLink>
 
         </div>
