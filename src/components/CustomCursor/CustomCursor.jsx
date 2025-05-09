@@ -40,7 +40,7 @@ export default function CustomCursor() {
 
             if (isInput) {
                 setCursorType("text");
-                setCursorSize(32);
+                setCursorSize(48);
             } else if (canvasTool === "pen") {
                 setCursorType("pencil");
                 setCursorSize(penSize * 5); // optional scale-up factor
@@ -49,10 +49,10 @@ export default function CustomCursor() {
                 setCursorSize(eraserSize * 2); // optional scale-up factor
             } else if (isPointer) {
                 setCursorType("pointer");
-                setCursorSize(32); // reset size
+                setCursorSize(48); // reset size
             } else {
                 setCursorType("default");
-                setCursorSize(32);
+                setCursorSize(48);
             }
         };
 

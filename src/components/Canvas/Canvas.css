@@ -45,8 +45,54 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1.5rem;
     width: 100%;
 }
+.slider-input {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 12px;
+    background: transparent;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+}
+.slider-input::-webkit-slider-runnable-track {
+    height: 12px;
+    background-color: #f7c938;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+.slider-input::-moz-range-track {
+    height: 12px;
+    background: #ddd;
+    border-radius: 6px;
+}
+.slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: url("/cursors/slider_thumb.png") no-repeat center center;
+    background-size: contain;
+    width: 50px;
+    height: 50px;
+    border: none;
+    margin-top: -20px; /* adjusts vertical alignment */
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.slider-input::-moz-range-thumb {
+    background: url("/cursors/slider_thumb.png") no-repeat center center;
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
 .canvas-icon{
     width: 100px;
     height: 100px;

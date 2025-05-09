@@ -1,27 +1,49 @@
-.simple-feedback {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #fff;
-    padding: 5rem 5rem;
-    border: 0.5rem solid;
-    border-radius: 28px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-}
-
 .simple-feedback-message {
-    font-size: 1.2rem;
-}
+    font-size: var(--font-size-very-large);
+    font-weight: bold;}
 
 .simple-feedback-close {
     margin-left: 1rem;
     background: transparent;
-    border: none;
+    border: 0.5rem white solid;
     cursor: pointer;
-    font-size: 1rem;
-    color: inherit;
+    font-size: var(--font-size-large);
+    font-weight: bold;
+    color: white;
+}
+
+.simple-feedback-close:hover {
+    scale: 1.1;
+}
+.simple-feedback {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: gold;
+    color: black;
+
+    padding: 8px 16px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    animation: pop-in 0.5s ease;
+    z-index: 10;
+}
+
+@keyframes pop-in {
+    from {
+        opacity: 0;
+        transform: translate(-50%,-50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%,-50%) scale(1);
+    }
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+        transform: translate(-50%,-50%) scale(0.95);
+    }
 }
