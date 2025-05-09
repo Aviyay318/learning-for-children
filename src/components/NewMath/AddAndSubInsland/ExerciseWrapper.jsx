@@ -52,6 +52,7 @@ export default function ExerciseWrapper({ questionType, haveHint=true,haveSoluti
 
     const [showGuide, setShowGuide] = useState(false);
 
+    const timeToCloseMessage = 2000;
 
     const loadNewQuestion = async () => {
         const token = Cookies.get("token");
@@ -80,25 +81,25 @@ export default function ExerciseWrapper({ questionType, haveHint=true,haveSoluti
     };
 
     const getLevel= ()=>{
-    const token = Cookies.get("token");
-    axios.get(SERVER_URL+GET_LEVEL_OF_ISLAND+"?token="+token+"&islandId="+island.id).then((res) => {
-        if (res!==null) {
-            console.log(res.data, " =res.data= ")
-setLevel(res.data.level)
-            setHighestLevel(res.data.highestLevel)
-        }
-    })
-}
+        const token = Cookies.get("token");
+        axios.get(SERVER_URL+GET_LEVEL_OF_ISLAND+"?token="+token+"&islandId="+island.id).then((res) => {
+            if (res!==null) {
+                console.log(res.data, " =res.data= ")
+                setLevel(res.data.level)
+                setHighestLevel(res.data.highestLevel)
+            }
+        })
+    }
 
 
-const loadProgress =()=>{
+    const loadProgress =()=>{
         const token = Cookies.get("token")
         axios.get(SERVER_URL+"/api/islands/progress?token="+token+"&level="+level+"&islandId="+island.id).then(
             (res) => {
                 console.log("rammm:  ",res.data)
-               setCurrentExp(res.data.progress)
+                setCurrentExp(res.data.progress)
             })
-}
+    }
     useEffect(() => {
         console.log("⏳ Fetching question...");
         loadProgress()
@@ -135,7 +136,7 @@ const loadProgress =()=>{
             setTimeout(() => {
                 setShowFeedback(false);
                 loadNewQuestion();
-            }, 1000);
+            }, timeToCloseMessage);
         }
         //
         // console.log("כדי לא לשגע את רם: ", result);
@@ -162,7 +163,7 @@ const loadProgress =()=>{
 
     return (
         <div className="simple island-math-container flex"
-             // style={{backgroundImage: "url("+`${island.children}`+")"}}
+            // style={{backgroundImage: "url("+`${island.children}`+")"}}
              dir="rtl">
             {loading ? (
                 <div>טוען שאלה...</div>
@@ -176,12 +177,12 @@ const loadProgress =()=>{
                         <SimpleFeedback
                             message={
                                 isWrong
-                               ?<p>{"טעית, תשובה שגויה - התשובה הנכונה היא " + data.solution}</p>
+                                    ?<p>{"טעית, תשובה שגויה - התשובה הנכונה היא " + data.solution}</p>
 
-                                : "כל הכבוד, תשובה נכונה"
+                                    : "כל הכבוד, תשובה נכונה"
                             }
                             color={isWrong ? "red" : "green"}
-                            autoCloseTime={isWrong ? null : 1000}
+                            autoCloseTime={isWrong ? null : 2000}
                             onClose={() => {
                                 setShowFeedback(false);
                                 if (isWrong) loadNewQuestion();
@@ -201,11 +202,11 @@ const loadProgress =()=>{
                         setShowModal={setShowCanvas}
                     />
                     <Modal
-                            title="הוראות"
-                            component={<Guide url={GET_GUIDE_FOR_ISLAND} payload={{islandId: island.id}}/>}
-                            showModal={showGuide}
-                            setShowModal={setShowGuide}
-                        />
+                        title="הוראות"
+                        component={<Guide url={GET_GUIDE_FOR_ISLAND} payload={{islandId: island.id}}/>}
+                        showModal={showGuide}
+                        setShowModal={setShowGuide}
+                    />
                     <div className={"exercise-right-container flex"}
                          onClick={loadNewQuestion}
                          onMouseEnter={()=> setRightHovered(true)}
@@ -223,7 +224,7 @@ const loadProgress =()=>{
                         />
                         <div className="exercise-time flex">
                             <img src={time} alt={"time"}/>
-                            <label>
+                            <label >
                                 {solutionTime} שניות
                             </label>
                         </div>

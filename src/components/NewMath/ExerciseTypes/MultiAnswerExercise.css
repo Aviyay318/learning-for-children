@@ -1,6 +1,5 @@
 :root{
     --multi-board-text-color: #AE4C02;
-
    --multi-board-background-color: #FEE79F;
    --multi-board-outside-border-color: #6D2C0B;
    --multi-board-middle-border-color: #FCC902;
@@ -10,15 +9,16 @@
     --multi-answer-button-outside-border-color: var(--multi-board-outside-border-color);
     --multi-answer-button-inside-border-color: var(--multi-board-background-color);
 
+    --multi-board-height: 45vh;
+    --multi-board-gap: 5rem;
 }
 .multiple-board {
     width: var(--board-width);
     max-width: var(--board-max-width);
-    height: var(--board-height);
+    height: var(--multi-board-height);
     aspect-ratio: var(--board-aspect-ratio);
 
     background: var(--multi-board-background-color);
-    border: 1rem solid var(--multi-board-outside-border-color);
     border-radius: 35px;
 
     display: flex;
@@ -26,11 +26,21 @@
     align-items: center;
     justify-content: center;
 
-    gap: var(--board-gap);
+    gap: var(--multi-board-gap);
     padding: var(--board-padding);
 
     box-sizing: border-box;
     direction: ltr;
+
+    background: var(--multi-board-background-color); /* inner fill (creamy yellow) */
+    font-size: 3rem;
+    border: 6px solid var(--multi-board-inside-border-color);     /* inner yellow border */
+    outline: 10px solid var(--multi-board-middle-border-color);    /* middle brown border */
+    box-shadow:
+            0 0 0 18px var(--multi-board-outside-border-color),           /* simulate outer yellow frame */
+            2px 4px 0 #0004;             /* optional depth shadow */
+    font-weight: bold;
+    text-align: center;
 }
 .multiple-question{
     width: 100%;
@@ -53,20 +63,23 @@
 .options-button-box{
     display: flex;
     align-items: center;
-    /*justify-content: space-evenly;*/
-    gap: 2rem;
+    justify-content: space-evenly;
+    /*gap: 2rem;*/
     /*background: var(--board-background-color);*/
     width: var(--board-max-width);
 }
 
 .option-button{
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: bold;
     width: 10rem;
     background-color: var(--multi-answer-button-background-color);
-    border: 8px solid var(--multi-answer-button-outside-border-color);
+    border: 8px solid var(--multi-answer-button-inside-border-color);
     border-radius: 35px;
     color: var(--multi-board-text-color);
+    box-shadow:
+            0 0 0 8px var(--multi-board-outside-border-color),           /* simulate outer yellow frame */
+            2px 4px 0 #0004;
 
 }
 .option-button:hover{

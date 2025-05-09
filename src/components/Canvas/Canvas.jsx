@@ -93,6 +93,7 @@ export default function Canvas({ text ,component}) {
                     <label className="slider-label">
                         {tool === "pen" ? "Pen Size" : "Eraser Size"}: {currentSize}
                         <input
+                            className="slider-input"
                             type="range"
                             min="10"
                             max={tool==="pen"?"30":"100"}

@@ -7,6 +7,8 @@ export default function SimpleFeedback({
                                            autoCloseTime,
                                            onClose,
                                        }) {
+
+
     useEffect(() => {
         if (autoCloseTime != null) {
             const timer = setTimeout(onClose, autoCloseTime);
@@ -15,13 +17,13 @@ export default function SimpleFeedback({
     }, [autoCloseTime, onClose]);
 
     return (
-        <div className="simple-feedback" style={{ borderColor: color }}>
-      <span
-          className="simple-feedback-message"
-          style={{ color: color }}
-      >
-        {message}
-      </span>
+        <div className="simple-feedback" style={{ borderColor: color, backgroundColor: color }}>
+            <span
+                className="simple-feedback-message"
+                style={{ color: "white" }}
+            >
+                {message}
+            </span>
             {autoCloseTime == null && (
                 <button
                     className="simple-feedback-close"
