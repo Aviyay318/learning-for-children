@@ -50,12 +50,22 @@ import divisionIslandFlipped from "/src/assets/images/Islands/DivisionIsland/div
 import lagoonCardBg from "/src/assets/images/Islands/DivisionIsland/lagoon_card_background.png";
 import divisionBackground from "/src/assets/images/Islands/DivisionIsland/division_background.png";
 import divisionChildren from "/src/assets/images/Islands/DivisionIsland/questions/division_1.png";
+import divisionBall from "/src/assets/images/Islands/DivisionIsland/questions/division_1_ball.png";
+import divisionBallHappy from "/src/assets/images/Islands/DivisionIsland/questions/division_1_ball_happy.png";
+import divisionKidsHappy from "/src/assets/images/Islands/DivisionIsland/questions/division_1_kids_happy.png";
+import divisionKids from "/src/assets/images/Islands/DivisionIsland/questions/division_1_kids.png";
+import divisionChildrenThinking from "/src/assets/images/Islands/DivisionIsland/division_island_kid_thinking.png"
 
 export const DIVISION_ISLAND = divisionIsland;
 export const DIVISION_ISLAND_FLIPPED = divisionIslandFlipped;
 export const DIVISION_ISLAND_BACKGROUND = lagoonCardBg;
 export const DIVISION_BACKGROUND = divisionBackground;
 export const DIVISION_CHILDREN = divisionChildren;
+export const DIVISION_BALL = divisionBall;
+export const DIVISION_BALL_HAPPY = divisionBallHappy;
+export const DIVISION_KIDS_HAPPY = divisionKidsHappy;
+export const DIVISION_KIDS = divisionKids;
+export const DIVISION_CHILDREN_THINKING = divisionChildrenThinking;
 
 
 

@@ -39,6 +39,11 @@ import {
     LONG_MULTIPLICATION_DIVISION_ISLAND_FLIPPED,
     HORROR_ISLAND_FLIPPED,
     EQUATIONS_ISLAND_FLIPPED,
+    DIVISION_BALL,
+    DIVISION_BALL_HAPPY,
+    DIVISION_KIDS,
+    DIVISION_KIDS_HAPPY,
+    DIVISION_CHILDREN_THINKING,
 } from "./IslandConstants.js";
 
 // 💡 Main config as an array
@@ -91,6 +96,11 @@ const ISLAND_CONFIGS = [
         background: DIVISION_BACKGROUND,
         cardBackground: DIVISION_ISLAND_BACKGROUND,
         children: DIVISION_CHILDREN,
+        child1:DIVISION_BALL,
+        child1Happy:DIVISION_BALL_HAPPY,
+        child2:DIVISION_KIDS,
+        child2Happy:DIVISION_KIDS_HAPPY,
+        childrenThinking:DIVISION_CHILDREN_THINKING,
         url: "/island/divisionIsland",
         exerciseUrl:"/api/islands/division",
         buttonColor: "blue",
