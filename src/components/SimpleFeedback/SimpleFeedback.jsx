@@ -6,6 +6,7 @@ export default function SimpleFeedback({
                                            color,
                                            autoCloseTime,
                                            onClose,
+                                           playConfetti
                                        }) {
 
 

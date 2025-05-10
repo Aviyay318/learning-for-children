@@ -40,7 +40,7 @@ export default function ExerciseWrapper({ questionType, haveHint=true,haveSoluti
     const { user, setUser } = useUser();
 
     const { data, error, sendRequest } = useApi(url, "GET", { minDelay: 0 });
-    const { checkAnswer, feedback, showSolution, setShowSolution, resetTimer, startTimeRef,setFeedback } = useAnswerCheck({ questionType, setUser });
+    const { checkAnswer, feedback, showSolution, setShowSolution, resetTimer, startTimeRef,setFeedback, islandOpen } = useAnswerCheck({ questionType, setUser });
     const { levels, loading: levelsLoading } = useUserLevels();
     const myLevelObj = levels.find(l => l.island.id === island.id);
     const myLevel    = myLevelObj?.level ?? 1;
@@ -189,6 +189,20 @@ export default function ExerciseWrapper({ questionType, haveHint=true,haveSoluti
                             }}
                         />
                     )}
+                    {
+                        islandOpen &&
+                        <SimpleFeedback
+                            message={
+                            `האי ${islandOpen} נפתח!`
+                            }
+                            color={"green"}
+                            autoCloseTime={isWrong ? null : 1000}
+                            onClose={() => {
+                                setShowFeedback(false);
+                                if (isWrong) loadNewQuestion();
+                            }}
+                        />
+                    }
                     <Modal
                         title="רמז"
                         component={hint}
